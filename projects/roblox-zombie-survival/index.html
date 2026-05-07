@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en" data-asset-root="../../" data-site-root="../../">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project | KarlForge</title>
+  <meta
+    name="description"
+    content="A KarlForge project case study with role, tech stack, goals, features, preview, demo, and source links."
+  >
+  <meta name="theme-color" content="#ffffff">
+  <meta name="color-scheme" content="light dark">
+  <script>
+    (() => {
+      try {
+        const params = new URLSearchParams(window.location.search);
+        const urlTheme = params.get("theme");
+        const captureMode = params.get("capture") === "1" || window.location.hash.includes("capture");
+        const savedTheme = localStorage.getItem("karlforge-theme");
+        const theme = urlTheme === "dark" || urlTheme === "light" ? urlTheme : savedTheme;
+        document.documentElement.dataset.theme = theme === "dark" ? "dark" : "light";
+        if (captureMode) {
+          document.documentElement.dataset.capture = "true";
+        }
+      } catch (error) {
+        document.documentElement.dataset.theme = "light";
+      }
+    })();
+  </script>
+  <link rel="icon" type="image/png" href="../../assets/images/karlforge-logo-dark.png" data-site-favicon>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap"
+    rel="stylesheet"
+  >
+  <link rel="stylesheet" href="../../css/style.css">
+  <script defer src="../../js/projects-data.js"></script>
+  <script defer src="../../js/main.js"></script>
+  <script defer src="../../js/project-detail.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-shell">
+      <a class="brand" href="../../index.html#home" aria-label="KarlForge homepage">
+        <span class="brand-mark" aria-hidden="true">
+          <span class="theme-logo-stack">
+            <img class="theme-logo-image theme-logo-light" src="../../assets/images/karlforge-logo-light.png" alt="">
+            <img class="theme-logo-image theme-logo-dark" src="../../assets/images/karlforge-logo-dark.png" alt="">
+          </span>
+        </span>
+        <span class="brand-name">KarlForge</span>
+      </a>
+
+      <nav class="site-nav" id="site-nav" aria-label="Primary navigation">
+        <a class="nav-link" href="../../index.html#home">Home</a>
+        <a class="nav-link" href="../../index.html#about">About</a>
+        <a class="nav-link" href="../../index.html#skills">Skills</a>
+        <a class="nav-link is-active" href="../../index.html#projects">Projects</a>
+        <a class="nav-link" href="../../index.html#experience">Experience</a>
+        <a class="nav-link" href="../../cv/index.html">CV</a>
+        <a class="nav-link" href="../../index.html#contact">Contact</a>
+      </nav>
+
+      <div class="header-actions">
+        <a class="header-cta" href="../../index.html#contact">
+          <span>Let's Connect</span>
+          <span class="circle-icon" aria-hidden="true">&rarr;</span>
+        </a>
+        <button
+          class="theme-toggle theme-switch"
+          type="button"
+          data-theme-toggle
+          aria-label="Switch to dark mode"
+          aria-pressed="false"
+          title="Switch to dark mode"
+        >
+          <span class="theme-switch-thumb" aria-hidden="true"></span>
+          <span class="theme-switch-icon theme-switch-sun" aria-hidden="true">
+            <svg viewBox="0 0 24 24" role="img" focusable="false">
+              <circle cx="12" cy="12" r="4.2"></circle>
+              <path d="M12 2.8v2.1M12 19.1v2.1M2.8 12h2.1M19.1 12h2.1M5.5 5.5l1.5 1.5M17 17l1.5 1.5M18.5 5.5 17 7M7 17l-1.5 1.5"></path>
+            </svg>
+          </span>
+          <span class="theme-switch-divider" aria-hidden="true"></span>
+          <span class="theme-switch-icon theme-switch-moon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" role="img" focusable="false">
+              <path d="M20.4 14.3A7.4 7.4 0 0 1 9.7 3.6 8.6 8.6 0 1 0 20.4 14.3Z"></path>
+            </svg>
+          </span>
+          <span class="sr-only" data-theme-text>Dark mode</span>
+        </button>
+        <button
+          class="nav-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="site-nav"
+          aria-label="Open menu"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="project-detail-main" data-project-detail data-project-slug="roblox-zombie-survival">
+    <section class="section project-detail-hero" aria-labelledby="project-title">
+      <div class="container project-detail-shell">
+        <a class="project-back-link" href="../../index.html#projects">Back to Projects</a>
+
+        <div class="project-detail-preview">
+          <img data-project-image src="../../assets/images/project-zombie-shooter.png" alt="" loading="eager" decoding="async">
+        </div>
+
+        <div class="project-detail-copy">
+          <p class="eyebrow">Project Case Study</p>
+          <h1 id="project-title" data-project-title>Project title</h1>
+          <p class="project-detail-summary" data-project-short-description></p>
+          <p class="project-detail-description" data-project-description></p>
+
+          <div class="project-detail-facts" aria-label="Project summary">
+            <div>
+              <span>My Role</span>
+              <strong data-project-role></strong>
+            </div>
+            <div>
+              <span>Tech Stack</span>
+              <div class="project-tags" data-project-tech></div>
+            </div>
+          </div>
+
+          <div class="project-detail-actions">
+            <a class="button button-dark" data-project-live>
+              <span data-project-link-label>Live Demo</span>
+              <span class="circle-icon" aria-hidden="true">&rarr;</span>
+            </a>
+            <a class="button button-light" data-project-source>
+              <span data-project-link-label>GitHub / Source Code</span>
+              <span class="circle-icon" aria-hidden="true">&rarr;</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section project-detail-body">
+      <div class="container project-detail-content">
+        <article class="project-detail-panel">
+          <p class="eyebrow">Problem / Goal</p>
+          <h2>What this project needed to solve</h2>
+          <p data-project-problem></p>
+        </article>
+
+        <article class="project-detail-panel">
+          <p class="eyebrow">Features</p>
+          <h2>What it includes</h2>
+          <ul class="project-feature-list" data-project-features></ul>
+        </article>
+      </div>
+
+      <div class="container project-detail-bottom">
+        <a class="button button-light" href="../../index.html#projects">
+          <span>Back to Projects</span>
+          <span class="circle-icon" aria-hidden="true">&larr;</span>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-shell">
+      <p>&copy; <span data-year>2026</span> KarlForge. All rights reserved.</p>
+      <nav class="footer-links" aria-label="Footer links">
+        <a href="https://github.com/Karlthegreatprogrammer" target="_blank" rel="noreferrer">GitHub</a>
+        <a href="https://www.linkedin.com/in/karlmatthewdegala/" target="_blank" rel="noreferrer">LinkedIn</a>
+        <a href="https://www.facebook.com/karlmatthewfernandezdegala" target="_blank" rel="noreferrer">Facebook</a>
+        <a href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=karlmatthewdegala%40gmail.com&amp;su=Portfolio%20Inquiry&amp;body=Hi%20Karl%2C%0A%0AI%20saw%20your%20portfolio%20and%20I%27d%20like%20to%20connect%20about%20a%20project%20or%20opportunity.%0A%0A" target="_blank" rel="noreferrer">Email</a>
+        <a href="../../cv/index.html">CV</a>
+      </nav>
+      <a href="../../index.html#home" class="footer-top">Back to top &uarr;</a>
+    </div>
+  </footer>
+</body>
+</html>

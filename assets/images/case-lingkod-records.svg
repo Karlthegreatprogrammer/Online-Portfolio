@@ -1,0 +1,57 @@
+<svg width="960" height="600" viewBox="0 0 960 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="960" height="600" rx="32" fill="#F7F7F7"/>
+  <rect x="28" y="30" width="904" height="540" rx="26" fill="#FFFFFF" stroke="#D7D7D7"/>
+  <rect x="28" y="30" width="210" height="540" rx="26" fill="#0B0B0B"/>
+  <path d="M238 30H226V570H238V30Z" fill="#111111"/>
+  <rect x="58" y="66" width="52" height="52" rx="14" fill="#FFFFFF"/>
+  <circle cx="84" cy="91" r="9" fill="#0B0B0B"/>
+  <path d="M70 108C73 99 95 99 98 108" stroke="#0B0B0B" stroke-width="6" stroke-linecap="round"/>
+  <rect x="126" y="73" width="72" height="11" rx="5.5" fill="#FFFFFF"/>
+  <rect x="126" y="94" width="50" height="9" rx="4.5" fill="#A3A3A3"/>
+  <rect x="58" y="158" width="138" height="34" rx="10" fill="#FFFFFF" fill-opacity="0.12"/>
+  <rect x="58" y="210" width="122" height="12" rx="6" fill="#F5F5F5" fill-opacity="0.7"/>
+  <rect x="58" y="250" width="136" height="12" rx="6" fill="#F5F5F5" fill-opacity="0.42"/>
+  <rect x="58" y="290" width="104" height="12" rx="6" fill="#F5F5F5" fill-opacity="0.42"/>
+  <rect x="58" y="330" width="128" height="12" rx="6" fill="#F5F5F5" fill-opacity="0.42"/>
+  <rect x="58" y="370" width="112" height="12" rx="6" fill="#F5F5F5" fill-opacity="0.42"/>
+  <rect x="58" y="502" width="138" height="34" rx="10" fill="#FFFFFF" fill-opacity="0.1"/>
+
+  <rect x="276" y="66" width="252" height="22" rx="11" fill="#0B0B0B"/>
+  <rect x="276" y="104" width="160" height="12" rx="6" fill="#A3A3A3"/>
+  <rect x="728" y="66" width="142" height="38" rx="12" fill="#0B0B0B"/>
+  <rect x="748" y="79" width="102" height="12" rx="6" fill="#FFFFFF"/>
+
+  <rect x="276" y="150" width="142" height="76" rx="18" fill="#F6F6F6" stroke="#E0E0E0"/>
+  <rect x="304" y="178" width="62" height="13" rx="6.5" fill="#0B0B0B"/>
+  <rect x="304" y="202" width="84" height="9" rx="4.5" fill="#A3A3A3"/>
+  <rect x="438" y="150" width="142" height="76" rx="18" fill="#F6F6F6" stroke="#E0E0E0"/>
+  <rect x="466" y="178" width="54" height="13" rx="6.5" fill="#0B0B0B"/>
+  <rect x="466" y="202" width="72" height="9" rx="4.5" fill="#A3A3A3"/>
+  <rect x="600" y="150" width="142" height="76" rx="18" fill="#F6F6F6" stroke="#E0E0E0"/>
+  <rect x="628" y="178" width="70" height="13" rx="6.5" fill="#0B0B0B"/>
+  <rect x="628" y="202" width="82" height="9" rx="4.5" fill="#A3A3A3"/>
+  <rect x="762" y="150" width="108" height="76" rx="18" fill="#F6F6F6" stroke="#E0E0E0"/>
+  <rect x="790" y="178" width="34" height="13" rx="6.5" fill="#0B0B0B"/>
+  <rect x="790" y="202" width="54" height="9" rx="4.5" fill="#A3A3A3"/>
+
+  <rect x="276" y="258" width="594" height="244" rx="18" fill="#FFFFFF" stroke="#DDDDDD"/>
+  <rect x="306" y="286" width="142" height="14" rx="7" fill="#0B0B0B"/>
+  <rect x="690" y="282" width="150" height="26" rx="13" fill="#F0F0F0"/>
+  <rect x="306" y="332" width="534" height="1" fill="#E7E7E7"/>
+  <rect x="306" y="376" width="534" height="1" fill="#E7E7E7"/>
+  <rect x="306" y="420" width="534" height="1" fill="#E7E7E7"/>
+  <rect x="306" y="464" width="534" height="1" fill="#E7E7E7"/>
+  <rect x="320" y="346" width="82" height="12" rx="6" fill="#0B0B0B"/>
+  <rect x="460" y="346" width="108" height="12" rx="6" fill="#A3A3A3"/>
+  <rect x="626" y="344" width="76" height="16" rx="8" fill="#E8E8E8"/>
+  <rect x="732" y="344" width="78" height="16" rx="8" fill="#111111"/>
+  <rect x="320" y="390" width="96" height="12" rx="6" fill="#0B0B0B"/>
+  <rect x="460" y="390" width="92" height="12" rx="6" fill="#A3A3A3"/>
+  <rect x="626" y="388" width="86" height="16" rx="8" fill="#E8E8E8"/>
+  <rect x="732" y="388" width="62" height="16" rx="8" fill="#111111"/>
+  <rect x="320" y="434" width="76" height="12" rx="6" fill="#0B0B0B"/>
+  <rect x="460" y="434" width="132" height="12" rx="6" fill="#A3A3A3"/>
+  <rect x="626" y="432" width="66" height="16" rx="8" fill="#E8E8E8"/>
+  <rect x="732" y="432" width="90" height="16" rx="8" fill="#111111"/>
+  <text x="276" y="548" fill="#111111" font-family="Arial, sans-serif" font-size="24" font-weight="700">Lingkod Bayan // Records Table View</text>
+</svg>

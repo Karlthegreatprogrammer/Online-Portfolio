@@ -1,0 +1,18 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="630" rx="40" fill="#0F172A"/>
+  <circle cx="1014" cy="136" r="160" fill="#1E88E5" fill-opacity="0.18"/>
+  <circle cx="1014" cy="136" r="92" fill="#38BDF8" fill-opacity="0.22"/>
+  <rect x="84" y="86" width="138" height="138" rx="28" fill="url(#paint0_linear_1_2)"/>
+  <path d="M132 140H174V154H148V174H170V188H148V230H132V140Z" fill="white"/>
+  <path d="M190 140H206V177L238 140H258L227 177L261 230H242L217 190L206 202V230H190V140Z" fill="white"/>
+  <text x="84" y="322" fill="#38BDF8" font-family="Inter, Arial, sans-serif" font-size="28" font-weight="700">KarlForge Portfolio</text>
+  <text x="84" y="404" fill="white" font-family="Poppins, Arial, sans-serif" font-size="72" font-weight="700">Web Developer</text>
+  <text x="84" y="484" fill="white" font-family="Poppins, Arial, sans-serif" font-size="72" font-weight="700">UI Designer</text>
+  <text x="84" y="548" fill="#E5E7EB" font-family="Inter, Arial, sans-serif" font-size="32">Websites, systems, and digital tools for businesses and personal brands.</text>
+  <defs>
+    <linearGradient id="paint0_linear_1_2" x1="84" y1="86" x2="222" y2="224" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1E88E5"/>
+      <stop offset="1" stop-color="#38BDF8"/>
+    </linearGradient>
+  </defs>
+</svg>

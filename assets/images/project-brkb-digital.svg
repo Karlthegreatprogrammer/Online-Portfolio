@@ -1,0 +1,95 @@
+<svg width="1200" height="941" viewBox="0 0 1200 941" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="118" y1="88" x2="1138" y2="846" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FBFBFB"/>
+      <stop offset="0.46" stop-color="#F0F0F1"/>
+      <stop offset="1" stop-color="#DADADD"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(767 186) rotate(103.08) scale(543.935 649.823)">
+      <stop stop-color="#FFFFFF"/>
+      <stop offset="0.42" stop-color="#FFFFFF" stop-opacity="0.68"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="plate" x1="711" y1="470" x2="1222" y2="729" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FAFAFA"/>
+      <stop offset="0.45" stop-color="#DEDEDF"/>
+      <stop offset="1" stop-color="#67676C"/>
+    </linearGradient>
+    <linearGradient id="plateDark" x1="904" y1="532" x2="1318" y2="695" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#D2D2D4"/>
+      <stop offset="1" stop-color="#46464B"/>
+    </linearGradient>
+    <linearGradient id="cubeFront" x1="956" y1="290" x2="1217" y2="543" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#58585D"/>
+      <stop offset="1" stop-color="#16161A"/>
+    </linearGradient>
+    <linearGradient id="cubeTop" x1="947" y1="153" x2="1204" y2="286" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#6E6E74"/>
+      <stop offset="1" stop-color="#2A2A30"/>
+    </linearGradient>
+    <filter id="softShadow" x="32" y="7" width="1138" height="111" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+      <feOffset dy="8"/>
+      <feGaussianBlur stdDeviation="10"/>
+      <feComposite in2="hardAlpha" operator="out"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0.133333 0 0 0 0 0.133333 0 0 0 0 0.141176 0 0 0 0.08 0"/>
+      <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_1_1"/>
+      <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_1_1" result="shape"/>
+    </filter>
+  </defs>
+  <rect width="1200" height="941" rx="42" fill="url(#bg)"/>
+  <rect width="1200" height="941" rx="42" fill="url(#glow)"/>
+  <path d="M11 941L726 342" stroke="#FFFFFF" stroke-opacity="0.74" stroke-width="2.3"/>
+  <path d="M128 941L843 292" stroke="#FFFFFF" stroke-opacity="0.54" stroke-width="1.8"/>
+  <path d="M339 941L1058 238" stroke="#FFFFFF" stroke-opacity="0.46" stroke-width="1.8"/>
+  <path d="M542 941L1248 322" stroke="#FFFFFF" stroke-opacity="0.62" stroke-width="1.8"/>
+  <path d="M1007 358L1197 489" stroke="#FFFFFF" stroke-opacity="0.58" stroke-width="2"/>
+  <path d="M1039 323L1200 210" stroke="#FFFFFF" stroke-opacity="0.52" stroke-width="2"/>
+  <g opacity="0.55">
+    <path d="M774 529L1001 374H1290L1062 529H774Z" fill="url(#plate)"/>
+    <path d="M846 646L1072 491H1363L1135 646H846Z" fill="url(#plateDark)"/>
+    <path d="M894 437H1187V760H894V437Z" fill="url(#cubeFront)"/>
+    <path d="M894 437L1045 302H1339L1187 437H894Z" fill="url(#cubeTop)"/>
+    <path d="M1187 437L1339 302V625L1187 760V437Z" fill="#26262B"/>
+  </g>
+  <g filter="url(#softShadow)">
+    <rect x="60" y="16" width="1080" height="78" rx="24" fill="#FFFFFF" fill-opacity="0.84" stroke="#D7D7DA"/>
+  </g>
+  <rect x="86" y="24" width="45" height="55" rx="8" fill="#111111"/>
+  <path d="M96 34L114 27L128 35V57L110 64L96 56V34Z" stroke="#ECECEC" stroke-width="2.2"/>
+  <path d="M110 64V46L128 35" stroke="#ECECEC" stroke-width="2.2"/>
+  <text x="149" y="54" fill="#111111" font-family="Inter, Arial, sans-serif" font-size="25" font-weight="800">BRKB</text>
+  <text x="149" y="75" fill="#7A7A7E" font-family="Inter, Arial, sans-serif" font-size="11.5" font-weight="700" letter-spacing="0.15em">DIGITAL SOLUTIONS</text>
+  <text x="389" y="56" fill="#121212" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="600">Home</text>
+  <line x1="389" y1="69.5" x2="444" y2="69.5" stroke="#121212" stroke-width="1.7" stroke-linecap="round"/>
+  <text x="494" y="56" fill="#535357" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="500">About</text>
+  <text x="598" y="56" fill="#535357" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="500">Work</text>
+  <text x="697" y="56" fill="#535357" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="500">Contact</text>
+  <rect x="1010" y="16" width="126" height="39" rx="10" fill="#111111"/>
+  <text x="1026" y="42" fill="#FFFFFF" font-family="Inter, Arial, sans-serif" font-size="13.5" font-weight="700">Get a Quote</text>
+  <path d="M1114 35H1121" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round"/>
+  <path d="M1118 31L1122 35L1118 39" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="1169" cy="35.5" r="15.5" fill="#FFFFFF" fill-opacity="0.8" stroke="#D9D9DD"/>
+  <path d="M1169 27.5C1165.69 27.5 1163 30.1863 1163 33.5C1163 36.8137 1165.69 39.5 1169 39.5C1170.64 39.5 1172.14 38.8406 1173.23 37.7734C1171.18 37.2935 1169.66 35.4575 1169.66 33.2578C1169.66 31.3827 1170.76 29.7665 1172.34 29.0117C1171.39 28.0649 1170.09 27.5 1169 27.5Z" fill="#111111"/>
+  <text x="84" y="309" fill="#111111" font-family="Plus Jakarta Sans, Inter, Arial, sans-serif" font-size="82" font-weight="800">We Build Digital</text>
+  <text x="84" y="405" fill="#111111" font-family="Plus Jakarta Sans, Inter, Arial, sans-serif" font-size="82" font-style="italic" font-weight="800">Brands</text>
+  <rect x="401" y="338" width="4.5" height="96" rx="2.25" fill="#111111"/>
+  <text x="84" y="497" fill="#66666A" font-family="Inter, Arial, sans-serif" font-size="24">Premium web design and development for ambitious brands. From concept to</text>
+  <text x="84" y="545" fill="#66666A" font-family="Inter, Arial, sans-serif" font-size="24">launch — fast, professional, and client-ready.</text>
+  <rect x="84" y="614" width="341" height="90" rx="18" fill="#0F0F10"/>
+  <text x="107" y="672" fill="#FFFFFF" font-family="Inter, Arial, sans-serif" font-size="25" font-weight="700">Get a Free Quote</text>
+  <path d="M351 659H364" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round"/>
+  <path d="M358 651L366 659L358 667" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="448" y="614" width="285" height="90" rx="18" fill="#FFFFFF" fill-opacity="0.34" stroke="#D5D5D8"/>
+  <text x="503" y="672" fill="#171717" font-family="Inter, Arial, sans-serif" font-size="25" font-weight="600">View Our Work</text>
+  <text x="84" y="848" fill="#111111" font-family="Inter, Arial, sans-serif" font-size="38" font-weight="800">10+</text>
+  <text x="321" y="848" fill="#111111" font-family="Inter, Arial, sans-serif" font-size="38" font-weight="800">24h</text>
+  <circle cx="593" cy="822" r="11" fill="#61E086"/>
+  <text x="84" y="881" fill="#808085" font-family="Inter, Arial, sans-serif" font-size="20">Projects Delivered</text>
+  <text x="321" y="881" fill="#808085" font-family="Inter, Arial, sans-serif" font-size="20">Response Time</text>
+  <text x="540" y="881" fill="#808085" font-family="Inter, Arial, sans-serif" font-size="20">Available For</text>
+  <text x="540" y="916" fill="#808085" font-family="Inter, Arial, sans-serif" font-size="20">New Projects</text>
+  <line x1="273" y1="791" x2="273" y2="884" stroke="#C5C5C9"/>
+  <line x1="491" y1="791" x2="491" y2="884" stroke="#C5C5C9"/>
+</svg>

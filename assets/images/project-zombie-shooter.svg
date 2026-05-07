@@ -1,0 +1,18 @@
+<svg width="1200" height="675" viewBox="0 0 1200 675" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="675" rx="40" fill="#0B1220"/>
+  <rect x="60" y="60" width="1080" height="555" rx="26" fill="#131C2E"/>
+  <circle cx="925" cy="196" r="120" fill="#1E88E5" fill-opacity="0.18"/>
+  <circle cx="925" cy="196" r="64" fill="#38BDF8" fill-opacity="0.22"/>
+  <rect x="98" y="98" width="402" height="44" rx="18" fill="#1E88E5"/>
+  <rect x="98" y="170" width="516" height="14" rx="7" fill="#E5E7EB" fill-opacity="0.62"/>
+  <rect x="98" y="198" width="468" height="14" rx="7" fill="#E5E7EB" fill-opacity="0.44"/>
+  <rect x="98" y="246" width="1004" height="294" rx="28" fill="#0F172A"/>
+  <rect x="134" y="284" width="294" height="34" rx="14" fill="#F43F5E" fill-opacity="0.9"/>
+  <rect x="134" y="346" width="930" height="12" rx="6" fill="#E5E7EB" fill-opacity="0.38"/>
+  <rect x="134" y="372" width="882" height="12" rx="6" fill="#E5E7EB" fill-opacity="0.28"/>
+  <rect x="134" y="398" width="844" height="12" rx="6" fill="#E5E7EB" fill-opacity="0.28"/>
+  <rect x="134" y="452" width="166" height="44" rx="14" fill="#1E88E5"/>
+  <rect x="320" y="452" width="184" height="44" rx="14" fill="#FFFFFF" fill-opacity="0.08" stroke="#FFFFFF" stroke-opacity="0.16"/>
+  <text x="94" y="610" fill="#E5E7EB" font-family="Inter, Arial, sans-serif" font-size="42" font-weight="700">Roblox Zombie Shooter GDD</text>
+  <text x="94" y="642" fill="#38BDF8" font-family="Inter, Arial, sans-serif" font-size="22">Game design document and production planning concept</text>
+</svg>

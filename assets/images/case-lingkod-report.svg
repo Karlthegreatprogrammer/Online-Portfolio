@@ -1,0 +1,27 @@
+<svg width="960" height="600" viewBox="0 0 960 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="960" height="600" rx="32" fill="#09101B"/>
+  <rect x="28" y="28" width="904" height="544" rx="26" fill="#0F1B2E" stroke="#22324A"/>
+  <rect x="58" y="58" width="844" height="58" rx="18" fill="#14263F"/>
+  <rect x="80" y="78" width="198" height="16" rx="8" fill="#F5FAFF" fill-opacity="0.92"/>
+  <rect x="706" y="72" width="164" height="28" rx="14" fill="#30C29E"/>
+  <rect x="80" y="146" width="248" height="112" rx="22" fill="#13243A"/>
+  <rect x="356" y="146" width="248" height="112" rx="22" fill="#13243A"/>
+  <rect x="632" y="146" width="238" height="112" rx="22" fill="#13243A"/>
+  <rect x="108" y="178" width="118" height="18" rx="9" fill="#8AB8FF" fill-opacity="0.9"/>
+  <rect x="384" y="178" width="118" height="18" rx="9" fill="#FFB56B"/>
+  <rect x="660" y="178" width="118" height="18" rx="9" fill="#30C29E"/>
+  <rect x="80" y="286" width="518" height="218" rx="24" fill="#13243A"/>
+  <rect x="626" y="286" width="244" height="218" rx="24" fill="#13243A"/>
+  <rect x="110" y="314" width="164" height="18" rx="9" fill="#D6E5FF" fill-opacity="0.92"/>
+  <rect x="110" y="364" width="48" height="110" rx="16" fill="#2E8BFF"/>
+  <rect x="182" y="332" width="48" height="142" rx="16" fill="#3FA3FF"/>
+  <rect x="254" y="388" width="48" height="86" rx="16" fill="#30C29E"/>
+  <rect x="326" y="346" width="48" height="128" rx="16" fill="#FF647A"/>
+  <rect x="398" y="300" width="48" height="174" rx="16" fill="#FFB56B"/>
+  <rect x="470" y="372" width="48" height="102" rx="16" fill="#7A92B8"/>
+  <rect x="656" y="318" width="122" height="18" rx="9" fill="#D6E5FF" fill-opacity="0.92"/>
+  <rect x="656" y="364" width="182" height="22" rx="11" fill="#1A3150"/>
+  <rect x="656" y="404" width="182" height="22" rx="11" fill="#162B45"/>
+  <rect x="656" y="444" width="182" height="22" rx="11" fill="#1A3150"/>
+  <text x="82" y="562" fill="#D6E5FF" font-family="Arial, sans-serif" font-size="24" font-weight="700">Lingkod Bayan // Reporting and Summary View</text>
+</svg>
