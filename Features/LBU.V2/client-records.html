@@ -1,4 +1,4 @@
-ï»¿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
@@ -3703,7 +3703,9 @@ tr:hover {
 <script src="assets/js/supabase-client.js"></script>
 <script src="assets/js/data-store.js"></script>
 <script src="assets/js/record-attachments.js"></script>
+
 <script src="assets/js/routes.js"></script>
+<script src="assets/js/portfolio-exit.js"></script>
 <script src="assets/js/auth.js"></script>
 <script src="assets/js/ceu-referrals.js"></script>
 <script src="assets/js/barangays.js"></script>
@@ -5537,7 +5539,7 @@ function formatHistoryUploadMeta(meta){
         const kb = normalizedMeta.size / 1024;
         parts.push(kb >= 1024 ? `${(kb / 1024).toFixed(1)} MB` : `${Math.max(kb, 0.1).toFixed(1)} KB`);
     }
-    return parts.join(' â€¢ ');
+    return parts.join(' • ');
 }
 
 function getHistoryUploadAttachmentId(meta){
@@ -5737,7 +5739,7 @@ async function hydrateHistoryAttachmentBlock(block, meta){
     if((!attachmentId && !storagePath) || !(window.lbAttachments && typeof window.lbAttachments.createSignedUrl === 'function')){
         link.setAttribute('aria-disabled', 'true');
         helper.textContent = formatHistoryUploadMeta(normalizedMeta)
-            ? `${formatHistoryUploadMeta(normalizedMeta)} â€¢ Preview unavailable for this saved entry.`
+            ? `${formatHistoryUploadMeta(normalizedMeta)} • Preview unavailable for this saved entry.`
             : 'Preview unavailable for this saved entry.';
         preview.classList.add('is-empty');
         preview.textContent = 'Only the saved file name is available for this history entry.';
@@ -5757,7 +5759,7 @@ async function hydrateHistoryAttachmentBlock(block, meta){
         link.rel = 'noopener noreferrer';
 
         if(isHistoryImageUpload(normalizedMeta)){
-            helper.textContent = `${formatHistoryUploadMeta(normalizedMeta) || getHistoryUploadFileName(normalizedMeta)} â€¢ Click the image or filename to download.`;
+            helper.textContent = `${formatHistoryUploadMeta(normalizedMeta) || getHistoryUploadFileName(normalizedMeta)} • Click the image or filename to download.`;
 
             const imageLink = document.createElement('a');
             imageLink.className = 'history-attachment-image-link';
@@ -5776,7 +5778,7 @@ async function hydrateHistoryAttachmentBlock(block, meta){
         }
 
         if(isHistoryPdfUpload(normalizedMeta)){
-            helper.textContent = `${formatHistoryUploadMeta(normalizedMeta) || getHistoryUploadFileName(normalizedMeta)} â€¢ PDF preview ready. Click the filename to download.`;
+            helper.textContent = `${formatHistoryUploadMeta(normalizedMeta) || getHistoryUploadFileName(normalizedMeta)} • PDF preview ready. Click the filename to download.`;
 
             const iframe = document.createElement('iframe');
             iframe.className = 'history-attachment-pdf';
@@ -5787,7 +5789,7 @@ async function hydrateHistoryAttachmentBlock(block, meta){
             return;
         }
 
-        helper.textContent = `${formatHistoryUploadMeta(normalizedMeta) || getHistoryUploadFileName(normalizedMeta)} â€¢ Preview unavailable for this file type. Click the filename to download.`;
+        helper.textContent = `${formatHistoryUploadMeta(normalizedMeta) || getHistoryUploadFileName(normalizedMeta)} • Preview unavailable for this file type. Click the filename to download.`;
         preview.classList.add('is-empty');
         preview.textContent = 'This file type cannot be previewed here, but it can still be downloaded.';
     } catch(error){
@@ -6717,7 +6719,7 @@ function renderAppliedSearchFilters(){
         removeButton.type = 'button';
         removeButton.className = 'search-chip-remove';
         removeButton.setAttribute('aria-label', `Remove ${descriptor.label} filter`);
-        removeButton.textContent = 'Ã—';
+        removeButton.textContent = '×';
         removeButton.addEventListener('click', function(){
             clearAppliedSearchFilter(descriptor.key);
             searchData();
@@ -7400,7 +7402,7 @@ function formatHistoryDateForDisplay(value){
 function buildHistorySummaryLine(requestedDate, completedDate){
     const parts = [`Requested ${requestedDate || 'Not set'}`];
     parts.push(completedDate ? `Completed ${completedDate}` : 'Open');
-    return parts.join(' â€¢ ');
+    return parts.join(' • ');
 }
 
 function getHistoryStatusTone(status){
@@ -8345,7 +8347,7 @@ async function refreshDetailAuditTrail(recordId){
             const meta = document.createElement('div');
             meta.className = 'detail-audit-meta';
             const actorEmail = String(log && log.actor_email || '').trim() || 'Unknown admin';
-            meta.textContent = `${actorEmail} â€¢ ${formatAuditTimestamp(log && log.action_at)}`;
+            meta.textContent = `${actorEmail} • ${formatAuditTimestamp(log && log.action_at)}`;
 
             head.appendChild(actionBadge);
             head.appendChild(meta);
@@ -8407,7 +8409,7 @@ function populateDetailTable(record){
             if(latestAssistanceDate){
                 summaryParts.push(`Last assistance: ${latestAssistanceDate}`);
             }
-            detailClientSummaryLine.textContent = summaryParts.join(' â€¢ ');
+            detailClientSummaryLine.textContent = summaryParts.join(' • ');
         }
     }
     if(detailClientLatestType){
