@@ -4309,13 +4309,21 @@ html:not([data-theme="dark"]) .quote-card {
   }
 
   .project-filter-bar {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 0.15rem;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
   }
 
-  .project-filter-bar button:first-child,
-  .project-filter-bar button:last-child {
-    grid-column: 1 / -1;
+  .project-filter-bar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .project-filter-bar button {
+    flex: 0 0 auto;
+    white-space: nowrap;
   }
 }
 
