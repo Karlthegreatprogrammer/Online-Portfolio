@@ -1,0 +1,74 @@
+<!-- ============================================================
+     BRKB Digital Solutions — Navbar Component
+     ============================================================ -->
+<nav class="navbar" id="navbar" role="navigation" aria-label="Main navigation">
+  <div class="navbar-inner">
+
+    <!-- Logo -->
+    <a href="index.html" class="navbar-logo" aria-label="BRKB Digital Solutions home">
+      <img src="assets/icons/brkb-logo.png" alt="BRKB Logo" id="navbar-logo-img" />
+      <div class="navbar-logo-text-wrapper">
+        <span class="navbar-logo-text-main">BRKB</span>
+        <span class="navbar-logo-text-sub">Digital Solutions</span>
+      </div>
+    </a>
+
+    <!-- Desktop Nav Links -->
+    <ul class="navbar-links" role="list">
+      <li><a href="index.html" class="navbar-link" data-navlink>Home</a></li>
+      <li><a href="about.html" class="navbar-link" data-navlink>About</a></li>
+      <li><a href="projects.html" class="navbar-link" data-navlink>Work</a></li>
+      <li><a href="contact.html" class="navbar-link" data-navlink>Contact</a></li>
+    </ul>
+
+    <!-- Actions Container -->
+    <div style="display: flex; align-items: center; gap: var(--space-4); margin-left: auto;">
+      
+      <!-- Desktop CTA -->
+      <div class="navbar-cta">
+        <a href="contact.html" class="btn btn-primary btn-sm" id="navbar-cta-btn">
+          Get a Quote
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+      </div>
+
+      <!-- Theme Toggle -->
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+        <svg class="sun-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-text-primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+        <svg class="moon-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-text-primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+      </button>
+
+      <!-- Hamburger -->
+      <button
+        class="navbar-hamburger"
+        id="navbar-hamburger"
+        aria-label="Toggle mobile menu"
+        aria-expanded="false"
+        aria-controls="navbar-mobile"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+    </div>
+
+  </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="navbar-mobile" id="navbar-mobile" role="dialog" aria-modal="true" aria-label="Mobile navigation">
+  <a href="index.html" class="navbar-mobile-link" data-navlink>Home</a>
+  <a href="about.html" class="navbar-mobile-link" data-navlink>About</a>
+  <a href="projects.html" class="navbar-mobile-link" data-navlink>Work</a>
+  <a href="contact.html" class="navbar-mobile-link" data-navlink>Contact</a>
+  <div class="navbar-mobile-cta">
+    <a href="contact.html" class="btn btn-primary btn-lg" style="width:100%;">
+      Get a Free Quote →
+    </a>
+  </div>
+</div>
+
+</body>

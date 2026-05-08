@@ -122,17 +122,19 @@ window.KARLFORGE_PROJECTS = [
   {
     slug: "roblox-zombie-survival",
     title: "Roblox Zombie Survival",
-    shortDescription: "Game concept with wave progression, survival systems, and replayable loops.",
+    shortDescription: "In-progress Roblox survival game concept with wave progression and replayable systems.",
     description:
-      "A Roblox survival game concept focused on wave-based pressure, defensive play, progression, and replayable systems.",
+      "A Roblox survival game concept currently in development, focused on wave-based pressure, defensive play, progression, and replayable systems.",
+    status: "In Progress / Still Developing",
     role: "Roblox Game Developer",
     categoryTags: ["Roblox"],
     techStack: ["Roblox Studio", "Lua", "Game Design"],
     image: "assets/images/project-zombie-shooter.png",
     imageAlt: "Roblox Zombie Shooter Survival concept card",
     problem:
-      "The goal was to shape a survival loop that feels tense, readable, and replayable while keeping the systems organized enough to expand later.",
+      "The goal is to shape a survival loop that feels tense, readable, and replayable while keeping the systems organized enough to expand later.",
     features: [
+      "Status: still developing and being refined.",
       "Wave-based enemy pressure and survival pacing.",
       "Base defense concept with barricades and player positioning.",
       "Replayable progression ideas for weapons, upgrades, and rewards.",
@@ -164,7 +166,7 @@ window.KARLFORGE_PROJECTS = [
     ],
     links: {
       live: "",
-      source: "",
+      source: "https://github.com/Karlthegreatprogrammer/Online-Portfolio.git",
     },
   },
   {
@@ -177,7 +179,7 @@ window.KARLFORGE_PROJECTS = [
     role: "Frontend Developer / UI Designer",
     categoryTags: ["Web Systems"],
     techStack: ["HTML", "CSS", "JavaScript", "Web Design"],
-    image: "assets/images/project-brkb-digital.png",
+    image: "assets/images/brkb-digital/01-home-hero.png",
     imageAlt: "BRKB Digital Solutions website preview",
     problem:
       "The goal was to position BRKB as a professional web design and development service for businesses and personal brands that need a stronger online presence.",
@@ -187,9 +189,64 @@ window.KARLFORGE_PROJECTS = [
       "Trust-building stats for delivered projects, response time, and availability.",
       "Clean monochrome visual direction that matches a modern digital service brand.",
     ],
+    caseStudy: [
+      {
+        eyebrow: "Goal",
+        title: "Present a premium web service brand",
+        body:
+          "The page positions BRKB as a clean, client-ready digital service for business websites, portfolios, and landing pages.",
+      },
+      {
+        eyebrow: "Design Direction",
+        title: "Strong first impression with clear actions",
+        body:
+          "The layout uses large typography, simple navigation, quote-focused CTAs, and trust stats to make the offer easy to understand.",
+      },
+      {
+        eyebrow: "Result",
+        title: "A focused service website demo",
+        body:
+          "The demo now has a live landing page, services section, work direction, contact CTA, and responsive mobile view.",
+      },
+    ],
+    portfolioCaption:
+      "A clean service website concept focused on brand trust, clear service offers, and conversion-ready calls to action.",
+    screenshots: [
+      {
+        title: "Homepage Hero",
+        image: "assets/images/brkb-digital/01-home-hero.png",
+        alt: "BRKB Digital Solutions homepage hero",
+        description: "First screen with brand, service positioning, CTAs, and trust stats.",
+      },
+      {
+        title: "Services Section",
+        image: "assets/images/brkb-digital/02-services-section.png",
+        alt: "BRKB Digital Solutions services section",
+        description: "Highlights business websites, portfolio pages, and landing pages.",
+      },
+      {
+        title: "Work Direction",
+        image: "assets/images/brkb-digital/03-work-section.png",
+        alt: "BRKB Digital Solutions work direction section",
+        description: "Explains the clean, premium, easy-to-scan design approach.",
+      },
+      {
+        title: "Contact CTA",
+        image: "assets/images/brkb-digital/04-contact-section.png",
+        alt: "BRKB Digital Solutions contact section",
+        description: "Simple inquiry section for quote and project conversations.",
+      },
+      {
+        title: "Mobile View",
+        image: "assets/images/brkb-digital/05-mobile-home.png",
+        alt: "BRKB Digital Solutions mobile homepage view",
+        description: "Responsive layout for mobile visitors and quick scanning.",
+      },
+    ],
     links: {
-      live: "",
-      source: "",
+      live: "../../Features/BRKB%20-%20Portolfio/",
+      liveLabel: "Live Demo",
+      source: "https://github.com/Karlthegreatprogrammer/Online-Portfolio.git",
     },
   },
 ];

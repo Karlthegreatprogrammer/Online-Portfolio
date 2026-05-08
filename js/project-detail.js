@@ -61,6 +61,31 @@ const renderTags = (selector, items) => {
   );
 };
 
+const renderProjectStatus = (status) => {
+  const facts = projectDetail.querySelector(".project-detail-facts");
+  const existing = projectDetail.querySelector("[data-project-status-fact]");
+
+  if (existing) {
+    existing.remove();
+  }
+
+  if (!facts || !status) {
+    return;
+  }
+
+  const wrapper = document.createElement("div");
+  wrapper.dataset.projectStatusFact = "";
+
+  const label = document.createElement("span");
+  label.textContent = "Status";
+
+  const value = document.createElement("strong");
+  value.textContent = status;
+
+  wrapper.append(label, value);
+  facts.append(wrapper);
+};
+
 const setProjectLink = (selector, url, availableLabel, unavailableLabel) => {
   const link = projectDetail.querySelector(selector);
 
@@ -75,6 +100,7 @@ const setProjectLink = (selector, url, availableLabel, unavailableLabel) => {
     link.target = "_blank";
     link.rel = "noreferrer";
     link.classList.remove("is-disabled");
+    link.hidden = false;
     link.removeAttribute("aria-disabled");
     label.textContent = availableLabel;
     return;
@@ -85,6 +111,7 @@ const setProjectLink = (selector, url, availableLabel, unavailableLabel) => {
   link.removeAttribute("rel");
   link.classList.add("is-disabled");
   link.setAttribute("aria-disabled", "true");
+  link.hidden = true;
   label.textContent = unavailableLabel;
 };
 
@@ -251,6 +278,7 @@ if (projectDetail) {
     setDetailText("[data-project-description]", project.description);
     setDetailText("[data-project-role]", project.role);
     setDetailText("[data-project-problem]", project.problem);
+    renderProjectStatus(project.status);
     renderTags("[data-project-tech]", project.techStack);
     renderList("[data-project-features]", project.features);
     renderCaseStudySections(project.caseStudy);
