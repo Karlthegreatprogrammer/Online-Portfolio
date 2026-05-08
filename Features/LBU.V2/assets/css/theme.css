@@ -1,0 +1,61 @@
+:root {
+  --bg-a: #f6fbff;
+  --bg-b: #e9f2ff;
+  --bg-c: #e8f6f3;
+  --brand: #0f6ccf;
+  --brand-600: #0b4f98;
+  --ink: #122c44;
+  --muted: #667a92;
+  --surface: rgba(255, 255, 255, 0.92);
+  --surface-solid: #ffffff;
+  --border: rgba(18, 62, 114, 0.15);
+  --neutral-100: #f4f8fc;
+  --neutral-200: #dce6f2;
+  --neutral-300: #c2d1e2;
+  --danger: #cf4233;
+  --danger-600: #b73529;
+  --success: #0fa36d;
+  --radius: 12px;
+  --radius-lg: 18px;
+  --ring: rgba(15, 108, 207, 0.2);
+  --shadow: 0 20px 50px rgba(10, 41, 87, 0.15);
+}
+
+* {
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  color: var(--ink);
+  font-family: 'Outfit', 'Trebuchet MS', sans-serif;
+}
+
+a {
+  color: inherit;
+}
+
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+}
+
+:focus-visible {
+  outline: 3px solid var(--ring);
+  outline-offset: 2px;
+}
+
+.lb-brand-font {
+  font-family: 'Arial Black', 'Outfit', sans-serif;
+  letter-spacing: 0.35px;
+}
+

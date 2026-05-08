@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>LINGKOD BAYAN - Import Tools</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/theme.css">
+<style>
+:root {
+  --bg-a: #f6fbff;
+  --bg-b: #e9f2ff;
+  --bg-c: #e8f6f3;
+  --brand: #0f6ccf;
+  --brand-600: #0b4f98;
+  --brand-100: #eaf4ff;
+  --accent: #f19a29;
+  --danger: #cf4233;
+  --danger-600: #b73529;
+  --success: #0fa36d;
+  --surface: rgba(255, 255, 255, 0.92);
+  --surface-solid: #ffffff;
+  --ink: #122c44;
+  --muted: #667a92;
+  --border: rgba(18, 62, 114, 0.15);
+  --neutral-100: #f4f8fc;
+  --neutral-200: #dce6f2;
+  --neutral-300: #c2d1e2;
+  --shadow: 0 20px 50px rgba(10, 41, 87, 0.15);
+  --transition: 180ms cubic-bezier(.2,.8,.2,1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Outfit', 'Trebuchet MS', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background:
+    radial-gradient(1250px 620px at -8% -20%, #d8ecff 0%, transparent 66%),
+    radial-gradient(940px 530px at 112% 115%, #cbf1e9 0%, transparent 58%),
+    linear-gradient(140deg, var(--bg-a), var(--bg-b) 52%, var(--bg-c));
+  color: var(--ink);
+  line-height: 1.35;
+}
+
+header {
+  background: linear-gradient(135deg, var(--brand), #2f92ea 72%);
+  color: #fff;
+  padding: 16px 22px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  box-shadow: 0 16px 36px rgba(11, 54, 109, 0.28);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+header img {
+  height: 48px;
+  width: 48px;
+  object-fit: cover;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.92);
+  padding: 6px;
+  border: 2px solid rgba(255, 255, 255, 0.35);
+}
+
+header h1 {
+  font-family: 'Space Grotesk', 'Arial Narrow', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.25px;
+  flex: 1;
+  min-width: 0;
+}
+
+.menu-toggle {
+  height: 40px;
+  padding: 0 14px 0 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.68);
+  background: rgba(255, 255, 255, 0.96);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: background 140ms ease, border-color 140ms ease;
+}
+
+.menu-toggle:hover {
+  background: #eef5fd;
+  border-color: rgba(255, 255, 255, 0.92);
+}
+
+.menu-bars {
+  display: grid;
+  gap: 4px;
+}
+
+.menu-bars span {
+  display: block;
+  width: 14px;
+  height: 2px;
+  background: var(--brand-600);
+  border-radius: 4px;
+}
+
+.menu-text {
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--brand-600);
+  font-size: 0.8rem;
+}
+
+.menu-toggle:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.92);
+  outline-offset: 2px;
+}
+
+body.menu-open {
+  overflow: hidden;
+}
+
+.nav-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(8, 26, 48, 0.45);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: stretch;
+  justify-content: flex-start;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition);
+  z-index: 200;
+}
+
+.nav-overlay.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.nav-drawer {
+  width: min(360px, 25vw);
+  background:
+    linear-gradient(160deg, rgba(255, 255, 255, 0.98), rgba(236, 244, 255, 0.98));
+  border-right: 1px solid var(--border);
+  box-shadow: 18px 0 40px rgba(8, 35, 70, 0.22);
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  transform: translateX(-102%);
+  transition: transform 200ms cubic-bezier(.2,.8,.2,1);
+}
+
+.nav-overlay.is-open .nav-drawer {
+  transform: translateX(0);
+}
+
+.nav-drawer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-drawer-title {
+  font-family: 'Space Grotesk', 'Arial Narrow', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.nav-close {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  border: none;
+  background: rgba(15, 108, 207, 0.12);
+  color: var(--brand-600);
+  font-size: 20px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 120ms ease, background 140ms ease;
+}
+
+.nav-close:hover {
+  transform: translateY(-1px);
+  background: rgba(15, 108, 207, 0.2);
+}
+
+.nav-item {
+  text-decoration: none;
+  border-radius: 12px;
+  border: 1px solid transparent;
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+  color: var(--ink);
+  background: #fff;
+  box-shadow: 0 10px 24px rgba(10, 41, 87, 0.12);
+  transition: transform 140ms ease, box-shadow 140ms ease, border-color 140ms ease;
+}
+
+.nav-item:hover {
+  transform: translateY(-1px);
+  border-color: var(--neutral-200);
+  box-shadow: 0 12px 26px rgba(10, 41, 87, 0.18);
+}
+
+.nav-item.danger {
+  background: linear-gradient(135deg, rgba(207, 66, 51, 0.95), rgba(227, 90, 73, 0.95));
+  color: #fff;
+}
+
+.nav-item.danger:hover {
+  box-shadow: 0 14px 30px rgba(207, 66, 51, 0.28);
+}
+
+.nav-meta {
+  margin-top: auto;
+  border: 1px solid rgba(18, 62, 114, 0.12);
+  border-radius: 14px;
+  background: linear-gradient(135deg, rgba(15, 108, 207, 0.08), rgba(241, 154, 41, 0.12));
+  padding: 14px 16px;
+  display: grid;
+  gap: 4px;
+}
+
+.nav-meta-button {
+  width: 100%;
+  appearance: none;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: transform 140ms ease, box-shadow 140ms ease, border-color 140ms ease, background 140ms ease;
+}
+
+.nav-meta-button:hover {
+  transform: translateY(-1px);
+  border-color: rgba(15, 108, 207, 0.22);
+  box-shadow: 0 12px 28px rgba(10, 41, 87, 0.12);
+}
+
+.nav-meta-button:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(15, 108, 207, 0.18), 0 12px 28px rgba(10, 41, 87, 0.12);
+}
+
+.nav-meta-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--brand-600);
+}
+
+.nav-meta-version-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.nav-meta-version {
+  font-family: 'Space Grotesk', 'Arial Narrow', sans-serif;
+  font-size: 1.12rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.nav-meta-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(15, 108, 207, 0.12);
+  color: var(--brand-600);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.nav-meta-copy {
+  color: var(--muted);
+  font-size: 0.8rem;
+  line-height: 1.45;
+}
+
+.nav-meta-action {
+  margin-top: 6px;
+  color: var(--brand-600);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.container {
+  width: min(1180px, calc(100% - 24px));
+  margin: 20px auto;
+  padding: 20px;
+  border-radius: 18px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(7px);
+}
+
+.btn {
+  border: none;
+  border-radius: 12px;
+  padding: 11px 16px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 140ms ease, box-shadow 140ms ease, background 140ms ease;
+  box-shadow: 0 10px 22px rgba(10, 41, 87, 0.12);
+}
+
+.btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+.btn:disabled {
+  opacity: 0.62;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--brand), #2f92ea 72%);
+  color: #fff;
+}
+
+.btn-outline {
+  background: #fff;
+  color: var(--brand-600);
+  border: 1px solid rgba(18, 62, 114, 0.18);
+}
+
+.btn-ghost {
+  background: rgba(15, 108, 207, 0.08);
+  color: var(--brand-600);
+  border: 1px solid rgba(15, 108, 207, 0.1);
+}
+
+.page-hero {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 18px;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 12px;
+  border-radius: 999px;
+  background: rgba(15, 108, 207, 0.11);
+  color: var(--brand-600);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.22px;
+  margin-bottom: 10px;
+}
+
+.page-hero h2 {
+  font-family: 'Space Grotesk', 'Arial Narrow', sans-serif;
+  font-size: clamp(1.5rem, 2vw, 2rem);
+  margin-bottom: 8px;
+}
+
+.page-hero p {
+  color: var(--muted);
+  max-width: 700px;
+}
+
+.page-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.summary-grid,
+.tool-grid {
+  display: grid;
+  gap: 16px;
+}
+
+.summary-grid {
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  margin-bottom: 18px;
+}
+
+.summary-card,
+.tool-card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  box-shadow: 0 14px 30px rgba(10, 41, 87, 0.1);
+}
+
+.summary-card {
+  padding: 16px 18px;
+}
+
+.summary-label {
+  font-size: 0.76rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+
+.summary-value {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--ink);
+}
+
+.tool-grid {
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+}
+
+.tool-card {
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.tool-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.tool-title {
+  font-family: 'Space Grotesk', 'Arial Narrow', sans-serif;
+  font-size: 1.12rem;
+  margin-bottom: 6px;
+}
+
+.tool-copy {
+  color: var(--muted);
+}
+
+.tool-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.tool-note {
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, rgba(15, 108, 207, 0.08), rgba(241, 154, 41, 0.08));
+  border: 1px solid rgba(15, 108, 207, 0.1);
+  color: var(--ink);
+  font-size: 0.93rem;
+}
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 92px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: rgba(15, 108, 207, 0.11);
+  color: var(--brand-600);
+}
+
+.status-badge.warning {
+  background: rgba(241, 154, 41, 0.15);
+  color: #a45900;
+}
+
+.status-badge.success {
+  background: rgba(15, 163, 109, 0.14);
+  color: #0c8157;
+}
+
+.status-badge.danger {
+  background: rgba(207, 66, 51, 0.12);
+  color: var(--danger-600);
+}
+
+.toast {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  background: rgba(18, 44, 68, 0.96);
+  color: #fff;
+  padding: 12px 16px;
+  border-radius: 14px;
+  box-shadow: 0 16px 34px rgba(10, 41, 87, 0.28);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(10px);
+  transition: opacity 180ms ease, transform 180ms ease;
+  z-index: 250;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.toast.success {
+  background: rgba(15, 163, 109, 0.97);
+}
+
+.toast.error {
+  background: rgba(207, 66, 51, 0.97);
+}
+
+@media (max-width: 760px) {
+  .nav-drawer {
+    width: min(360px, 88vw);
+  }
+
+  .page-hero {
+    flex-direction: column;
+  }
+
+  .page-actions {
+    width: 100%;
+  }
+}
+</style>
+</head>
+<body>
+<header>
+  <img src="assets/img/logo.jpg" alt="Lingkod Bayan Logo">
+  <h1 class="lb-brand-font">LINGKOD BAYAN - Import Tools</h1>
+  <button id="menuToggle" class="menu-toggle" type="button" aria-label="Open main menu" aria-expanded="false" aria-controls="navOverlay">
+    <span class="menu-bars" aria-hidden="true">
+      <span></span>
+      <span></span>
+      <span></span>
+    </span>
+    <span class="menu-text">Menu</span>
+  </button>
+</header>
+
+<div id="navOverlay" class="nav-overlay" aria-hidden="true">
+  <div class="nav-drawer" role="dialog" aria-modal="true" aria-label="Main menu">
+    <div class="nav-drawer-header">
+      <span class="nav-drawer-title">Main Menu</span>
+      <button id="navClose" class="nav-close" type="button" aria-label="Close menu">&times;</button>
+    </div>
+    <a class="nav-item" href="ceu-database.html" data-route="ceuDatabase">CEU Database</a>
+    <a class="nav-item" href="client-records.html" data-route="records">Lingkod Bayan</a>
+    <a class="nav-item" href="import-tools.html" data-route="importTools">Import Tools</a>
+    <a class="nav-item" href="help-center.html" data-route="helpCenter">Help Center</a>
+    <button class="nav-item danger" type="button" onclick="logout()" aria-label="Logout">Logout</button>
+    <button class="nav-meta nav-meta-button" type="button" data-changelog-trigger aria-haspopup="dialog" aria-controls="lbChangelogModal" aria-label="View current version updates">
+      <span class="nav-meta-label">System Updates</span>
+      <span class="nav-meta-version-row">
+        <strong class="nav-meta-version" data-changelog-version>v2.0.9</strong>
+        <span class="nav-meta-badge">Current Version</span>
+      </span>
+      <span class="nav-meta-copy">Updated <span data-changelog-updated>April 15, 2026</span>. Review the latest fixes and improvements from the changelog.</span>
+      <span class="nav-meta-action">Open Changelog</span>
+    </button>
+  </div>
+</div>
+
+<main class="container">
+  <section class="page-hero">
+    <div>
+      <span class="eyebrow">Admin Tools</span>
+      <h2>Import and Migration</h2>
+      <p>These tools are for bulk loading and migration work only, so they live on a separate page away from the daily client records workflow.</p>
+    </div>
+    <div class="page-actions">
+      <button class="btn btn-outline" type="button" onclick="window.lbRoutes.go('records')">Back to Records</button>
+      <button class="btn btn-outline" type="button" onclick="window.lbRoutes.go('helpCenter')">Help Center</button>
+      <button class="btn btn-primary" type="button" onclick="window.lbRoutes.go('addRecord')">Add Record</button>
+    </div>
+  </section>
+
+  <section class="summary-grid" aria-label="Import summary">
+    <article class="summary-card">
+      <div class="summary-label">Storage Mode</div>
+      <div class="summary-value" id="summaryStorage">Checking...</div>
+    </article>
+    <article class="summary-card">
+      <div class="summary-label">Current Records</div>
+      <div class="summary-value" id="summaryRecords">0</div>
+    </article>
+    <article class="summary-card">
+      <div class="summary-label">Backup Queue</div>
+      <div class="summary-value" id="summaryBackup">0</div>
+    </article>
+  </section>
+
+  <section class="tool-grid" aria-label="Import tools">
+    <article id="migrationBanner" class="tool-card">
+      <div class="tool-head">
+        <div>
+          <h3 class="tool-title">One-Time Supabase Import Tool</h3>
+          <p id="migrationMessage" class="tool-copy">Checking for preserved browser backup records.</p>
+        </div>
+        <span id="migrationStatus" class="status-badge">Checking</span>
+      </div>
+      <div class="tool-actions">
+        <button id="importBackupBtn" class="btn btn-outline" type="button">Import One-Time Backup</button>
+        <button id="clearBackupBtn" class="btn btn-ghost" type="button">Clear Backup</button>
+      </div>
+      <div class="tool-note">Use this only when you need to move preserved browser backup records into the shared Supabase database.</div>
+    </article>
+
+    <article id="excelImportBanner" class="tool-card">
+      <div class="tool-head">
+        <div>
+          <h3 class="tool-title">Excel Import Tool</h3>
+          <p id="excelImportMessage" class="tool-copy">Import an LBU Excel workbook and merge repeat requests into client history.</p>
+        </div>
+        <span id="excelImportStatus" class="status-badge">Ready</span>
+      </div>
+      <div class="tool-actions">
+        <input id="excelImportInput" type="file" accept=".xlsx" hidden>
+        <button id="downloadExcelTemplateBtn" class="btn btn-outline" type="button">Download Excel Template</button>
+        <button id="importExcelBtn" class="btn btn-primary" type="button">Import Excel</button>
+      </div>
+      <div class="tool-note">Download the template, keep the column headers unchanged, then upload the filled workbook here. The system checks the columns before saving records.</div>
+    </article>
+  </section>
+</main>
+
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+<script src="assets/js/supabase-config.js"></script>
+<script src="assets/js/supabase-client.js"></script>
+<script src="assets/js/data-store.js"></script>
+<script src="assets/js/routes.js"></script>
+<script src="assets/js/auth.js"></script>
+<script src="assets/js/xlsx-lite.js"></script>
+<script src="assets/js/record-excel-import.js"></script>
+<script src="assets/js/import-tools-page.js"></script>
+<script src="assets/js/changelog-viewer.js"></script>
+</body>
+</html>

@@ -132,6 +132,91 @@ const renderCaseStudySections = (sections) => {
   bodySection.insertBefore(wrapper, bottom);
 };
 
+const renderProjectScreenshots = (screenshots, caption) => {
+  const existing = projectDetail.querySelector("[data-project-screenshots]");
+
+  if (existing) {
+    existing.remove();
+  }
+
+  if (!Array.isArray(screenshots) || !screenshots.length) {
+    return;
+  }
+
+  const bodySection = projectDetail.querySelector(".project-detail-body");
+  const bottom = projectDetail.querySelector(".project-detail-bottom");
+
+  if (!bodySection || !bottom) {
+    return;
+  }
+
+  const section = document.createElement("section");
+  section.id = "project-gallery";
+  section.className = "container project-screenshot-section";
+  section.dataset.projectScreenshots = "";
+
+  const header = document.createElement("div");
+  header.className = "project-screenshot-header";
+
+  const eyebrow = document.createElement("p");
+  eyebrow.className = "eyebrow";
+  eyebrow.textContent = "Screenshots";
+
+  const title = document.createElement("h2");
+  title.textContent = "Key screens";
+
+  header.append(eyebrow, title);
+
+  if (caption) {
+    const summary = document.createElement("p");
+    summary.textContent = caption;
+    header.append(summary);
+  }
+
+  const grid = document.createElement("div");
+  grid.className = "project-screenshot-grid";
+
+  screenshots.forEach((screenshot, index) => {
+    const figure = document.createElement("figure");
+    figure.className = "project-screenshot-card";
+
+    const imageShell = document.createElement("div");
+    imageShell.className = "project-screenshot-media";
+
+    const image = document.createElement("img");
+    image.src = getDetailAssetPath(screenshot.image);
+    image.alt = screenshot.alt || screenshot.title || `${projectDetail.dataset.projectSlug} screenshot`;
+    image.loading = "lazy";
+    image.decoding = "async";
+    window.KarlForgeLoading?.watchImage(
+      image,
+      imageShell,
+      `${screenshot.title || "Project screenshot"} loading`
+    );
+
+    imageShell.append(image);
+
+    const captionBlock = document.createElement("figcaption");
+
+    const number = document.createElement("span");
+    number.className = "project-screenshot-number";
+    number.textContent = String(index + 1).padStart(2, "0");
+
+    const screenshotTitle = document.createElement("h3");
+    screenshotTitle.textContent = screenshot.title || "";
+
+    const body = document.createElement("p");
+    body.textContent = screenshot.description || "";
+
+    captionBlock.append(number, screenshotTitle, body);
+    figure.append(imageShell, captionBlock);
+    grid.append(figure);
+  });
+
+  section.append(header, grid);
+  bodySection.insertBefore(section, bottom);
+};
+
 if (projectDetail) {
   const projects = window.KARLFORGE_PROJECTS || [];
   const project = projects.find((item) => item.slug === getCurrentProjectSlug());
@@ -169,7 +254,13 @@ if (projectDetail) {
     renderTags("[data-project-tech]", project.techStack);
     renderList("[data-project-features]", project.features);
     renderCaseStudySections(project.caseStudy);
-    setProjectLink("[data-project-live]", project.links?.live, "Live Demo", "Live Demo unavailable");
+    renderProjectScreenshots(project.screenshots, project.portfolioCaption);
+    setProjectLink(
+      "[data-project-live]",
+      project.links?.live,
+      project.links?.liveLabel || "Live Demo",
+      project.links?.liveUnavailableLabel || "Live Demo unavailable"
+    );
     setProjectLink(
       "[data-project-source]",
       project.links?.source,

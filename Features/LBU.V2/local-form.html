@@ -1,0 +1,513 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>2026 Lingkod Bayan Center - Local Form</title>
+<meta name="description" content="Standalone, fixed copy of the 2026 Lingkod Bayan Center form (local version)." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/local-form.css">
+
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div style="width:56px;height:56px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#8e44ff);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700">LB</div>
+      <div>
+        <h1 class="lb-brand-font">2026 Lingkod Bayan Center</h1>
+        <div class="small">Local copy - fixed and interactive. Your answers remain in browser (no Google submits).</div>
+      </div>
+    </header>
+
+    <form id="lbForm" class="card" novalidate>
+      <!-- Section A: Basics -->
+      <div class="section">
+        <div class="section-title">Basics</div>
+
+        <div class="row">
+          <div class="field">
+            <label>Office <span class="required">*</span></label>
+            <div class="radio-group" role="radiogroup" aria-required="true">
+              <label class="radio"><input type="radio" name="office" value="CNL" required> <span>CNL</span></label>
+              <label class="radio"><input type="radio" name="office" value="PDL"> <span>PDL</span></label>
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Saan po kayo unang lumapit? <span class="required">*</span></label>
+            <div class="radio-group" role="radiogroup" aria-required="true">
+              <label class="radio"><input type="radio" name="first_contact" value="Online" required> Online</label>
+              <label class="radio"><input type="radio" name="first_contact" value="City Hall Office"> City Hall Office</label>
+              <label class="radio"><input type="radio" name="first_contact" value="TGP Office - Brgy. Milagrosa"> TGP Office - Brgy. Milagrosa</label>
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Ano po ang pangalan ng staff na unang nag-assist sayo? <span class="required">*</span></label>
+            <input type="text" name="first_staff" placeholder="Enter staff name" required>
+          </div>
+
+          <div class="field">
+            <label>Client Classification <span class="required">*</span></label>
+            <div class="radio-group" role="radiogroup" aria-required="true">
+              <label class="radio"><input type="radio" name="client_class" value="Regular Client" required> Regular Client</label>
+              <label class="radio"><input type="radio" name="client_class" value="Barangay Official"> Barangay Official</label>
+              <label class="radio"><input type="radio" name="client_class" value="City Hall Employee"> City Hall Employee</label>
+              <label class="radio"><input type="radio" name="client_class" value="Organization/Sectors"> Organization/Sectors</label>
+              <label class="radio"><input type="radio" name="client_class" id="clientOtherRadio" value="Other"> Other</label>
+            </div>
+            <div style="margin-top:8px;">
+              <input type="text" id="clientOtherText" name="client_class_other" placeholder="If Other, specify" disabled>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section B: Organization / Office -->
+      <div class="section" style="margin-top:16px">
+        <div class="section-title">Office / Organization</div>
+        <div class="row">
+          <div class="field">
+            <label>Ano po ang pangalan ng inyong opisina o organisasyong kinabibilangan? <span class="required">*</span></label>
+            <input type="text" name="organization_name" placeholder="Organization / Office" required>
+          </div>
+
+          <div class="field">
+            <label>Ano ang iyong position o ginagampanang tungkulin?</label>
+            <input type="text" name="position" placeholder="Position or role">
+          </div>
+        </div>
+      </div>
+
+      <!-- Section C: Address / Client Info (Calamba clients & barangays) -->
+      <div class="section" style="margin-top:16px">
+        <div class="section-title">Client's Information</div>
+        <div class="row">
+          <div class="field">
+            <label>Calamba Barangay</label>
+            <select name="calamba_barangay">
+              <option value="">-- choose barangay --</option>
+              <optgroup label="Calamba barangays">
+                <option>Bagong Kalsada</option>
+                <option>Banadero</option>
+                <option>Banlic</option>
+                <option>Barandal</option>
+                <option>Batino</option>
+                <option>Bubuyan</option>
+                <option>Bucal</option>
+                <option>Bunggo</option>
+                <option>Burol</option>
+                <option>Camaligan</option>
+                <option>Canlubang</option>
+                <option>Halang</option>
+                <option>Hornalan</option>
+                <option>Kay-Anlog</option>
+                <option>Laguerta</option>
+                <option>La Mesa</option>
+                <option>Lawa</option>
+                <option>Lecheria</option>
+                <option>Lingga</option>
+                <option>Looc</option>
+                <option>Mabato</option>
+                <option>Makiling</option>
+                <option>Mapagong</option>
+                <option>Masili</option>
+                <option>Maunong</option>
+                <option>Mayapa</option>
+                <option>Milagrosa</option>
+                <option>Paciano</option>
+                <option>Palingon</option>
+                <option>Palo-Alto</option>
+                <option>Pansol</option>
+                <option>Parian</option>
+                <option>Prinza</option>
+                <option>Punta</option>
+                <option>Puting Lupa</option>
+                <option>Real</option>
+                <option>Sucol</option>
+                <option>Saimsim</option>
+                <option>Sampiruhan</option>
+                <option>San Cristobal</option>
+                <option>San Jose</option>
+                <option>San Juan</option>
+                <option>Sirang Lupa</option>
+                <option>Turbina</option>
+                <option>Ulango</option>
+                <option>Uwisan</option>
+                <option>Majada Out</option>
+                <option>Poblacion 1</option>
+                <option>Poblacion 2</option>
+                <option>Poblacion 3</option>
+                <option>Poblacion 4</option>
+                <option>Poblacion 5</option>
+                <option>Poblacion 6</option>
+                <option>Poblacion 7</option>
+              </optgroup>
+            </select>
+          </div>
+
+          <div class="field">
+            <label>Ilagay po ang inyong Purok, Sitio, Compound, o Subdivision</label>
+            <input type="text" name="subdivision" placeholder="Purok / Sitio / Compound / Subdivision">
+          </div>
+
+          <div class="field">
+            <label>Ilagay po ang inyong House Number / Lot / Block</label>
+            <input type="text" name="house_number" placeholder="House number / Lot / Block">
+          </div>
+        </div>
+
+        <div class="row" style="margin-top:8px;">
+          <div class="field">
+            <label>Last Name <span class="required">*</span></label>
+            <input type="text" name="last_name" required placeholder="Last name">
+          </div>
+          <div class="field">
+            <label>First Name <span class="required">*</span></label>
+            <input type="text" name="first_name" required placeholder="First name">
+          </div>
+          <div class="field">
+            <label>Middle Name</label>
+            <input type="text" name="middle_name" placeholder="Middle name">
+          </div>
+        </div>
+
+        <div class="row" style="margin-top:8px;">
+          <div class="field">
+            <label>Birthday</label>
+            <input type="date" name="birthday">
+          </div>
+
+          <div class="field">
+            <label>Gender Identity</label>
+            <div class="radio-group">
+              <label class="radio"><input type="radio" name="gender" value="Male"> Male</label>
+              <label class="radio"><input type="radio" name="gender" value="Female"> Female</label>
+              <label class="radio"><input type="radio" name="gender" value="LGBTQ"> LGBTQ</label>
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Cellphone Number</label>
+            <input type="tel" name="cellphone" placeholder="+63...">
+          </div>
+
+          <div class="field">
+            <label>Email</label>
+            <input type="email" name="email" placeholder="example@email.com">
+          </div>
+        </div>
+      </div>
+
+      <!-- Section D: Referral, Programs, Medical -->
+      <div class="section" style="margin-top:16px">
+        <div class="section-title">Programs / Requests / Medical</div>
+
+        <div class="row">
+          <div class="field">
+            <label>Kung meron man, ilagay ang pangalan ng opisyal na nagrefer o nag-endorse sainyo.</label>
+            <input type="text" name="referrer" placeholder="Referring official (if any)">
+          </div>
+
+          <div class="field" style="min-width:320px;">
+            <label>Ano pong programa o activity ang nais ninyong i-request?</label>
+            <div class="checkbox-group" style="flex-direction:column;">
+              <!-- list based on original options -->
+              <label class="checkbox"><input type="checkbox" name="programs" value="Guarantee Letter"> Guarantee Letter</label>
+              <label class="checkbox"><input type="checkbox" name="programs" value="Transport Service - Medical Client"> Transport Service - Medical Client</label>
+              <label class="checkbox"><input type="checkbox" name="programs" value="Special Case - Medical Client"> Special Case - Medical Client</label>
+              <label class="checkbox"><input type="checkbox" name="programs" value="Medical Financial Assistance (Cash)"> Medical Financial Assistance (Cash)</label>
+              <label class="checkbox"><input type="checkbox" name="programs" value="Solicitation (Cash / Goods / Item)"> Solicitation (Cash / Goods / Item)</label>
+              <label class="checkbox"><input type="checkbox" name="programs" value="Agricultural Program"> Agricultural Program</label>
+              <label class="checkbox"><input type="checkbox" name="programs" value="Consultation & Visitation"> Consultation & Visitation</label>
+              <label class="checkbox"><input type="checkbox" name="programs" value="Environmental Program"> Environmental Program</label>
+              <label class="checkbox"><input type="checkbox" name="programs" value="Hapag-Kainan"> Hapag-Kainan</label>
+              <label class="checkbox"><input type="checkbox" name="programs" value="Legal Assistance"> Legal Assistance</label>
+              <label class="checkbox"><input type="checkbox" name="programs" value="MayTrabaho - Referral Letter"> MayTrabaho - Referral Letter</label>
+              <label class="checkbox"><input type="checkbox" name="programs" value="Educational Discussions / Events"> Educational Discussions / Events</label>
+              <label class="checkbox"><input type="checkbox" name="programs" value="Barangay Event Appearance"> Barangay Event Appearance</label>
+              <label class="checkbox"><input type="checkbox" name="programs" value="Speaking Engagement"> Speaking Engagement</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="row" style="margin-top:10px;">
+          <div class="field">
+            <label>Requesting for</label>
+            <div class="radio-group">
+              <label class="radio"><input type="radio" name="requesting_for" value="TGP Partylist"> TGP Partylist</label>
+              <label class="radio"><input type="radio" name="requesting_for" value="DSWD Regional"> DSWD Regional</label>
+              <label class="radio"><input type="radio" name="requesting_for" value="Malacanang / Office of the President"> Malacanang / Office of the President</label>
+              <label class="radio"><input type="radio" name="requesting_for" value="Solicitation - Direct: CNL"> Solicitation - Direct: CNL</label>
+              <label class="radio"><input type="radio" name="requesting_for" value="PCSO"> PCSO</label>
+              <label class="radio"><input type="radio" name="requesting_for" value="DSWD Provincial"> DSWD Provincial</label>
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Ang pasyente po ba ay</label>
+            <div class="radio-group">
+              <label class="radio"><input type="radio" name="patient_status" value="Admitted sa hospital"> Admitted sa hospital</label>
+              <label class="radio"><input type="radio" name="patient_status" value="Out Patient o hindi na admitted"> Out Patient o hindi na admitted</label>
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Ang pasyente o kliyente po ba ay</label>
+            <div class="radio-group">
+              <label class="radio"><input type="radio" name="client_times" value="New Client"> New Client</label>
+              <label class="radio"><input type="radio" name="client_times" value="Returning Client"> Returning Client</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="row" style="margin-top:10px;">
+          <div class="field">
+            <label>Hospital / Institution</label>
+            <input type="text" name="hospital" placeholder="If applicable">
+          </div>
+
+          <div class="field">
+            <label>Date of Assistance</label>
+            <input type="date" name="date_of_assistance">
+          </div>
+
+          <div class="field">
+            <label>Other Activities and Programs</label>
+            <input type="text" name="other_activities" placeholder="Other activities / programs">
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Section E: Events / Upload -->
+      <div class="section" style="margin-top:16px">
+        <div class="section-title">Events / Documents</div>
+
+        <div class="row">
+          <div class="field">
+            <label>Pangalan ng inyong Organization, Institution, Office, Sangguniang Barangay, Company</label>
+            <input type="text" name="org_long_name" placeholder="Full organization name">
+          </div>
+
+          <div class="field">
+            <label>Number of Attendees/Beneficiaries</label>
+            <input type="number" min="0" name="num_attendees">
+          </div>
+
+          <div class="field">
+            <label>Iba pang detalye tulad ng: Requests, Venue, Attire, At iba pa</label>
+            <input type="text" name="other_details" placeholder="Additional details">
+          </div>
+        </div>
+
+        <div class="row" style="margin-top:10px;">
+          <div class="field">
+            <label>Date of the Event/Activity</label>
+            <input type="date" name="event_date">
+          </div>
+
+          <div class="field">
+            <label>Ano ang Event/ Activity</label>
+            <input type="text" name="event_name" placeholder="Event / Activity">
+          </div>
+
+          <div class="field">
+            <label>Place of Event/Activity</label>
+            <input type="text" name="event_place" placeholder="Place of event/activity">
+          </div>
+
+          <div class="field">
+            <label>Time</label>
+            <input type="time" name="event_time">
+          </div>
+        </div>
+
+        <div style="margin-top:10px;">
+          <label>Paki-upload po ng inyong letter of request, solicitation and invitation.</label>
+          <input type="file" name="upload_letter" id="upload_letter" accept=".pdf,.doc,.docx,image/*">
+          <div class="file-note">Allowed: pdf, doc, docx, images. (Files stay in your browser until you submit and download summary.)</div>
+        </div>
+      </div>
+
+      <!-- submission / actions -->
+      <div class="actions">
+        <button type="button" id="clearBtn" class="btn btn-ghost">Clear form</button>
+        <button type="button" id="nextBtn" class="btn btn-ghost">Next</button>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+
+      <div id="result" class="summary" style="display:none"></div>
+    </form>
+
+    <footer class="small">
+      This local form is a fixed copy of your Google Form. To send data to a server or to Google Sheets, ask me and I will add a submit endpoint.
+    </footer>
+  </div>
+
+<script>
+  // --- small runtime to replicate "Other" behaviour and basic validation + summary --
+  (function(){
+    const form = document.getElementById('lbForm');
+    const clientOtherRadio = document.getElementById('clientOtherRadio');
+    const clientOtherText = document.getElementById('clientOtherText');
+    const clearBtn = document.getElementById('clearBtn');
+    const result = document.getElementById('result');
+    const nextBtn = document.getElementById('nextBtn');
+
+    // enable/disable "Other" text
+    document.querySelectorAll('input[name="client_class"]').forEach(r=>{
+      r.addEventListener('change', (e)=>{
+        if(e.target.value === 'Other'){
+          clientOtherText.disabled = false;
+          clientOtherText.focus();
+          clientOtherText.required = true;
+        } else {
+          clientOtherText.value = '';
+          clientOtherText.disabled = true;
+          clientOtherText.required = false;
+        }
+      });
+    });
+
+    clearBtn.addEventListener('click', ()=>{
+      if(confirm('Clear the form? All entries will be removed.')){
+        form.reset();
+        clientOtherText.disabled = true;
+        clientOtherText.required = false;
+        result.style.display = 'none';
+        window.scrollTo({top:0,behavior:'smooth'});
+      }
+    });
+
+    // "Next" scrolls to the next major section (simple heuristic)
+    nextBtn.addEventListener('click', ()=>{
+      // find first section below current viewport
+      const sections = Array.from(document.querySelectorAll('.section'));
+      const y = window.scrollY;
+      const next = sections.find(s => s.getBoundingClientRect().top + window.scrollY > y+10);
+      if(next){
+        window.scrollTo({ top: next.getBoundingClientRect().top + window.scrollY - 20, behavior:'smooth' });
+      } else {
+        window.scrollTo({ top: document.body.scrollHeight, behavior:'smooth' });
+      }
+    });
+
+    // collect multiple checkbox values
+    function collectCheckboxes(name){
+      const nodes = form.querySelectorAll('input[name="'+name+'"]');
+      const picked = [];
+      nodes.forEach(n=>{ if(n.checked) picked.push(n.value); });
+      return picked;
+    }
+
+    // on submit, validate required fields and present summary
+    form.addEventListener('submit', (ev)=>{
+      ev.preventDefault();
+      result.style.display = 'none';
+      // browser built-in validation for required inputs:
+      const invalid = form.querySelector(':invalid');
+      if(invalid){
+        invalid.scrollIntoView({behavior:'smooth', block:'center'});
+        invalid.focus();
+        alert('Please fill the required fields (highlighted).');
+        return;
+      }
+
+      // build data object
+      const data = {
+        office: form.office.value || '',
+        first_contact: form.first_contact.value || '',
+        first_staff: form.first_staff.value || '',
+        client_class: form.client_class.value === 'Other' ? (form.client_class_other.value || 'Other') : (form.client_class.value || ''),
+        organization_name: form.organization_name.value || '',
+        position: form.position.value || '',
+        calamba_barangay: form.calamba_barangay.value || '',
+        subdivision: form.subdivision.value || '',
+        house_number: form.house_number.value || '',
+        last_name: form.last_name.value || '',
+        first_name: form.first_name.value || '',
+        middle_name: form.middle_name.value || '',
+        birthday: form.birthday.value || '',
+        gender: form.gender ? (form.gender.value || '') : '',
+        cellphone: form.cellphone.value || '',
+        email: form.email.value || '',
+        referrer: form.referrer.value || '',
+        programs: collectCheckboxes('programs'),
+        requesting_for: form.requesting_for ? form.requesting_for.value : '',
+        patient_status: form.patient_status ? form.patient_status.value : '',
+        client_times: form.client_times ? form.client_times.value : '',
+        hospital: form.hospital.value || '',
+        date_of_assistance: form.date_of_assistance.value || '',
+        other_activities: form.other_activities.value || '',
+        org_long_name: form.org_long_name.value || '',
+        num_attendees: form.num_attendees.value || '',
+        other_details: form.other_details.value || '',
+        event_date: form.event_date.value || '',
+        event_name: form.event_name.value || '',
+        event_place: form.event_place.value || '',
+        event_time: form.event_time.value || ''
+      };
+
+      // handle file info (we do NOT upload; we show info to user)
+      const fileInput = document.getElementById('upload_letter');
+      let fileInfo = null;
+      if(fileInput && fileInput.files && fileInput.files.length>0){
+        const f = fileInput.files[0];
+        fileInfo = { name: f.name, size: f.size, type: f.type, lastModified: f.lastModified };
+        // optionally you could read file via FileReader here if needed
+      }
+
+      // show summary
+      let html = '<strong>Submission summary</strong><br><small class="small">Review below - this does not leave your browser.</small><hr>';
+      html += '<pre style="white-space:pre-wrap;font-family:inherit;font-size:13px;">'+JSON.stringify(data, null, 2) +'</pre>';
+      if(fileInfo) {
+        html += '<div style="margin-top:8px;"><strong>Uploaded file:</strong> '+fileInfo.name+' ('+Math.round(fileInfo.size/1024)+' KB)</div>';
+      } else {
+        html += '<div style="margin-top:8px;"><em>No file uploaded</em></div>';
+      }
+      html += '<div style="margin-top:12px">You can download this response as a JSON file below.</div>';
+      html += '<div style="margin-top:8px"><button id="downloadJson" class="btn btn-ghost">Download JSON</button> <button id="closeSummary" class="btn btn-primary">Close</button></div>';
+
+      result.innerHTML = html;
+      result.style.display = 'block';
+      result.scrollIntoView({behavior:'smooth', block:'center'});
+
+      // bind download & close
+      document.getElementById('downloadJson').addEventListener('click',()=>{
+        const blob = new Blob([JSON.stringify({data, fileInfo},null,2)], {type:'application/json'});
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = (data.first_name || 'response') + '_lb_form.json';
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        URL.revokeObjectURL(url);
+      });
+
+      document.getElementById('closeSummary').addEventListener('click', ()=>{
+        result.style.display = 'none';
+        window.scrollTo({top:0,behavior:'smooth'});
+      });
+    });
+
+    // small UX: enable "Other" typed when page loads if radio preselected
+    if(document.querySelector('input[name="client_class"]:checked') && document.querySelector('input[name="client_class"]:checked').value === 'Other'){
+      clientOtherText.disabled = false;
+    } else {
+      clientOtherText.disabled = true;
+    }
+
+  })();
+</script>
+</body>
+</html>
+
+
+
+
+
+

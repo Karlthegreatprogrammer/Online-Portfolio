@@ -1,0 +1,102 @@
+[build]
+publish = "."
+
+[[redirects]]
+from = "/"
+to = "/admin-login.html"
+status = 302
+
+[[redirects]]
+from = "/index"
+to = "/admin-login.html"
+status = 302
+
+[[redirects]]
+from = "/index.html"
+to = "/admin-login.html"
+status = 302
+
+[[redirects]]
+from = "/admin"
+to = "/admin-login.html"
+status = 302
+
+[[redirects]]
+from = "/admin/*"
+to = "/admin-login.html"
+status = 302
+
+[[redirects]]
+from = "/admin-login"
+to = "/admin-login.html"
+status = 302
+
+[[redirects]]
+from = "/admin-login/"
+to = "/admin-login.html"
+status = 302
+
+[[redirects]]
+from = "/login/"
+to = "/admin-login.html"
+status = 302
+
+[[redirects]]
+from = "/login"
+to = "/admin-login.html"
+status = 200
+
+[[redirects]]
+from = "/records"
+to = "/client-records.html"
+status = 200
+
+[[redirects]]
+from = "/client-records"
+to = "/client-records.html"
+status = 302
+
+[[redirects]]
+from = "/import-tools"
+to = "/import-tools.html"
+status = 200
+
+[[redirects]]
+from = "/import-tools.html"
+to = "/import-tools"
+status = 301
+
+[[redirects]]
+from = "/add-record"
+to = "/add-record.html"
+status = 200
+
+[[redirects]]
+from = "/add-record.html"
+to = "/add-record"
+status = 301
+
+[[redirects]]
+from = "/ceu-database"
+to = "/ceu-database.html"
+status = 200
+
+[[redirects]]
+from = "/reports"
+to = "/reports.html"
+status = 200
+
+[[redirects]]
+from = "/reports.html"
+to = "/reports"
+status = 301
+
+[[redirects]]
+from = "/local-form"
+to = "/local-form.html"
+status = 200
+
+[[redirects]]
+from = "/local-form.html"
+to = "/local-form"
+status = 301

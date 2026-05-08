@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/theme.css">
+<link rel="stylesheet" href="assets/css/login.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Login - LINGKOD BAYAN</title>
+</head>
+<body>
+
+<div id="loginAppLoader" class="app-loading-screen" role="status" aria-live="polite" aria-label="Loading Lingkod Bayan Admin Login" hidden>
+    <div class="app-loading-card">
+        <div class="app-loading-mark" aria-hidden="true">
+            <img src="assets/img/logo.jpg" alt="">
+        </div>
+        <div class="app-loading-copy">
+            <span class="app-loading-eyebrow" data-loading-eyebrow>Admin portal</span>
+            <strong class="app-loading-title" data-loading-title>Loading Admin Login</strong>
+            <span class="app-loading-subtitle" data-loading-subtitle>Preparing the secure login screen.</span>
+        </div>
+        <div class="app-loading-track" aria-hidden="true"></div>
+        <span class="app-loading-footnote">Please keep this tab open while the session is prepared.</span>
+    </div>
+</div>
+
+<div class="container">
+    <div class="logo-container">
+        <img src="assets/img/logo.jpg" alt="Logo">
+    </div>
+
+    <h1 id="pageTitle">Admin Login</h1>
+    <div id="modeHint" style="text-align:center; margin-bottom:12px; color:#555; font-size:14px;"></div>
+
+    <form id="loginForm" autocomplete="off">
+        <div id="error">Invalid username or password!</div>
+        <input type="text" id="username" placeholder="Username" value="admin" aria-label="Username">
+        <input type="password" id="password" placeholder="Password" aria-label="Password">
+        <input type="password" id="confirmPassword" placeholder="Confirm Password" aria-label="Confirm Password" style="display:none;">
+        <button type="submit" id="loginBtn">Login</button>
+        <div class="demo-login-panel" id="demoLoginPanel" hidden>
+            <button type="button" class="demo-login-button" id="demoLoginBtn">Use Demo Account</button>
+            <p>Demo-only access. Use fake records only.</p>
+        </div>
+    </form>
+</div>
+
+<script src="assets/js/supabase-config.js"></script>
+<script src="assets/js/supabase-client.js"></script>
+<script src="assets/js/routes.js"></script>
+<script src="assets/js/auth.js"></script>
+<script>
+const form = document.getElementById('loginForm');
+const usernameInput = document.getElementById('username');  
+const passwordInput = document.getElementById('password');
+const confirmInput = document.getElementById('confirmPassword');
+const errorDiv = document.getElementById('error');
+const modeHint = document.getElementById('modeHint');
+const loginBtn = document.getElementById('loginBtn');
+const demoLoginPanel = document.getElementById('demoLoginPanel');
+const demoLoginBtn = document.getElementById('demoLoginBtn');
+const pageTitle = document.getElementById('pageTitle');
+const LOGIN_APP_LOADER_MIN_MS = 1200;
+const LOGIN_APP_LOADER_EXIT_MS = 700;
+const LOGIN_APP_ROUTE_DELAY_MS = 500;
+const LOGIN_PRELOAD_TIMEOUT_MS = 800;
+const loginAppLoader = document.getElementById('loginAppLoader');
+let loginAppLoaderVisibleSince = window.performance && typeof window.performance.now === 'function'
+    ? window.performance.now()
+    : Date.now();
+let loginAppLoaderClosed = true;
+let loginAppLoaderVersion = 0;
+let loginAppLoaderStageTimers = [];
+
+function getLoginLoaderNow(){
+    return window.performance && typeof window.performance.now === 'function'
+        ? window.performance.now()
+        : Date.now();
+}
+
+function setLoginLoaderCopy(options){
+    const opts = options || {};
+    if(!loginAppLoader) return;
+
+    const eyebrow = loginAppLoader.querySelector('[data-loading-eyebrow]');
+    const title = loginAppLoader.querySelector('[data-loading-title]');
+    const subtitle = loginAppLoader.querySelector('[data-loading-subtitle]');
+
+    if(eyebrow && opts.eyebrow) eyebrow.textContent = opts.eyebrow;
+    if(title && opts.title) title.textContent = opts.title;
+    if(subtitle && opts.subtitle) subtitle.textContent = opts.subtitle;
+}
+
+function clearLoginLoaderStageTimers(){
+    loginAppLoaderStageTimers.forEach(function(timer){
+        window.clearTimeout(timer);
+    });
+    loginAppLoaderStageTimers = [];
+}
+
+function scheduleLoginLoaderStages(stages){
+    clearLoginLoaderStageTimers();
+    (Array.isArray(stages) ? stages : []).forEach(function(stage){
+        loginAppLoaderStageTimers.push(window.setTimeout(function(){
+            setLoginLoaderCopy(stage);
+        }, Math.max(0, Number(stage && stage.delay) || 0)));
+    });
+}
+
+function showLoginAppLoader(options){
+    if(!loginAppLoader) return;
+    const opts = options || {};
+    loginAppLoaderVersion += 1;
+    loginAppLoaderClosed = false;
+    loginAppLoaderVisibleSince = getLoginLoaderNow();
+    setLoginLoaderCopy(opts);
+    scheduleLoginLoaderStages(opts.stages);
+    loginAppLoader.hidden = false;
+    loginAppLoader.classList.remove('is-leaving');
+    loginAppLoader.removeAttribute('aria-hidden');
+    document.body.classList.add('is-app-loading');
+}
+
+function hideLoginAppLoader(){
+    if(loginAppLoaderClosed || !loginAppLoader || loginAppLoader.hidden){
+        return;
+    }
+
+    loginAppLoaderClosed = true;
+    const loaderVersion = loginAppLoaderVersion;
+    const remainingVisibleTime = Math.max(0, LOGIN_APP_LOADER_MIN_MS - (getLoginLoaderNow() - loginAppLoaderVisibleSince));
+
+    window.setTimeout(function(){
+        if(loaderVersion !== loginAppLoaderVersion) return;
+        clearLoginLoaderStageTimers();
+        loginAppLoader.classList.add('is-leaving');
+        loginAppLoader.setAttribute('aria-hidden', 'true');
+
+        window.setTimeout(function(){
+            if(loaderVersion !== loginAppLoaderVersion) return;
+            loginAppLoader.hidden = true;
+            document.body.classList.remove('is-app-loading');
+        }, LOGIN_APP_LOADER_EXIT_MS);
+    }, remainingVisibleTime);
+}
+
+function delayLoginNavigation(ms){
+    return new Promise(function(resolve){
+        window.setTimeout(resolve, Math.max(0, Number(ms) || 0));
+    });
+}
+
+function preloadLoginDestination(target){
+    if(!target || window.location.protocol === 'file:'){
+        return Promise.resolve();
+    }
+
+    let finished = false;
+    let controller = null;
+
+    if(typeof AbortController === 'function'){
+        controller = new AbortController();
+    }
+
+    const preload = fetch(target, {
+        cache: 'force-cache',
+        signal: controller ? controller.signal : undefined
+    })
+        .then(function(){
+            finished = true;
+            return true;
+        })
+        .catch(function(){
+            finished = true;
+            return false;
+        });
+
+    const timeout = new Promise(function(resolve){
+        window.setTimeout(function(){
+            if(!finished && controller){
+                controller.abort();
+            }
+            resolve(false);
+        }, LOGIN_PRELOAD_TIMEOUT_MS);
+    });
+
+    return Promise.race([preload, timeout]);
+}
+
+function setLoginBusy(isBusy){
+    loginBtn.disabled = !!isBusy;
+    if(demoLoginBtn){
+        demoLoginBtn.disabled = !!isBusy;
+    }
+    form.classList.toggle('is-busy', !!isBusy);
+}
+
+function getDemoLoginConfig(){
+    const config = window.LBU_SUPABASE_CONFIG || {};
+    const demo = config.demoLogin || {};
+    if(!demo.enabled || !demo.email || !demo.password){
+        return null;
+    }
+    return demo;
+}
+
+function syncDemoLoginButton(){
+    if(!demoLoginPanel){
+        return;
+    }
+
+    const shouldShow = !!(
+        window.lbAuth &&
+        window.lbAuth.isCloudEnabled &&
+        window.lbAuth.isCloudEnabled() &&
+        getDemoLoginConfig()
+    );
+
+    demoLoginPanel.hidden = !shouldShow;
+}
+
+function getLoginRouteCopy(routeName, target){
+    const text = String(routeName || target || '').toLowerCase();
+
+    if(text.indexOf('records') !== -1 || text.indexOf('client') !== -1){
+        return {
+            eyebrow: 'Opening database',
+            title: 'Loading Lingkod Bayan Records',
+            subtitle: 'Preparing the client assistance database after login.',
+            stages: [
+                { delay: 600, title: 'Checking Session', subtitle: 'Confirming your admin session.' },
+                { delay: 1100, title: 'Preloading Records Page', subtitle: 'Preparing the main Lingkod Bayan records page before opening it.' }
+            ]
+        };
+    }
+
+    return {
+        eyebrow: 'Securing session',
+        title: 'Preparing Page',
+        subtitle: 'Please wait while the system finishes the transition.',
+        stages: [
+            { delay: 600, title: 'Checking Session', subtitle: 'Preparing route access.' },
+            { delay: 1100, title: 'Opening Page', subtitle: 'Moving to the requested page.' }
+        ]
+    };
+}
+
+window.lbBeforeRouteChange = function(details){
+    const route = details || {};
+    const target = route.target || '';
+    const navigate = typeof route.navigate === 'function'
+        ? route.navigate
+        : function(){ window.location.href = target; };
+
+    showLoginAppLoader(getLoginRouteCopy(route.routeName, target));
+    Promise.all([
+        delayLoginNavigation(LOGIN_APP_ROUTE_DELAY_MS),
+        preloadLoginDestination(target)
+    ]).then(navigate).catch(navigate);
+    return true;
+};
+
+function setError(message){
+    errorDiv.textContent = message;
+    errorDiv.style.display = 'block';
+}
+
+function clearError(){
+    errorDiv.style.display = 'none';
+}
+
+function setSetupMode(enabled){
+    usernameInput.type = 'text';
+    usernameInput.placeholder = 'Username';
+    usernameInput.readOnly = false;
+    usernameInput.value = 'admin';
+    if(enabled){
+        pageTitle.textContent = 'Set Admin Password';
+        modeHint.textContent = 'First-time setup for this browser.';
+        loginBtn.textContent = 'Create Password';
+        confirmInput.style.display = 'block';
+    } else {
+        pageTitle.textContent = 'Admin Login';
+        modeHint.textContent = 'Use your admin credentials.';
+        loginBtn.textContent = 'Login';
+        confirmInput.style.display = 'none';
+        confirmInput.value = '';
+    }
+}
+
+function setCloudMode(){
+    pageTitle.textContent = 'Admin Login';
+    const configuredEmails = window.lbAuth && window.lbAuth.getConfiguredAdminEmails
+        ? window.lbAuth.getConfiguredAdminEmails()
+        : [];
+
+    modeHint.textContent = configuredEmails.length > 1
+        ? 'Use one of the allowed Supabase admin accounts for this website.'
+        : 'Use the Supabase admin account for this website.';
+    loginBtn.textContent = 'Login';
+    confirmInput.style.display = 'none';
+    confirmInput.value = '';
+    usernameInput.type = 'email';
+    usernameInput.placeholder = 'Admin email';
+    usernameInput.value = configuredEmails.length === 1 ? configuredEmails[0] : '';
+    usernameInput.readOnly = false;
+    syncDemoLoginButton();
+}
+
+function handleDemoLogin(){
+    const demo = getDemoLoginConfig();
+    if(!demo || loginBtn.disabled){
+        return;
+    }
+
+    usernameInput.value = demo.email;
+    passwordInput.value = demo.password;
+    clearError();
+
+    if(form.requestSubmit){
+        form.requestSubmit(loginBtn);
+        return;
+    }
+
+    form.dispatchEvent(new Event('submit', { cancelable: true }));
+}
+
+async function handleAuth(event){
+    event.preventDefault();
+    if(loginBtn.disabled){
+        return;
+    }
+
+    clearError();
+
+    const username = (usernameInput.value || '').trim();
+    const password = passwordInput.value || '';
+    const confirmPassword = confirmInput.value || '';
+
+    if(window.lbAuth && window.lbAuth.isCloudEnabled && window.lbAuth.isCloudEnabled()){
+        if(!username){
+            setError('Admin email is required.');
+            return;
+        }
+        if(!password){
+            setError('Password is required.');
+            return;
+        }
+
+        setLoginBusy(true);
+        showLoginAppLoader({
+            eyebrow: 'Securing session',
+            title: 'Signing In',
+            subtitle: 'Checking your Supabase admin credentials before opening the records database.',
+            stages: [
+                { delay: 600, title: 'Checking Credentials', subtitle: 'Signing in with Supabase Auth.' },
+                { delay: 1200, title: 'Preparing Session', subtitle: 'Confirming admin access before opening records.' }
+            ]
+        });
+
+        try {
+            await window.lbAuth.signInWithPassword({
+                email: username,
+                password: password
+            });
+            window.lbRoutes.go('records');
+        } catch(err){
+            setLoginBusy(false);
+            hideLoginAppLoader();
+            setError(err && err.message ? err.message : 'Invalid email or password.');
+        }
+        return;
+    }
+
+    if(username.toLowerCase() !== 'admin'){
+        setError('Only the admin account is allowed.');
+        return;
+    }
+
+    const hasProfile = window.lbAuth && window.lbAuth.hasProfile();
+
+    if(!password){
+        setError('Password is required.');
+        return;
+    }
+
+    if(!hasProfile){
+        if(password.length < 8){
+            setError('Password must be at least 8 characters.');
+            return;
+        }
+        if(password !== confirmPassword){
+            setError('Passwords do not match.');
+            return;
+        }
+
+        setLoginBusy(true);
+        showLoginAppLoader({
+            eyebrow: 'Creating access',
+            title: 'Setting Admin Password',
+            subtitle: 'Saving the local admin profile before opening the records database.',
+            stages: [
+                { delay: 600, title: 'Saving Admin Profile', subtitle: 'Creating the local admin password.' },
+                { delay: 1200, title: 'Preparing Session', subtitle: 'Opening the records database after setup.' }
+            ]
+        });
+
+        try {
+            await window.lbAuth.initializePassword(password);
+            window.lbAuth.createSession();
+            window.lbRoutes.go('records');
+        } catch(err){
+            setLoginBusy(false);
+            hideLoginAppLoader();
+            setError(err && err.message ? err.message : 'Failed to create admin password.');
+        }
+        return;
+    }
+
+    setLoginBusy(true);
+    showLoginAppLoader({
+        eyebrow: 'Securing session',
+        title: 'Signing In',
+        subtitle: 'Checking your local admin password before opening the records database.',
+        stages: [
+            { delay: 600, title: 'Checking Password', subtitle: 'Verifying local admin access.' },
+            { delay: 1200, title: 'Preparing Session', subtitle: 'Opening the records database after verification.' }
+        ]
+    });
+
+    try {
+        const ok = await window.lbAuth.verifyPassword(password);
+        if(!ok){
+            setLoginBusy(false);
+            hideLoginAppLoader();
+            setError('Invalid username or password.');
+            return;
+        }
+
+        window.lbAuth.createSession();
+        window.lbRoutes.go('records');
+    } catch(err){
+        setLoginBusy(false);
+        hideLoginAppLoader();
+        setError(err && err.message ? err.message : 'Failed to sign in.');
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function(){
+    if(!window.lbAuth){
+        setError('Auth module failed to load.');
+        return;
+    }
+
+    if(window.lbAuth.isAuthenticated()){
+        window.lbRoutes.go('records');
+        return;
+    }
+
+    if(window.lbAuth.isCloudEnabled && window.lbAuth.isCloudEnabled()){
+        setCloudMode();
+    } else {
+        setSetupMode(!window.lbAuth.hasProfile());
+    }
+    form.addEventListener('submit', handleAuth);
+    if(demoLoginBtn){
+        demoLoginBtn.addEventListener('click', handleDemoLogin);
+    }
+});
+</script>
+
+</body>
+</html>

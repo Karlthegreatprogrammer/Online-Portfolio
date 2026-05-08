@@ -1,0 +1,1176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Help Center - LINGKOD BAYAN</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/theme.css" />
+  <style>
+    :root {
+      --help-bg-a: #f5f9ff;
+      --help-bg-b: #ebf3ff;
+      --help-bg-c: #edf8f6;
+      --help-surface: rgba(255, 255, 255, 0.94);
+      --help-surface-strong: #ffffff;
+      --help-border: rgba(17, 63, 117, 0.12);
+      --help-shadow: 0 26px 58px rgba(11, 41, 86, 0.14);
+      --help-shadow-soft: 0 16px 34px rgba(11, 41, 86, 0.08);
+      --help-ink: #112b43;
+      --help-muted: #5f7288;
+      --help-brand: #0f6ccf;
+      --help-brand-strong: #0b4b93;
+      --help-accent: #138a74;
+      --help-warn: #b96812;
+      --help-radius-xl: 28px;
+      --help-radius-lg: 22px;
+      --help-radius-md: 16px;
+      --help-radius-sm: 12px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: 'Outfit', 'Trebuchet MS', sans-serif;
+      color: var(--help-ink);
+      background:
+        radial-gradient(1200px 700px at -8% -14%, #d6ebff 0%, transparent 66%),
+        radial-gradient(880px 560px at 112% 112%, #caefe7 0%, transparent 58%),
+        linear-gradient(135deg, var(--help-bg-a), var(--help-bg-b) 56%, var(--help-bg-c));
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .help-shell {
+      width: min(1400px, calc(100% - 32px));
+      margin: 20px auto 48px;
+    }
+
+    .help-header {
+      position: sticky;
+      top: 16px;
+      z-index: 30;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 18px 22px;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      border-radius: 26px;
+      background: rgba(255, 255, 255, 0.86);
+      backdrop-filter: blur(16px);
+      box-shadow: var(--help-shadow-soft);
+    }
+
+    .help-brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      min-width: 0;
+    }
+
+    .help-brand img {
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.98);
+      padding: 5px;
+      border: 2px solid rgba(15, 108, 207, 0.16);
+      box-shadow: 0 10px 22px rgba(15, 108, 207, 0.12);
+      object-fit: cover;
+    }
+
+    .help-brand-copy {
+      min-width: 0;
+      display: grid;
+      gap: 4px;
+    }
+
+    .help-brand-copy span {
+      color: var(--help-brand);
+      font-size: 0.74rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .help-brand-copy strong {
+      font-family: 'Space Grotesk', 'Arial Narrow', sans-serif;
+      font-size: 1.28rem;
+      line-height: 1.1;
+      color: var(--help-ink);
+    }
+
+    .help-brand-copy p {
+      margin: 0;
+      color: var(--help-muted);
+      font-size: 0.9rem;
+      line-height: 1.45;
+    }
+
+    .help-header-actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+
+    .help-nav-link,
+    .help-logout {
+      min-height: 44px;
+      padding: 10px 16px;
+      border-radius: 14px;
+      border: 1px solid rgba(15, 108, 207, 0.12);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(244, 249, 255, 0.96));
+      color: var(--help-brand-strong);
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      box-shadow: 0 10px 22px rgba(15, 108, 207, 0.08);
+      transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+      cursor: pointer;
+    }
+
+    .help-nav-link:hover,
+    .help-logout:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 28px rgba(15, 108, 207, 0.12);
+    }
+
+    .help-logout {
+      color: #b43629;
+      border-color: rgba(180, 54, 41, 0.14);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(255, 246, 244, 0.98));
+    }
+
+    .help-hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(320px, 0.7fr);
+      gap: 22px;
+      margin-top: 22px;
+      padding: 28px;
+      border: 1px solid rgba(15, 108, 207, 0.12);
+      border-radius: var(--help-radius-xl);
+      background:
+        radial-gradient(360px 220px at 100% 0%, rgba(15, 108, 207, 0.12), transparent 62%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(247, 251, 255, 0.95));
+      box-shadow: var(--help-shadow);
+    }
+
+    .hero-copy {
+      display: grid;
+      gap: 16px;
+      align-content: start;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      width: fit-content;
+      min-height: 32px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: rgba(15, 108, 207, 0.08);
+      color: var(--help-brand);
+      font-size: 0.74rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .hero-copy h1 {
+      margin: 0;
+      font-family: 'Space Grotesk', 'Arial Narrow', sans-serif;
+      font-size: clamp(2rem, 3.4vw, 3rem);
+      line-height: 1.04;
+      color: var(--help-ink);
+    }
+
+    .hero-copy p {
+      margin: 0;
+      color: var(--help-muted);
+      font-size: 1rem;
+      line-height: 1.72;
+      max-width: 68ch;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .hero-card {
+      padding: 16px 18px;
+      border-radius: var(--help-radius-md);
+      border: 1px solid rgba(15, 108, 207, 0.1);
+      background: rgba(255, 255, 255, 0.96);
+      box-shadow: 0 12px 22px rgba(11, 41, 86, 0.06);
+    }
+
+    .hero-card strong {
+      display: block;
+      font-size: 0.98rem;
+      line-height: 1.35;
+      margin-bottom: 8px;
+      color: var(--help-ink);
+    }
+
+    .hero-card span {
+      display: block;
+      color: var(--help-muted);
+      font-size: 0.88rem;
+      line-height: 1.6;
+    }
+
+    .hero-side {
+      display: grid;
+      gap: 16px;
+      align-content: start;
+    }
+
+    .hero-panel,
+    .hero-actions {
+      padding: 18px;
+      border-radius: var(--help-radius-lg);
+      border: 1px solid rgba(15, 108, 207, 0.1);
+      background: rgba(255, 255, 255, 0.96);
+      box-shadow: 0 14px 26px rgba(11, 41, 86, 0.06);
+    }
+
+    .hero-panel h2,
+    .hero-actions h2 {
+      margin: 0 0 10px;
+      font-family: 'Space Grotesk', 'Arial Narrow', sans-serif;
+      font-size: 1.08rem;
+    }
+
+    .hero-panel ol,
+    .hero-panel ul {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--help-muted);
+      line-height: 1.7;
+      font-size: 0.92rem;
+    }
+
+    .hero-actions-list {
+      display: grid;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .hero-action-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      min-height: 44px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(15, 108, 207, 0.12);
+      background: linear-gradient(180deg, #ffffff, #f5f9ff);
+      color: var(--help-brand-strong);
+      font-weight: 700;
+      box-shadow: 0 10px 20px rgba(15, 108, 207, 0.06);
+    }
+
+    .hero-action-link small {
+      color: var(--help-muted);
+      font-size: 0.78rem;
+      font-weight: 600;
+    }
+
+    .help-layout {
+      display: grid;
+      grid-template-columns: minmax(250px, 300px) minmax(0, 1fr);
+      gap: 22px;
+      margin-top: 24px;
+      align-items: start;
+    }
+
+    .help-sidebar {
+      position: sticky;
+      top: 112px;
+      padding: 20px;
+      border-radius: var(--help-radius-lg);
+      border: 1px solid rgba(15, 108, 207, 0.1);
+      background: rgba(255, 255, 255, 0.94);
+      box-shadow: var(--help-shadow-soft);
+    }
+
+    .help-sidebar h2 {
+      margin: 0 0 8px;
+      font-family: 'Space Grotesk', 'Arial Narrow', sans-serif;
+      font-size: 1.05rem;
+    }
+
+    .help-sidebar p {
+      margin: 0 0 14px;
+      color: var(--help-muted);
+      font-size: 0.88rem;
+      line-height: 1.6;
+    }
+
+    .topic-nav {
+      display: grid;
+      gap: 8px;
+    }
+
+    .topic-nav a {
+      display: block;
+      padding: 11px 13px;
+      border-radius: 12px;
+      color: var(--help-muted);
+      font-size: 0.92rem;
+      font-weight: 700;
+      line-height: 1.45;
+      transition: background 180ms ease, color 180ms ease, transform 180ms ease;
+    }
+
+    .topic-nav a:hover,
+    .topic-nav a.is-active {
+      color: var(--help-brand-strong);
+      background: rgba(15, 108, 207, 0.08);
+      transform: translateX(2px);
+    }
+
+    .sidebar-note {
+      margin-top: 16px;
+      padding: 14px;
+      border-radius: 14px;
+      background: linear-gradient(180deg, rgba(15, 108, 207, 0.06), rgba(19, 138, 116, 0.06));
+      color: var(--help-muted);
+      font-size: 0.84rem;
+      line-height: 1.6;
+      border: 1px solid rgba(15, 108, 207, 0.08);
+    }
+
+    .help-content {
+      display: grid;
+      gap: 18px;
+    }
+
+    .topic-section {
+      padding: 24px;
+      border-radius: var(--help-radius-lg);
+      border: 1px solid rgba(15, 108, 207, 0.1);
+      background: rgba(255, 255, 255, 0.95);
+      box-shadow: 0 18px 32px rgba(11, 41, 86, 0.07);
+      scroll-margin-top: 110px;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    .section-head-copy {
+      min-width: 0;
+    }
+
+    .section-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: rgba(15, 108, 207, 0.08);
+      color: var(--help-brand);
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .section-head h2 {
+      margin: 10px 0 8px;
+      font-family: 'Space Grotesk', 'Arial Narrow', sans-serif;
+      font-size: 1.5rem;
+      line-height: 1.12;
+    }
+
+    .section-head p {
+      margin: 0;
+      color: var(--help-muted);
+      line-height: 1.72;
+      max-width: 72ch;
+    }
+
+    .section-link {
+      flex: 0 0 auto;
+      min-height: 42px;
+      padding: 10px 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(15, 108, 207, 0.12);
+      background: linear-gradient(180deg, #ffffff, #f5f9ff);
+      color: var(--help-brand-strong);
+      font-size: 0.88rem;
+      font-weight: 700;
+      box-shadow: 0 10px 18px rgba(15, 108, 207, 0.06);
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .info-card {
+      padding: 18px;
+      border-radius: 18px;
+      border: 1px solid rgba(17, 63, 117, 0.08);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(248, 251, 255, 0.96));
+      box-shadow: 0 10px 18px rgba(11, 41, 86, 0.04);
+    }
+
+    .info-card h3 {
+      margin: 0 0 10px;
+      font-size: 1rem;
+      line-height: 1.35;
+    }
+
+    .info-card p {
+      margin: 0 0 10px;
+      color: var(--help-muted);
+      font-size: 0.9rem;
+      line-height: 1.66;
+    }
+
+    .info-card ul,
+    .info-card ol {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--help-muted);
+      font-size: 0.9rem;
+      line-height: 1.68;
+    }
+
+    .callout {
+      margin-top: 14px;
+      padding: 16px 18px;
+      border-radius: 18px;
+      border: 1px solid rgba(19, 138, 116, 0.14);
+      background: linear-gradient(180deg, rgba(232, 248, 244, 0.94), rgba(255, 255, 255, 0.98));
+    }
+
+    .callout strong {
+      display: block;
+      margin-bottom: 6px;
+      color: #166455;
+      font-size: 0.96rem;
+    }
+
+    .callout p {
+      margin: 0;
+      color: var(--help-muted);
+      font-size: 0.9rem;
+      line-height: 1.64;
+    }
+
+    .warn-callout {
+      border-color: rgba(185, 104, 18, 0.16);
+      background: linear-gradient(180deg, rgba(255, 247, 235, 0.96), rgba(255, 255, 255, 0.98));
+    }
+
+    .warn-callout strong {
+      color: var(--help-warn);
+    }
+
+    .footer-note {
+      margin-top: 18px;
+      padding: 20px 22px;
+      border-radius: 20px;
+      border: 1px solid rgba(15, 108, 207, 0.1);
+      background: rgba(255, 255, 255, 0.94);
+      box-shadow: var(--help-shadow-soft);
+      color: var(--help-muted);
+      line-height: 1.72;
+    }
+
+    .footer-note strong {
+      color: var(--help-ink);
+    }
+
+    @media (max-width: 1080px) {
+      .help-hero,
+      .help-layout,
+      .info-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .help-sidebar {
+        position: static;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .help-shell {
+        width: min(100%, calc(100% - 20px));
+        margin-top: 12px;
+      }
+
+      .help-header,
+      .help-hero,
+      .topic-section {
+        padding: 18px;
+      }
+
+      .help-header {
+        top: 10px;
+        border-radius: 20px;
+      }
+
+      .help-brand {
+        align-items: flex-start;
+      }
+
+      .help-header-actions,
+      .hero-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .help-header-actions {
+        justify-content: stretch;
+      }
+
+      .help-nav-link,
+      .help-logout,
+      .section-link {
+        width: 100%;
+        text-align: center;
+      }
+
+      .section-head {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="help-shell">
+    <header class="help-header">
+      <div class="help-brand">
+        <img src="assets/img/logo.jpg" alt="Lingkod Bayan logo" />
+        <div class="help-brand-copy">
+          <span>System Manual</span>
+          <strong>Lingkod Bayan / CEU Help Center</strong>
+          <p>A complete, topic-based guide for the daily tasks inside the LBU.V2 system.</p>
+        </div>
+      </div>
+      <div class="help-header-actions">
+        <a class="help-nav-link" href="client-records.html" data-route="records">Lingkod Bayan</a>
+        <a class="help-nav-link" href="ceu-database.html" data-route="ceuDatabase">CEU Database</a>
+        <a class="help-nav-link" href="import-tools.html" data-route="importTools">Import Tools</a>
+        <button class="help-logout" type="button" onclick="logout()">Logout</button>
+      </div>
+    </header>
+
+    <section class="help-hero" aria-labelledby="helpHeroTitle">
+      <div class="hero-copy">
+        <span class="hero-eyebrow">Turnover-Friendly Guide</span>
+        <h1 id="helpHeroTitle">Use this page as the office manual for the full system.</h1>
+        <p>
+          This guide is written for the actual pages inside Lingkod Bayan and CEU Database. It is arranged by topic so staff can
+          jump directly to the page they are using instead of guessing where a feature lives.
+        </p>
+        <div class="hero-grid">
+          <article class="hero-card">
+            <strong>If you need to search, update history, or review a client</strong>
+            <span>Open the Lingkod Bayan page and go to the Client Records section below in this guide.</span>
+          </article>
+          <article class="hero-card">
+            <strong>If you need to add a new client or a new request</strong>
+            <span>Go to Add Record and follow the Add Record section below before saving anything.</span>
+          </article>
+          <article class="hero-card">
+            <strong>If you need reports, printing, or CSV export</strong>
+            <span>Use the Client Assistance Summary Report topic so the filters and print behavior are clear first.</span>
+          </article>
+          <article class="hero-card">
+            <strong>If you need CEU names, referrals, or bulk admin tools</strong>
+            <span>Jump to the CEU Database, Referral Summary, and Import Tools topics in the sidebar.</span>
+          </article>
+        </div>
+      </div>
+
+      <div class="hero-side">
+        <div class="hero-panel">
+          <h2>Quick Start Before Anything Else</h2>
+          <ol>
+            <li>Stay inside the correct page for the task you need.</li>
+            <li>Search first before adding a new client or CEU record.</li>
+            <li>Check filters before printing or exporting.</li>
+            <li>Use CEU names as the reference for referral-related checks.</li>
+            <li>Open the flowchart only when you need the bigger system picture.</li>
+          </ol>
+        </div>
+        <div class="hero-actions">
+          <h2>Quick Links</h2>
+          <div class="hero-actions-list">
+            <a class="hero-action-link" href="client-records.html" data-route="records">
+              <span>Open Lingkod Bayan Records</span>
+              <small>Daily client work</small>
+            </a>
+            <a class="hero-action-link" href="ceu-database.html" data-route="ceuDatabase">
+              <span>Open CEU Database</span>
+              <small>CEU records and referrals</small>
+            </a>
+            <a class="hero-action-link" href="reports.html" data-route="reports">
+              <span>Open Report Page</span>
+              <small>Summary, print, CSV, graphs</small>
+            </a>
+            <a class="hero-action-link" href="LBU.V2-system-flowchart.html">
+              <span>Open System Flowchart</span>
+              <small>Advanced reference</small>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="help-layout">
+      <aside class="help-sidebar">
+        <h2>Guide Topics</h2>
+        <p>Pick a topic based on the page or task you are doing right now.</p>
+        <nav class="topic-nav" aria-label="Help center topics">
+          <a href="#quick-start">1. Quick Start</a>
+          <a href="#navigation">2. Navigation and Main Pages</a>
+          <a href="#client-records">3. Lingkod Bayan Client Records</a>
+          <a href="#add-record">4. Add Record</a>
+          <a href="#reports">5. Client Assistance Summary Report</a>
+          <a href="#ceu-database">6. CEU Database</a>
+          <a href="#referral-summary">7. Referral Summary</a>
+          <a href="#import-tools">8. Import Tools</a>
+          <a href="#local-form">9. Local Form</a>
+          <a href="#troubleshooting">10. Troubleshooting and Best Practices</a>
+        </nav>
+        <div class="sidebar-note">
+          If the system changes later, update this Help Center first, then update the flowchart if the whole workflow changes.
+        </div>
+      </aside>
+
+      <main class="help-content">
+        <section id="quick-start" class="topic-section">
+          <div class="section-head">
+            <div class="section-head-copy">
+              <span class="section-eyebrow">Start Here</span>
+              <h2>Quick Start For New Staff</h2>
+              <p>Use this section when someone is opening the system for the first time or needs the shortest version of the daily workflow.</p>
+            </div>
+          </div>
+          <div class="info-grid">
+            <article class="info-card">
+              <h3>Daily workflow in plain language</h3>
+              <ol>
+                <li>Login as admin.</li>
+                <li>Open Lingkod Bayan if the task is about client assistance records.</li>
+                <li>Open CEU Database if the task is about officials, organizations, or referral names.</li>
+                <li>Open Add Record only when you need to save a new client or a new request.</li>
+                <li>Open Reports only when you need summary totals, print, CSV, or graphs.</li>
+                <li>Open Import Tools only for backup import or Excel import work.</li>
+              </ol>
+            </article>
+            <article class="info-card">
+              <h3>Most common question: where should I go?</h3>
+              <ul>
+                <li>Find a client, review history, or update an assistance entry: Lingkod Bayan.</li>
+                <li>Add a brand-new client or save a new request: Add Record.</li>
+                <li>Print filtered totals or export CSV: Client Assistance Summary Report.</li>
+                <li>Check officials or organization names: CEU Database.</li>
+                <li>Check who has referrals and how many: Referral Summary inside CEU Database.</li>
+                <li>Import old or bulk records: Import Tools.</li>
+              </ul>
+            </article>
+          </div>
+          <div class="callout">
+            <strong>Best first habit</strong>
+            <p>Search first before adding. This prevents duplicate client records and makes it easier to append new requests to the correct history instead of creating another profile for the same person.</p>
+          </div>
+        </section>
+
+        <section id="navigation" class="topic-section">
+          <div class="section-head">
+            <div class="section-head-copy">
+              <span class="section-eyebrow">Main Pages</span>
+              <h2>Navigation and Main Pages</h2>
+              <p>The system is split into focused pages. Each page has one main purpose, so the fastest way to work is to stay inside the page that matches the task.</p>
+            </div>
+          </div>
+          <div class="info-grid">
+            <article class="info-card">
+              <h3>Lingkod Bayan</h3>
+              <p>The main operational page for client assistance records. This is where staff search the client list, open client details, manage assistance history, and move to Add Record or Reports.</p>
+            </article>
+            <article class="info-card">
+              <h3>Add Record</h3>
+              <p>The intake page for new client records and new requests. It also detects matching clients so staff can add a request to history instead of creating a duplicate profile.</p>
+            </article>
+            <article class="info-card">
+              <h3>Client Assistance Summary Report</h3>
+              <p>The report page for totals, filtered records, line graphs, area checks, printable summaries, and CSV export.</p>
+            </article>
+            <article class="info-card">
+              <h3>CEU Database</h3>
+              <p>The page for CEU categories such as BARANGAY OFFICIALS, SK OFFICIALS, BHW, BPSO, BQRT, LUPON, BRGY EMPLOYEE, VAWC, and SECTORAL ORGS.</p>
+            </article>
+          </div>
+          <div class="info-grid" style="margin-top: 14px;">
+            <article class="info-card">
+              <h3>Referral Summary</h3>
+              <p>A CEU sub-section that cross-checks active CEU names against Lingkod Bayan referral values. Use this only inside CEU Database.</p>
+            </article>
+            <article class="info-card">
+              <h3>Import Tools</h3>
+              <p>Admin-only page for one-time backup import and Excel import. This page is not part of the normal daily workflow.</p>
+            </article>
+          </div>
+        </section>
+
+        <section id="client-records" class="topic-section">
+          <div class="section-head">
+            <div class="section-head-copy">
+              <span class="section-eyebrow">Lingkod Bayan</span>
+              <h2>Lingkod Bayan Client Records</h2>
+              <p>Use this page when the task is about finding a client, checking assistance history, editing entries, or reviewing the current record list.</p>
+            </div>
+            <a class="section-link" href="client-records.html" data-route="records">Open Lingkod Bayan</a>
+          </div>
+          <div class="info-grid">
+            <article class="info-card">
+              <h3>Main actions on the page</h3>
+              <ul>
+                <li><strong>Add Record</strong>: opens the intake form for a new client or new request.</li>
+                <li><strong>Report</strong>: opens the Client Assistance Summary Report.</li>
+                <li><strong>Delete All Data</strong>: removes all client records. Use only when explicitly required.</li>
+                <li><strong>System Updates</strong>: opens the changelog from the main menu.</li>
+              </ul>
+            </article>
+            <article class="info-card">
+              <h3>Search and filters</h3>
+              <ul>
+                <li>Use the main search box for client name, barangay, program, status, office, or GL code.</li>
+                <li>Open <strong>Filters</strong> only when you need exact filtering by Barangay, Purok, Program, Status, Office, or Requested Date range.</li>
+                <li>The active filter count and chips show what is currently narrowing the table.</li>
+              </ul>
+            </article>
+          </div>
+          <div class="info-grid" style="margin-top: 14px;">
+            <article class="info-card">
+              <h3>Opening a client and using the detail view</h3>
+              <ol>
+                <li>Find the client in the table.</li>
+                <li>Open the detail view for that client.</li>
+                <li>Review the client summary strip and latest assistance information.</li>
+                <li>Use <strong>New History Entry</strong> to add another assistance request for the same client.</li>
+                <li>Edit or delete individual history entries only after checking the correct date, program, and remarks.</li>
+              </ol>
+            </article>
+            <article class="info-card">
+              <h3>When to use history instead of a new client</h3>
+              <p>If the person is already in Lingkod Bayan and the new request belongs to the same client profile, do not create another client row. Add a new history entry instead so the profile stays clean and all requests remain together.</p>
+            </article>
+          </div>
+          <div class="warn-callout callout">
+            <strong>Important warning</strong>
+            <p><strong>Delete All Data</strong> is not a cleanup tool for ordinary work. Use it only if an admin truly intends to wipe the full client assistance dataset.</p>
+          </div>
+        </section>
+
+        <section id="add-record" class="topic-section">
+          <div class="section-head">
+            <div class="section-head-copy">
+              <span class="section-eyebrow">Intake</span>
+              <h2>Add Record</h2>
+              <p>Use Add Record for intake. This page can either create a new client record or attach a new request to an existing client through history.</p>
+            </div>
+            <a class="section-link" href="add-record.html" data-route="addRecord">Open Add Record</a>
+          </div>
+          <div class="info-grid">
+            <article class="info-card">
+              <h3>What the form is divided into</h3>
+              <ul>
+                <li>Section 1: Office / Organization</li>
+                <li>Section 2: Client Information</li>
+                <li>Section 3 and later sections: request, medical, guarantee, event, and related details depending on the selected program</li>
+                <li>Final action: <strong>Save Record</strong></li>
+              </ul>
+            </article>
+            <article class="info-card">
+              <h3>Existing client match behavior</h3>
+              <ul>
+                <li>If the name matches an existing client, the page shows a notice.</li>
+                <li>You can use <strong>Add Request Details</strong> so the client profile stays on the main record while the new request is saved in history.</li>
+                <li>This is the safest way to prevent duplicate client profiles.</li>
+              </ul>
+            </article>
+          </div>
+          <div class="info-grid" style="margin-top: 14px;">
+            <article class="info-card">
+              <h3>Duplicate request protection</h3>
+              <p>The form checks if the same client already has the same request date and program saved. If it does, save is stopped so staff can review the existing history entry first.</p>
+            </article>
+            <article class="info-card">
+              <h3>Program-specific fields</h3>
+              <p>Required fields change depending on the selected program. Medical-related requests will show fields like Requesting For, Patient Status, Client Times, Hospital, and status-specific dropdowns such as Transport Service Status or OP Assistance Status.</p>
+            </article>
+          </div>
+          <div class="callout">
+            <strong>Best practice for Add Record</strong>
+            <p>Finish the client identity first, then choose the program carefully, and only then fill the request-specific fields. That order avoids missing required fields and wrong program status combinations.</p>
+          </div>
+        </section>
+
+        <section id="reports" class="topic-section">
+          <div class="section-head">
+            <div class="section-head-copy">
+              <span class="section-eyebrow">Reporting</span>
+              <h2>Client Assistance Summary Report</h2>
+              <p>Use the report page for totals, filtered records, breakdown tables, graphs, print, and CSV export.</p>
+            </div>
+            <a class="section-link" href="reports.html" data-route="reports">Open Report Page</a>
+          </div>
+          <div class="info-grid">
+            <article class="info-card">
+              <h3>Top buttons</h3>
+              <ul>
+                <li><strong>Back</strong>: returns to Lingkod Bayan records.</li>
+                <li><strong>Print</strong>: prints the current filtered report, not the whole raw database.</li>
+                <li><strong>Export CSV</strong>: exports the current filtered records to CSV.</li>
+                <li><strong>Line Graphs</strong>: shows or hides report graphs.</li>
+              </ul>
+            </article>
+            <article class="info-card">
+              <h3>Filters available on the report</h3>
+              <ul>
+                <li>Search</li>
+                <li>Month</li>
+                <li>Year</li>
+                <li>Barangay</li>
+                <li>Type</li>
+                <li>Status</li>
+                <li>Office</li>
+                <li>Source</li>
+                <li>Category</li>
+                <li>Priority</li>
+              </ul>
+            </article>
+          </div>
+          <div class="info-grid" style="margin-top: 14px;">
+            <article class="info-card">
+              <h3>How to read the page</h3>
+              <ul>
+                <li>The summary cards show totals like total people assisted, distinct assistance types, pending cases, and completed cases.</li>
+                <li>The <strong>Filtered Records</strong> table is view-only and shows the exact client rows included in the current report filters.</li>
+                <li>Breakdown tables such as Assistance by Barangay or Assistance by Type can be clicked to show the records behind a total.</li>
+              </ul>
+            </article>
+            <article class="info-card">
+              <h3>Printing and exporting rules</h3>
+              <ul>
+                <li>Print uses the current filtered records.</li>
+                <li>The print view includes the active filters, so staff can see what was set to All and what was narrowed down.</li>
+                <li>If 8 filtered records are visible, 8 records should be what appear in the report print view.</li>
+              </ul>
+            </article>
+          </div>
+          <div class="callout">
+            <strong>Helpful check before printing</strong>
+            <p>Look at the Filtered Records section first. If the rows shown there are correct, the printed report should match those same filtered rows.</p>
+          </div>
+        </section>
+
+        <section id="ceu-database" class="topic-section">
+          <div class="section-head">
+            <div class="section-head-copy">
+              <span class="section-eyebrow">CEU Workspace</span>
+              <h2>CEU Database</h2>
+              <p>Use CEU Database for category-based records such as BARANGAY OFFICIALS, SK OFFICIALS, BHW, BPSO, BQRT, BRGY EMPLOYEE, LUPON, VAWC, and SECTORAL ORGS.</p>
+            </div>
+            <a class="section-link" href="ceu-database.html" data-route="ceuDatabase">Open CEU Database</a>
+          </div>
+          <div class="info-grid">
+            <article class="info-card">
+              <h3>How the page is organized</h3>
+              <ul>
+                <li>Category buttons switch between CEU datasets.</li>
+                <li><strong>All</strong> lets staff search across all categories at once.</li>
+                <li>Each category has its own search and keeps the original table layout inside barangay accordions.</li>
+              </ul>
+            </article>
+            <article class="info-card">
+              <h3>Main admin actions</h3>
+              <ul>
+                <li><strong>Add CEU Record</strong>: opens the CEU editor modal.</li>
+                <li><strong>Refresh Data</strong>: reloads the CEU data from Supabase.</li>
+                <li><strong>Referral Summary</strong>: opens the referral summary inside the CEU page.</li>
+              </ul>
+            </article>
+          </div>
+          <div class="info-grid" style="margin-top: 14px;">
+            <article class="info-card">
+              <h3>Searching and browsing</h3>
+              <ul>
+                <li>Search first by name, barangay, position, organization, address, or other relevant CEU details.</li>
+                <li>Open the barangay accordion only when you need the actual row list.</li>
+                <li>The summary line above each accordion shows how many records are currently visible.</li>
+              </ul>
+            </article>
+            <article class="info-card">
+              <h3>Editing and deleting CEU rows</h3>
+              <p>Use the action controls inside the category tables for updates or deletion. Because CEU data lives in Supabase, treat it as shared data and confirm the target category before saving changes.</p>
+            </article>
+          </div>
+          <div class="warn-callout callout">
+            <strong>Important setup note</strong>
+            <p>If CEU data is missing, the status message usually means Supabase is not connected, the admin session is missing, or the CEU setup/seed SQL still needs to be run.</p>
+          </div>
+        </section>
+
+        <section id="referral-summary" class="topic-section">
+          <div class="section-head">
+            <div class="section-head-copy">
+              <span class="section-eyebrow">CEU Referral Checks</span>
+              <h2>Referral Summary</h2>
+              <p>Referral Summary is part of CEU Database. It compares active CEU names with Lingkod Bayan referral values so staff can see who has referrals and how many.</p>
+            </div>
+          </div>
+          <div class="info-grid">
+            <article class="info-card">
+              <h3>What the page shows</h3>
+              <ul>
+                <li>Tracked names</li>
+                <li>Total referrals</li>
+                <li>Names with referrals</li>
+                <li>Top referral name</li>
+                <li>Row-by-row counts for the current filtered summary</li>
+              </ul>
+            </article>
+            <article class="info-card">
+              <h3>Filters available</h3>
+              <ul>
+                <li>Search by name, barangay, category, role, or organization</li>
+                <li>Category</li>
+                <li>Barangay</li>
+                <li>Referral Count</li>
+                <li>Rows Per Page</li>
+              </ul>
+            </article>
+          </div>
+          <div class="info-grid" style="margin-top: 14px;">
+            <article class="info-card">
+              <h3>Print and PDF actions</h3>
+              <ul>
+                <li><strong>Print Summary</strong>: prints the current filtered referral summary in the same tab.</li>
+                <li><strong>Download PDF</strong>: creates a PDF version of the filtered summary.</li>
+                <li><strong>Print Selected</strong>: prints only the checked rows.</li>
+              </ul>
+            </article>
+            <article class="info-card">
+              <h3>Row selection</h3>
+              <ul>
+                <li>Use the row checkboxes when you need only specific rows.</li>
+                <li>The page checkbox helps with current-page selection.</li>
+                <li>The selection status text tells you how many rows are selected and how many are still visible in the current filters.</li>
+              </ul>
+            </article>
+          </div>
+          <div class="callout">
+            <strong>How to interpret the heat color</strong>
+            <p>Zero referrals stay white. Once the count starts at 1 and goes up, the color shifts across the referral heat scale until higher counts move toward red.</p>
+          </div>
+        </section>
+
+        <section id="import-tools" class="topic-section">
+          <div class="section-head">
+            <div class="section-head-copy">
+              <span class="section-eyebrow">Admin Tools</span>
+              <h2>Import Tools</h2>
+              <p>This page is for bulk or one-time import work. It is separated from daily client records work on purpose.</p>
+            </div>
+            <a class="section-link" href="import-tools.html" data-route="importTools">Open Import Tools</a>
+          </div>
+          <div class="info-grid">
+            <article class="info-card">
+              <h3>One-Time Supabase Import Tool</h3>
+              <ul>
+                <li>Use this only when preserved browser backup records must be moved into the shared Supabase database.</li>
+                <li>It is not for normal daily entry.</li>
+                <li>Confirm the source backup first before importing.</li>
+              </ul>
+            </article>
+            <article class="info-card">
+              <h3>Excel Import Tool</h3>
+              <ul>
+                <li>Download the template first.</li>
+                <li>Do not change the Excel column headers.</li>
+                <li>Import the workbook after filling the rows correctly.</li>
+                <li>Repeat requests are merged into client history when possible.</li>
+              </ul>
+            </article>
+          </div>
+          <div class="warn-callout callout">
+            <strong>Important warning</strong>
+            <p>Import Tools affects many rows at once. If the task is only one client or one request, do not use this page. Use Add Record or the client history editor instead.</p>
+          </div>
+        </section>
+
+        <section id="local-form" class="topic-section">
+          <div class="section-head">
+            <div class="section-head-copy">
+              <span class="section-eyebrow">Separate Utility</span>
+              <h2>Local Form</h2>
+              <p>The local form is separate from the authenticated admin workflow. Treat it as a standalone capture tool, not the main admin database screen.</p>
+            </div>
+          </div>
+          <div class="info-grid">
+            <article class="info-card">
+              <h3>What it is for</h3>
+              <p>It keeps answers locally in the browser and is useful when a standalone, form-like intake flow is needed outside the normal admin record management screens.</p>
+            </article>
+            <article class="info-card">
+              <h3>What it is not for</h3>
+              <p>It is not the daily page for managing Lingkod Bayan client history, CEU records, or referral summary reporting.</p>
+            </article>
+          </div>
+        </section>
+
+        <section id="troubleshooting" class="topic-section">
+          <div class="section-head">
+            <div class="section-head-copy">
+              <span class="section-eyebrow">Support</span>
+              <h2>Troubleshooting and Best Practices</h2>
+              <p>Use this section when something does not look right, a page is empty, or the result does not match the expectation.</p>
+            </div>
+          </div>
+          <div class="info-grid">
+            <article class="info-card">
+              <h3>If data takes a few seconds to appear</h3>
+              <p>The system now shows loading screens during major page changes, especially when moving between Lingkod Bayan and CEU Database. A short wait can still happen while Supabase data is loading.</p>
+            </article>
+            <article class="info-card">
+              <h3>If CEU or Lingkod Bayan looks empty</h3>
+              <ul>
+                <li>Check that the admin session is still active.</li>
+                <li>Check the status message shown on the page.</li>
+                <li>For CEU, verify that Supabase setup and seed work were completed.</li>
+                <li>Try Refresh Data before assuming the records are gone.</li>
+              </ul>
+            </article>
+          </div>
+          <div class="info-grid" style="margin-top: 14px;">
+            <article class="info-card">
+              <h3>If Add Record blocks save with a duplicate warning</h3>
+              <p>Do not force another identical client request with the same date and program. Search the existing client first and review that client's history entry.</p>
+            </article>
+            <article class="info-card">
+              <h3>If a print result looks wrong</h3>
+              <ul>
+                <li>Check the filtered records or filtered summary before printing.</li>
+                <li>Confirm the active filters.</li>
+                <li>For Referral Summary, know whether you clicked Print Summary or Print Selected.</li>
+              </ul>
+            </article>
+          </div>
+          <div class="info-grid" style="margin-top: 14px;">
+            <article class="info-card">
+              <h3>Best practices for clean data</h3>
+              <ul>
+                <li>Search before adding.</li>
+                <li>Use history for repeat requests on the same client.</li>
+                <li>Use CEU names as the reference for referral-related entries.</li>
+                <li>Review filters before printing, exporting, or reporting totals.</li>
+                <li>Use Import Tools only for bulk or one-time admin work.</li>
+              </ul>
+            </article>
+            <article class="info-card">
+              <h3>Best practices for turnover</h3>
+              <ul>
+                <li>Keep this Help Center updated when the workflow changes.</li>
+                <li>Use the System Flowchart for technical overview.</li>
+                <li>When handing over work, point the next staff to the exact page topic in this guide.</li>
+              </ul>
+            </article>
+          </div>
+        </section>
+
+        <div class="footer-note">
+          <strong>Advanced reference:</strong> if staff or developers need the bigger page-to-page picture, open
+          <a href="LBU.V2-system-flowchart.html">LBU.V2 System Flowchart</a>. Use the flowchart for architecture-level understanding,
+          and use this Help Center for the actual office workflow.
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="assets/js/supabase-config.js"></script>
+  <script src="assets/js/supabase-client.js"></script>
+  <script src="assets/js/routes.js"></script>
+  <script src="assets/js/auth.js"></script>
+  <script>
+    if (!(window.lbAuth && window.lbAuth.requireAuth())) {
+      throw new Error('Authentication required');
+    }
+
+    function logout() {
+      if (window.lbAuth && typeof window.lbAuth.logout === 'function') {
+        window.lbAuth.logout();
+      }
+    }
+
+    (function syncTopicNavigation() {
+      const links = Array.from(document.querySelectorAll('.topic-nav a[href^="#"]'));
+      const sections = links
+        .map(function (link) {
+          const id = link.getAttribute('href').slice(1);
+          return document.getElementById(id);
+        })
+        .filter(Boolean);
+
+      if (!links.length || !sections.length || typeof IntersectionObserver !== 'function') {
+        return;
+      }
+
+      const linkMap = new Map();
+      links.forEach(function (link) {
+        linkMap.set(link.getAttribute('href').slice(1), link);
+      });
+
+      const observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          const id = entry.target.getAttribute('id');
+          const link = linkMap.get(id);
+          if (!link) return;
+          if (entry.isIntersecting) {
+            links.forEach(function (item) { item.classList.remove('is-active'); });
+            link.classList.add('is-active');
+          }
+        });
+      }, {
+        rootMargin: '-30% 0px -55% 0px',
+        threshold: 0.01
+      });
+
+      sections.forEach(function (section) {
+        observer.observe(section);
+      });
+    })();
+  </script>
+</body>
+</html>

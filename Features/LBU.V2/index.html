@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="assets/js/supabase-config.js"></script>
+  <script src="assets/js/supabase-client.js"></script>
+  <script src="assets/js/routes.js"></script>
+  <script src="assets/js/auth.js"></script>
+  <script>
+    (function(){
+      var routeName = window.lbAuth && window.lbAuth.isAuthenticated && window.lbAuth.isAuthenticated()
+        ? 'records'
+        : 'login';
+      var fallback = routeName === 'records' ? 'client-records.html' : 'admin-login.html';
+      window.location.replace((window.lbRoutes && window.lbRoutes.href(routeName)) || fallback);
+    })();
+  </script>
+  <noscript>
+    <meta http-equiv="refresh" content="0; url=admin-login.html" />
+  </noscript>
+  <title>LINGKOD BAYAN</title>
+  <link rel="canonical" href="/admin-login.html" />
+</head>
+<body>
+  <p>Open <a href="admin-login.html" data-route="login">Admin Login</a>.</p>
+</body>
+</html>

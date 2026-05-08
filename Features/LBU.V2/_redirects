@@ -1,0 +1,34 @@
+/ /admin-login.html 302
+/index /admin-login.html 302
+/index.html /admin-login.html 302
+
+/admin /admin-login.html 302
+/admin/ /admin-login.html 302
+/admin-login /admin-login.html 302
+/admin-login/ /admin-login.html 302
+/login/ /admin-login.html 302
+/login /admin-login.html 200
+
+/client-records /client-records.html 302
+/client-records/ /client-records.html 302
+/records/ /client-records.html 302
+/records /client-records.html 200
+
+/import-tools.html /import-tools 301
+/import-tools/ /import-tools 301
+/import-tools /import-tools.html 200
+
+/add-record.html /add-record 301
+/add-record/ /add-record 301
+/add-record /add-record.html 200
+
+/ceu-database/ /ceu-database.html 302
+/ceu-database /ceu-database.html 200
+
+/reports.html /reports 301
+/reports/ /reports 301
+/reports /reports.html 200
+
+/local-form.html /local-form 301
+/local-form/ /local-form 301
+/local-form /local-form.html 200

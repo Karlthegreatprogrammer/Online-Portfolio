@@ -1812,6 +1812,93 @@ html[data-theme="dark"] .project-filter-bar button.is-active {
   min-width: 0;
 }
 
+.project-screenshot-section {
+  margin-top: 1rem;
+}
+
+.project-screenshot-header {
+  max-width: 55rem;
+  margin-bottom: 1rem;
+}
+
+.project-screenshot-header h2 {
+  margin: 0.22rem 0 0;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: clamp(1.55rem, 3vw, 2.4rem);
+  line-height: 1.08;
+  font-weight: 800;
+  text-wrap: balance;
+}
+
+.project-screenshot-header p:not(.eyebrow) {
+  margin: 0.7rem 0 0;
+  color: var(--text-soft);
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+.project-screenshot-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.project-screenshot-card {
+  min-width: 0;
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 0.9rem;
+  background: linear-gradient(180deg, var(--panel), var(--panel-depth));
+  box-shadow: var(--shadow-sm);
+}
+
+.project-screenshot-media {
+  aspect-ratio: 36 / 25;
+  overflow: hidden;
+  border-bottom: 1px solid var(--line);
+  background: var(--soft-panel);
+}
+
+.project-screenshot-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  background: var(--panel);
+}
+
+.project-screenshot-card figcaption {
+  display: grid;
+  gap: 0.45rem;
+  padding: 1rem;
+}
+
+.project-screenshot-number {
+  width: max-content;
+  padding: 0.28rem 0.52rem;
+  border-radius: 999px;
+  background: var(--blue-soft);
+  color: var(--blue);
+  font-size: 0.68rem;
+  font-weight: 900;
+}
+
+.project-screenshot-card h3 {
+  margin: 0;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 1.05rem;
+  line-height: 1.22;
+  font-weight: 800;
+}
+
+.project-screenshot-card p {
+  margin: 0;
+  color: var(--text-soft);
+  font-size: 0.84rem;
+  line-height: 1.58;
+}
+
 .project-detail-panel {
   padding: 1.1rem;
 }
@@ -2567,6 +2654,7 @@ html[data-theme="dark"] .project-card,
 html[data-theme="dark"] .project-detail-preview,
 html[data-theme="dark"] .project-detail-copy,
 html[data-theme="dark"] .project-detail-panel,
+html[data-theme="dark"] .project-screenshot-card,
 html[data-theme="dark"] .cv-hero-copy,
 html[data-theme="dark"] .cv-profile-panel,
 html[data-theme="dark"] .cv-panel,
@@ -2600,6 +2688,7 @@ html:not([data-theme="dark"]) .project-card,
 html:not([data-theme="dark"]) .project-detail-preview,
 html:not([data-theme="dark"]) .project-detail-copy,
 html:not([data-theme="dark"]) .project-detail-panel,
+html:not([data-theme="dark"]) .project-screenshot-card,
 html:not([data-theme="dark"]) .cv-hero-copy,
 html:not([data-theme="dark"]) .cv-profile-panel,
 html:not([data-theme="dark"]) .cv-panel,
@@ -2617,6 +2706,7 @@ html:not([data-theme="dark"]) .currently-card,
 html:not([data-theme="dark"]) .project-detail-preview,
 html:not([data-theme="dark"]) .project-detail-copy,
 html:not([data-theme="dark"]) .project-detail-panel,
+html:not([data-theme="dark"]) .project-screenshot-card,
 html:not([data-theme="dark"]) .cv-hero-copy,
 html:not([data-theme="dark"]) .cv-profile-panel,
 html:not([data-theme="dark"]) .cv-panel,
@@ -3977,7 +4067,8 @@ html:not([data-theme="dark"]) .quote-card {
 
   .project-detail-preview,
   .project-detail-copy,
-  .project-detail-panel {
+  .project-detail-panel,
+  .project-screenshot-card {
     border-radius: 1rem;
   }
 
@@ -4024,6 +4115,29 @@ html:not([data-theme="dark"]) .quote-card {
   .project-feature-list li {
     padding: 0.66rem 0.72rem 0.66rem 1.8rem;
     font-size: 0.8rem;
+  }
+
+  .project-screenshot-section {
+    margin-top: 0.85rem;
+  }
+
+  .project-screenshot-grid {
+    grid-template-columns: 1fr;
+    gap: 0.85rem;
+  }
+
+  .project-screenshot-header h2 {
+    font-size: clamp(1.35rem, 7vw, 1.9rem);
+  }
+
+  .project-screenshot-header p:not(.eyebrow),
+  .project-screenshot-card p {
+    font-size: 0.8rem;
+    line-height: 1.58;
+  }
+
+  .project-screenshot-card figcaption {
+    padding: 0.85rem;
   }
 
   .contact-shell {

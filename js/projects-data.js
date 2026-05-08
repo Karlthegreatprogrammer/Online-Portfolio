@@ -2,66 +2,120 @@ window.KARLFORGE_PROJECTS = [
   {
     slug: "lingkod-bayan-monitoring-system",
     title: "Lingkod Bayan Unit Records Management System",
-    shortDescription: "Web-based internal records platform for client assistance, CEU records, referrals, and reports.",
+    shortDescription:
+      "A records management system for client assistance, CEU data, barangay records, search, CRUD, and reports.",
     description:
-      "The Lingkod Bayan Unit Records Management System is a web-based internal records platform designed to help manage client assistance records, CEU databases, barangay-based information, referrals, and reports. The system supports faster record searching, cleaner data organization, and easier updates for local government service operations.",
+      "A full-stack records system that organizes local government service data into searchable, editable, and report-ready digital records.",
     role: "Full-Stack Developer",
     categoryTags: ["Web Systems", "Government System"],
-    techStack: ["HTML", "CSS", "JavaScript", "Supabase", "SQL", "Excel/XLSX"],
-    image: "assets/images/case-lingkod-records.png",
-    imageAlt: "Lingkod Bayan records table interface",
+    techStack: [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "Supabase",
+      "SQL",
+      "CRUD",
+      "Search & Filtering",
+    ],
+    image: "assets/images/lingkod-bayan/01-dashboard-home.png",
+    imageAlt: "Lingkod Bayan records dashboard home screen",
     problem:
-      "The existing workflow involved handling large amounts of client and barangay-related data from forms, spreadsheets, and database records. Some fields were too strict, such as requiring Purok/Sitio even though not all locations use that address structure. The CEU database also needed additional datasets, including Sample Leaders Identified, while maintaining the same searchable and editable structure used in other database sections.",
+      "The project needed to turn manual local service records into a cleaner digital workflow with search, validation, editing, and reporting.",
     features: [
-      "Updated the Client Assistance Record form so Purok/Sitio became optional while Barangay remained required.",
-      "Fixed the searchable Purok/Sitio input behavior so deleted values would not automatically return.",
-      "Integrated the Sample Leaders Identified dataset into the CEU Records Database.",
-      "Processed Excel source data and converted it into structured Supabase-ready records.",
-      "Added 681 Sample Leaders records grouped across barangay sections.",
-      "Ensured each Sample Leaders row followed the same Edit/Delete action format as other CEU records.",
-      "Excluded unnecessary discussion-related fields to keep the database focused and cleaner.",
-      "Updated SQL seed and upsert files to support repeatable database imports without duplicating records.",
+      "Client assistance form with practical address validation.",
+      "CEU database with searchable category and barangay records.",
+      "Sample Leaders section imported from Excel/XLSX data.",
+      "Edit and Delete actions for easier record maintenance.",
+      "Reports dashboard for reviewing encoded records and activity.",
     ],
     caseStudy: [
       {
         eyebrow: "Goal",
-        title: "Make record management more flexible and consistent",
+        title: "Digitize local service records",
         body:
-          "The goal was to improve data flexibility, make record management easier, and preserve consistency across the system. This included making address handling more practical, importing structured Excel data, grouping records per barangay, and supporting edit/delete actions for database maintenance.",
+          "Built a searchable system for client assistance, CEU data, barangay records, referrals, and reports.",
       },
       {
-        eyebrow: "Implementation Approach",
-        title: "Reused the existing database pattern",
+        eyebrow: "Key Work",
+        title: "Forms, database, search, and CRUD",
         body:
-          "I first reviewed the existing CEU database structure to understand how categories, search filters, barangay grouping, and CRUD actions were implemented. Instead of creating a separate custom interface, I reused the existing database pattern so the Sample Leaders section would behave consistently with the rest of the system.",
-      },
-      {
-        eyebrow: "Data Handling",
-        title: "Converted spreadsheet data into clean database records",
-        body:
-          "For the Excel data, I extracted only the relevant fields such as barangay, purok/sitio/subdivision, position, name, address details, contact number, assistance given, and code source. I intentionally excluded program discussion, date attended, and content of discussion fields to keep the section aligned with the requested database scope.",
-      },
-      {
-        eyebrow: "Challenges",
-        title: "Improving flexibility without breaking existing behavior",
-        body:
-          "One challenge was making the address form flexible without breaking existing records and validations. Another was importing spreadsheet data while preserving the existing database structure, search behavior, and barangay-based grouping. The system also needed to support future edits, deletes, and re-imports safely.",
+          "Implemented validation, grouped records, search/filter behavior, Excel/XLSX data handling, and Edit/Delete controls.",
       },
       {
         eyebrow: "Result",
-        title: "Cleaner records, faster searching, and easier updates",
+        title: "Cleaner monitoring workflow",
         body:
-          "The project improved both usability and data quality. Users can now submit client records without being forced to enter Purok/Sitio when it does not apply. The CEU Records Database also now includes the Sample Leaders Identified section with searchable, barangay-grouped records and consistent Edit/Delete actions.",
+          "The system makes records easier to encode, find, update, group by barangay, and review through reports.",
+      },
+    ],
+    portfolioCaption:
+      "A practical full-stack records system with searchable data, validation, CRUD, reports, and Supabase integration.",
+    screenshots: [
+      {
+        title: "Dashboard / Home Screen",
+        image: "assets/images/lingkod-bayan/01-dashboard-home.png",
+        alt: "Lingkod Bayan dashboard home screen",
+        description: "Main dashboard for records, CEU database, reports, and tools.",
       },
       {
-        eyebrow: "Impact",
-        title: "More practical local government record management",
-        body:
-          "This project helped make the records system more practical for real-world barangay data, reduced form friction, and improved database maintainability. It also transformed spreadsheet-based information into a structured, searchable, and editable web database suitable for ongoing local government record management.",
+        title: "Client Assistance Record Form",
+        image: "assets/images/lingkod-bayan/02-client-assistance-form.png",
+        alt: "Client assistance record form",
+        description: "Form for encoding client details, requests, programs, and address data.",
+      },
+      {
+        title: "Address Section With Optional Purok/Sitio",
+        image: "assets/images/lingkod-bayan/03-address-optional-purok-sitio.png",
+        alt: "Address section with Barangay required and Purok/Sitio optional",
+        description: "Barangay stays required while Purok/Sitio can be left blank.",
+      },
+      {
+        title: "Searchable Dropdown / Form Interaction",
+        image: "assets/images/lingkod-bayan/04-searchable-dropdown.png",
+        alt: "Searchable Purok/Sitio dropdown interaction",
+        description: "Searchable input improves faster and cleaner encoding.",
+      },
+      {
+        title: "CEU Records Database Main Page",
+        image: "assets/images/lingkod-bayan/05-ceu-database-main.png",
+        alt: "CEU records database main page with category filters",
+        description: "Category filters for CEU and barangay-related records.",
+      },
+      {
+        title: "Sample Leaders Identified Section",
+        image: "assets/images/lingkod-bayan/06-sample-leaders-section.png",
+        alt: "Sample Leaders Identified section",
+        description: "Sample Leaders records grouped per barangay.",
+      },
+      {
+        title: "Barangay Grouped Records View",
+        image: "assets/images/lingkod-bayan/07-barangay-grouped-records.png",
+        alt: "Barangay grouped records table view",
+        description: "Barangay-based table view for easier scanning.",
+      },
+      {
+        title: "Edit and Delete Buttons Per Record",
+        image: "assets/images/lingkod-bayan/08-edit-delete-buttons.png",
+        alt: "Edit and Delete buttons per record",
+        description: "Edit and Delete actions for each record row.",
+      },
+      {
+        title: "Search and Filter Results",
+        image: "assets/images/lingkod-bayan/09-search-filter-results.png",
+        alt: "Search and filter results table",
+        description: "Fast lookup by name, position, barangay, or details.",
+      },
+      {
+        title: "Reports / Records Summary Page",
+        image: "assets/images/lingkod-bayan/10-reports-summary.png",
+        alt: "Reports and records summary page",
+        description: "Summary view for monitoring encoded records.",
       },
     ],
     links: {
-      live: "",
+      live: "../../Features/LBU.V2/",
+      liveLabel: "View Project",
+      liveUnavailableLabel: "View Project",
       source: "",
     },
   },

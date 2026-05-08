@@ -1,0 +1,1798 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LBU.V2 System Flowchart</title>
+  <style>
+    :root {
+      --bg: #eef4fb;
+      --bg-soft: #f8fbff;
+      --panel: #ffffff;
+      --ink: #16304b;
+      --muted: #5f7590;
+      --line: #cfdceb;
+      --blue: #0f6ccf;
+      --blue-deep: #103d73;
+      --cyan: #dff0ff;
+      --green: #2f9e72;
+      --green-soft: #e9f8f1;
+      --gold: #dd8712;
+      --gold-soft: #fff4df;
+      --red: #c13a31;
+      --red-soft: #fdeae8;
+      --purple-soft: #f2ebff;
+      --shadow: 0 22px 48px rgba(15, 52, 90, 0.12);
+      --radius: 22px;
+      --font-body: "Aptos", "Segoe UI", sans-serif;
+      --font-head: "Trebuchet MS", "Aptos", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: var(--font-body);
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(15, 108, 207, 0.1), transparent 34%),
+        radial-gradient(circle at top right, rgba(221, 135, 18, 0.08), transparent 28%),
+        linear-gradient(180deg, #f7fbff 0%, var(--bg) 100%);
+    }
+
+    a {
+      color: var(--blue);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .page-shell {
+      max-width: 1560px;
+      margin: 0 auto;
+      padding: 28px 22px 64px;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, rgba(15, 108, 207, 0.98), rgba(16, 61, 115, 0.98));
+      color: #fff;
+      padding: 28px 30px;
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto -80px -80px auto;
+      width: 240px;
+      height: 240px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.2), transparent 70%);
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.14);
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .hero h1 {
+      margin: 16px 0 10px;
+      font-family: var(--font-head);
+      font-size: clamp(2rem, 3.1vw, 3.25rem);
+      line-height: 1.05;
+    }
+
+    .hero p {
+      margin: 0;
+      max-width: 980px;
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+
+    .hero-grid {
+      margin-top: 22px;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .hero-stat {
+      background: rgba(255, 255, 255, 0.11);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 18px;
+      padding: 14px 16px;
+    }
+
+    .hero-stat strong {
+      display: block;
+      font-size: 1.4rem;
+      font-family: var(--font-head);
+    }
+
+    .hero-stat span {
+      display: block;
+      margin-top: 6px;
+      font-size: 0.85rem;
+      color: rgba(255, 255, 255, 0.84);
+      line-height: 1.45;
+    }
+
+    .top-nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      margin-top: 18px;
+      padding: 12px 16px;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(186, 206, 229, 0.86);
+      border-radius: 18px;
+      box-shadow: 0 10px 24px rgba(17, 56, 92, 0.08);
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .top-nav a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 38px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: #edf5ff;
+      border: 1px solid #cddff2;
+      color: var(--blue-deep);
+      font-size: 0.84rem;
+      font-weight: 700;
+    }
+
+    .top-nav a:hover {
+      text-decoration: none;
+      background: #e2efff;
+    }
+
+    .section {
+      margin-top: 22px;
+      background: var(--panel);
+      border: 1px solid #dbe7f3;
+      border-radius: var(--radius);
+      box-shadow: 0 18px 40px rgba(20, 57, 93, 0.08);
+      overflow: hidden;
+    }
+
+    .section-head {
+      padding: 22px 26px 16px;
+      border-bottom: 1px solid #e3edf8;
+      background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+    }
+
+    .section-kicker {
+      color: var(--blue);
+      font-size: 0.74rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 800;
+    }
+
+    .section-head h2 {
+      margin: 8px 0 8px;
+      font-family: var(--font-head);
+      font-size: 1.65rem;
+      line-height: 1.15;
+    }
+
+    .section-head p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 1080px;
+    }
+
+    .section-body {
+      padding: 22px 24px 26px;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    .info-card {
+      background: linear-gradient(180deg, #ffffff 0%, #f7fbff 100%);
+      border: 1px solid #dbe7f3;
+      border-radius: 18px;
+      padding: 16px 18px;
+    }
+
+    .info-card h3 {
+      margin: 0 0 10px;
+      font-size: 1rem;
+      font-family: var(--font-head);
+    }
+
+    .info-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 0.95rem;
+    }
+
+    .legend {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 14px;
+    }
+
+    .legend-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      border: 1px solid #dbe7f3;
+      background: #fff;
+      font-size: 0.82rem;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .legend-swatch {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+    }
+
+    .diagram-shell {
+      overflow: auto;
+      border: 1px solid #dbe7f3;
+      border-radius: 20px;
+      background:
+        linear-gradient(180deg, rgba(245, 250, 255, 0.75), rgba(255, 255, 255, 0.96)),
+        linear-gradient(90deg, rgba(15, 108, 207, 0.03), transparent 30%);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.72);
+    }
+
+    .diagram {
+      display: block;
+      width: 100%;
+      min-width: 1320px;
+      height: auto;
+    }
+
+    .diagram text {
+      font-family: var(--font-body);
+      fill: var(--muted);
+      font-size: 14px;
+    }
+
+    .lane-label {
+      font-size: 13px;
+      font-weight: 800;
+      fill: #5f7590;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .arrow {
+      fill: none;
+      stroke: #89a8ca;
+      stroke-width: 2.2;
+      marker-end: url(#flow-arrow);
+    }
+
+    .arrow-strong {
+      stroke: #2b6aa8;
+      stroke-width: 2.6;
+    }
+
+    .arrow-dashed {
+      stroke-dasharray: 8 7;
+    }
+
+    .callout {
+      fill: #f6fbff;
+      stroke: #d8e5f2;
+      stroke-width: 1.3;
+      rx: 14;
+    }
+
+    .svg-card {
+      height: 100%;
+      border-radius: 18px;
+      border: 1px solid #d7e5f3;
+      background: #fff;
+      box-shadow: 0 10px 22px rgba(15, 52, 90, 0.08);
+      padding: 14px 14px 12px;
+      color: var(--ink);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      line-height: 1.45;
+    }
+
+    .svg-card strong {
+      font-size: 1rem;
+      font-family: var(--font-head);
+      color: var(--ink);
+      line-height: 1.2;
+    }
+
+    .svg-card p,
+    .svg-card ul,
+    .svg-card small {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+
+    .svg-card ul {
+      padding-left: 18px;
+    }
+
+    .svg-card li + li {
+      margin-top: 3px;
+    }
+
+    .svg-kicker {
+      align-self: flex-start;
+      padding: 5px 8px;
+      border-radius: 999px;
+      font-size: 0.68rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .card-page {
+      background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+    }
+
+    .card-page .svg-kicker {
+      background: #eaf3ff;
+      color: var(--blue-deep);
+    }
+
+    .card-process {
+      background: linear-gradient(180deg, #ffffff 0%, #fffaf1 100%);
+    }
+
+    .card-process .svg-kicker {
+      background: var(--gold-soft);
+      color: #8a5600;
+    }
+
+    .card-module {
+      background: linear-gradient(180deg, #ffffff 0%, #f5fbff 100%);
+    }
+
+    .card-module .svg-kicker {
+      background: #dff0ff;
+      color: var(--blue);
+    }
+
+    .card-data {
+      background: linear-gradient(180deg, #ffffff 0%, #f1faf5 100%);
+    }
+
+    .card-data .svg-kicker {
+      background: var(--green-soft);
+      color: #18734f;
+    }
+
+    .card-decision {
+      background: linear-gradient(180deg, #ffffff 0%, #fff6f6 100%);
+    }
+
+    .card-decision .svg-kicker {
+      background: var(--red-soft);
+      color: var(--red);
+    }
+
+    .card-support {
+      background: linear-gradient(180deg, #ffffff 0%, #f8f4ff 100%);
+    }
+
+    .card-support .svg-kicker {
+      background: var(--purple-soft);
+      color: #62429a;
+    }
+
+    .source-files {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 16px;
+    }
+
+    .file-chip {
+      display: inline-flex;
+      align-items: center;
+      min-height: 36px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid #dbe7f3;
+      background: #f9fbff;
+      color: var(--blue-deep);
+      font-size: 0.82rem;
+      font-weight: 700;
+    }
+
+    .file-chip:hover {
+      text-decoration: none;
+      background: #eef5ff;
+    }
+
+    .support-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .support-card {
+      border: 1px solid #dbe7f3;
+      border-radius: 18px;
+      padding: 16px 18px;
+      background: linear-gradient(180deg, #ffffff 0%, #f9fbff 100%);
+    }
+
+    .support-card h3 {
+      margin: 0 0 10px;
+      font-family: var(--font-head);
+      font-size: 1.02rem;
+    }
+
+    .support-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 0.9rem;
+    }
+
+    .support-card .source-files {
+      margin-top: 12px;
+    }
+
+    .footer-note {
+      margin-top: 20px;
+      padding: 16px 18px;
+      border-radius: 18px;
+      border: 1px dashed #c6d8ea;
+      background: #f8fbff;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 0.92rem;
+    }
+
+    @media (max-width: 1024px) {
+      .hero-grid,
+      .info-grid,
+      .support-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute">
+    <defs>
+      <marker id="flow-arrow" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="10" markerHeight="10" orient="auto-start-reverse">
+        <path d="M 0 0 L 12 6 L 0 12 z" fill="#5a84b3"></path>
+      </marker>
+    </defs>
+  </svg>
+
+  <div class="page-shell">
+    <header class="hero">
+      <div class="hero-eyebrow">LBU.V2 Project Scan • Flowchart Artifact • v2.0.9</div>
+      <h1>Lingkod Bayan / CEU System Flowchart</h1>
+      <p>
+        This file maps the live runtime of the <strong>LBU.V2</strong> project based on the scanned root pages,
+        shared JavaScript modules, route wrappers, Netlify redirects, Supabase configuration, and support SQL/import files
+        inside the project folder. I grouped the chart into subsystem views so it stays readable while still covering the whole system.
+      </p>
+      <div class="hero-grid">
+        <div class="hero-stat">
+          <strong>8 Live Pages</strong>
+          <span>`index`, `admin-login`, `client-records`, `add-record`, `reports`, `import-tools`, `ceu-database`, `local-form`</span>
+        </div>
+        <div class="hero-stat">
+          <strong>11 Shared JS Modules</strong>
+          <span>Routing, auth, data store, attachments, CEU referrals, Excel import, barangay/purok helpers, changelog, and SDK bootstrap</span>
+        </div>
+        <div class="hero-stat">
+          <strong>Supabase-First Runtime</strong>
+          <span>`lb_records`, `ceu_records`, `admin_users`, `record_audit_logs`, `record_attachments`, and storage bucket workflows</span>
+        </div>
+        <div class="hero-stat">
+          <strong>Support Layers Included</strong>
+          <span>Netlify redirects, clean-route folders, backup migration, workbook import logic, SQL seed/setup files, and local form</span>
+        </div>
+      </div>
+    </header>
+
+    <nav class="top-nav" aria-label="Flowchart sections">
+      <a href="#overview">Overview</a>
+      <a href="#auth-routing">Auth + Routing</a>
+      <a href="#records-runtime">Client Records</a>
+      <a href="#add-record-flow">Add Record</a>
+      <a href="#reports-flow">Reports</a>
+      <a href="#ceu-flow">CEU + Referral Summary</a>
+      <a href="#import-flow">Import Tools</a>
+      <a href="#supporting-assets">Support Files</a>
+    </nav>
+
+    <section class="section" id="overview">
+      <div class="section-head">
+        <div class="section-kicker">Section 1</div>
+        <h2>System Overview</h2>
+        <p>
+          This is the top-level map of the live app: entry paths, protected pages, shared modules, and backend/storage targets.
+          The detailed subsystem charts below expand each branch.
+        </p>
+      </div>
+      <div class="section-body">
+        <div class="info-grid">
+          <div class="info-card">
+            <h3>How To Read This Flowchart</h3>
+            <p>
+              Blue nodes are live pages or routing modules, gold nodes are runtime processes, green nodes are storage/data targets,
+              red nodes are decisions or guards, and purple nodes are support assets that influence the system but are not the day-to-day UI.
+            </p>
+            <div class="legend">
+              <span class="legend-item"><span class="legend-swatch" style="background:#eaf3ff"></span>Live page / route</span>
+              <span class="legend-item"><span class="legend-swatch" style="background:#fff4df"></span>Process / runtime step</span>
+              <span class="legend-item"><span class="legend-swatch" style="background:#e9f8f1"></span>Data / storage</span>
+              <span class="legend-item"><span class="legend-swatch" style="background:#fdeae8"></span>Guard / decision</span>
+              <span class="legend-item"><span class="legend-swatch" style="background:#f2ebff"></span>Support / tooling</span>
+            </div>
+          </div>
+          <div class="info-card">
+            <h3>Coverage Basis</h3>
+            <p>
+              This artifact was mapped from `README.md`, root HTML files, `assets/js/*`, `netlify.toml`, `_redirects`,
+              clean-route folder `index.html` wrappers, `supabase/*`, and the latest live project structure in `LBU.V2`.
+              Archive folders are noted as reference-only and not treated as live runtime.
+            </p>
+          </div>
+        </div>
+
+        <div class="diagram-shell">
+          <svg class="diagram" viewBox="0 0 1500 760" role="img" aria-label="LBU.V2 system overview flowchart">
+            <text class="lane-label" x="54" y="42">User / Browser</text>
+            <text class="lane-label" x="285" y="42">Entry + Route Layer</text>
+            <text class="lane-label" x="585" y="42">Live Pages</text>
+            <text class="lane-label" x="945" y="42">Shared Modules</text>
+            <text class="lane-label" x="1240" y="42">Backend + Support</text>
+
+            <path class="arrow arrow-strong" d="M 195 186 C 230 186, 240 150, 280 150" />
+            <path class="arrow" d="M 500 150 C 545 150, 550 115, 595 115" />
+            <path class="arrow" d="M 500 150 C 545 150, 550 240, 595 240" />
+            <path class="arrow" d="M 500 150 C 545 150, 550 365, 595 365" />
+            <path class="arrow" d="M 500 150 C 545 150, 550 490, 595 490" />
+            <path class="arrow" d="M 500 150 C 545 150, 550 615, 595 615" />
+            <path class="arrow arrow-dashed" d="M 195 585 C 255 585, 260 585, 330 585" />
+
+            <path class="arrow" d="M 820 110 C 900 110, 900 110, 950 110" />
+            <path class="arrow" d="M 820 240 C 900 240, 900 240, 950 240" />
+            <path class="arrow" d="M 820 365 C 900 365, 900 365, 950 365" />
+            <path class="arrow" d="M 820 490 C 900 490, 900 490, 950 490" />
+            <path class="arrow" d="M 820 615 C 900 615, 900 615, 950 615" />
+
+            <path class="arrow" d="M 1150 110 C 1210 110, 1210 140, 1260 140" />
+            <path class="arrow" d="M 1150 240 C 1210 240, 1210 260, 1260 260" />
+            <path class="arrow" d="M 1150 365 C 1210 365, 1210 385, 1260 385" />
+            <path class="arrow" d="M 1150 490 C 1210 490, 1210 510, 1260 510" />
+            <path class="arrow" d="M 1150 615 C 1210 615, 1210 640, 1260 640" />
+
+            <foreignObject x="40" y="130" width="155" height="115">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-card card-process">
+                <span class="svg-kicker">Browser</span>
+                <strong>User opens app</strong>
+                <p>Entry may start from `/`, `/login`, `/records`, clean folders, or direct HTML files.</p>
+              </div>
+            </foreignObject>
+
+            <foreignObject x="280" y="88" width="220" height="125">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-card card-support">
+                <span class="svg-kicker">Route Layer</span>
+                <strong>Netlify + wrappers + `routes.js`</strong>
+                <p>Clean URL redirects, route-name mapping, route loaders, and `data-route` link hydration.</p>
+              </div>
+            </foreignObject>
+
+            <foreignObject x="280" y="250" width="220" height="114">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-card card-page">
+                <span class="svg-kicker">Entry</span>
+                <strong>`index.html`</strong>
+                <p>Checks `lbAuth.isAuthenticated()` and routes to records or login.</p>
+              </div>
+            </foreignObject>
+
+            <foreignObject x="280" y="405" width="220" height="125">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-card card-page">
+                <span class="svg-kicker">Login</span>
+                <strong>`admin-login.html`</strong>
+                <p>Supabase admin sign-in or local fallback password setup/verification.</p>
+              </div>
+            </foreignObject>
+
+            <foreignObject x="330" y="545" width="170" height="100">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-card card-page">
+                <span class="svg-kicker">Standalone</span>
+                <strong>`local-form.html`</strong>
+                <p>Browser-only form and JSON download.</p>
+              </div>
+            </foreignObject>
+
+            <foreignObject x="595" y="56" width="225" height="118">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-card card-page">
+                <span class="svg-kicker">Main Database</span>
+                <strong>`client-records.html`</strong>
+                <p>Searchable Lingkod Bayan client table, detail view, history editor, audit, and deletion flow.</p>
+              </div>
+            </foreignObject>
+
+            <foreignObject x="595" y="183" width="225" height="112">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-card card-page">
+                <span class="svg-kicker">Data Entry</span>
+                <strong>`add-record.html`</strong>
+                <p>5-step form, request-only mode, duplicate history checks, and save/update flow.</p>
+              </div>
+            </foreignObject>
+
+            <foreignObject x="595" y="308" width="225" height="114">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-card card-page">
+                <span class="svg-kicker">Reporting</span>
+                <strong>`reports.html`</strong>
+                <p>Client assistance summary, filters, graphs, no-client view, print, and CSV export.</p>
+              </div>
+            </foreignObject>
+
+            <foreignObject x="595" y="432" width="225" height="114">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-card card-page">
+                <span class="svg-kicker">Admin Tools</span>
+                <strong>`import-tools.html`</strong>
+                <p>One-time backup migration plus workbook import/merge workflow.</p>
+              </div>
+            </foreignObject>
+
+            <foreignObject x="595" y="557" width="225" height="118">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-card card-page">
+                <span class="svg-kicker">CEU Workspace</span>
+                <strong>`ceu-database.html`</strong>
+                <p>CEU CRUD by category plus inline referral summary, printing, PDF, and heat map.</p>
+              </div>
+            </foreignObject>
+
+            <foreignObject x="950" y="54" width="200" height="100">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-card card-module">
+                <span class="svg-kicker">Shared JS</span>
+                <strong>`routes.js` + `auth.js`</strong>
+                <p>Route mapping, loaders, login state, session guards, logout.</p>
+              </div>
+            </foreignObject>
+
+            <foreignObject x="950" y="179" width="200" height="106">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-card card-module">
+                <span class="svg-kicker">Shared JS</span>
+                <strong>`data-store.js`</strong>
+                <p>Cached records, local fallback, Supabase sync, realtime refresh, backup migration.</p>
+              </div>
+            </foreignObject>
+
+            <foreignObject x="950" y="309" width="200" height="104">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-card card-module">
+                <span class="svg-kicker">Shared JS</span>
+                <strong>`record-attachments.js`</strong>
+                <p>Upload, signed URLs, preview/download, orphan cleanup, bucket/table metadata.</p>
+              </div>
+            </foreignObject>
+
+            <foreignObject x="950" y="432" width="200" height="104">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-card card-module">
+                <span class="svg-kicker">Shared JS</span>
+                <strong>`ceu-referrals.js`</strong>
+                <p>Referral picker, alias matching, counts, summary items, heat colors.</p>
+              </div>
+            </foreignObject>
+
+            <foreignObject x="950" y="558" width="200" height="112">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-card card-support">
+                <span class="svg-kicker">Import Helpers</span>
+                <strong>`xlsx-lite.js` + `record-excel-import.js` + `import-tools-page.js`</strong>
+                <p>Workbook parsing, import diffing, template download, migration UI.</p>
+              </div>
+            </foreignObject>
+
+            <foreignObject x="1260" y="86" width="210" height="108">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-card card-data">
+                <span class="svg-kicker">Supabase</span>
+                <strong>Auth + `admin_users`</strong>
+                <p>Allowed admin accounts, active/inactive status, optional MFA requirement.</p>
+              </div>
+            </foreignObject>
+
+            <foreignObject x="1260" y="210" width="210" height="118">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-card card-data">
+                <span class="svg-kicker">Supabase</span>
+                <strong>`lb_records` + `record_audit_logs`</strong>
+                <p>Main Lingkod Bayan records, record history payloads, and audit trail reads.</p>
+              </div>
+            </foreignObject>
+
+            <foreignObject x="1260" y="345" width="210" height="108">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-card card-data">
+                <span class="svg-kicker">Supabase</span>
+                <strong>`ceu_records`</strong>
+                <p>CEU category rows, upserts, and tombstone deletions used by CEU and referrals.</p>
+              </div>
+            </foreignObject>
+
+            <foreignObject x="1260" y="470" width="210" height="110">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-card card-data">
+                <span class="svg-kicker">Supabase</span>
+                <strong>Storage + `record_attachments`</strong>
+                <p>Attachment bucket objects, signed URL generation, temp/active metadata rows.</p>
+              </div>
+            </foreignObject>
+
+            <foreignObject x="1260" y="598" width="210" height="92">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-card card-support">
+                <span class="svg-kicker">Support Files</span>
+                <strong>`supabase/*` + `scripts/*`</strong>
+                <p>SQL setup/seed/import scripts and helper PowerShell tooling.</p>
+              </div>
+            </foreignObject>
+          </svg>
+        </div>
+
+        <div class="source-files">
+          <a class="file-chip" href="README.md">README.md</a>
+          <a class="file-chip" href="index.html">index.html</a>
+          <a class="file-chip" href="admin-login.html">admin-login.html</a>
+          <a class="file-chip" href="client-records.html">client-records.html</a>
+          <a class="file-chip" href="add-record.html">add-record.html</a>
+          <a class="file-chip" href="reports.html">reports.html</a>
+          <a class="file-chip" href="import-tools.html">import-tools.html</a>
+          <a class="file-chip" href="ceu-database.html">ceu-database.html</a>
+          <a class="file-chip" href="local-form.html">local-form.html</a>
+          <a class="file-chip" href="assets/js/routes.js">assets/js/routes.js</a>
+          <a class="file-chip" href="assets/js/auth.js">assets/js/auth.js</a>
+          <a class="file-chip" href="assets/js/data-store.js">assets/js/data-store.js</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="auth-routing">
+      <div class="section-head">
+        <div class="section-kicker">Section 2</div>
+        <h2>Authentication And Routing Flow</h2>
+        <p>
+          The project supports both Supabase-backed admin auth and a local fallback admin password mode.
+          Routing is unified through `routes.js`, and protected pages gate access through `lbAuth.requireAuth()`.
+        </p>
+      </div>
+      <div class="section-body">
+        <div class="diagram-shell">
+          <svg class="diagram" viewBox="0 0 1500 670" role="img" aria-label="Authentication and routing flowchart">
+            <path class="arrow arrow-strong" d="M 175 136 C 225 136, 230 136, 280 136" />
+            <path class="arrow" d="M 510 136 C 555 136, 555 120, 600 120" />
+            <path class="arrow" d="M 510 136 C 555 136, 555 250, 600 250" />
+            <path class="arrow" d="M 820 250 C 860 250, 865 180, 915 180" />
+            <path class="arrow" d="M 820 250 C 860 250, 865 332, 915 332" />
+            <path class="arrow" d="M 1135 180 C 1175 180, 1180 160, 1235 160" />
+            <path class="arrow" d="M 1135 332 C 1175 332, 1180 330, 1235 330" />
+            <path class="arrow arrow-strong" d="M 1035 160 C 1035 85, 1275 85, 1275 85" />
+            <path class="arrow arrow-strong" d="M 1450 235 C 1450 470, 760 470, 760 470" />
+            <path class="arrow arrow-dashed" d="M 1260 510 C 1170 560, 600 560, 510 560" />
+
+            <foreignObject x="40" y="88" width="135" height="95">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-card card-process">
+                <span class="svg-kicker">Start</span>
+                <strong>Open app URL</strong>
+                <p>User hits `/`, `/login`, `/records`, or a direct page link.</p>
+              </div>
+            </foreignObject>
+
+            <foreignObject x="280" y="76" width="230" height="120">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-card card-support">
+                <span class="svg-kicker">Route Layer</span>
+                <strong>Netlify redirects + wrapper folders</strong>
+                <p>`netlify.toml`, `_redirects`, and `/login/index.html`, `/records/index.html`, etc. normalize clean URLs.</p>
+              </div>
+            </foreignObject>
+
+            <foreignObject x="600" y="68" width="220" height="104">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-card card-page">
+                <span class="svg-kicker">Entry Page</span>
+                <strong>`index.html`</strong>
+                <p>Calls `lbAuth.isAuthenticated()` and chooses `records` or `login`.</p>
+              </div>
+            </foreignObject>
+
+            <foreignObject x="600" y="204" width="220" height="104">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-card card-page">
+                <span class="svg-kicker">Login Page</span>
+                <strong>`admin-login.html`</strong>
+                <p>Shows animated login loader and handles cloud/local auth modes.</p>
+              </div>
+            </foreignObject>
+
+            <foreignObject x="915" y="118" width="220" height="124">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-card card-process">
+                <span class="svg-kicker">Cloud Branch</span>
+                <strong>Supabase admin sign-in</strong>
+                <p>`lbAuth.signInWithPassword()` → Supabase Auth → refresh DB-backed admin profile.</p>
+              </div>
+            </foreignObject>
+
+            <foreignObject x="915" y="270" width="220" height="124">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-card card-process">
+                <span class="svg-kicker">Local Branch</span>
+                <strong>Local password setup / verify</strong>
+                <p>`initializePassword()` or `verifyPassword()` using browser-stored profile and session keys.</p>
+              </div>
+            </foreignObject>
+
+            <foreignObject x="1235" y="114" width="215" height="130">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-card card-data">
+                <span class="svg-kicker">Cloud Validation</span>
+                <strong>Supabase Auth + `admin_users`</strong>
+                <p>Allowed email check, active status, profile match, and optional MFA (`aal2`) enforcement.</p>
+              </div>
+            </foreignObject>
+
+            <foreignObject x="1235" y="286" width="215" height="92">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-card card-data">
+                <span class="svg-kicker">Local Validation</span>
+                <strong>Browser profile + session</strong>
+                <p>`lb_auth_profile_v1`, `lb_auth_session_v1`, and legacy cleanup.</p>
+              </div>
+            </foreignObject>
+
+            <foreignObject x="1160" y="430" width="290" height="128">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-card card-module">
+                <span class="svg-kicker">Protected Route Result</span>
+                <strong>`lbRoutes.go()` + full-screen route loader</strong>
+                <p>Successful login sends the user to `records`. Cross-page moves can show route loaders, including forced loader handoff between Lingkod Bayan and CEU Database.</p>
+              </div>
+            </foreignObject>
+
+            <foreignObject x="510" y="420" width="270" height="140">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-card card-decision">
+                <span class="svg-kicker">Guard</span>
+                <strong>Every protected page calls `lbAuth.requireAuth()`</strong>
+                <p>If no valid session is found, the user is pushed back to `admin-login.html`. If the session is valid, page initialization continues.</p>
+              </div>
+            </foreignObject>
+
+            <foreignObject x="820" y="430" width="250" height="124">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-card card-page">
+                <span class="svg-kicker">Protected Pages</span>
+                <strong>`client-records`, `add-record`, `reports`, `import-tools`, `ceu-database`</strong>
+                <p>All share the same auth/routing helpers before their own page logic starts.</p>
+              </div>
+            </foreignObject>
+          </svg>
+        </div>
+
+        <div class="source-files">
+          <a class="file-chip" href="index.html">index.html</a>
+          <a class="file-chip" href="admin-login.html">admin-login.html</a>
+          <a class="file-chip" href="assets/js/routes.js">assets/js/routes.js</a>
+          <a class="file-chip" href="assets/js/auth.js">assets/js/auth.js</a>
+          <a class="file-chip" href="netlify.toml">netlify.toml</a>
+          <a class="file-chip" href="_redirects">_redirects</a>
+          <a class="file-chip" href="login/index.html">login/index.html</a>
+          <a class="file-chip" href="records/index.html">records/index.html</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="records-runtime">
+      <div class="section-head">
+        <div class="section-kicker">Section 3</div>
+        <h2>Lingkod Bayan Client Records Runtime</h2>
+        <p>
+          `client-records.html` is the operational hub of the app. It initializes the shared record store, renders the main table,
+          exposes the detail/history workspace, and links outward to add-record, reports, imports, and CEU.
+        </p>
+      </div>
+      <div class="section-body">
+        <div class="diagram-shell">
+          <svg class="diagram" viewBox="0 0 1500 760" role="img" aria-label="Lingkod Bayan client records runtime flowchart">
+            <path class="arrow arrow-strong" d="M 175 115 C 225 115, 230 115, 275 115" />
+            <path class="arrow" d="M 510 115 C 560 115, 565 110, 615 110" />
+            <path class="arrow" d="M 860 110 C 910 110, 915 110, 975 110" />
+            <path class="arrow" d="M 860 110 C 910 110, 915 270, 975 270" />
+            <path class="arrow" d="M 1195 110 C 1240 110, 1245 110, 1325 110" />
+            <path class="arrow" d="M 1195 270 C 1240 270, 1245 270, 1325 270" />
+            <path class="arrow arrow-strong" d="M 735 246 C 735 318, 735 318, 735 350" />
+            <path class="arrow" d="M 735 486 C 735 550, 480 550, 480 550" />
+            <path class="arrow" d="M 735 486 C 735 550, 735 550, 735 550" />
+            <path class="arrow" d="M 735 486 C 735 550, 1000 550, 1000 550" />
+            <path class="arrow" d="M 480 636 C 480 690, 340 690, 240 690" />
+            <path class="arrow" d="M 735 636 C 735 690, 735 690, 735 690" />
+            <path class="arrow" d="M 1000 636 C 1000 690, 1160 690, 1260 690" />
+
+            <foreignObject x="40" y="62" width="135" height="106">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-card card-page">
+                <span class="svg-kicker">Page Load</span>
+                <strong>`client-records.html`</strong>
+                <p>Main Lingkod Bayan database page opens.</p>
+              </div>
+            </foreignObject>
+
+            <foreignObject x="275" y="62" width="235" height="106">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-card card-decision">
+                <span class="svg-kicker">Access Guard</span>
+                <strong>`lbAuth.requireAuth()`</strong>
+                <p>Rejects unauthenticated users and sends them back to login.</p>
+              </div>
+            </foreignObject>
+
+            <foreignObject x="615" y="58" width="245" height="114">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-card card-process">
+                <span class="svg-kicker">Initialization</span>
+                <strong>`lbData.initialize()`</strong>
+                <p>Backs up legacy local data when cloud is on, refreshes records, and subscribes to realtime changes.</p>
+              </div>
+            </foreignObject>
+
+            <foreignObject x="975" y="54" width="220" height="114">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-card card-data">
+                <span class="svg-kicker">Cloud Path</span>
+                <strong>Supabase records path</strong>
+                <p>`lb_records` load into memory cache. `focus` and realtime events refresh the cached list.</p>
+              </div>
+            </foreignObject>
+
+            <foreignObject x="975" y="214" width="220" height="114">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-card card-data">
+                <span class="svg-kicker">Fallback Path</span>
+                <strong>Local browser path</strong>
+                <p>Uses `localStorage("records")` when cloud mode is unavailable or disabled.</p>
+              </div>
+            </foreignObject>
+
+            <foreignObject x="1325" y="54" width="135" height="114">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-card card-data">
+                <span class="svg-kicker">Target</span>
+                <strong>`lb_records`</strong>
+                <p>Main record rows</p>
+              </div>
+            </foreignObject>
+
+            <foreignObject x="1325" y="214" width="135" height="114">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-card card-data">
+                <span class="svg-kicker">Target</span>
+                <strong>Browser cache</strong>
+                <p>Local fallback only</p>
+              </div>
+            </foreignObject>
+
+            <foreignObject x="585" y="350" width="300" height="136">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-card card-page">
+                <span class="svg-kicker">Main Workspace</span>
+                <strong>Search + filters + table render</strong>
+                <p>Main table search, filter chips, `CEU Database`, `Add Record`, `Report`, `Import Tools`, and `Delete All Data` actions all start here.</p>
+              </div>
+            </foreignObject>
+
+            <foreignObject x="340" y="548" width="280" height="104">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-card card-process">
+                <span class="svg-kicker">Detail Branch</span>
+                <strong>Open client detail view</strong>
+                <p>Shows summary strip, assistance history cards, and audit activity panel for the selected client.</p>
+              </div>
+            </foreignObject>
+
+            <foreignObject x="635" y="548" width="200" height="104">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-card card-process">
+                <span class="svg-kicker">Top Actions</span>
+                <strong>Page navigation</strong>
+                <p>Route to add-record, reports, import tools, or CEU database.</p>
+              </div>
+            </foreignObject>
+
+            <foreignObject x="910" y="548" width="315" height="104">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-card card-process">
+                <span class="svg-kicker">Mass Action</span>
+                <strong>Delete all records</strong>
+                <p>Runs `lbData.clearAllRecords()` and, when supported, `lbAttachments.clearAll()`.</p>
+              </div>
+            </foreignObject>
+
+            <foreignObject x="40" y="666" width="400" height="70">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-card card-module">
+                <span class="svg-kicker">Inside Detail View</span>
+                <strong>History editor + audit loader + attachment preview/download</strong>
+              </div>
+            </foreignObject>
+
+            <foreignObject x="540" y="666" width="390" height="70">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-card card-module">
+                <span class="svg-kicker">Shared Helpers</span>
+                <strong>`lbData.updateRecord`, `lbData.deleteRecord`, `lbData.getRecordAuditLogs`, `lbCeuReferrals.attachInput`, `lbAttachments.*`</strong>
+              </div>
+            </foreignObject>
+
+            <foreignObject x="1035" y="666" width="425" height="70">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-card card-data">
+                <span class="svg-kicker">Cloud Extras</span>
+                <strong>`record_audit_logs`, `record_attachments`, signed URLs, preview iframes/images</strong>
+              </div>
+            </foreignObject>
+          </svg>
+        </div>
+
+        <div class="source-files">
+          <a class="file-chip" href="client-records.html">client-records.html</a>
+          <a class="file-chip" href="assets/js/data-store.js">assets/js/data-store.js</a>
+          <a class="file-chip" href="assets/js/record-attachments.js">assets/js/record-attachments.js</a>
+          <a class="file-chip" href="assets/js/ceu-referrals.js">assets/js/ceu-referrals.js</a>
+          <a class="file-chip" href="assets/js/routes.js">assets/js/routes.js</a>
+          <a class="file-chip" href="assets/js/auth.js">assets/js/auth.js</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="add-record-flow">
+      <div class="section-head">
+        <div class="section-kicker">Section 4</div>
+        <h2>Add Record And History Save Flow</h2>
+        <p>
+          `add-record.html` can either create a brand-new client record or append a new request/history entry to an existing client,
+          depending on name matching and duplicate-request checks.
+        </p>
+      </div>
+      <div class="section-body">
+        <div class="diagram-shell">
+          <svg class="diagram" viewBox="0 0 1500 780" role="img" aria-label="Add record and history save flowchart">
+            <path class="arrow arrow-strong" d="M 175 110 C 235 110, 235 110, 300 110" />
+            <path class="arrow" d="M 560 110 C 620 110, 620 110, 705 110" />
+            <path class="arrow" d="M 965 110 C 1030 110, 1035 110, 1100 110" />
+            <path class="arrow" d="M 965 110 C 1030 110, 1035 280, 1100 280" />
+            <path class="arrow" d="M 965 110 C 1030 110, 1035 450, 1100 450" />
+            <path class="arrow" d="M 1330 110 C 1380 110, 1380 110, 1440 110" />
+            <path class="arrow" d="M 1330 280 C 1380 280, 1380 280, 1440 280" />
+            <path class="arrow" d="M 1330 450 C 1380 450, 1380 450, 1440 450" />
+            <path class="arrow arrow-dashed" d="M 775 236 C 775 300, 485 300, 485 360" />
+            <path class="arrow arrow-dashed" d="M 775 236 C 775 300, 775 300, 775 360" />
+            <path class="arrow arrow-dashed" d="M 775 236 C 775 300, 1065 300, 1065 360" />
+            <path class="arrow" d="M 185 590 C 300 590, 300 590, 430 590" />
+            <path class="arrow" d="M 645 590 C 730 590, 730 590, 860 590" />
+            <path class="arrow" d="M 1080 590 C 1160 590, 1160 590, 1305 590" />
+
+            <foreignObject x="40" y="58" width="135" height="104">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-card card-page">
+                <span class="svg-kicker">Open Page</span>
+                <strong>`add-record.html`</strong>
+                <p>Protected page opens and shared record store initializes.</p>
+              </div>
+            </foreignObject>
+
+            <foreignObject x="300" y="52" width="260" height="116">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-card card-process">
+                <span class="svg-kicker">Form Runtime</span>
+                <strong>5-step assistance form</strong>
+                <p>Client info, office/classification, program choice, program-specific fields, remarks, and optional upload.</p>
+              </div>
+            </foreignObject>
+
+            <foreignObject x="705" y="44" width="260" height="132">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-card card-decision">
+                <span class="svg-kicker">Key Decision</span>
+                <strong>Does the client already exist?</strong>
+                <p>Name matching checks current records. If matched, the page can switch to request-only mode instead of creating a duplicate client profile.</p>
+              </div>
+            </foreignObject>
+
+            <foreignObject x="1100" y="56" width="230" height="108">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-card card-process">
+                <span class="svg-kicker">New Client Path</span>
+                <strong>Create new record</strong>
+                <p>Build first history entry from form values and call `createRecordInStore()` / `lbData.createRecord()`.</p>
+              </div>
+            </foreignObject>
+
+            <foreignObject x="1100" y="226" width="230" height="108">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-card card-process">
+                <span class="svg-kicker">Existing Client Path</span>
+                <strong>Append assistance history</strong>
+                <p>Keep the client profile, add a new history entry, then update the matching record in store.</p>
+              </div>
+            </foreignObject>
+
+            <foreignObject x="1100" y="396" width="230" height="108">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-card card-decision">
+                <span class="svg-kicker">Duplicate Check</span>
+                <strong>Same request date + same program?</strong>
+                <p>Duplicate request warning prevents saving the same client/date/program combination twice.</p>
+              </div>
+            </foreignObject>
+
+            <foreignObject x="1375" y="56" width="105" height="108">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-card card-data">
+                <span class="svg-kicker">Save</span>
+                <strong>`lb_records`</strong>
+              </div>
+            </foreignObject>
+
+            <foreignObject x="1375" y="226" width="105" height="108">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-card card-data">
+                <span class="svg-kicker">Save</span>
+                <strong>`lb_records`</strong>
+              </div>
+            </foreignObject>
+
+            <foreignObject x="1375" y="396" width="105" height="108">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-card card-support">
+                <span class="svg-kicker">Block</span>
+                <strong>Warn only</strong>
+              </div>
+            </foreignObject>
+
+            <foreignObject x="340" y="360" width="290" height="120">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-card card-module">
+                <span class="svg-kicker">Dynamic Fields</span>
+                <strong>Program-specific field switching</strong>
+                <p>`Guarantee Letter`, medical/request flows, activity/program flows, and special status fields change automatically from selected program.</p>
+              </div>
+            </foreignObject>
+
+            <foreignObject x="675" y="360" width="200" height="120">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-card card-module">
+                <span class="svg-kicker">Referral Picker</span>
+                <strong>`lbCeuReferrals.attachInput()`</strong>
+                <p>Leader / VIP referral field opens a searchable CEU picker modal.</p>
+              </div>
+            </foreignObject>
+
+            <foreignObject x="965" y="360" width="280" height="120">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-card card-module">
+                <span class="svg-kicker">Optional Upload</span>
+                <strong>`upload_letter` → `lbAttachments.uploadFile()`</strong>
+                <p>Validates PDF/image file, stores object in bucket, and keeps metadata in `record_attachments`.</p>
+              </div>
+            </foreignObject>
+
+            <foreignObject x="40" y="538" width="145" height="104">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-card card-process">
+                <span class="svg-kicker">Validation</span>
+                <strong>Field checks</strong>
+                <p>Per-step validation before save.</p>
+              </div>
+            </foreignObject>
+
+            <foreignObject x="430" y="526" width="215" height="128">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-card card-process">
+                <span class="svg-kicker">History Builder</span>
+                <strong>`buildHistoryEntryFromForm()`</strong>
+                <p>Transforms form values into normalized assistance history payload for new or existing clients.</p>
+              </div>
+            </foreignObject>
+
+            <foreignObject x="860" y="526" width="220" height="128">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-card card-data">
+                <span class="svg-kicker">Storage APIs</span>
+                <strong>`lbData.createRecord` / `lbData.updateRecord`</strong>
+                <p>Uses Supabase-first shared store with local fallback when cloud is unavailable.</p>
+              </div>
+            </foreignObject>
+
+            <foreignObject x="1305" y="530" width="175" height="120">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-card card-page">
+                <span class="svg-kicker">After Save</span>
+                <strong>Toast + return to records</strong>
+                <p>Success feedback, reset/clear helpers, then back to table view.</p>
+              </div>
+            </foreignObject>
+          </svg>
+        </div>
+
+        <div class="source-files">
+          <a class="file-chip" href="add-record.html">add-record.html</a>
+          <a class="file-chip" href="assets/js/data-store.js">assets/js/data-store.js</a>
+          <a class="file-chip" href="assets/js/record-attachments.js">assets/js/record-attachments.js</a>
+          <a class="file-chip" href="assets/js/ceu-referrals.js">assets/js/ceu-referrals.js</a>
+          <a class="file-chip" href="assets/js/barangays.js">assets/js/barangays.js</a>
+          <a class="file-chip" href="assets/js/puroks.js">assets/js/puroks.js</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="reports-flow">
+      <div class="section-head">
+        <div class="section-kicker">Section 5</div>
+        <h2>Client Assistance Summary Report Flow</h2>
+        <p>
+          The report page is a read/compute/print workspace: it reads the shared client records, filters them,
+          computes breakdowns and graphs, and prepares filtered print/export outputs.
+        </p>
+      </div>
+      <div class="section-body">
+        <div class="diagram-shell">
+          <svg class="diagram" viewBox="0 0 1500 730" role="img" aria-label="Reports flowchart">
+            <path class="arrow arrow-strong" d="M 175 110 C 240 110, 245 110, 310 110" />
+            <path class="arrow" d="M 565 110 C 635 110, 640 110, 710 110" />
+            <path class="arrow" d="M 965 110 C 1025 110, 1030 110, 1100 110" />
+            <path class="arrow" d="M 965 110 C 1025 110, 1030 265, 1100 265" />
+            <path class="arrow" d="M 965 110 C 1025 110, 1030 420, 1100 420" />
+            <path class="arrow" d="M 1325 110 C 1380 110, 1380 110, 1455 110" />
+            <path class="arrow" d="M 1325 265 C 1380 265, 1380 265, 1455 265" />
+            <path class="arrow" d="M 1325 420 C 1380 420, 1380 420, 1455 420" />
+            <path class="arrow arrow-dashed" d="M 800 236 C 800 305, 335 305, 335 360" />
+            <path class="arrow arrow-dashed" d="M 800 236 C 800 305, 800 305, 800 360" />
+            <path class="arrow arrow-dashed" d="M 800 236 C 800 305, 1140 305, 1140 360" />
+            <path class="arrow" d="M 205 570 C 310 570, 315 570, 445 570" />
+            <path class="arrow" d="M 695 570 C 760 570, 765 570, 940 570" />
+            <path class="arrow" d="M 1190 570 C 1260 570, 1265 570, 1455 570" />
+
+            <foreignObject x="40" y="58" width="135" height="102">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-card card-page">
+                <span class="svg-kicker">Open Page</span>
+                <strong>`reports.html`</strong>
+                <p>Protected summary report opens.</p>
+              </div>
+            </foreignObject>
+
+            <foreignObject x="310" y="52" width="255" height="116">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-card card-process">
+                <span class="svg-kicker">Input Data</span>
+                <strong>`lbData.initialize()` + `safeGetRecords()`</strong>
+                <p>Loads shared records, normalizes type shape, and refreshes again on `lb:records-changed`.</p>
+              </div>
+            </foreignObject>
+
+            <foreignObject x="710" y="44" width="255" height="132">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-card card-process">
+                <span class="svg-kicker">Filter Engine</span>
+                <strong>Search + filter stack</strong>
+                <p>Search, month, year, barangay, type, status, office, source, category, and priority determine the filtered dataset.</p>
+              </div>
+            </foreignObject>
+
+            <foreignObject x="1100" y="56" width="225" height="108">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-card card-page">
+                <span class="svg-kicker">Rendered View</span>
+                <strong>KPI cards + filtered records</strong>
+                <p>Total people, distinct types, pending/completed, and the exact filtered record table.</p>
+              </div>
+            </foreignObject>
+
+            <foreignObject x="1100" y="211" width="225" height="108">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-card card-page">
+                <span class="svg-kicker">Rendered View</span>
+                <strong>Breakdown tables + summary modal</strong>
+                <p>By type, barangay, month, status, category, priority, office. Rows/cards can drill into matching records.</p>
+              </div>
+            </foreignObject>
+
+            <foreignObject x="1100" y="366" width="225" height="108">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-card card-page">
+                <span class="svg-kicker">Rendered View</span>
+                <strong>Graphs + no-client areas</strong>
+                <p>Monthly SVG line graphs and barangay/purok comparison against location lists.</p>
+              </div>
+            </foreignObject>
+
+            <foreignObject x="1368" y="56" width="112" height="108">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-card card-data">
+                <span class="svg-kicker">Output</span>
+                <strong>Screen</strong>
+              </div>
+            </foreignObject>
+
+            <foreignObject x="1368" y="211" width="112" height="108">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-card card-data">
+                <span class="svg-kicker">Output</span>
+                <strong>Modal</strong>
+              </div>
+            </foreignObject>
+
+            <foreignObject x="1368" y="366" width="112" height="108">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-card card-data">
+                <span class="svg-kicker">Output</span>
+                <strong>Charts</strong>
+              </div>
+            </foreignObject>
+
+            <foreignObject x="190" y="360" width="290" height="120">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-card card-module">
+                <span class="svg-kicker">Source Resolver</span>
+                <strong>`getRecordReferralSource()`</strong>
+                <p>Resolves source from direct field, imported remarks, history, first contact, leader, and office fallback.</p>
+              </div>
+            </foreignObject>
+
+            <foreignObject x="650" y="360" width="300" height="120">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-card card-module">
+                <span class="svg-kicker">Location Comparison</span>
+                <strong>Barangays / puroks / `locationRecords`</strong>
+                <p>Finds areas with no matching clients under the current report filters.</p>
+              </div>
+            </foreignObject>
+
+            <foreignObject x="1010" y="360" width="260" height="120">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-card card-module">
+                <span class="svg-kicker">SVG Graph Engine</span>
+                <strong>Monthly series builder</strong>
+                <p>Builds total/completed/pending line graphs from requested month-year buckets.</p>
+              </div>
+            </foreignObject>
+
+            <foreignObject x="40" y="516" width="165" height="108">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-card card-process">
+                <span class="svg-kicker">Print Path</span>
+                <strong>Filtered print sheet</strong>
+                <p>Current filtered records only</p>
+              </div>
+            </foreignObject>
+
+            <foreignObject x="445" y="516" width="250" height="108">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-card card-process">
+                <span class="svg-kicker">Print Details</span>
+                <strong>Filter snapshot in print</strong>
+                <p>Print/PDF includes search + all report filters, with `All` shown where not narrowed.</p>
+              </div>
+            </foreignObject>
+
+            <foreignObject x="940" y="516" width="250" height="108">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-card card-process">
+                <span class="svg-kicker">CSV Export</span>
+                <strong>Export current records</strong>
+                <p>Exports normalized record rows including computed `referralSource`.</p>
+              </div>
+            </foreignObject>
+
+            <foreignObject x="1265" y="516" width="215" height="108">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-card card-data">
+                <span class="svg-kicker">Outputs</span>
+                <strong>Browser print / CSV</strong>
+                <p>Print preview, PDF via browser, and CSV download.</p>
+              </div>
+            </foreignObject>
+          </svg>
+        </div>
+
+        <div class="source-files">
+          <a class="file-chip" href="reports.html">reports.html</a>
+          <a class="file-chip" href="assets/js/data-store.js">assets/js/data-store.js</a>
+          <a class="file-chip" href="assets/js/barangays.js">assets/js/barangays.js</a>
+          <a class="file-chip" href="assets/js/puroks.js">assets/js/puroks.js</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="ceu-flow">
+      <div class="section-head">
+        <div class="section-kicker">Section 6</div>
+        <h2>CEU Database And Referral Summary Flow</h2>
+        <p>
+          The CEU page is its own protected workspace backed by the `ceu_records` table. It also contains the inline referral summary,
+          which cross-matches active CEU names against Lingkod Bayan client referral values.
+        </p>
+      </div>
+      <div class="section-body">
+        <div class="diagram-shell">
+          <svg class="diagram" viewBox="0 0 1500 890" role="img" aria-label="CEU database and referral summary flowchart">
+            <path class="arrow arrow-strong" d="M 180 110 C 240 110, 245 110, 315 110" />
+            <path class="arrow" d="M 575 110 C 640 110, 645 110, 720 110" />
+            <path class="arrow" d="M 990 110 C 1055 110, 1060 110, 1145 110" />
+            <path class="arrow" d="M 990 110 C 1055 110, 1060 290, 1145 290" />
+            <path class="arrow" d="M 990 110 C 1055 110, 1060 470, 1145 470" />
+            <path class="arrow" d="M 1390 110 C 1430 110, 1430 110, 1470 110" />
+            <path class="arrow" d="M 1390 290 C 1430 290, 1430 290, 1470 290" />
+            <path class="arrow" d="M 1390 470 C 1430 470, 1430 470, 1470 470" />
+            <path class="arrow arrow-dashed" d="M 855 236 C 855 320, 420 320, 420 385" />
+            <path class="arrow arrow-dashed" d="M 855 236 C 855 320, 855 320, 855 385" />
+            <path class="arrow arrow-dashed" d="M 855 236 C 855 320, 1230 320, 1230 385" />
+            <path class="arrow" d="M 265 650 C 380 650, 385 650, 565 650" />
+            <path class="arrow" d="M 830 650 C 940 650, 945 650, 1175 650" />
+            <path class="arrow" d="M 1390 650 C 1430 650, 1430 650, 1470 650" />
+
+            <foreignObject x="40" y="58" width="140" height="104">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-card card-page">
+                <span class="svg-kicker">Open Page</span>
+                <strong>`ceu-database.html`</strong>
+                <p>Protected CEU workspace opens.</p>
+              </div>
+            </foreignObject>
+
+            <foreignObject x="315" y="52" width="260" height="116">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-card card-process">
+                <span class="svg-kicker">Store Init</span>
+                <strong>`initializeCeuCrudStore()`</strong>
+                <p>Checks authenticated Supabase session, then loads CEU rows from `ceu_records` into in-memory category state.</p>
+              </div>
+            </foreignObject>
+
+            <foreignObject x="720" y="44" width="270" height="132">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-card card-page">
+                <span class="svg-kicker">Main CEU Workspace</span>
+                <strong>Category panels + search all + CRUD modals</strong>
+                <p>Search All, Officials, BHW, BPSO, BQRT, Brgy Employee, Lupon, Sectoral Orgs, SK Officials, and VAWC panels.</p>
+              </div>
+            </foreignObject>
+
+            <foreignObject x="1145" y="56" width="245" height="108">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-card card-process">
+                <span class="svg-kicker">CRUD Flow</span>
+                <strong>Add / edit record modal</strong>
+                <p>Saves through `persistCeuRecordOverride()` using Supabase upsert on `(category, source_id)`.</p>
+              </div>
+            </foreignObject>
+
+            <foreignObject x="1145" y="236" width="245" height="108">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-card card-process">
+                <span class="svg-kicker">Delete Flow</span>
+                <strong>Tombstone delete</strong>
+                <p>`persistCeuRecordDeletion()` writes `is_deleted = true` while preserving a snapshot payload.</p>
+              </div>
+            </foreignObject>
+
+            <foreignObject x="1145" y="416" width="245" height="108">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-card card-page">
+                <span class="svg-kicker">Inline Section</span>
+                <strong>Referral Summary</strong>
+                <p>Search, filters, paging, row selection, print summary, print selected, and PDF export.</p>
+              </div>
+            </foreignObject>
+
+            <foreignObject x="1382" y="56" width="98" height="108">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-card card-data">
+                <span class="svg-kicker">Target</span>
+                <strong>`ceu_records`</strong>
+              </div>
+            </foreignObject>
+
+            <foreignObject x="1382" y="236" width="98" height="108">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-card card-data">
+                <span class="svg-kicker">Target</span>
+                <strong>`ceu_records`</strong>
+              </div>
+            </foreignObject>
+
+            <foreignObject x="1382" y="416" width="98" height="108">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-card card-data">
+                <span class="svg-kicker">Output</span>
+                <strong>UI + PDF</strong>
+              </div>
+            </foreignObject>
+
+            <foreignObject x="195" y="385" width="225" height="134">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-card card-module">
+                <span class="svg-kicker">Display Builder</span>
+                <strong>Category payload formatting</strong>
+                <p>Per-category display transforms normalize records, build searchable strings, and reshape category-specific fields.</p>
+              </div>
+            </foreignObject>
+
+            <foreignObject x="710" y="385" width="290" height="134">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-card card-module">
+                <span class="svg-kicker">Cross-System Bridge</span>
+                <strong>`lbCeuReferrals.refresh()`</strong>
+                <p>Loads active CEU referral categories (`officials`, `sk-officials`, `sectoral-orgs`) and client records, then matches aliases to compute referral counts.</p>
+              </div>
+            </foreignObject>
+
+            <foreignObject x="1115" y="385" width="230" height="134">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-card card-module">
+                <span class="svg-kicker">Visual Layer</span>
+                <strong>Heat scale + printable report</strong>
+                <p>0 stays white. 1..100+ use the indigo→blue→green→yellow→orange→red scale and styled PDF/print builders.</p>
+              </div>
+            </foreignObject>
+
+            <foreignObject x="40" y="598" width="225" height="108">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-card card-data">
+                <span class="svg-kicker">Source A</span>
+                <strong>Active CEU referral records</strong>
+                <p>Loaded from `ceu_records` only for referral-eligible categories.</p>
+              </div>
+            </foreignObject>
+
+            <foreignObject x="565" y="598" width="265" height="108">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-card card-data">
+                <span class="svg-kicker">Source B</span>
+                <strong>Lingkod Bayan client records</strong>
+                <p>Referral values come from client record fields/history and are counted against CEU aliases.</p>
+              </div>
+            </foreignObject>
+
+            <foreignObject x="1175" y="598" width="215" height="108">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-card card-process">
+                <span class="svg-kicker">Referral Outputs</span>
+                <strong>Summary rows + selection tools</strong>
+                <p>Filter, select all filtered, select page, print selected, download PDF.</p>
+              </div>
+            </foreignObject>
+
+            <foreignObject x="1382" y="598" width="98" height="108">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-card card-data">
+                <span class="svg-kicker">Result</span>
+                <strong>Cross-report</strong>
+              </div>
+            </foreignObject>
+          </svg>
+        </div>
+
+        <div class="source-files">
+          <a class="file-chip" href="ceu-database.html">ceu-database.html</a>
+          <a class="file-chip" href="assets/js/ceu-referrals.js">assets/js/ceu-referrals.js</a>
+          <a class="file-chip" href="assets/js/data-store.js">assets/js/data-store.js</a>
+          <a class="file-chip" href="assets/js/supabase-config.js">assets/js/supabase-config.js</a>
+          <a class="file-chip" href="assets/js/supabase-client.js">assets/js/supabase-client.js</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="import-flow">
+      <div class="section-head">
+        <div class="section-kicker">Section 7</div>
+        <h2>Import Tools, Backup Migration, And Excel Import Flow</h2>
+        <p>
+          The admin tools page handles two different import tracks: one-time migration of preserved browser data into Supabase,
+          and workbook-based import that merges repeat requests into client history.
+        </p>
+      </div>
+      <div class="section-body">
+        <div class="diagram-shell">
+          <svg class="diagram" viewBox="0 0 1500 790" role="img" aria-label="Import tools flowchart">
+            <path class="arrow arrow-strong" d="M 180 112 C 245 112, 250 112, 330 112" />
+            <path class="arrow" d="M 610 112 C 680 112, 685 112, 760 112" />
+            <path class="arrow" d="M 1040 112 C 1100 112, 1105 112, 1180 112" />
+            <path class="arrow" d="M 1040 112 C 1100 112, 1105 320, 1180 320" />
+            <path class="arrow" d="M 1415 112 C 1450 112, 1450 112, 1480 112" />
+            <path class="arrow" d="M 1415 320 C 1450 320, 1450 320, 1480 320" />
+            <path class="arrow arrow-dashed" d="M 900 240 C 900 310, 370 310, 370 395" />
+            <path class="arrow arrow-dashed" d="M 900 240 C 900 310, 900 310, 900 395" />
+            <path class="arrow arrow-dashed" d="M 900 240 C 900 310, 1230 310, 1230 395" />
+            <path class="arrow" d="M 250 640 C 370 640, 375 640, 600 640" />
+            <path class="arrow" d="M 825 640 C 925 640, 930 640, 1170 640" />
+            <path class="arrow" d="M 1395 640 C 1445 640, 1445 640, 1480 640" />
+
+            <foreignObject x="40" y="58" width="140" height="108">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-card card-page">
+                <span class="svg-kicker">Open Page</span>
+                <strong>`import-tools.html`</strong>
+                <p>Protected admin tools workspace opens.</p>
+              </div>
+            </foreignObject>
+
+            <foreignObject x="330" y="50" width="280" height="124">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-card card-process">
+                <span class="svg-kicker">Page Init</span>
+                <strong>`import-tools-page.js` startup</strong>
+                <p>Runs `lbData.initialize()`, shows storage/record/backup counts, and wires migration/import buttons.</p>
+              </div>
+            </foreignObject>
+
+            <foreignObject x="760" y="44" width="280" height="136">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-card card-page">
+                <span class="svg-kicker">Two Main Tracks</span>
+                <strong>Backup migration and workbook import</strong>
+                <p>One branch moves preserved browser data into cloud; the other parses Excel and decides create-vs-merge operations.</p>
+              </div>
+            </foreignObject>
+
+            <foreignObject x="1180" y="56" width="235" height="108">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-card card-process">
+                <span class="svg-kicker">Track 1</span>
+                <strong>Import one-time backup</strong>
+                <p>`lbData.importBackupRecords()` deduplicates by stable fingerprint before insert.</p>
+              </div>
+            </foreignObject>
+
+            <foreignObject x="1180" y="264" width="235" height="112">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-card card-process">
+                <span class="svg-kicker">Track 2</span>
+                <strong>Excel import workflow</strong>
+                <p>`xlsx-lite` parses workbook, then `record-excel-import.js` builds normalized rows and import changes.</p>
+              </div>
+            </foreignObject>
+
+            <foreignObject x="1385" y="56" width="95" height="108">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-card card-data">
+                <span class="svg-kicker">Target</span>
+                <strong>`lb_records`</strong>
+              </div>
+            </foreignObject>
+
+            <foreignObject x="1385" y="264" width="95" height="112">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-card card-data">
+                <span class="svg-kicker">Target</span>
+                <strong>`lb_records`</strong>
+              </div>
+            </foreignObject>
+
+            <foreignObject x="180" y="395" width="190" height="132">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-card card-data">
+                <span class="svg-kicker">Backup Source</span>
+                <strong>Preserved browser backup</strong>
+                <p>`lb_records_local_backup_v1` stores legacy local records kept for one-time migration.</p>
+              </div>
+            </foreignObject>
+
+            <foreignObject x="760" y="395" width="280" height="132">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-card card-module">
+                <span class="svg-kicker">Workbook Parser</span>
+                <strong>`record-excel-import.js`</strong>
+                <p>Normalizes headers, dates, names, types, remarks, source keys, and history-entry IDs for imported rows.</p>
+              </div>
+            </foreignObject>
+
+            <foreignObject x="1090" y="395" width="280" height="132">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-card card-decision">
+                <span class="svg-kicker">Import Diff</span>
+                <strong>Existing client match or new record?</strong>
+                <p>`buildImportChanges()` either merges history into existing clients or queues brand-new records for creation.</p>
+              </div>
+            </foreignObject>
+
+            <foreignObject x="40" y="588" width="210" height="108">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-card card-support">
+                <span class="svg-kicker">Template</span>
+                <strong>Download Excel template</strong>
+                <p>Headers come from `getTemplateHeaders()` in import logic.</p>
+              </div>
+            </foreignObject>
+
+            <foreignObject x="600" y="584" width="225" height="116">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-card card-process">
+                <span class="svg-kicker">Write Phase</span>
+                <strong>`createRecords` / `updateRecords`</strong>
+                <p>Imports are persisted in batches, then shared record counts and page summaries refresh.</p>
+              </div>
+            </foreignObject>
+
+            <foreignObject x="1170" y="584" width="225" height="116">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-card card-page">
+                <span class="svg-kicker">Admin Result</span>
+                <strong>Toasts + updated summary</strong>
+                <p>Shows import counts, skipped duplicates, and refreshed storage summary.</p>
+              </div>
+            </foreignObject>
+
+            <foreignObject x="1385" y="584" width="95" height="116">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-card card-data">
+                <span class="svg-kicker">Result</span>
+                <strong>Updated data</strong>
+              </div>
+            </foreignObject>
+          </svg>
+        </div>
+
+        <div class="source-files">
+          <a class="file-chip" href="import-tools.html">import-tools.html</a>
+          <a class="file-chip" href="assets/js/import-tools-page.js">assets/js/import-tools-page.js</a>
+          <a class="file-chip" href="assets/js/record-excel-import.js">assets/js/record-excel-import.js</a>
+          <a class="file-chip" href="assets/js/xlsx-lite.js">assets/js/xlsx-lite.js</a>
+          <a class="file-chip" href="assets/js/data-store.js">assets/js/data-store.js</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="supporting-assets">
+      <div class="section-head">
+        <div class="section-kicker">Section 8</div>
+        <h2>Supporting Files, SQL Setup, And Non-Live Runtime Areas</h2>
+        <p>
+          These files matter to the complete system map, but they are not the day-to-day interactive runtime pages in the same way as
+          `client-records.html` or `ceu-database.html`.
+        </p>
+      </div>
+      <div class="section-body">
+        <div class="support-grid">
+          <article class="support-card">
+            <h3>Supabase setup and seed files</h3>
+            <p>
+              `supabase/setup.sql` creates the main shared tables, allow-list, audit log, and policies.
+              `supabase/ceu-seed.sql` plus `supabase/ceu-seed-parts/*` populate CEU data.
+              `supabase/lbu-client-import-setup.sql` plus `supabase/lbu-client-import-parts/*` are import-oriented SQL assets for Lingkod Bayan records.
+            </p>
+            <div class="source-files">
+              <a class="file-chip" href="supabase/setup.sql">supabase/setup.sql</a>
+              <a class="file-chip" href="supabase/ceu-seed.sql">supabase/ceu-seed.sql</a>
+              <a class="file-chip" href="supabase/lbu-client-import-setup.sql">supabase/lbu-client-import-setup.sql</a>
+            </div>
+          </article>
+
+          <article class="support-card">
+            <h3>Edge / cleanup support</h3>
+            <p>
+              `supabase/functions/cleanup-record-attachments/index.ts` is support infrastructure around attachment lifecycle.
+              It is part of the broader system picture even though the live HTML pages do not execute it directly in the browser.
+            </p>
+            <div class="source-files">
+              <a class="file-chip" href="supabase/functions/cleanup-record-attachments/index.ts">cleanup-record-attachments/index.ts</a>
+              <a class="file-chip" href="assets/js/record-attachments.js">assets/js/record-attachments.js</a>
+            </div>
+          </article>
+
+          <article class="support-card">
+            <h3>Clean-route wrapper folders</h3>
+            <p>
+              Folders like `/records`, `/login`, `/add-record`, `/reports`, `/import-tools`, and `/ceu-database`
+              contain tiny `index.html` wrappers that redirect to the root HTML pages. They support clean browsing and deployment behavior.
+            </p>
+            <div class="source-files">
+              <a class="file-chip" href="records/index.html">records/index.html</a>
+              <a class="file-chip" href="login/index.html">login/index.html</a>
+              <a class="file-chip" href="add-record/index.html">add-record/index.html</a>
+              <a class="file-chip" href="reports/index.html">reports/index.html</a>
+            </div>
+          </article>
+
+          <article class="support-card">
+            <h3>Standalone local form</h3>
+            <p>
+              `local-form.html` is intentionally separate from the authenticated admin runtime. It keeps answers in-browser and offers JSON download,
+              but it does not submit into the main app database by default.
+            </p>
+            <div class="source-files">
+              <a class="file-chip" href="local-form.html">local-form.html</a>
+            </div>
+          </article>
+
+          <article class="support-card">
+            <h3>Scripts and workbook helpers</h3>
+            <p>
+              The `scripts/` folder contains helper scripts such as CEU data generation tooling. These are operational/project-maintenance assets,
+              not end-user browser pages, but they still support the broader data pipeline.
+            </p>
+            <div class="source-files">
+              <a class="file-chip" href="scripts">scripts/</a>
+            </div>
+          </article>
+
+          <article class="support-card">
+            <h3>Archive and reference-only material</h3>
+            <p>
+              `archive/` and workbook inspection/reference folders are useful historical context,
+              but they are not treated as live runtime pages in this flowchart.
+            </p>
+            <div class="source-files">
+              <a class="file-chip" href="archive">archive/</a>
+              <a class="file-chip" href="data">data/</a>
+            </div>
+          </article>
+        </div>
+
+        <div class="footer-note">
+          This flowchart was intentionally split into multiple subsystem diagrams so the project stays understandable without collapsing everything into one unreadable mega-chart.
+          If you want, the next good upgrade would be either:
+          a printable landscape version optimized for A3/PDF, or
+          a second artifact focused only on database schema + table relationships.
+        </div>
+      </div>
+    </section>
+  </div>
+</body>
+</html>

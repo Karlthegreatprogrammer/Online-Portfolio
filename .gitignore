@@ -1,0 +1,12 @@
+# Local/runtime files
+node_modules/
+
+# LBU demo copy: keep confidential imports and generated reports out of commits.
+Features/LBU.V2/tmp-*.json
+Features/LBU.V2/data/
+Features/LBU.V2/archive/
+Features/LBU.V2/supabase/ceu-*-upsert.sql
+Features/LBU.V2/supabase/ceu-seed.sql
+Features/LBU.V2/supabase/ceu-seed-parts/
+Features/LBU.V2/supabase/lbu-client-import-parts/
+Features/LBU.V2/supabase/lbu-client-import-rows-2147-2620-parts/

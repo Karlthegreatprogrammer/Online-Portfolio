@@ -1,0 +1,4120 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Report - LINGKOD BAYAN | Client Assistance Summary</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/theme.css">
+<style>
+:root {
+  --bg-a: #f6fbff;
+  --bg-b: #e9f2ff;
+  --bg-c: #e8f6f3;
+  --brand: #0f6ccf;
+  --brand-600: #0b4f98;
+  --ink: #122c44;
+  --muted: #667a92;
+  --surface: rgba(255, 255, 255, 0.92);
+  --surface-solid: #ffffff;
+  --border: rgba(18, 62, 114, 0.14);
+  --shadow: 0 20px 52px rgba(10, 41, 87, 0.14);
+  --success: #0fa36d;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Outfit', 'Trebuchet MS', sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  color: var(--ink);
+  background:
+    radial-gradient(1200px 620px at -8% -20%, #d8ecff 0%, transparent 66%),
+    radial-gradient(930px 520px at 112% 115%, #cbf1e9 0%, transparent 58%),
+    linear-gradient(140deg, var(--bg-a), var(--bg-b) 52%, var(--bg-c));
+}
+
+header {
+  background: linear-gradient(135deg, var(--brand), #2f92ea 70%);
+  color: #fff;
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  box-shadow: 0 16px 36px rgba(11, 54, 109, 0.28);
+  position: sticky;
+  top: 0;
+  z-index: 40;
+}
+
+header img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.92);
+  padding: 5px;
+  border: 2px solid rgba(255, 255, 255, 0.35);
+}
+
+header h1 {
+  font-family: 'Space Grotesk', 'Arial Narrow', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+}
+
+.header-actions {
+  margin-left: auto;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.header-actions button {
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  font-weight: 600;
+  color: #fff;
+  transition: transform 140ms ease, filter 140ms ease;
+}
+
+.header-actions button:hover {
+  transform: translateY(-1px);
+  filter: saturate(1.06);
+}
+
+.btn-back { background: linear-gradient(135deg, #1ca95f, #138a49); }
+.btn-print { background: linear-gradient(135deg, #f3a633, #dd8712); }
+.btn-export { background: linear-gradient(135deg, #0f6ccf, #1f85e3); }
+.btn-graph { background: linear-gradient(135deg, #007d8c, #0f6ccf); }
+.btn-help { background: linear-gradient(135deg, #4a6da7, #2e558f); }
+
+
+
+.container {
+  width: min(1450px, calc(100% - 30px));
+  margin: 18px auto;
+  background: var(--surface);
+  padding: 22px;
+  border-radius: 18px;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(7px);
+  animation: fade-slide 420ms cubic-bezier(.2,.8,.2,1);
+}
+
+body.graph-panel-open .container {
+  width: min(1750px, calc(100% - 24px));
+}
+
+.search-container {
+  border: 1px solid rgba(15, 108, 207, 0.14);
+  border-radius: 16px;
+  background: linear-gradient(180deg, rgba(248, 252, 255, 0.98), rgba(255, 255, 255, 0.98));
+  box-shadow: 0 14px 34px rgba(10, 41, 87, 0.08);
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.search-toolbar {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 14px;
+  align-items: start;
+}
+
+.search-main-field {
+  display: grid;
+  gap: 8px;
+}
+
+.search-eyebrow {
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--brand-600);
+}
+
+.search-main-input {
+  min-height: 48px;
+  padding: 12px 14px;
+  border: 1px solid #c0d0e2;
+  border-radius: 12px;
+  background: #fff;
+  color: var(--ink);
+  font-size: 0.95rem;
+  transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.search-main-input:focus {
+  outline: none;
+  border-color: var(--brand);
+  box-shadow: 0 0 0 4px rgba(15, 108, 207, 0.18);
+}
+
+.search-helper {
+  margin: 0;
+  color: #5d728d;
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+
+.search-toolbar-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-self: start;
+  padding-top: 27px;
+}
+
+.search-toolbar-actions .selection-btn {
+  min-height: 44px;
+}
+
+.search-filter-toggle.is-open,
+.search-filter-toggle.is-active {
+  border-color: rgba(15, 108, 207, 0.32);
+  background: #eff6ff;
+  box-shadow: 0 10px 22px rgba(15, 108, 207, 0.12);
+}
+
+.search-filter-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 6px;
+  border-radius: 999px;
+  background: var(--brand);
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 800;
+}
+
+.search-filter-count[hidden] {
+  display: none !important;
+}
+
+.search-active-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.search-active-filters[hidden] {
+  display: none !important;
+}
+
+.search-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(15, 108, 207, 0.16);
+  background: rgba(15, 108, 207, 0.08);
+  color: #1e4f82;
+  font-size: 0.78rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.search-chip-remove {
+  appearance: none;
+  border: none;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  border-radius: 999px;
+  background: rgba(15, 108, 207, 0.14);
+  color: var(--brand-600);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.search-chip-remove:hover {
+  background: rgba(15, 108, 207, 0.22);
+}
+
+.search-chip-remove:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(15, 108, 207, 0.18);
+}
+
+.search-filter-panel {
+  margin-top: 14px;
+  border: 1px solid rgba(15, 108, 207, 0.12);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.92);
+  padding: 14px;
+}
+
+.search-panel-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.search-panel-heading strong {
+  display: block;
+  color: var(--ink);
+  font-size: 0.92rem;
+}
+
+.search-panel-heading p {
+  margin: 4px 0 0;
+  color: var(--muted);
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+
+.controls {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 12px;
+  align-items: center;
+}
+
+.controls select,
+.controls input {
+  height: 42px;
+  padding: 8px 10px;
+  border: 1px solid #c0d0e2;
+  border-radius: 10px;
+  background: #fff;
+  color: var(--ink);
+  font-size: 0.92rem;
+  transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.controls select:focus,
+.controls input:focus {
+  outline: none;
+  border-color: var(--brand);
+  box-shadow: 0 0 0 4px rgba(15, 108, 207, 0.18);
+}
+
+.controls .actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  grid-column: -1 / -1;
+}
+
+.search-filter-panel .controls {
+  margin-bottom: 0;
+}
+
+.selection-panel {
+  border: 1px solid #d7e6f5;
+  border-radius: 14px;
+  padding: 14px;
+  background: linear-gradient(180deg, #f8fbff, #ffffff 42%);
+  box-shadow: 0 10px 24px rgba(10, 41, 87, 0.08);
+}
+
+.selection-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.selection-header h2,
+.selected-print-head h2 {
+  margin-bottom: 4px;
+}
+
+.selection-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.selection-btn {
+  border: 1px solid #9fb8d5;
+  background: #fff;
+  color: #1e4f81;
+  padding: 9px 12px;
+  border-radius: 10px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 140ms ease, filter 140ms ease, border-color 140ms ease;
+}
+
+.selection-btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  filter: brightness(1.02);
+  border-color: #7ca3cb;
+}
+
+.selection-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.selection-btn.is-primary {
+  border-color: transparent;
+  background: linear-gradient(135deg, #007d8c, #0f6ccf);
+  color: #fff;
+}
+
+.selection-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 12px 0 10px;
+}
+
+.selection-check-all {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: #173f66;
+}
+
+.selection-count {
+  color: #0d4c87;
+  font-size: 0.84rem;
+  font-weight: 700;
+  background: #eef6ff;
+  border: 1px solid #d7e6f5;
+  border-radius: 999px;
+  padding: 6px 10px;
+}
+
+.record-list-empty {
+  margin-top: 10px;
+  color: #5e748c;
+  font-size: 0.86rem;
+}
+
+.record-table-wrap {
+  overflow: auto;
+  max-height: 720px;
+  border: 1px solid #d7e6f5;
+  border-radius: 12px;
+  background: #fff;
+}
+
+table.breakdown-table.record-selection-table,
+table.breakdown-table.selected-print-table {
+  table-layout: auto;
+  min-width: 960px;
+  margin-top: 0;
+  border: none;
+  box-shadow: none;
+}
+
+table.breakdown-table.record-selection-table th,
+table.breakdown-table.record-selection-table td,
+table.breakdown-table.selected-print-table th,
+table.breakdown-table.selected-print-table td {
+  text-align: left;
+  padding: 9px 10px;
+  white-space: normal;
+}
+
+table.breakdown-table.record-selection-table th:nth-child(1),
+table.breakdown-table.record-selection-table td:nth-child(1),
+table.breakdown-table.selected-print-table th:nth-child(2),
+table.breakdown-table.selected-print-table td:nth-child(2) {
+  width: auto;
+  text-align: left;
+  padding-right: 10px;
+  background: inherit;
+  color: inherit;
+  font-weight: inherit;
+  white-space: normal;
+}
+
+table.breakdown-table.record-selection-table tbody tr:nth-child(even) td,
+table.breakdown-table.selected-print-table tbody tr:nth-child(even) td {
+  background: #fbfdff;
+}
+
+table.breakdown-table.record-selection-table tbody tr:nth-child(odd) td,
+table.breakdown-table.selected-print-table tbody tr:nth-child(odd) td {
+  background: #ffffff;
+}
+
+table.breakdown-table.record-selection-table tbody tr:hover td {
+  background: #f2f8ff;
+}
+
+.record-name {
+  font-weight: 700;
+  color: #173f66;
+}
+
+.record-muted {
+  color: #607890;
+  font-size: 0.78rem;
+}
+
+.record-amount {
+  color: #0a5a9e;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.selected-print-sheet {
+  display: none;
+}
+
+.filtered-print-sheet {
+  display: none;
+}
+
+.selected-print-head {
+  margin-bottom: 12px;
+}
+
+.filtered-print-head {
+  margin-bottom: 12px;
+}
+
+.print-filter-summary {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 8px;
+  margin: 12px 0 16px;
+}
+
+.print-filter-item {
+  border: 1px solid #d6e4f1;
+  border-radius: 10px;
+  background: #f8fbff;
+  padding: 10px 12px;
+}
+
+.print-filter-item span {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #5f7690;
+}
+
+.print-filter-item strong {
+  display: block;
+  margin-top: 4px;
+  font-size: 0.92rem;
+  color: #163a5f;
+  word-break: break-word;
+}
+
+.summary {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 14px;
+  box-shadow: 0 10px 24px rgba(10, 41, 87, 0.1);
+  border: 1px solid #dbe7f4;
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, #0f6ccf, #2e9ceb);
+}
+
+.card .num {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #0f4f90;
+  margin-bottom: 6px;
+}
+
+.card .label {
+  color: #4f657d;
+  font-size: 0.84rem;
+}
+
+.summary .summary-clickable {
+  cursor: pointer;
+  transition: transform 140ms ease, box-shadow 140ms ease, border-color 140ms ease;
+}
+
+.summary .summary-clickable:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 28px rgba(10, 41, 87, 0.14);
+  border-color: #b9d0ea;
+}
+
+.summary .summary-clickable:focus-visible {
+  outline: 3px solid rgba(15, 108, 207, 0.28);
+  outline-offset: 2px;
+}
+
+body.summary-modal-open {
+  overflow: hidden;
+}
+
+.summary-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 120;
+  display: grid;
+  place-items: center;
+  padding: 14px;
+}
+
+.summary-modal[hidden] {
+  display: none !important;
+}
+
+.summary-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(9, 28, 53, 0.52);
+  backdrop-filter: blur(2px);
+}
+
+.summary-modal-dialog {
+  position: relative;
+  width: min(1180px, calc(100% - 20px));
+  max-height: min(84vh, 920px);
+  overflow: hidden;
+  border-radius: 18px;
+  border: 1px solid #c9dbef;
+  background: #fff;
+  box-shadow: 0 24px 58px rgba(5, 24, 47, 0.32);
+  display: flex;
+  flex-direction: column;
+}
+
+.summary-modal-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 16px 18px 14px;
+  border-bottom: 1px solid #e2edf8;
+  background: linear-gradient(180deg, #f4f9ff, #ffffff);
+}
+
+.summary-modal-head h3 {
+  margin: 0;
+  color: #11395f;
+  font-size: 1.05rem;
+}
+
+.summary-modal-close {
+  border: 1px solid #adc6e2;
+  background: #fff;
+  color: #1d507f;
+  border-radius: 9px;
+  cursor: pointer;
+  padding: 7px 10px;
+  font-weight: 600;
+}
+
+.summary-modal-close:hover {
+  background: #f3f8ff;
+}
+
+.summary-modal-subtitle {
+  color: #5d748d;
+  font-size: 0.84rem;
+  line-height: 1.45;
+  padding: 10px 18px 2px;
+}
+
+.summary-modal-content {
+  padding: 10px 18px 18px;
+  overflow: auto;
+  display: grid;
+  gap: 12px;
+}
+
+.summary-modal-meta {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 10px;
+}
+
+.summary-modal-meta[hidden],
+.summary-modal-record-wrap[hidden],
+.summary-modal-summary-wrap[hidden] {
+  display: none !important;
+}
+
+.summary-modal-meta-card {
+  border: 1px solid #d9e7f6;
+  border-radius: 12px;
+  background: linear-gradient(180deg, #f7fbff, #ffffff);
+  padding: 10px 12px;
+  box-shadow: 0 8px 18px rgba(10, 41, 87, 0.06);
+}
+
+.summary-modal-meta-card span {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #64809b;
+}
+
+.summary-modal-meta-card strong {
+  display: block;
+  margin-top: 5px;
+  font-size: 0.95rem;
+  color: #163a5f;
+  word-break: break-word;
+}
+
+.summary-modal-record-wrap,
+.summary-modal-summary-wrap {
+  border: 1px solid #d7e6f5;
+  border-radius: 14px;
+  background: #fff;
+  overflow: auto;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+.summary-modal-record-wrap {
+  max-height: min(56vh, 600px);
+}
+
+.summary-modal-summary-wrap {
+  max-height: min(42vh, 440px);
+}
+
+table.breakdown-table.summary-modal-record-table,
+table.breakdown-table.summary-modal-summary-table {
+  margin-top: 0;
+  border: none;
+  box-shadow: none;
+}
+
+table.breakdown-table.summary-modal-record-table {
+  min-width: 980px;
+}
+
+table.breakdown-table.summary-modal-summary-table {
+  table-layout: auto;
+  min-width: 0;
+}
+
+table.breakdown-table.summary-modal-summary-table th,
+table.breakdown-table.summary-modal-summary-table td {
+  text-align: left;
+}
+
+table.breakdown-table.summary-modal-summary-table th:nth-child(1),
+table.breakdown-table.summary-modal-summary-table td:nth-child(1) {
+  width: auto;
+  text-align: left;
+  padding-right: 10px;
+  background: inherit;
+  color: inherit;
+  font-weight: inherit;
+}
+
+table.breakdown-table.summary-modal-summary-table th:nth-child(2),
+table.breakdown-table.summary-modal-summary-table td:nth-child(2) {
+  width: 150px;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.summary-modal-empty {
+  color: #607890;
+  font-size: 0.9rem;
+  padding: 16px 18px;
+  border: 1px dashed #cbdced;
+  border-radius: 12px;
+  background: linear-gradient(180deg, #f8fbff, #ffffff);
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section h2 {
+  font-size: 0.96rem;
+  margin-bottom: 10px;
+  color: #153e67;
+  font-family: 'Space Grotesk', 'Arial Narrow', sans-serif;
+}
+
+.breakdown-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 24px rgba(10, 41, 87, 0.08);
+  table-layout: fixed;
+  border: 1px solid #d7e6f5;
+}
+
+.breakdown-table th,
+.breakdown-table td {
+  padding: 10px 12px;
+  text-align: left;
+  border-bottom: 1px solid #e3edf8;
+  border-right: 1px solid #edf3fa;
+  font-size: 0.87rem;
+  word-wrap: break-word;
+}
+
+.breakdown-table tr th:last-child,
+.breakdown-table tr td:last-child {
+  border-right: none;
+}
+
+.breakdown-table th:nth-child(2),
+.breakdown-table td:nth-child(2) {
+  width: 110px;
+  text-align: right;
+  padding-right: 16px;
+  white-space: nowrap;
+  background: linear-gradient(90deg, rgba(236, 247, 255, 0.8), rgba(247, 252, 255, 0.5));
+  color: #0a5a9e;
+  font-weight: 700;
+}
+
+.breakdown-table thead th {
+  background: linear-gradient(180deg, #f0f6ff, #e7f1ff);
+  color: #0d4c87;
+  font-weight: 700;
+  position: sticky;
+  top: 0;
+  border-bottom: 1px solid #cfe1f4;
+  text-align: left;
+}
+
+.breakdown-table tbody tr:nth-child(even) td:nth-child(1) {
+  background: #fbfdff;
+}
+
+.breakdown-table tbody tr:nth-child(odd) td:nth-child(1) {
+  background: #ffffff;
+}
+
+.breakdown-table tbody tr td:nth-child(2) {
+  background: linear-gradient(90deg, rgba(236, 247, 255, 0.8), rgba(247, 252, 255, 0.5));
+}
+
+.breakdown-table tbody tr.breakdown-clickable {
+  cursor: pointer;
+}
+
+.breakdown-table tbody tr.breakdown-clickable:hover td,
+.breakdown-table tbody tr.breakdown-clickable:focus-visible td {
+  background: #eaf4ff !important;
+}
+
+.breakdown-table tbody tr.breakdown-clickable:focus-visible {
+  outline: none;
+}
+
+.controls-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.small-muted {
+  color: var(--muted);
+  font-size: 0.84rem;
+}
+
+.no-client-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.no-client-btn {
+  border: 1px solid #9fb8d5;
+  background: linear-gradient(135deg, #0f6ccf, #2c8fe4);
+  color: #fff;
+  padding: 9px 12px;
+  border-radius: 10px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 140ms ease, filter 140ms ease;
+}
+
+.no-client-btn:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.02);
+}
+
+.no-client-summary,
+.no-client-detail-table {
+  table-layout: auto;
+  margin-top: 10px;
+}
+
+.no-client-summary th,
+.no-client-summary td {
+  text-align: left;
+  font-size: 0.82rem;
+  padding: 8px 10px;
+}
+
+.no-client-summary tbody tr {
+  cursor: pointer;
+  transition: background-color 140ms ease;
+}
+
+.no-client-summary tbody tr:hover td {
+  background: #f2f8ff;
+}
+
+.no-client-summary tbody tr.is-active td {
+  background: #e6f1ff;
+  font-weight: 600;
+}
+
+.no-client-summary td:last-child {
+  color: #0a5a9e;
+  font-weight: 700;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.no-client-summary th:nth-child(2),
+.no-client-summary td:nth-child(2) {
+  background: transparent;
+  text-align: right;
+  padding-right: 12px;
+}
+
+.no-client-detail-row td {
+  padding: 0;
+  border-bottom: none;
+}
+
+.no-client-detail-wrap {
+  padding: 10px;
+  background: #f7fbff;
+  border-top: 1px solid #d7e6f5;
+}
+
+.no-client-detail-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+
+.no-client-detail-title {
+  font-weight: 700;
+  color: #173f66;
+  font-size: 0.9rem;
+}
+
+.no-client-detail-meta {
+  color: #5e748c;
+  font-size: 0.82rem;
+}
+
+.no-client-detail-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.no-client-detail-table th,
+.no-client-detail-table td {
+  text-align: left;
+  font-size: 0.82rem;
+  padding: 8px 10px;
+}
+
+.no-client-detail-table th:nth-child(2),
+.no-client-detail-table td:nth-child(2) {
+  background: transparent;
+  text-align: left;
+  padding-right: 10px;
+  color: inherit;
+  font-weight: 600;
+}
+
+.no-client-detail-table td:last-child {
+  color: var(--success);
+  font-weight: 700;
+  white-space: nowrap;
+  text-align: center;
+}
+
+.no-client-detail-table th:last-child {
+  text-align: center;
+}
+
+.no-client-empty {
+  margin-top: 10px;
+  color: #5e748c;
+  font-size: 0.86rem;
+}
+
+.chart-panel {
+  background: #fff;
+  border: 1px solid #d7e6f5;
+  border-radius: 14px;
+  box-shadow: 0 10px 24px rgba(10, 41, 87, 0.08);
+  padding: 12px;
+}
+
+.chart-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.graph-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.graph-toggle {
+  border: 1px solid #9fb8d5;
+  background: #f7fbff;
+  color: #1e4f81;
+  border-radius: 999px;
+  padding: 7px 10px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 130ms ease;
+}
+
+.graph-toggle:hover {
+  transform: translateY(-1px);
+  border-color: #6e95bf;
+}
+
+.graph-toggle.is-on {
+  background: #0f6ccf;
+  color: #fff;
+  border-color: #0f6ccf;
+}
+
+
+
+.graph-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+  gap: 12px;
+}
+
+body.graph-panel-open #lineGraphSection .graph-grid {
+  grid-template-columns: repeat(auto-fit, minmax(520px, 1fr));
+}
+
+.graph-grid.stacked {
+  grid-template-columns: 1fr;
+}
+
+.graph-card {
+  border: 1px solid #dbe7f4;
+  border-radius: 12px;
+  padding: 10px;
+  min-width: 0;
+  background: #fff;
+  box-shadow: 0 8px 18px rgba(10, 41, 87, 0.08);
+  transform-origin: top center;
+  will-change: transform, opacity;
+}
+
+.graph-card-header {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 8px;
+}
+
+.graph-title {
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #173f66;
+}
+
+.graph-meta {
+  color: #607b96;
+  font-size: 0.78rem;
+}
+
+.graph-svg {
+  width: 100%;
+  min-height: 300px;
+  display: block;
+  border-radius: 10px;
+  background: linear-gradient(180deg, #f8fbff, #ffffff 45%);
+  border: 1px solid #e2ecf7;
+}
+
+.graph-empty {
+  margin-top: 8px;
+  color: #7b8da3;
+  font-size: 0.82rem;
+}
+
+.graph-note {
+  margin-top: 6px;
+}
+
+@media (max-width: 1280px) {
+  .graph-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .graph-card {
+    will-change: auto;
+  }
+}
+
+@media print {
+  @page {
+    margin: 12mm;
+  }
+
+  .no-print,
+  .header-actions,
+  #generatedAt,
+  .controls,
+  #lineGraphControls,
+  #graphBtn,
+  #backBtn,
+  #printBtn,
+  #exportBtn,
+  #noClientBtn {
+    display: none !important;
+  }
+
+  .container {
+    box-shadow: none;
+    margin: 0;
+    border-radius: 0;
+    width: 100%;
+    padding: 18px;
+    border: none;
+  }
+
+  body {
+    background: #fff;
+    color: #000;
+  }
+
+  header {
+    position: static;
+    box-shadow: none;
+    padding: 0 0 10px;
+    margin-bottom: 10px;
+    background: transparent;
+    color: #12314f;
+  }
+
+  header img {
+    background: transparent;
+    border: none;
+    padding: 0;
+  }
+
+  .container > div:first-child {
+    display: none !important;
+  }
+
+  .breakdown-table th {
+    position: static;
+  }
+
+  .breakdown-table,
+  .breakdown-table th,
+  .breakdown-table td {
+    -webkit-print-color-adjust: exact;
+    color-adjust: exact;
+    background: transparent !important;
+    border-color: #cfe0f1 !important;
+  }
+
+  .summary {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 10px !important;
+  }
+
+  .card {
+    page-break-inside: avoid;
+    break-inside: avoid;
+    -webkit-column-break-inside: avoid;
+  }
+
+  .card {
+    padding: 10px;
+  }
+
+  .card .num {
+    font-size: 1rem;
+  }
+
+  .card .label {
+    font-size: 0.75rem;
+  }
+
+  .breakdown-table th,
+  .breakdown-table td {
+    font-size: 0.78rem;
+    padding: 7px;
+  }
+
+    .summary {
+    margin-bottom: 14px;
+  }
+.graph-card {
+    page-break-inside: avoid;
+    break-inside: avoid-page;
+    margin-bottom: 10px;
+    transform: none !important;
+    opacity: 1 !important;
+    animation: none !important;
+  }
+
+  #lineGraphSection .graph-grid {
+    grid-template-columns: 1fr !important;
+    gap: 8px !important;
+  }
+
+  .graph-card[hidden],
+  [hidden] {
+    display: none !important;
+  }
+
+  .summary-modal {
+    display: none !important;
+  }
+
+  .selection-panel,
+  #filteredPrintSheet[hidden],
+  #selectedPrintSheet[hidden] {
+    display: none !important;
+  }
+
+  #filteredPrintSheet {
+    display: block !important;
+    margin-top: 18px;
+  }
+
+  body.printing-selected-records header,
+  body.printing-selected-records .container > :not(#selectedPrintSheet) {
+    display: none !important;
+  }
+
+  body.printing-selected-records .container {
+    padding: 0;
+    border: none;
+    box-shadow: none;
+    background: #fff;
+  }
+
+  body.printing-selected-records #selectedPrintSheet {
+    display: block !important;
+    margin-top: 0;
+  }
+
+  body.printing-selected-records table.breakdown-table.selected-print-table {
+    min-width: 0;
+  }
+
+  body.printing-selected-records table.breakdown-table.selected-print-table th {
+    position: static;
+  }
+}
+
+@media (max-width: 760px) {
+  header {
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 14px;
+  }
+
+  header img {
+    width: 44px;
+    height: 44px;
+  }
+
+header h1 {
+    font-size: 1rem;
+  }
+
+  .header-actions {
+    width: 100%;
+    justify-content: stretch;
+  }
+
+  .header-actions button {
+    flex: 1 1 25%;
+  }
+
+  .container {
+    width: calc(100% - 16px);
+    margin: 10px auto;
+    padding: 14px;
+    border-radius: 14px;
+  }
+
+  .controls {
+    grid-template-columns: 1fr;
+  }
+
+  .selection-header,
+  .selection-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .search-toolbar {
+    grid-template-columns: 1fr;
+  }
+
+  .search-toolbar-actions {
+    width: 100%;
+    padding-top: 0;
+    justify-content: stretch;
+  }
+
+  .search-toolbar-actions .selection-btn {
+    flex: 1 1 100%;
+  }
+
+  .selection-actions {
+    width: 100%;
+  }
+
+  .selection-actions .selection-btn {
+    flex: 1 1 100%;
+  }
+
+  .selection-count {
+    align-self: flex-start;
+  }
+
+  .record-table-wrap {
+    max-height: 540px;
+  }
+
+  .summary-modal {
+    padding: 10px;
+  }
+
+  .summary-modal-dialog {
+    width: 100%;
+    max-height: 86vh;
+    border-radius: 16px;
+  }
+
+  .summary-modal-head {
+    padding: 14px 14px 12px;
+  }
+
+  .summary-modal-subtitle {
+    padding: 10px 14px 0;
+  }
+
+  .summary-modal-content {
+    padding: 10px 14px 14px;
+  }
+
+  .summary-modal-record-wrap {
+    max-height: 52vh;
+  }
+
+  table.breakdown-table.summary-modal-record-table {
+    min-width: 840px;
+  }
+
+  table.breakdown-table.summary-modal-summary-table th:nth-child(2),
+  table.breakdown-table.summary-modal-summary-table td:nth-child(2) {
+    width: 110px;
+  }
+
+  table.breakdown-table.record-selection-table th:nth-child(1),
+  table.breakdown-table.record-selection-table td:nth-child(1),
+  table.breakdown-table.selected-print-table th:nth-child(2),
+  table.breakdown-table.selected-print-table td:nth-child(2) {
+    width: auto;
+    padding-right: 10px;
+  }
+
+  .breakdown-table th:nth-child(2),
+  .breakdown-table td:nth-child(2) {
+    width: 86px;
+    padding-right: 10px;
+  }
+}
+
+@keyframes fade-slide {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+</style>
+</head>
+<body>
+
+<header>
+    <img src="assets/img/logo.jpg" alt="Logo">
+    <h1>Client Assistance Summary Report</h1>
+    <div class="header-actions no-print">
+        <button class="btn-back" id="backBtn" title="Back to table">Back</button>
+        <button class="btn-print" id="printBtn" title="Print report">Print</button>
+        <button class="btn-export" id="exportBtn" title="Export CSV">Export CSV</button>
+        <button class="btn-graph" id="graphBtn" title="Show line graphs">Line Graphs</button>
+        <button class="btn-help" id="helpBtn" title="Open help center">Help</button>
+    </div>
+</header>
+
+<div class="container">
+    <div style="display:flex; justify-content:space-between; align-items:center; gap:12px; margin-bottom:12px;">
+        <div class="small-muted">This report summarizes the records currently available in the secured shared database session.</div>
+        <div class="small-muted" id="generatedAt"></div>
+    </div>
+
+    <div id="reportSearchSection" class="search-container no-print" aria-label="Search and filter report records">
+        <div class="search-toolbar">
+            <div class="search-main-field">
+                <label class="search-eyebrow" for="reportSearchInput">Search Report Records</label>
+                <input type="text" id="reportSearchInput" class="search-main-input" placeholder="Search by client name, barangay, type, status, office, contact, or remarks">
+                <p class="search-helper">Start broad with search, then open filters only when you need an exact slice of the report.</p>
+            </div>
+            <div class="search-toolbar-actions">
+                <button id="toggleReportFilters" class="selection-btn search-filter-toggle" type="button" aria-controls="reportFiltersPanel" aria-expanded="false">
+                    <span>Filters</span>
+                    <span id="activeReportFilterCount" class="search-filter-count" hidden>0</span>
+                </button>
+                <button id="clearReportSearchFilters" class="selection-btn" type="button">Clear</button>
+            </div>
+        </div>
+        <div id="activeReportFilters" class="search-active-filters" aria-live="polite" hidden></div>
+        <div id="reportFiltersPanel" class="search-filter-panel" hidden>
+            <div class="search-panel-heading">
+                <div>
+                    <strong>Refine the summary only when needed</strong>
+                    <p>Use these filters for exact month, office, source, category, and status breakdowns without keeping the whole filter grid open all the time.</p>
+                </div>
+            </div>
+            <div class="controls" role="region" aria-label="Report filters">
+                <select id="filterMonth">
+                    <option value="">All months</option>
+                    <option>JANUARY</option><option>FEBRUARY</option><option>MARCH</option><option>APRIL</option>
+                    <option>MAY</option><option>JUNE</option><option>JULY</option><option>AUGUST</option>
+                    <option>SEPTEMBER</option><option>OCTOBER</option><option>NOVEMBER</option><option>DECEMBER</option>
+                </select>
+
+                <select id="filterYear">
+                    <option value="">All years</option>
+                </select>
+
+                <select id="filterBarangay">
+                    <option value="">All barangays</option>
+                </select>
+
+                <select id="filterType">
+                    <option value="">All types</option>
+                </select>
+
+                <select id="filterStatus">
+                    <option value="">All status</option>
+                    <option>Pending</option>
+                    <option>Completed</option>
+                    <option>In Progress</option>
+                </select>
+
+                <select id="filterOffice">
+                    <option value="">All offices</option>
+                </select>
+
+                <select id="filterReferralSource">
+                    <option value="">All sources</option>
+                </select>
+                
+                <select id="filterClientCategory">
+                    <option value="">All categories</option>
+                </select>
+                
+                <select id="filterPriority">
+                    <option value="">All priorities</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+            <!-- Summary cards -->
+    <div class="summary" aria-live="polite">
+        <div class="card summary-clickable" data-summary-key="totalCount" role="button" tabindex="0" aria-controls="summaryModal" aria-label="View names for total people assisted">
+            <div class="num" id="totalCount">0</div>
+            <div class="label">Total People Assisted</div>
+        </div>
+        <div class="card summary-clickable" data-summary-key="totalTypes" role="button" tabindex="0" aria-controls="summaryModal" aria-label="View details for distinct assistance types">
+            <div class="num" id="totalTypes">0</div>
+            <div class="label">Distinct Assistance Types</div>
+        </div>
+        <div class="card summary-clickable" data-summary-key="pendingCount" role="button" tabindex="0" aria-controls="summaryModal" aria-label="View names for pending cases">
+            <div class="num" id="pendingCount">0</div>
+            <div class="label">Pending Cases</div>
+        </div>
+        <div class="card summary-clickable" data-summary-key="completedCount" role="button" tabindex="0" aria-controls="summaryModal" aria-label="View names for completed cases">
+            <div class="num" id="completedCount">0</div>
+            <div class="label">Completed Cases</div>
+        </div>
+    </div>
+
+    <div class="summary-modal no-print" id="summaryModal" hidden>
+        <div class="summary-modal-backdrop" id="summaryModalBackdrop"></div>
+        <div class="summary-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="summaryModalTitle">
+            <div class="summary-modal-head">
+                <h3 id="summaryModalTitle">Summary Details</h3>
+                <button type="button" class="summary-modal-close" id="summaryModalCloseBtn">Close</button>
+            </div>
+            <div class="summary-modal-subtitle" id="summaryModalSubtitle"></div>
+            <div class="summary-modal-content">
+                <div class="summary-modal-meta" id="summaryModalMeta" hidden></div>
+                <div class="summary-modal-empty" id="summaryModalEmpty" hidden>No records found for this summary.</div>
+                <div class="summary-modal-record-wrap" id="summaryModalRecordWrap" hidden>
+                    <table class="breakdown-table record-selection-table summary-modal-record-table" id="summaryModalRecordTable">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Date Requested</th>
+                                <th>Type</th>
+                                <th>Barangay</th>
+                                <th>Status</th>
+                                <th>Office</th>
+                                <th>Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+                <div class="summary-modal-summary-wrap" id="summaryModalSummaryWrap" hidden>
+                    <table class="breakdown-table summary-modal-summary-table" id="summaryModalSummaryTable">
+                        <thead>
+                            <tr>
+                                <th id="summaryModalSummaryLabel">Label</th>
+                                <th id="summaryModalSummaryValue">Total</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section selection-panel no-print" id="selectionSection">
+        <div class="selection-header">
+            <div>
+                <h2>Filtered Records</h2>
+                <div class="small-muted" id="selectionMeta">Viewing the exact client records included in the current filters.</div>
+            </div>
+        </div>
+
+        <div class="record-list-empty" id="filteredRecordsEmpty" hidden>No records match the current filters.</div>
+
+        <div class="record-table-wrap" id="filteredRecordsWrap">
+            <table class="breakdown-table record-selection-table" id="filteredRecordsTable">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Date Requested</th>
+                        <th>Type</th>
+                        <th>Barangay</th>
+                        <th>Status</th>
+                        <th>Office</th>
+                        <th>Amount</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="section filtered-print-sheet" id="filteredPrintSheet" hidden>
+        <div class="filtered-print-head">
+            <h2>Filtered Client Records</h2>
+            <div class="small-muted" id="filteredPrintMeta"></div>
+        </div>
+        <div class="print-filter-summary" id="filteredPrintFilterSummary"></div>
+        <table class="breakdown-table selected-print-table" id="filteredPrintTable">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Date Requested</th>
+                    <th>Type</th>
+                    <th>Barangay</th>
+                    <th>Status</th>
+                    <th>Office</th>
+                    <th>Amount</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+    <div class="section" id="noClientSection">
+        <div class="no-client-header">
+            <h2>Areas With No Clients</h2>
+            <button type="button" class="no-client-btn no-print" id="noClientBtn" aria-pressed="false">Show Areas With No Clients</button>
+        </div>
+        <div class="small-muted" id="noClientMeta">Click the button to compare the locations list with the current report filters.</div>
+        <div class="no-client-empty" id="noClientEmpty" hidden>No locations without clients were found.</div>
+        <table class="breakdown-table no-client-summary" id="noClientTable" hidden>
+            <thead>
+                <tr>
+                    <th>Barangay</th>
+                    <th>No-Client Locations</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+    <div class="section chart-panel" id="lineGraphSection" hidden>
+        <div class="chart-header">
+            <h2>Line Graphs (Monthly Trends)</h2>
+            <div class="small-muted" id="lineGraphMetaGlobal">Visible graphs are included in print.</div>
+        </div>
+
+        <div class="graph-controls no-print" id="lineGraphControls">
+            <button type="button" class="graph-toggle is-on" data-graph-key="totalClients">Hide Total Clients</button>
+            <button type="button" class="graph-toggle is-on" data-graph-key="completedClients">Hide Completed Cases</button>
+            <button type="button" class="graph-toggle is-on" data-graph-key="pendingClients">Hide Pending Cases</button>
+        </div>
+
+        <div class="graph-empty" id="lineGraphPanelEmpty" hidden>All line graphs are hidden. Use the Show buttons above.</div>
+
+                <div class="graph-grid">
+            <div class="graph-card" id="graphCardTotalClients">
+                <div class="graph-card-header">
+                    <h3 class="graph-title">Total Clients Assisted per Month</h3>
+                    <div class="graph-meta" id="lineGraphMetaTotalClients">Based on current filters</div>
+                </div>
+                <svg class="graph-svg" id="lineGraphTotalClients" viewBox="0 0 900 320" role="img" aria-label="Line graph for total clients assisted per month"></svg>
+                <div class="graph-empty" id="lineGraphEmptyTotalClients" hidden>No valid month-year dates found for this graph.</div>
+                <div class="graph-note small-muted" id="lineGraphNoteTotalClients"></div>
+            </div>
+
+            <div class="graph-card" id="graphCardCompletedClients">
+                <div class="graph-card-header">
+                    <h3 class="graph-title">Completed Cases per Month</h3>
+                    <div class="graph-meta" id="lineGraphMetaCompletedClients">Based on current filters</div>
+                </div>
+                <svg class="graph-svg" id="lineGraphCompletedClients" viewBox="0 0 900 320" role="img" aria-label="Line graph for completed cases per month"></svg>
+                <div class="graph-empty" id="lineGraphEmptyCompletedClients" hidden>No valid month-year dates found for this graph.</div>
+                <div class="graph-note small-muted" id="lineGraphNoteCompletedClients"></div>
+            </div>
+
+            <div class="graph-card" id="graphCardPendingClients">
+                <div class="graph-card-header">
+                    <h3 class="graph-title">Pending Cases per Month</h3>
+                    <div class="graph-meta" id="lineGraphMetaPendingClients">Based on current filters</div>
+                </div>
+                <svg class="graph-svg" id="lineGraphPendingClients" viewBox="0 0 900 320" role="img" aria-label="Line graph for pending cases per month"></svg>
+                <div class="graph-empty" id="lineGraphEmptyPendingClients" hidden>No valid month-year dates found for this graph.</div>
+                <div class="graph-note small-muted" id="lineGraphNotePendingClients"></div>
+            </div>
+        </div>
+    </div>
+<!-- Breakdown: By Type -->
+    <div class="section">
+        <h2>Assistance by Type</h2>
+        <table class="breakdown-table" id="byTypeTable">
+            <thead><tr><th>Type of Assistance</th><th>Total</th></tr></thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+    <!-- Breakdown: By Barangay -->
+    <div class="section">
+        <h2>Assistance by Barangay</h2>
+        <table class="breakdown-table" id="byBarangayTable">
+            <thead><tr><th>Barangay</th><th>Total</th></tr></thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+    <!-- Breakdown: By Month/Year -->
+    <div class="section">
+        <h2>Assistance by Month / Year</h2>
+        <table class="breakdown-table" id="byMonthTable">
+            <thead><tr><th>Month / Year</th><th>Total</th></tr></thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+    <!-- Breakdown: By Status -->
+    <div class="section">
+        <h2>Assistance by Status</h2>
+        <table class="breakdown-table" id="byStatusTable">
+            <thead><tr><th>Status</th><th>Total</th></tr></thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>Assistance by Client Category</h2>
+        <table class="breakdown-table" id="byCategoryTable">
+            <thead><tr><th>Client Category</th><th>Total</th></tr></thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>Assistance by Priority Level</h2>
+        <table class="breakdown-table" id="byPriorityTable">
+            <thead><tr><th>Priority Level</th><th>Total</th></tr></thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>Assistance by Office</h2>
+        <table class="breakdown-table" id="byOfficeTable">
+            <thead><tr><th>Office</th><th>Total</th></tr></thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+
+<script src="assets/js/supabase-config.js"></script>
+<script src="assets/js/supabase-client.js"></script>
+<script src="assets/js/data-store.js"></script>
+<script src="assets/js/routes.js"></script>
+<script src="assets/js/auth.js"></script>
+<script src="assets/js/barangays.js"></script>
+<script src="assets/js/puroks.js"></script>
+<script>
+if(!(window.lbAuth && window.lbAuth.requireAuth())){
+    throw new Error('Unauthorized');
+}
+
+migrateRecordsOnce();
+
+/* REPORT LOGIC
+   - Reads 'records' from localStorage (same key used by your main table page).
+   - Builds counts for: total assisted, by type, by barangay, by month/year, by status, by category, by priority, and by office.
+   - Filters: month, year, barangay, type, status, office, client category, and priority.
+   - Export CSV & Print supported.
+*/
+
+/* Utilities */
+function normalizeAssistanceText(value){
+    return String(value || '')
+        .toLowerCase()
+        .replace(/&/g, ' and ')
+        .replace(/[^a-z0-9]+/g, ' ')
+        .replace(/\s+/g, ' ')
+        .trim();
+}
+
+function normalizeAssistanceType(typeValue, legacyValue){
+    const direct = String(typeValue || '').trim();
+    const legacy = String(legacyValue || '').trim();
+    const program = String(arguments.length > 2 ? arguments[2] : '').trim();
+
+    if(!direct){
+        if(program) return program;
+        if(legacy) return legacy;
+        return '';
+    }
+
+    const labelMap = {
+        'medical': 'Medical',
+        'hospital': 'Hospital',
+        'pcso': 'PCSO',
+        'transport': 'Transport',
+        'guarantee letter': 'Guarantee Letter',
+        'special case': 'Special Case',
+        'promissory': 'Promissory',
+        'request': 'Request',
+        'solicitation': 'Solicitation',
+        'legal': 'Legal',
+        'referral': 'Referral',
+        'maytrabaho': 'MayTrabaho',
+        'activity': 'Activity',
+        'event': 'Event',
+        'agricultural': 'Agricultural',
+        'environmental': 'Environmental',
+        'educational': 'Educational',
+        'hapag': 'Hapag',
+        'consultation': 'Consultation',
+        'visitation': 'Visitation',
+        'speaking': 'Speaking'
+    };
+
+    const normalized = normalizeAssistanceText(direct);
+    if(labelMap[normalized]) return labelMap[normalized];
+
+    if(normalized === 'program'){
+        return program || legacy || '';
+    }
+
+    if(normalized === 'request' || normalized === 'medical'){
+        return program || legacy || direct;
+    }
+
+    return direct;
+}
+
+function normalizeRecordShape(record){
+    if(!record || typeof record !== 'object') return {};
+    const next = Object.assign({}, record);
+    let programValue = '';
+    if(Array.isArray(next.programs)){
+        programValue = String(next.programs[0] || '').trim();
+    } else if(typeof next.programs === 'string'){
+        programValue = String(next.programs || '').trim();
+    }
+    next.type = normalizeAssistanceType(next.type, next.services, programValue);
+    if(Object.prototype.hasOwnProperty.call(next, 'services')) delete next.services;
+
+    if(Array.isArray(next.history)){
+        next.history = next.history.map(item => {
+            if(!item || typeof item !== 'object') return item;
+            const h = Object.assign({}, item);
+            h.type = normalizeAssistanceType(h.type, h.services);
+            if(Object.prototype.hasOwnProperty.call(h, 'services')) delete h.services;
+            return h;
+        });
+    }
+
+    return next;
+}
+
+function safeGetRecords(){
+    if(window.lbData && typeof window.lbData.getRecords === 'function'){
+        return window.lbData.getRecords().map(normalizeRecordShape);
+    }
+
+    if(window.lbSupabase && window.lbSupabase.isEnabled && window.lbSupabase.isEnabled()){
+        console.warn('Cloud mode is enabled but the shared records store is unavailable.');
+        return [];
+    }
+
+    try {
+        const raw = localStorage.getItem('records');
+        if(!raw) return [];
+        const parsed = JSON.parse(raw);
+        if(!Array.isArray(parsed)) return [];
+        return parsed.map(normalizeRecordShape);
+    } catch(e){
+        console.error('Failed to parse records from localStorage', e);
+        return [];
+    }
+}
+
+const RECORDS_MIGRATION_KEY = 'lb_records_type_migration_v2';
+function migrateRecordsOnce(){
+    if(window.lbData && window.lbData.isCloudEnabled && window.lbData.isCloudEnabled()){
+        return;
+    }
+
+    try {
+        if(localStorage.getItem(RECORDS_MIGRATION_KEY) === '1') return;
+        const raw = localStorage.getItem('records');
+        if(!raw){
+            localStorage.setItem(RECORDS_MIGRATION_KEY, '1');
+            return;
+        }
+        const parsed = JSON.parse(raw);
+        if(!Array.isArray(parsed)){
+            localStorage.setItem(RECORDS_MIGRATION_KEY, '1');
+            return;
+        }
+        let changed = false;
+        const migrated = parsed.map(record => {
+            const normalized = normalizeRecordShape(record);
+            if(!changed && JSON.stringify(normalized) !== JSON.stringify(record)){
+                changed = true;
+            }
+            return normalized;
+        });
+        if(changed){
+            localStorage.setItem('records', JSON.stringify(migrated));
+        }
+        localStorage.setItem(RECORDS_MIGRATION_KEY, '1');
+    } catch(e){
+        console.warn('Record migration failed', e);
+    }
+}
+
+const ASSISTANCE_TYPE_OPTIONS = [
+    'Guarantee Letter',
+    'Transport Service - Medical Client',
+    'Special Case - Medical Client',
+    'Medical Financial Assistance (Cash)',
+    'Solicitation (Cash / Goods / Item)',
+    'Agricultural Program',
+    'Consultation & Visitation',
+    'Environmental Program',
+    'Hapag-Kainan',
+    'Legal Assistance',
+    'MayTrabaho - Referral Letter',
+    'Educational Discussions / Events',
+    'Barangay Event Appearance',
+    'Speaking Engagement',
+    'Medical',
+    'Hospital',
+    'PCSO',
+    'Transport',
+    'Special Case',
+    'Promissory',
+    'Request',
+    'Solicitation',
+    'Legal',
+    'Referral',
+    'MayTrabaho',
+    'Activity',
+    'Event',
+    'Agricultural',
+    'Environmental',
+    'Educational',
+    'Hapag',
+    'Consultation',
+    'Visitation',
+    'Speaking'
+];
+
+const MONTH_NAMES = [
+    'JANUARY','FEBRUARY','MARCH','APRIL','MAY','JUNE',
+    'JULY','AUGUST','SEPTEMBER','OCTOBER','NOVEMBER','DECEMBER'
+];
+
+function parseDateToMonthYear(value){
+    const raw = String(value || '').trim();
+    if(!raw) return { month:'', year:'' };
+
+    if(/^\d{4}-\d{2}-\d{2}$/.test(raw)){
+        const parts = raw.split('-');
+        const year = parts[0];
+        const monthNum = Number(parts[1]);
+        return {
+            month: MONTH_NAMES[monthNum - 1] || '',
+            year: year
+        };
+    }
+
+    if(/^\d{2}\/\d{2}\/\d{4}$/.test(raw)){
+        const parts = raw.split('/');
+        const monthNum = Number(parts[0]);
+        const year = parts[2];
+        return {
+            month: MONTH_NAMES[monthNum - 1] || '',
+            year: year
+        };
+    }
+
+    return { month:'', year:'' };
+}
+
+function parseLegacyMonthYear(monthField){
+    if(!monthField) return { month:'', year:'' };
+    const parts = String(monthField).trim().split(/\s+/);
+    const last = parts[parts.length - 1];
+    const year = /^\d{4}$/.test(last) ? last : '';
+    const month = year ? parts.slice(0, parts.length - 1).join(' ') : parts.join(' ');
+    return { month: month.toUpperCase(), year: year };
+}
+
+function getRecordMonthYear(record){
+    const fromRequested = parseDateToMonthYear(record && record.dateRequested ? record.dateRequested : '');
+    if(fromRequested.month || fromRequested.year) return fromRequested;
+
+    const monthField = record && record.month ? record.month : '';
+    const fromMonthDate = parseDateToMonthYear(monthField);
+    if(fromMonthDate.month || fromMonthDate.year) return fromMonthDate;
+
+    return parseLegacyMonthYear(monthField);
+}
+
+function formatMonthYear(month, year){
+    if(month && year) return `${month} ${year}`;
+    if(month) return month;
+    if(year) return year;
+    return '';
+}
+
+function monthIndexFromName(month){
+    const idx = MONTH_NAMES.indexOf(String(month || '').toUpperCase());
+    return idx >= 0 ? (idx + 1) : 0;
+}
+
+function getMonthlyBucketInfo(record){
+    const { month, year } = getRecordMonthYear(record);
+    const monthNum = monthIndexFromName(month);
+    const isValidYear = /^\d{4}$/.test(String(year || ''));
+    if(!monthNum || !isValidYear) return null;
+
+    return {
+        key: `${year}-${String(monthNum).padStart(2, '0')}`,
+        label: `${MONTH_NAMES[monthNum - 1]} ${year}`,
+        shortLabel: `${MONTH_NAMES[monthNum - 1].slice(0, 3)} ${year}`
+    };
+}
+
+function buildMonthlySeries(records, valueSelector){
+    const seriesMap = {};
+    let skipped = 0;
+
+    (records || []).forEach(r => {
+        const bucket = getMonthlyBucketInfo(r);
+        if(!bucket){
+            skipped += 1;
+            return;
+        }
+
+        if(!seriesMap[bucket.key]){
+            seriesMap[bucket.key] = {
+                label: bucket.label,
+                shortLabel: bucket.shortLabel,
+                value: 0
+            };
+        }
+
+        const addRaw = typeof valueSelector === 'function' ? valueSelector(r) : 1;
+        const add = Number(addRaw);
+        if(!Number.isNaN(add) && add > 0){
+            seriesMap[bucket.key].value += add;
+        }
+    });
+
+    const points = Object.keys(seriesMap)
+        .sort()
+        .map(key => ({
+            key: key,
+            label: seriesMap[key].label,
+            shortLabel: seriesMap[key].shortLabel,
+            value: Number(seriesMap[key].value.toFixed(2))
+        }));
+
+    return { points, skipped };
+}
+
+function getNiceStep(maxValue, tickCount){
+    if(maxValue <= 1) return 1;
+    const roughStep = maxValue / tickCount;
+    const magnitude = Math.pow(10, Math.floor(Math.log10(roughStep)));
+    const normalized = roughStep / magnitude;
+
+    let nice = 1;
+    if(normalized > 1 && normalized <= 2) nice = 2;
+    else if(normalized > 2 && normalized <= 5) nice = 5;
+    else if(normalized > 5) nice = 10;
+
+    return nice * magnitude;
+}
+
+function formatAxisValue(value, valueType){
+    if(valueType === 'currency'){
+        if(value >= 1000000) return `PHP ${(value / 1000000).toFixed(1)}M`;
+        if(value >= 1000) return `PHP ${(value / 1000).toFixed(0)}K`;
+        return `PHP ${Math.round(value)}`;
+    }
+    return String(Math.round(value));
+}
+
+function formatPointValue(value, valueType){
+    if(valueType === 'currency') return formatCurrency(value);
+    return String(Math.round(value));
+}
+
+/* Rendering helpers */
+function resolveBreakdownTableOptions(limitSortOrOptions){
+    if(limitSortOrOptions && typeof limitSortOrOptions === 'object'){
+        return {
+            limitSort: limitSortOrOptions.limitSort !== false,
+            breakdownKey: String(limitSortOrOptions.breakdownKey || '').trim(),
+            breakdownLabel: String(limitSortOrOptions.breakdownLabel || '').trim()
+        };
+    }
+
+    return {
+        limitSort: limitSortOrOptions !== false,
+        breakdownKey: '',
+        breakdownLabel: ''
+    };
+}
+
+function fillTable(tbodyEl, mapObj, limitSortOrOptions = true){
+    tbodyEl.innerHTML = '';
+    const options = resolveBreakdownTableOptions(limitSortOrOptions);
+    const rows = Object.entries(mapObj);
+    // sort descending by value, then alphabetically
+    rows.sort((a,b) => {
+        if(options.limitSort) {
+            if(b[1] !== a[1]) return b[1] - a[1];
+            return a[0].localeCompare(b[0]);
+        } else {
+            return a[0].localeCompare(b[0]);
+        }
+    });
+    rows.forEach(([key,val]) => {
+        const tr = document.createElement('tr');
+        const k = document.createElement('td');
+        k.textContent = key || '(blank)';
+        const v = document.createElement('td');
+        v.textContent = val;
+        if(options.breakdownKey){
+            tr.classList.add('breakdown-clickable');
+            tr.tabIndex = 0;
+            tr.setAttribute('role', 'button');
+            tr.setAttribute('aria-controls', 'summaryModal');
+            tr.setAttribute('aria-label', `View details for ${options.breakdownLabel || options.breakdownKey} ${key || '(blank)'}: ${val} record(s)`);
+            tr.dataset.breakdownKey = options.breakdownKey;
+            tr.dataset.breakdownLabel = options.breakdownLabel || options.breakdownKey;
+            tr.dataset.breakdownValue = key || '(blank)';
+        }
+        tr.appendChild(k);
+        tr.appendChild(v);
+        tbodyEl.appendChild(tr);
+    });
+}
+
+function normalizeLocationPart(value){
+    return String(value || '')
+        .toLowerCase()
+        .replace(/\s+/g, ' ')
+        .trim();
+}
+
+function coerceLocationRecord(item){
+    if(!item || typeof item !== 'object') return null;
+    const barangay = item.barangay || item.Barangay || '';
+    const purok = item.purok || item.Purok || item.address || item.purokSitio || item.purok_sitio || '';
+    const sitio = item.sitio || item.Sitio || '';
+    const subdivision = item.subdivisionVillageCompound || item.subdivision || item.Subdivision || item.village || item.compound || '';
+
+    const hasValue = String(purok || '').trim() || String(sitio || '').trim() || String(subdivision || '').trim();
+    if(!hasValue) return null;
+
+    return {
+        barangay: String(barangay || ''),
+        purok: String(purok || ''),
+        sitio: String(sitio || ''),
+        subdivision: String(subdivision || '')
+    };
+}
+
+function readLocationRecordsFromStorage(){
+    const keys = ['locationRecords', 'locations', 'locationList'];
+    for(const key of keys){
+        const raw = localStorage.getItem(key);
+        if(!raw) continue;
+        try {
+            const parsed = JSON.parse(raw);
+            if(Array.isArray(parsed) && parsed.length){
+                const cleaned = parsed.map(coerceLocationRecord).filter(Boolean);
+                if(cleaned.length){
+                    return { records: cleaned, source: `localStorage:${key}` };
+                }
+            }
+        } catch(err){
+            console.warn(`Failed to parse ${key} location list`, err);
+        }
+    }
+    return null;
+}
+
+function getFallbackLocationRecords(){
+    let barangays = (typeof BARANGAYS !== 'undefined' && Array.isArray(BARANGAYS)) ? BARANGAYS.slice() : [];
+    const sitioMap = (typeof PUROKS !== 'undefined' && PUROKS !== null) ? PUROKS : (window.PUROKS || {});
+    if(!barangays.length && sitioMap){
+        barangays = Object.keys(sitioMap);
+    }
+
+    if(!barangays.length) return [];
+
+    const defaultSitios = Array.from({ length: 8 }, (_, i) => `Purok ${i + 1}`);
+    const records = [];
+
+    barangays.forEach(barangay => {
+        const purokList = Array.isArray(sitioMap[barangay]) && sitioMap[barangay].length
+            ? sitioMap[barangay]
+            : defaultSitios;
+        purokList.forEach(purok => {
+            records.push({ barangay, purok, sitio: '', subdivision: '' });
+        });
+    });
+
+    return records;
+}
+
+function getLocationRecords(){
+    const stored = readLocationRecordsFromStorage();
+    let records = stored ? stored.records : getFallbackLocationRecords();
+    let source = stored ? stored.source : (records.length ? 'barangay/purok lists' : '');
+
+    const seen = new Set();
+    records = records.filter(loc => {
+        const key = [
+            normalizeLocationPart(loc.barangay),
+            normalizeLocationPart(loc.purok),
+            normalizeLocationPart(loc.sitio),
+            normalizeLocationPart(loc.subdivision)
+        ].join('||');
+        if(!key.replace(/\|/g, '')) return false;
+        if(seen.has(key)) return false;
+        seen.add(key);
+        return true;
+    });
+
+    return { records, source };
+}
+
+function buildClientLocationIndex(records){
+    const index = {
+        barangayPurok: new Set(),
+        barangaySitio: new Set(),
+        barangaySubdivision: new Set(),
+        barangayPurokSubdivision: new Set(),
+        barangaySitioSubdivision: new Set()
+    };
+
+    (records || []).forEach(r => {
+        const barangay = normalizeLocationPart(r.barangay);
+        const address = normalizeLocationPart(r.address);
+        const purok = normalizeLocationPart(r.purok) || address;
+        const sitio = normalizeLocationPart(r.sitio) || address;
+        const subdivision = normalizeLocationPart(r.subdivisionVillageCompound || r.subdivision);
+
+        if(barangay && purok) index.barangayPurok.add(`${barangay}||${purok}`);
+        if(barangay && sitio) index.barangaySitio.add(`${barangay}||${sitio}`);
+        if(barangay && subdivision) index.barangaySubdivision.add(`${barangay}||${subdivision}`);
+        if(barangay && purok && subdivision) index.barangayPurokSubdivision.add(`${barangay}||${purok}||${subdivision}`);
+        if(barangay && sitio && subdivision) index.barangaySitioSubdivision.add(`${barangay}||${sitio}||${subdivision}`);
+    });
+
+    return index;
+}
+
+function locationHasClients(location, index){
+    const barangay = normalizeLocationPart(location.barangay);
+    const purok = normalizeLocationPart(location.purok);
+    const sitio = normalizeLocationPart(location.sitio);
+    const subdivision = normalizeLocationPart(location.subdivision);
+
+    if(barangay && subdivision && (purok || sitio)){
+        if(purok && index.barangayPurokSubdivision.has(`${barangay}||${purok}||${subdivision}`)) return true;
+        if(sitio && index.barangaySitioSubdivision.has(`${barangay}||${sitio}||${subdivision}`)) return true;
+        return false;
+    }
+    if(barangay && purok){
+        if(index.barangayPurok.has(`${barangay}||${purok}`)) return true;
+    }
+    if(barangay && sitio){
+        if(index.barangaySitio.has(`${barangay}||${sitio}`)) return true;
+    }
+    if(barangay && subdivision){
+        return index.barangaySubdivision.has(`${barangay}||${subdivision}`);
+    }
+    return false;
+}
+
+function renderNoClientAreas(records){
+    const table = document.getElementById('noClientTable');
+    const tbody = table ? table.querySelector('tbody') : null;
+    const emptyEl = document.getElementById('noClientEmpty');
+    const metaEl = document.getElementById('noClientMeta');
+    if(!table || !tbody) return;
+
+    const locationBundle = getLocationRecords();
+    const locationRecords = locationBundle.records || [];
+    const sourceNote = locationBundle.source ? `Location list: ${locationBundle.source}. ` : '';
+
+    if(!locationRecords.length){
+        tbody.innerHTML = '';
+        table.hidden = true;
+        clearNoClientExpandedRow();
+        if(emptyEl){
+            emptyEl.textContent = 'No location records available to compare.';
+            emptyEl.hidden = false;
+        }
+        if(metaEl){
+            metaEl.textContent = 'Add location records to compare against the client list.';
+        }
+        return;
+    }
+
+    const clientRecords = Array.isArray(records) ? records : [];
+    const clientIndex = buildClientLocationIndex(clientRecords);
+    const missing = locationRecords.filter(loc => !locationHasClients(loc, clientIndex));
+
+    if(!missing.length){
+        tbody.innerHTML = '';
+        table.hidden = true;
+        clearNoClientExpandedRow();
+        if(emptyEl){
+            emptyEl.textContent = 'No locations without clients were found.';
+            emptyEl.hidden = false;
+        }
+        if(metaEl){
+            metaEl.textContent = `${sourceNote}Compared ${locationRecords.length} location record(s) with ${clientRecords.length} client record(s) based on current filters.`;
+        }
+        return;
+    }
+
+    noClientState.groups = buildNoClientGroups(missing);
+    renderNoClientSummary(noClientState.groups);
+
+    if(noClientState.selectedBarangay && noClientState.groups[noClientState.selectedBarangay]){
+        const row = findNoClientBarangayRow(noClientState.selectedBarangay);
+        if(row){
+            expandNoClientBarangayRow(row, noClientState.selectedBarangay, noClientState.groups[noClientState.selectedBarangay]);
+            updateNoClientRowStates();
+        } else {
+            clearNoClientExpandedRow();
+        }
+    } else {
+        clearNoClientExpandedRow();
+    }
+
+    table.hidden = false;
+    if(emptyEl) emptyEl.hidden = true;
+
+    if(metaEl){
+        metaEl.textContent = `${sourceNote}Compared ${locationRecords.length} location record(s) with ${clientRecords.length} client record(s) based on current filters. Matching is based on Purok/Sitio/Subdivision values, not barangay totals. Click a barangay to view details.`;
+    }
+}
+
+function buildNoClientGroups(list){
+    const groups = {};
+    (list || []).forEach(loc => {
+        const key = String(loc.barangay || '').trim() || '(blank)';
+        if(!groups[key]) groups[key] = [];
+        groups[key].push(loc);
+    });
+
+    Object.keys(groups).forEach(key => {
+        groups[key].sort((a,b) => {
+            const aKey = `${a.purok || ''} ${a.sitio || ''} ${a.subdivision || ''}`.toLowerCase();
+            const bKey = `${b.purok || ''} ${b.sitio || ''} ${b.subdivision || ''}`.toLowerCase();
+            return aKey.localeCompare(bKey);
+        });
+    });
+
+    return groups;
+}
+
+function renderNoClientSummary(groups){
+    const table = document.getElementById('noClientTable');
+    const tbody = table ? table.querySelector('tbody') : null;
+    if(!table || !tbody) return;
+
+    const entries = Object.entries(groups || {}).sort((a,b) => a[0].localeCompare(b[0]));
+    tbody.innerHTML = '';
+    noClientState.expandedRow = null;
+
+    entries.forEach(([barangay, list]) => {
+        const tr = document.createElement('tr');
+        const tdBarangay = document.createElement('td');
+        const tdCount = document.createElement('td');
+
+        tdBarangay.textContent = barangay;
+        tdCount.textContent = list.length;
+
+        tr.classList.toggle('is-active', noClientState.selectedBarangay === barangay);
+        tr.setAttribute('role', 'button');
+        tr.setAttribute('tabindex', '0');
+        tr.setAttribute('aria-expanded', noClientState.selectedBarangay === barangay ? 'true' : 'false');
+        tr.setAttribute('data-barangay', barangay);
+
+        tr.addEventListener('click', () => toggleNoClientBarangayRow(tr, barangay));
+        tr.addEventListener('keydown', (ev) => {
+            if(ev.key === 'Enter' || ev.key === ' '){
+                ev.preventDefault();
+                toggleNoClientBarangayRow(tr, barangay);
+            }
+        });
+
+        tr.appendChild(tdBarangay);
+        tr.appendChild(tdCount);
+        tbody.appendChild(tr);
+    });
+}
+
+function toggleNoClientBarangayRow(row, barangay){
+    if(noClientState.selectedBarangay === barangay){
+        clearNoClientExpandedRow();
+        updateNoClientRowStates();
+        return;
+    }
+
+    const list = (noClientState.groups && noClientState.groups[barangay]) ? noClientState.groups[barangay] : [];
+    expandNoClientBarangayRow(row, barangay, list);
+    updateNoClientRowStates();
+}
+
+function expandNoClientBarangayRow(row, barangay, list){
+    clearNoClientExpandedRow();
+
+    const detailRow = document.createElement('tr');
+    detailRow.className = 'no-client-detail-row';
+    const detailCell = document.createElement('td');
+    detailCell.colSpan = 2;
+
+    detailCell.appendChild(buildNoClientDetailContent(barangay, list));
+    detailRow.appendChild(detailCell);
+
+    row.insertAdjacentElement('afterend', detailRow);
+    noClientState.expandedRow = detailRow;
+    noClientState.selectedBarangay = barangay;
+}
+
+function buildNoClientDetailContent(barangay, list){
+    const wrap = document.createElement('div');
+    wrap.className = 'no-client-detail-wrap';
+
+    const head = document.createElement('div');
+    head.className = 'no-client-detail-head';
+    const title = document.createElement('div');
+    title.className = 'no-client-detail-title';
+    title.textContent = `Barangay: ${barangay}`;
+    const meta = document.createElement('div');
+    meta.className = 'no-client-detail-meta';
+    meta.textContent = `${(list || []).length} location(s) with no clients`;
+
+    head.appendChild(title);
+    head.appendChild(meta);
+    wrap.appendChild(head);
+
+    const table = document.createElement('table');
+    table.className = 'breakdown-table no-client-detail-table';
+    table.innerHTML = `
+        <thead>
+            <tr>
+                <th>Purok</th>
+                <th>Sitio</th>
+                <th>Subdivision / Village / Compound</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    `;
+
+    const tbody = table.querySelector('tbody');
+    (list || []).forEach(loc => {
+        const tr = document.createElement('tr');
+        const tdPurok = document.createElement('td');
+        const tdSitio = document.createElement('td');
+        const tdSubdivision = document.createElement('td');
+        const tdStatus = document.createElement('td');
+
+        tdPurok.textContent = loc.purok || '';
+        tdSitio.textContent = loc.sitio || '';
+        tdSubdivision.textContent = loc.subdivision || '';
+        tdStatus.textContent = 'No Clients';
+
+        tr.appendChild(tdPurok);
+        tr.appendChild(tdSitio);
+        tr.appendChild(tdSubdivision);
+        tr.appendChild(tdStatus);
+        tbody.appendChild(tr);
+    });
+
+    wrap.appendChild(table);
+    return wrap;
+}
+
+function findNoClientBarangayRow(barangay){
+    const table = document.getElementById('noClientTable');
+    if(!table) return null;
+    const rows = table.querySelectorAll('tbody tr[data-barangay]');
+    for(const row of rows){
+        if(row.getAttribute('data-barangay') === barangay) return row;
+    }
+    return null;
+}
+
+function updateNoClientRowStates(){
+    const table = document.getElementById('noClientTable');
+    if(!table) return;
+    const rows = table.querySelectorAll('tbody tr[data-barangay]');
+    rows.forEach(row => {
+        const isActive = row.getAttribute('data-barangay') === noClientState.selectedBarangay;
+        row.classList.toggle('is-active', isActive);
+        row.setAttribute('aria-expanded', isActive ? 'true' : 'false');
+    });
+}
+
+function clearNoClientExpandedRow(){
+    if(noClientState.expandedRow && noClientState.expandedRow.parentNode){
+        noClientState.expandedRow.parentNode.removeChild(noClientState.expandedRow);
+    }
+    noClientState.expandedRow = null;
+    noClientState.selectedBarangay = '';
+}
+
+function hideNoClientAreas(){
+    const table = document.getElementById('noClientTable');
+    const emptyEl = document.getElementById('noClientEmpty');
+    const metaEl = document.getElementById('noClientMeta');
+    if(table) table.hidden = true;
+    if(emptyEl) emptyEl.hidden = true;
+    clearNoClientExpandedRow();
+    noClientState.selectedBarangay = '';
+    noClientState.groups = {};
+    if(metaEl) metaEl.textContent = 'Results hidden. Click the button to show areas with no clients.';
+}
+
+function createSvgNode(tag, attrs){
+    const node = document.createElementNS('http://www.w3.org/2000/svg', tag);
+    Object.keys(attrs || {}).forEach(key => {
+        node.setAttribute(key, attrs[key]);
+    });
+    return node;
+}
+
+function renderLineGraphToElements(config, records){
+    const svg = document.getElementById(config.svgId);
+    const emptyEl = document.getElementById(config.emptyId);
+    const metaEl = document.getElementById(config.metaId);
+    const noteEl = document.getElementById(config.noteId);
+    if(!svg || !emptyEl || !metaEl || !noteEl) return;
+
+    const { points, skipped } = buildMonthlySeries(records || [], config.valueSelector);
+    metaEl.textContent = `${config.metaLabel} | ${points.length} month bucket(s)`;
+    noteEl.textContent = skipped > 0
+        ? `${skipped} record(s) skipped due to missing or invalid dateRequested/month values.`
+        : '';
+
+    svg.innerHTML = '';
+    if(!points.length){
+        emptyEl.hidden = false;
+        return;
+    }
+
+    emptyEl.hidden = true;
+
+    const width = 900;
+    const height = 320;
+    const margin = {
+        top: 22,
+        right: 16,
+        bottom: points.length > 10 ? 92 : 70,
+        left: 70
+    };
+    const plotWidth = width - margin.left - margin.right;
+    const plotHeight = height - margin.top - margin.bottom;
+
+    const maxVal = Math.max(...points.map(p => p.value), 1);
+    const tickCount = 5;
+    const yStep = getNiceStep(maxVal, tickCount);
+    const yMax = Math.max(yStep * tickCount, maxVal);
+
+    const xAt = idx => {
+        if(points.length === 1) return margin.left + (plotWidth / 2);
+        return margin.left + ((idx * plotWidth) / (points.length - 1));
+    };
+    const yAt = val => margin.top + plotHeight - ((val / yMax) * plotHeight);
+
+    const axes = createSvgNode('g', {});
+    const grids = createSvgNode('g', {});
+    const labels = createSvgNode('g', {});
+    const dataLayer = createSvgNode('g', {});
+    svg.appendChild(grids);
+    svg.appendChild(axes);
+    svg.appendChild(dataLayer);
+    svg.appendChild(labels);
+
+    for(let i = 0; i <= tickCount; i += 1){
+        const yVal = i * yStep;
+        const y = yAt(yVal);
+
+        grids.appendChild(createSvgNode('line', {
+            x1: margin.left,
+            y1: y,
+            x2: width - margin.right,
+            y2: y,
+            stroke: '#e0ebf7',
+            'stroke-width': '1'
+        }));
+
+        const yText = createSvgNode('text', {
+            x: margin.left - 10,
+            y: y + 4,
+            'text-anchor': 'end',
+            fill: '#54708e',
+            'font-size': '12'
+        });
+        yText.textContent = formatAxisValue(yVal, config.valueType);
+        labels.appendChild(yText);
+    }
+
+    axes.appendChild(createSvgNode('line', {
+        x1: margin.left,
+        y1: margin.top,
+        x2: margin.left,
+        y2: margin.top + plotHeight,
+        stroke: '#7b98b8',
+        'stroke-width': '1.2'
+    }));
+    axes.appendChild(createSvgNode('line', {
+        x1: margin.left,
+        y1: margin.top + plotHeight,
+        x2: width - margin.right,
+        y2: margin.top + plotHeight,
+        stroke: '#7b98b8',
+        'stroke-width': '1.2'
+    }));
+
+    const showPointValues = points.length <= 10;
+
+    const linePath = points.map((p, idx) => {
+        const x = xAt(idx);
+        const y = yAt(p.value);
+        return `${idx === 0 ? 'M' : 'L'} ${x} ${y}`;
+    }).join(' ');
+    dataLayer.appendChild(createSvgNode('path', {
+        d: linePath,
+        fill: 'none',
+        stroke: config.color,
+        'stroke-width': '3'
+    }));
+
+    points.forEach((p, idx) => {
+        const x = xAt(idx);
+        const y = yAt(p.value);
+
+        const point = createSvgNode('circle', {
+            cx: x,
+            cy: y,
+            r: 4.2,
+            fill: config.color,
+            stroke: '#ffffff',
+            'stroke-width': '1.4'
+        });
+        const title = createSvgNode('title', {});
+        title.textContent = `${p.label}: ${formatPointValue(p.value, config.valueType)}`;
+        point.appendChild(title);
+        dataLayer.appendChild(point);
+
+        const valueText = createSvgNode('text', {
+            x: x,
+            y: y - 9,
+            'text-anchor': 'middle',
+            fill: '#0f4f90',
+            'font-size': '11',
+            'font-weight': '700'
+        });
+        valueText.textContent = formatAxisValue(p.value, config.valueType);
+        if(showPointValues){
+            labels.appendChild(valueText);
+        }
+
+        const labelY = margin.top + plotHeight + 15;
+        const xLabel = createSvgNode('text', {
+            x: x,
+            y: labelY,
+            'text-anchor': 'middle',
+            fill: '#4f657d',
+            'font-size': '11'
+        });
+        xLabel.textContent = p.shortLabel;
+        if(points.length > 8){
+            xLabel.setAttribute('transform', `rotate(-35 ${x} ${labelY})`);
+            xLabel.setAttribute('text-anchor', 'end');
+        }
+        labels.appendChild(xLabel);
+    });
+}
+
+const GRAPH_CONFIGS = {
+    totalClients: {
+        key: 'totalClients',
+        cardId: 'graphCardTotalClients',
+        svgId: 'lineGraphTotalClients',
+        metaId: 'lineGraphMetaTotalClients',
+        emptyId: 'lineGraphEmptyTotalClients',
+        noteId: 'lineGraphNoteTotalClients',
+        metaLabel: 'Total assisted clients',
+        color: '#0f6ccf',
+        valueType: 'count',
+        valueSelector: () => 1
+    },
+    completedClients: {
+        key: 'completedClients',
+        cardId: 'graphCardCompletedClients',
+        svgId: 'lineGraphCompletedClients',
+        metaId: 'lineGraphMetaCompletedClients',
+        emptyId: 'lineGraphEmptyCompletedClients',
+        noteId: 'lineGraphNoteCompletedClients',
+        metaLabel: 'Completed cases',
+        color: '#0fa36d',
+        valueType: 'count',
+        valueSelector: r => ((r.status || '').trim().toLowerCase() === 'completed' ? 1 : 0)
+    },
+    pendingClients: {
+        key: 'pendingClients',
+        cardId: 'graphCardPendingClients',
+        svgId: 'lineGraphPendingClients',
+        metaId: 'lineGraphMetaPendingClients',
+        emptyId: 'lineGraphEmptyPendingClients',
+        noteId: 'lineGraphNotePendingClients',
+        metaLabel: 'Pending cases',
+        color: '#d08a18',
+        valueType: 'count',
+        valueSelector: r => ((r.status || '').trim().toLowerCase() === 'pending' ? 1 : 0)
+    }
+};
+
+const GRAPH_KEYS = Object.keys(GRAPH_CONFIGS);
+const graphState = {
+    panelVisible: false,
+    visibleByKey: {
+        totalClients: true,
+        completedClients: true,
+        pendingClients: true
+    }
+};
+
+const noClientState = {
+    hasRun: false,
+    visible: false,
+    groups: {},
+    selectedBarangay: '',
+    expandedRow: null
+};
+let lastRenderedRecords = [];
+
+function getRecordDisplayName(record){
+    const explicit = String(record && record.name ? record.name : '').trim();
+    if(explicit) return explicit;
+
+    const first = String(record && record.firstName ? record.firstName : '').trim();
+    const middle = String(record && record.middleName ? record.middleName : '').trim();
+    const last = String(record && record.lastName ? record.lastName : '').trim();
+    const built = [first, middle, last].filter(Boolean).join(' ').replace(/\s+/g, ' ').trim();
+    return built || '(Unnamed client)';
+}
+
+function getRequestedDateDisplay(record){
+    const raw = String((record && (record.dateRequested || record.month)) || '').trim();
+    if(/^\d{4}-\d{2}-\d{2}$/.test(raw)){
+        const p = raw.split('-');
+        return `${p[1]}/${p[2]}/${p[0]}`;
+    }
+    return raw || 'No date';
+}
+
+function extractReferralSourceFromRemarks(value){
+    const text = String(value || '');
+    const match = text.match(/(?:^|\|\s*)Source:\s*([^|]+)/i);
+    return match ? String(match[1] || '').trim() : '';
+}
+
+function normalizeReferralSourceLabel(value){
+    const raw = String(value || '').replace(/\s+/g, ' ').trim();
+    if(!raw) return '';
+
+    const normalized = normalizeAssistanceText(raw);
+    const labelMap = {
+        'cityhall walk in': 'City Hall Walk In',
+        'city hall walk in': 'City Hall Walk In',
+        'city hall office': 'City Hall Walk In',
+        'vip leaders referral': 'VIP/Leaders Referral',
+        'vip leader referral': 'VIP/Leaders Referral',
+        'cnl page': 'CNL Page',
+        'cnl': 'CNL Page',
+        'pdl referral': 'PDL Referral',
+        'pdl page': 'PDL Page',
+        'pdl': 'PDL Page',
+        'satellite office': 'Satellite Office',
+        'tgp tgs referral': 'TGP/TGS Referral',
+        'tgp tgs referrals': 'TGP/TGS Referral',
+        'tgp walk in': 'TGP Walk In',
+        'walk in tgp office': 'TGP Walk In',
+        'tgp office brgy milagrosa': 'TGP Walk In',
+        'tgp office barangay milagrosa': 'TGP Walk In',
+        'online': 'Online',
+        'group chat': 'Online'
+    };
+
+    if(labelMap[normalized]) return labelMap[normalized];
+    return raw;
+}
+
+function getRecordReferralSource(record){
+    const direct = normalizeReferralSourceLabel(record && record.referralSource ? record.referralSource : '');
+    if(direct) return direct;
+
+    const directRemark = normalizeReferralSourceLabel(extractReferralSourceFromRemarks(record && record.remarks ? record.remarks : ''));
+    if(directRemark) return directRemark;
+
+    if(record && Array.isArray(record.history)){
+        for(let index = record.history.length - 1; index >= 0; index -= 1){
+            const entry = record.history[index];
+            const historyDirect = normalizeReferralSourceLabel(entry && entry.referralSource ? entry.referralSource : '');
+            if(historyDirect) return historyDirect;
+
+            const historyRemark = normalizeReferralSourceLabel(extractReferralSourceFromRemarks(entry && entry.remarks ? entry.remarks : ''));
+            if(historyRemark) return historyRemark;
+        }
+    }
+
+    const firstContact = normalizeReferralSourceLabel(record && record.first_contact ? record.first_contact : '');
+    if(firstContact) return firstContact;
+
+    const leader = String(record && record.leaderBarangayOfficial ? record.leaderBarangayOfficial : '').trim();
+    if(leader){
+        if(normalizeAssistanceText(leader) === 'pdl') return 'PDL Referral';
+        return 'VIP/Leaders Referral';
+    }
+
+    const office = normalizeReferralSourceLabel(record && record.office ? record.office : '');
+    if(office === 'CNL Page' || office === 'PDL Page'){
+        return office;
+    }
+
+    return '';
+}
+
+function getReportSearchIndex(record){
+    return [
+        getRecordDisplayName(record),
+        String(record && record.barangay ? record.barangay : '').trim(),
+        String(record && record.address ? record.address : '').trim(),
+        String(record && record.subdivisionVillageCompound ? record.subdivisionVillageCompound : '').trim(),
+        String(record && record.contact ? record.contact : '').trim(),
+        String(record && record.office ? record.office : '').trim(),
+        String(record && record.status ? record.status : '').trim(),
+        String(record && record.clientCategory ? record.clientCategory : '').trim(),
+        String(record && record.priorityLevel ? record.priorityLevel : '').trim(),
+        String(record && normalizeAssistanceType(record && record.type ? record.type : '', '') ? normalizeAssistanceType(record.type, '') : '').trim(),
+        getRecordReferralSource(record),
+        String(record && record.remarks ? record.remarks : '').trim(),
+        String(record && record.leaderBarangayOfficial ? record.leaderBarangayOfficial : '').trim(),
+        String(record && record.glcode ? record.glcode : '').trim()
+    ].join(' ').toLowerCase();
+}
+
+function getRecordStableKey(record){
+    const directId = String(record && record.id ? record.id : '').trim();
+    if(directId) return `id:${directId}`;
+
+    const importKey = String(record && record.importSourceKey ? record.importSourceKey : '').trim();
+    if(importKey) return `import:${importKey}`;
+
+    const historyId = String(
+        record && Array.isArray(record.history) && record.history[0] && record.history[0].id
+            ? record.history[0].id
+            : ''
+    ).trim();
+    if(historyId) return `history:${historyId}`;
+
+    return [
+        getRecordDisplayName(record),
+        String(record && (record.dateRequested || record.month) ? (record.dateRequested || record.month) : '').trim(),
+        String(record && record.barangay ? record.barangay : '').trim(),
+        String(record && normalizeAssistanceType(record.type, '') ? normalizeAssistanceType(record.type, '') : '').trim(),
+        String(record && (record.contact || record.office || record.guarantee_amount || record.assistanceAmount) ? (record.contact || record.office || record.guarantee_amount || record.assistanceAmount) : '').trim()
+    ].join('||').toLowerCase();
+}
+
+function getRecordAmountDisplay(record){
+    const raw = record ? (record.guarantee_amount || record.assistanceAmount || record.amount || '') : '';
+    const trimmed = String(raw || '').trim();
+    if(!trimmed) return '';
+
+    const numeric = Number(trimmed.replace(/,/g, ''));
+    if(Number.isFinite(numeric)) return formatCurrency(numeric);
+    return trimmed;
+}
+
+function appendRecordDetailCells(tr, record){
+    const nameTd = document.createElement('td');
+    const dateTd = document.createElement('td');
+    const typeTd = document.createElement('td');
+    const barangayTd = document.createElement('td');
+    const statusTd = document.createElement('td');
+    const officeTd = document.createElement('td');
+    const amountTd = document.createElement('td');
+
+    const nameLine = document.createElement('div');
+    nameLine.className = 'record-name';
+    nameLine.textContent = getRecordDisplayName(record);
+    nameTd.appendChild(nameLine);
+
+    const contactLine = document.createElement('div');
+    contactLine.className = 'record-muted';
+    contactLine.textContent = (record && record.contact) ? `Contact: ${record.contact}` : 'Contact: N/A';
+    nameTd.appendChild(contactLine);
+
+    dateTd.textContent = getRequestedDateDisplay(record);
+    typeTd.textContent = normalizeAssistanceType(record && record.type ? record.type : '', '') || 'No type';
+    barangayTd.textContent = String(record && record.barangay ? record.barangay : '').trim() || 'No barangay';
+    statusTd.textContent = String(record && record.status ? record.status : '').trim() || 'No status';
+    officeTd.textContent = String(record && record.office ? record.office : '').trim() || 'No office';
+    amountTd.textContent = getRecordAmountDisplay(record) || 'No amount';
+    amountTd.className = 'record-amount';
+
+    tr.appendChild(nameTd);
+    tr.appendChild(dateTd);
+    tr.appendChild(typeTd);
+    tr.appendChild(barangayTd);
+    tr.appendChild(statusTd);
+    tr.appendChild(officeTd);
+    tr.appendChild(amountTd);
+}
+
+function updateFilteredRecordMeta(filteredRecords){
+    const selectionMeta = document.getElementById('selectionMeta');
+    if(!selectionMeta) return;
+
+    const count = Array.isArray(filteredRecords) ? filteredRecords.length : 0;
+    if(count){
+        selectionMeta.textContent = `Viewing ${count} filtered record${count === 1 ? '' : 's'} in the current report.`;
+    } else {
+        selectionMeta.textContent = 'No records match the current filters.';
+    }
+}
+
+function renderFilteredRecordSelection(filteredRecords){
+    const tbody = document.querySelector('#filteredRecordsTable tbody');
+    const emptyEl = document.getElementById('filteredRecordsEmpty');
+    const wrap = document.getElementById('filteredRecordsWrap');
+    if(!tbody || !emptyEl || !wrap) return;
+
+    tbody.innerHTML = '';
+
+    const list = Array.isArray(filteredRecords) ? filteredRecords : [];
+    if(!list.length){
+        emptyEl.hidden = false;
+        wrap.hidden = true;
+        updateFilteredRecordMeta(list);
+        return;
+    }
+
+    list.forEach(record => {
+        const tr = document.createElement('tr');
+        appendRecordDetailCells(tr, record);
+        tbody.appendChild(tr);
+    });
+
+    emptyEl.hidden = true;
+    wrap.hidden = false;
+    updateFilteredRecordMeta(list);
+}
+
+function getReportFilterPrintDescriptors(){
+    const search = String(document.getElementById('reportSearchInput') && document.getElementById('reportSearchInput').value || '').trim();
+    const month = String(document.getElementById('filterMonth') && document.getElementById('filterMonth').value || '').trim();
+    const year = String(document.getElementById('filterYear') && document.getElementById('filterYear').value || '').trim();
+    const barangay = String(document.getElementById('filterBarangay') && document.getElementById('filterBarangay').value || '').trim();
+    const type = String(document.getElementById('filterType') && document.getElementById('filterType').value || '').trim();
+    const status = String(document.getElementById('filterStatus') && document.getElementById('filterStatus').value || '').trim();
+    const office = String(document.getElementById('filterOffice') && document.getElementById('filterOffice').value || '').trim();
+    const referralSource = String(document.getElementById('filterReferralSource') && document.getElementById('filterReferralSource').value || '').trim();
+    const category = String(document.getElementById('filterClientCategory') && document.getElementById('filterClientCategory').value || '').trim();
+    const priority = String(document.getElementById('filterPriority') && document.getElementById('filterPriority').value || '').trim();
+
+    return [
+        { label: 'Search', value: search || 'All' },
+        { label: 'Month', value: month || 'All' },
+        { label: 'Year', value: year || 'All' },
+        { label: 'Barangay', value: barangay || 'All' },
+        { label: 'Type', value: type || 'All' },
+        { label: 'Status', value: status || 'All' },
+        { label: 'Office', value: office || 'All' },
+        { label: 'Source', value: referralSource || 'All' },
+        { label: 'Category', value: category || 'All' },
+        { label: 'Priority', value: priority || 'All' }
+    ];
+}
+
+function renderReportFilterSummary(host, descriptors){
+    if(!host) return;
+    host.innerHTML = '';
+
+    (descriptors || []).forEach(descriptor => {
+        const item = document.createElement('div');
+        item.className = 'print-filter-item';
+
+        const label = document.createElement('span');
+        label.textContent = descriptor.label;
+        item.appendChild(label);
+
+        const value = document.createElement('strong');
+        value.textContent = descriptor.value;
+        item.appendChild(value);
+
+        host.appendChild(item);
+    });
+}
+
+function renderFilteredPrintSheet(records){
+    const sheet = document.getElementById('filteredPrintSheet');
+    const tbody = document.querySelector('#filteredPrintTable tbody');
+    const metaEl = document.getElementById('filteredPrintMeta');
+    const filterSummaryEl = document.getElementById('filteredPrintFilterSummary');
+    if(!sheet || !tbody || !metaEl || !filterSummaryEl) return;
+
+    tbody.innerHTML = '';
+
+    const list = Array.isArray(records) ? records : [];
+    if(list.length){
+        list.forEach(record => {
+            const tr = document.createElement('tr');
+            appendRecordDetailCells(tr, record);
+            tbody.appendChild(tr);
+        });
+    } else {
+        const tr = document.createElement('tr');
+        const td = document.createElement('td');
+        td.colSpan = 7;
+        td.textContent = 'No records match the current filters.';
+        tr.appendChild(td);
+        tbody.appendChild(tr);
+    }
+
+    renderReportFilterSummary(filterSummaryEl, getReportFilterPrintDescriptors());
+    metaEl.textContent = `${list.length} filtered record(s) | Printed ${new Date().toLocaleString()}`;
+    sheet.hidden = false;
+}
+
+function cleanupPrintArtifacts(){
+    document.body.classList.remove('printing-selected-records');
+    const filteredSheet = document.getElementById('filteredPrintSheet');
+    if(filteredSheet) filteredSheet.hidden = true;
+}
+
+function getBreakdownRecordLabel(record, breakdownKey){
+    if(!breakdownKey) return '';
+
+    switch(breakdownKey){
+        case 'type':
+            return normalizeAssistanceType(record && record.type ? record.type : '', '') || '(blank)';
+        case 'barangay':
+            return String(record && record.barangay ? record.barangay : '').trim() || '(blank)';
+        case 'monthYear': {
+            const { month, year } = getRecordMonthYear(record);
+            return formatMonthYear(month, year) || '(blank)';
+        }
+        case 'status':
+            return String(record && record.status ? record.status : '').trim() || '(blank)';
+        case 'clientCategory':
+            return String(record && record.clientCategory ? record.clientCategory : '').trim() || '(blank)';
+        case 'priority':
+            return String(record && record.priorityLevel ? record.priorityLevel : '').trim() || '(blank)';
+        case 'office':
+            return String(record && record.office ? record.office : '').trim() || '(blank)';
+        default:
+            return '';
+    }
+}
+
+function getBreakdownRecords(breakdownKey, breakdownValue, records){
+    const targetValue = String(breakdownValue || '').trim() || '(blank)';
+    return (Array.isArray(records) ? records : []).filter(record => getBreakdownRecordLabel(record, breakdownKey) === targetValue);
+}
+
+function renderSummaryModalMeta(metaItems){
+    const metaEl = document.getElementById('summaryModalMeta');
+    if(!metaEl) return;
+
+    metaEl.innerHTML = '';
+    const items = (Array.isArray(metaItems) ? metaItems : []).filter(item => {
+        if(!item || typeof item !== 'object') return false;
+        return String(item.label || '').trim() && String(item.value || '').trim();
+    });
+
+    if(!items.length){
+        metaEl.hidden = true;
+        return;
+    }
+
+    items.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'summary-modal-meta-card';
+
+        const label = document.createElement('span');
+        label.textContent = String(item.label || '').trim();
+
+        const value = document.createElement('strong');
+        value.textContent = String(item.value || '').trim();
+
+        card.appendChild(label);
+        card.appendChild(value);
+        metaEl.appendChild(card);
+    });
+
+    metaEl.hidden = false;
+}
+
+function renderSummaryModalRecordTable(records){
+    const wrap = document.getElementById('summaryModalRecordWrap');
+    const tbody = document.querySelector('#summaryModalRecordTable tbody');
+    if(!wrap || !tbody) return false;
+
+    tbody.innerHTML = '';
+    const list = Array.isArray(records) ? records : [];
+    if(!list.length){
+        wrap.hidden = true;
+        return false;
+    }
+
+    list.forEach(record => {
+        const tr = document.createElement('tr');
+        appendRecordDetailCells(tr, record);
+        tbody.appendChild(tr);
+    });
+
+    wrap.hidden = false;
+    return true;
+}
+
+function renderSummaryModalSummaryTable(rows, labelHeading, valueHeading){
+    const wrap = document.getElementById('summaryModalSummaryWrap');
+    const tbody = document.querySelector('#summaryModalSummaryTable tbody');
+    const labelHead = document.getElementById('summaryModalSummaryLabel');
+    const valueHead = document.getElementById('summaryModalSummaryValue');
+    if(!wrap || !tbody || !labelHead || !valueHead) return false;
+
+    tbody.innerHTML = '';
+    const list = Array.isArray(rows) ? rows : [];
+    if(!list.length){
+        wrap.hidden = true;
+        return false;
+    }
+
+    labelHead.textContent = String(labelHeading || 'Label').trim();
+    valueHead.textContent = String(valueHeading || 'Total').trim();
+
+    list.forEach(row => {
+        const tr = document.createElement('tr');
+        const labelTd = document.createElement('td');
+        const valueTd = document.createElement('td');
+
+        labelTd.textContent = String(row && row.label ? row.label : '').trim() || '(blank)';
+        valueTd.textContent = String(row && row.value ? row.value : '').trim() || '0';
+
+        tr.appendChild(labelTd);
+        tr.appendChild(valueTd);
+        tbody.appendChild(tr);
+    });
+
+    wrap.hidden = false;
+    return true;
+}
+
+function openDetailModal(data){
+    const modal = document.getElementById('summaryModal');
+    if(!modal) return;
+    const titleEl = document.getElementById('summaryModalTitle');
+    const subtitleEl = document.getElementById('summaryModalSubtitle');
+    const emptyEl = document.getElementById('summaryModalEmpty');
+
+    if(titleEl) titleEl.textContent = data && data.title ? data.title : 'Summary Details';
+    if(subtitleEl) subtitleEl.textContent = data && data.subtitle ? data.subtitle : '';
+    renderSummaryModalMeta(data && data.metaItems ? data.metaItems : []);
+
+    const hasRecordTable = renderSummaryModalRecordTable(data && data.records ? data.records : []);
+    const hasSummaryTable = renderSummaryModalSummaryTable(
+        data && data.summaryRows ? data.summaryRows : [],
+        data && data.summaryLabel ? data.summaryLabel : 'Label',
+        data && data.summaryValueLabel ? data.summaryValueLabel : 'Total'
+    );
+
+    if(emptyEl){
+        emptyEl.textContent = data && data.emptyText ? data.emptyText : 'No records found for this summary.';
+        emptyEl.hidden = hasRecordTable || hasSummaryTable;
+    }
+
+    modal.hidden = false;
+    document.body.classList.add('summary-modal-open');
+}
+
+function getSummaryModalData(summaryKey, records){
+    const list = Array.isArray(records) ? records.slice() : [];
+
+    if(summaryKey === 'totalCount'){
+        return {
+            title: 'Total People Assisted',
+            subtitle: 'Showing the client records included in the current filters.',
+            metaItems: [
+                { label: 'Matching records', value: String(list.length) },
+                { label: 'Scope', value: 'Current filters' },
+                { label: 'View', value: 'Client records' }
+            ],
+            records: list
+        };
+    }
+
+    if(summaryKey === 'pendingCount'){
+        const filtered = list.filter(r => String(r.status || '').trim().toLowerCase() === 'pending');
+        return {
+            title: 'Pending Cases',
+            subtitle: 'Showing the pending client records in the current filters.',
+            metaItems: [
+                { label: 'Matching records', value: String(filtered.length) },
+                { label: 'Status', value: 'Pending' },
+                { label: 'Scope', value: 'Current filters' }
+            ],
+            records: filtered
+        };
+    }
+
+    if(summaryKey === 'completedCount'){
+        const filtered = list.filter(r => String(r.status || '').trim().toLowerCase() === 'completed');
+        return {
+            title: 'Completed Cases',
+            subtitle: 'Showing the completed client records in the current filters.',
+            metaItems: [
+                { label: 'Matching records', value: String(filtered.length) },
+                { label: 'Status', value: 'Completed' },
+                { label: 'Scope', value: 'Current filters' }
+            ],
+            records: filtered
+        };
+    }
+
+    if(summaryKey === 'totalTypes'){
+        const typeMap = {};
+        list.forEach(r => {
+            const normalized = normalizeAssistanceType(r.type, '');
+            const key = normalized || '(blank)';
+            typeMap[key] = (typeMap[key] || 0) + 1;
+        });
+        const items = Object.entries(typeMap)
+            .sort((a, b) => (b[1] - a[1]) || a[0].localeCompare(b[0]))
+            .map(([type, count]) => ({
+                label: type,
+                value: `${count} record(s)`
+            }));
+        return {
+            title: 'Distinct Assistance Types',
+            subtitle: 'Grouped by assistance type for the current filters.',
+            metaItems: [
+                { label: 'Distinct types', value: String(items.length) },
+                { label: 'Scope', value: 'Current filters' }
+            ],
+            summaryRows: items,
+            summaryLabel: 'Assistance Type',
+            summaryValueLabel: 'Records'
+        };
+    }
+
+    return {
+        title: 'Summary Details',
+        subtitle: 'No matching summary found.',
+        emptyText: 'No matching summary found.'
+    };
+}
+
+function openSummaryModal(summaryKey){
+    const filtered = getCurrentFilteredRecords();
+    const data = getSummaryModalData(summaryKey, filtered);
+    openDetailModal(data);
+}
+
+function openBreakdownModal(breakdownKey, breakdownValue, breakdownLabel){
+    const filtered = getCurrentFilteredRecords();
+    const matching = getBreakdownRecords(breakdownKey, breakdownValue, filtered);
+    const label = String(breakdownLabel || breakdownKey || 'Breakdown').trim();
+    const valueLabel = String(breakdownValue || '').trim() || '(blank)';
+
+    openDetailModal({
+        title: `Assistance by ${label}`,
+        subtitle: `Showing the client records behind the selected ${label.toLowerCase()} total.`,
+        metaItems: [
+            { label: label, value: valueLabel },
+            { label: 'Matching records', value: String(matching.length) },
+            { label: 'Scope', value: 'Current filters' }
+        ],
+        records: matching,
+        emptyText: 'No records matched the selected breakdown row.'
+    });
+}
+
+function closeSummaryModal(){
+    const modal = document.getElementById('summaryModal');
+    if(!modal) return;
+    modal.hidden = true;
+    document.body.classList.remove('summary-modal-open');
+}
+
+function normalizeGraphsForPrint(){
+    GRAPH_KEYS.forEach(key => {
+        const cfg = GRAPH_CONFIGS[key];
+        const card = document.getElementById(cfg.cardId);
+        if(!card) return;
+
+        if(card.__graphAnim){
+            try { card.__graphAnim.cancel(); } catch(e){}
+            card.__graphAnim = null;
+        }
+
+        card.hidden = !graphState.visibleByKey[key];
+    });
+}
+
+function setGraphCardVisibility(cfg, isVisible, animate){
+    const card = document.getElementById(cfg.cardId);
+    if(!card) return;
+
+    if(!isVisible){
+        if(card.__graphAnim){
+            try { card.__graphAnim.cancel(); } catch(e){}
+            card.__graphAnim = null;
+        }
+        card.hidden = true;
+        return;
+    }
+
+    card.hidden = false;
+
+    if(!animate || !card.animate) return;
+
+    if(card.__graphAnim){
+        try { card.__graphAnim.cancel(); } catch(e){}
+    }
+
+    card.__graphAnim = card.animate([
+        { opacity: 0, transform: 'scale(0.98)' },
+        { opacity: 1, transform: 'scale(1)' }
+    ], { duration: 220, easing: 'ease-out' });
+}
+function syncGraphButtonsAndCards(options = {}){
+    const animateKey = options.animateKey || '';
+    let visibleCount = 0;
+
+    GRAPH_KEYS.forEach(key => {
+        const isVisible = !!graphState.visibleByKey[key];
+        if(isVisible) visibleCount += 1;
+
+        const cfg = GRAPH_CONFIGS[key];
+        const shouldAnimate = animateKey === key && graphState.panelVisible;
+        setGraphCardVisibility(cfg, isVisible, shouldAnimate);
+
+        const button = document.querySelector(`#lineGraphControls .graph-toggle[data-graph-key="${key}"]`);
+        if(button){
+            button.classList.toggle('is-on', isVisible);
+            const label = String(button.textContent || '').replace(/^Hide\s+|^Show\s+/i, '').trim();
+            button.textContent = `${isVisible ? 'Hide' : 'Show'} ${label}`;
+            button.setAttribute('aria-pressed', isVisible ? 'true' : 'false');
+        }
+    });
+
+    const panelEmpty = document.getElementById('lineGraphPanelEmpty');
+    if(panelEmpty) panelEmpty.hidden = visibleCount !== 0;
+
+    const graphGrid = document.querySelector('#lineGraphSection .graph-grid');
+    if(graphGrid){
+        const useStacked = visibleCount > 2 || window.innerWidth <= 1280;
+        graphGrid.classList.toggle('stacked', useStacked && visibleCount > 0);
+    }
+}
+
+function renderAllLineGraphs(records){
+    lastRenderedRecords = Array.isArray(records) ? records.slice() : [];
+    GRAPH_KEYS.forEach(key => {
+        if(graphState.visibleByKey[key]){
+            renderLineGraphToElements(GRAPH_CONFIGS[key], lastRenderedRecords);
+        }
+    });
+}
+
+function setGraphPanelVisibility(visible){
+    graphState.panelVisible = Boolean(visible);
+    const graphSection = document.getElementById('lineGraphSection');
+    const graphBtn = document.getElementById('graphBtn');
+
+    if(graphSection) graphSection.hidden = !graphState.panelVisible;
+    if(graphBtn){
+        graphBtn.textContent = graphState.panelVisible ? 'Hide Graphs' : 'Line Graphs';
+        graphBtn.setAttribute('aria-pressed', graphState.panelVisible ? 'true' : 'false');
+    }
+    document.body.classList.toggle('graph-panel-open', graphState.panelVisible);
+
+    if(graphState.panelVisible){
+        lastRenderedRecords = getCurrentFilteredRecords();
+        syncGraphButtonsAndCards();
+        renderAllLineGraphs(lastRenderedRecords);
+    }
+}
+
+/* Populate filter options (years & barangays) */
+function populateFilterLists(records){
+    const yearSet = new Set();
+    const barangaySet = new Set();
+    const typeSet = new Set();
+    const statusSet = new Set();
+    const officeSet = new Set();
+    const referralSourceSet = new Set();
+    const categorySet = new Set();
+    const prioritySet = new Set();
+
+    records.forEach(r => {
+        const { year } = getRecordMonthYear(r);
+        if(year) yearSet.add(year);
+        if(r.barangay) barangaySet.add(r.barangay);
+        const normalizedType = normalizeAssistanceType(r.type, '');
+        if(normalizedType) typeSet.add(normalizedType);
+        if(r.status && String(r.status).trim()) statusSet.add(String(r.status).trim());
+        if(r.office && String(r.office).trim()) officeSet.add(String(r.office).trim());
+        const referralSource = getRecordReferralSource(r);
+        if(referralSource) referralSourceSet.add(referralSource);
+        if(r.clientCategory && String(r.clientCategory).trim()) categorySet.add(String(r.clientCategory).trim());
+        if(r.priorityLevel && String(r.priorityLevel).trim()) prioritySet.add(String(r.priorityLevel).trim());
+    });
+
+    const yearSelect = document.getElementById('filterYear');
+    yearSelect.innerHTML = '<option value="">All years</option>';
+    Array.from(yearSet).sort((a,b)=>b-a).forEach(y=>{
+        const o = document.createElement('option');
+        o.value = y;
+        o.textContent = y;
+        yearSelect.appendChild(o);
+    });
+
+    const barangaySelect = document.getElementById('filterBarangay');
+    barangaySelect.innerHTML = '<option value="">All barangays</option>';
+    Array.from(barangaySet).sort().forEach(b=>{
+        const o = document.createElement('option');
+        o.value = b;
+        o.textContent = b;
+        barangaySelect.appendChild(o);
+    });
+
+    const typeSelect = document.getElementById('filterType');
+    typeSelect.innerHTML = '<option value="">All types</option>';
+    const typeOptions = ASSISTANCE_TYPE_OPTIONS.slice();
+    typeSet.forEach(t=>{
+        if(t && !typeOptions.includes(t)){
+            typeOptions.push(t);
+        }
+    });
+    typeOptions.forEach(t=>{
+        const o = document.createElement('option');
+        o.value = t;
+        o.textContent = t;
+        typeSelect.appendChild(o);
+    });
+
+    const statusSelect = document.getElementById('filterStatus');
+    statusSelect.innerHTML = '<option value="">All status</option>';
+    Array.from(statusSet).sort().forEach(s=>{
+        const o = document.createElement('option');
+        o.value = s;
+        o.textContent = s;
+        statusSelect.appendChild(o);
+    });
+
+    const officeSelect = document.getElementById('filterOffice');
+    officeSelect.innerHTML = '<option value="">All offices</option>';
+    Array.from(officeSet).sort().forEach(v=>{
+        const o = document.createElement('option');
+        o.value = v;
+        o.textContent = v;
+        officeSelect.appendChild(o);
+    });
+
+    const referralSourceSelect = document.getElementById('filterReferralSource');
+    if(referralSourceSelect){
+        referralSourceSelect.innerHTML = '<option value="">All sources</option>';
+        Array.from(referralSourceSet).sort().forEach(v=>{
+            const o = document.createElement('option');
+            o.value = v;
+            o.textContent = v;
+            referralSourceSelect.appendChild(o);
+        });
+    }
+
+    const categorySelect = document.getElementById('filterClientCategory');
+    categorySelect.innerHTML = '<option value="">All categories</option>';
+    Array.from(categorySet).sort().forEach(v=>{
+        const o = document.createElement('option');
+        o.value = v;
+        o.textContent = v;
+        categorySelect.appendChild(o);
+    });
+
+    const prioritySelect = document.getElementById('filterPriority');
+    prioritySelect.innerHTML = '<option value="">All priorities</option>';
+    Array.from(prioritySet).sort().forEach(v=>{
+        const o = document.createElement('option');
+        o.value = v;
+        o.textContent = v;
+        prioritySelect.appendChild(o);
+    });
+}
+
+/* Main compute & render */
+function formatCurrency(value){
+    return new Intl.NumberFormat('en-PH', {
+        style: 'currency',
+        currency: 'PHP',
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+    }).format(value || 0);
+}
+
+function computeAndRender(filteredRecords){
+    const total = filteredRecords.length;
+    const typeMap = {};
+    const barangayMap = {};
+    const monthMap = {};
+    const statusMap = {};
+    const categoryMap = {};
+    const priorityMap = {};
+    const officeMap = {};
+    const typeSet = new Set();
+
+    filteredRecords.forEach(r => {
+        const normalizedType = normalizeAssistanceType(r.type, '');
+        const t = normalizedType || '(blank)';
+        typeMap[t] = (typeMap[t] || 0) + 1;
+        if(normalizedType) typeSet.add(normalizedType);
+
+        const b = (r.barangay || '').trim() || '(blank)';
+        barangayMap[b] = (barangayMap[b] || 0) + 1;
+
+        const { month, year } = getRecordMonthYear(r);
+        const my = formatMonthYear(month, year);
+        const myKey = my || '(blank)';
+        monthMap[myKey] = (monthMap[myKey] || 0) + 1;
+
+        const s = (r.status || '').trim() || '(blank)';
+        statusMap[s] = (statusMap[s] || 0) + 1;
+
+        const category = (r.clientCategory || '').trim() || '(blank)';
+        categoryMap[category] = (categoryMap[category] || 0) + 1;
+
+        const priority = (r.priorityLevel || '').trim() || '(blank)';
+        priorityMap[priority] = (priorityMap[priority] || 0) + 1;
+
+        const office = (r.office || '').trim() || '(blank)';
+        officeMap[office] = (officeMap[office] || 0) + 1;});
+
+    document.getElementById('totalCount').textContent = total;
+    document.getElementById('totalTypes').textContent = typeSet.size;
+    document.getElementById('pendingCount').textContent = statusMap['Pending'] || 0;
+    document.getElementById('completedCount').textContent = statusMap['Completed'] || 0;
+
+    fillTable(document.querySelector('#byTypeTable tbody'), typeMap, { breakdownKey: 'type', breakdownLabel: 'Type' });
+    fillTable(document.querySelector('#byBarangayTable tbody'), barangayMap, { breakdownKey: 'barangay', breakdownLabel: 'Barangay' });
+    fillTable(document.querySelector('#byMonthTable tbody'), monthMap, { limitSort: false, breakdownKey: 'monthYear', breakdownLabel: 'Month / Year' });
+    fillTable(document.querySelector('#byStatusTable tbody'), statusMap, { breakdownKey: 'status', breakdownLabel: 'Status' });
+    fillTable(document.querySelector('#byCategoryTable tbody'), categoryMap, { breakdownKey: 'clientCategory', breakdownLabel: 'Client Category' });
+    fillTable(document.querySelector('#byPriorityTable tbody'), priorityMap, { breakdownKey: 'priority', breakdownLabel: 'Priority' });
+    fillTable(document.querySelector('#byOfficeTable tbody'), officeMap, { breakdownKey: 'office', breakdownLabel: 'Office' });
+
+    renderAppliedReportFilters();
+    renderFilteredRecordSelection(filteredRecords);
+    renderAllLineGraphs(filteredRecords);
+    if(noClientState.hasRun && noClientState.visible){
+        renderNoClientAreas(filteredRecords);
+    }
+}
+
+function getAppliedReportFilterDescriptors(){
+    const descriptors = [];
+    const month = String(document.getElementById('filterMonth') && document.getElementById('filterMonth').value || '').trim();
+    const year = String(document.getElementById('filterYear') && document.getElementById('filterYear').value || '').trim();
+    const barangay = String(document.getElementById('filterBarangay') && document.getElementById('filterBarangay').value || '').trim();
+    const type = String(document.getElementById('filterType') && document.getElementById('filterType').value || '').trim();
+    const status = String(document.getElementById('filterStatus') && document.getElementById('filterStatus').value || '').trim();
+    const office = String(document.getElementById('filterOffice') && document.getElementById('filterOffice').value || '').trim();
+    const referralSource = String(document.getElementById('filterReferralSource') && document.getElementById('filterReferralSource').value || '').trim();
+    const category = String(document.getElementById('filterClientCategory') && document.getElementById('filterClientCategory').value || '').trim();
+    const priority = String(document.getElementById('filterPriority') && document.getElementById('filterPriority').value || '').trim();
+
+    if(month) descriptors.push({ key: 'month', label: 'Month', value: month });
+    if(year) descriptors.push({ key: 'year', label: 'Year', value: year });
+    if(barangay) descriptors.push({ key: 'barangay', label: 'Barangay', value: barangay });
+    if(type) descriptors.push({ key: 'type', label: 'Type', value: type });
+    if(status) descriptors.push({ key: 'status', label: 'Status', value: status });
+    if(office) descriptors.push({ key: 'office', label: 'Office', value: office });
+    if(referralSource) descriptors.push({ key: 'referralSource', label: 'Source', value: referralSource });
+    if(category) descriptors.push({ key: 'clientCategory', label: 'Category', value: category });
+    if(priority) descriptors.push({ key: 'priority', label: 'Priority', value: priority });
+
+    return descriptors;
+}
+
+function syncReportFilterToggleState(){
+    const toggleButton = document.getElementById('toggleReportFilters');
+    const panel = document.getElementById('reportFiltersPanel');
+    const countBadge = document.getElementById('activeReportFilterCount');
+    const activeCount = getAppliedReportFilterDescriptors().length;
+    const isOpen = !!(panel && !panel.hidden);
+
+    if(toggleButton){
+        toggleButton.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        toggleButton.classList.toggle('is-open', isOpen);
+        toggleButton.classList.toggle('is-active', activeCount > 0);
+    }
+
+    if(countBadge){
+        countBadge.textContent = String(activeCount);
+        countBadge.hidden = activeCount === 0;
+    }
+}
+
+function setReportFilterPanelOpen(isOpen){
+    const panel = document.getElementById('reportFiltersPanel');
+    if(panel) panel.hidden = !isOpen;
+    syncReportFilterToggleState();
+}
+
+function clearAppliedReportFilter(key){
+    if(key === 'month' && document.getElementById('filterMonth')){
+        document.getElementById('filterMonth').value = '';
+    } else if(key === 'year' && document.getElementById('filterYear')){
+        document.getElementById('filterYear').value = '';
+    } else if(key === 'barangay' && document.getElementById('filterBarangay')){
+        document.getElementById('filterBarangay').value = '';
+    } else if(key === 'type' && document.getElementById('filterType')){
+        document.getElementById('filterType').value = '';
+    } else if(key === 'status' && document.getElementById('filterStatus')){
+        document.getElementById('filterStatus').value = '';
+    } else if(key === 'office' && document.getElementById('filterOffice')){
+        document.getElementById('filterOffice').value = '';
+    } else if(key === 'referralSource' && document.getElementById('filterReferralSource')){
+        document.getElementById('filterReferralSource').value = '';
+    } else if(key === 'clientCategory' && document.getElementById('filterClientCategory')){
+        document.getElementById('filterClientCategory').value = '';
+    } else if(key === 'priority' && document.getElementById('filterPriority')){
+        document.getElementById('filterPriority').value = '';
+    }
+}
+
+function renderAppliedReportFilters(){
+    const host = document.getElementById('activeReportFilters');
+    if(!host) return;
+
+    const descriptors = getAppliedReportFilterDescriptors();
+    host.innerHTML = '';
+
+    descriptors.forEach(descriptor => {
+        const chip = document.createElement('span');
+        chip.className = 'search-chip';
+
+        const text = document.createElement('span');
+        text.textContent = `${descriptor.label}: ${descriptor.value}`;
+        chip.appendChild(text);
+
+        const removeButton = document.createElement('button');
+        removeButton.type = 'button';
+        removeButton.className = 'search-chip-remove';
+        removeButton.setAttribute('aria-label', `Remove ${descriptor.label} filter`);
+        removeButton.textContent = '×';
+        removeButton.addEventListener('click', () => {
+            clearAppliedReportFilter(descriptor.key);
+            applyReportFiltersAndRender();
+        });
+        chip.appendChild(removeButton);
+
+        host.appendChild(chip);
+    });
+
+    host.hidden = descriptors.length === 0;
+    syncReportFilterToggleState();
+}
+
+/* Build a filtered subset based on current filters */
+function getFilteredRecords(records){
+    const searchQuery = String(document.getElementById('reportSearchInput') && document.getElementById('reportSearchInput').value || '').toLowerCase().trim();
+    const fm = document.getElementById('filterMonth').value;
+    const fy = document.getElementById('filterYear').value;
+    const fb = document.getElementById('filterBarangay').value.toLowerCase();
+    const ft = document.getElementById('filterType').value.toLowerCase();
+    const fs = document.getElementById('filterStatus').value.toLowerCase();
+    const fo = document.getElementById('filterOffice').value.toLowerCase();
+    const fr = document.getElementById('filterReferralSource').value.toLowerCase();
+    const fc = document.getElementById('filterClientCategory').value.toLowerCase();
+    const fp = document.getElementById('filterPriority').value.toLowerCase();
+
+    return records.filter(r => {
+        if(searchQuery && !getReportSearchIndex(r).includes(searchQuery)) return false;
+        const { month, year } = getRecordMonthYear(r);
+        if(fm && fm.toUpperCase() !== (month || '').toUpperCase()) return false;
+        if(fy && fy !== (year || '')) return false;
+        if(fb && !(r.barangay || '').toLowerCase().includes(fb)) return false;
+        const normalizedType = normalizeAssistanceType(r.type, '').toLowerCase();
+        if(ft && !normalizedType.includes(ft)) return false;
+        if(fs && !(r.status || '').toLowerCase().includes(fs)) return false;
+        if(fo && !(r.office || '').toLowerCase().includes(fo)) return false;
+        if(fr && getRecordReferralSource(r).toLowerCase() !== fr) return false;
+        if(fc && !(r.clientCategory || '').toLowerCase().includes(fc)) return false;
+        if(fp && !(r.priorityLevel || '').toLowerCase().includes(fp)) return false;
+        return true;
+    });
+}
+
+function getCurrentFilteredRecords(){
+    return getFilteredRecords(safeGetRecords());
+}
+
+function applyReportFiltersAndRender(){
+    const recs = safeGetRecords();
+    const filtered = getFilteredRecords(recs);
+    computeAndRender(filtered);
+}
+
+/* Export CSV */
+function toCSV(records){
+    if(!records || !records.length) return '';
+    const headers = [
+        'id','month','dateRequested','dateCompleted','dateReleased','glcode',
+        'name','lastName','firstName','middleName','office','type',
+        'houseNo','address','subdivisionVillageCompound','barangay','contact',
+        'gender','birthday','clientCategory','civilStatus','employmentStatus',
+        'monthlyIncomeBracket','householdSize','priorityLevel','assistanceAmount',
+        'referralSource','status','leaderBarangayOfficial','remarks'
+    ];
+    const escape = v => {
+        if(v === null || v === undefined) return '';
+        const s = String(v).replace(/"/g, '""');
+        return `"${s}"`;
+    };
+    const rows = records.map(r => headers.map(h => escape(h === 'referralSource' ? getRecordReferralSource(r) : r[h])).join(','));
+    return headers.join(',') + '\n' + rows.join('\n');
+}
+
+function downloadCSV(filename, content){
+    const blob = new Blob([content], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 2000);
+}
+
+/* Init */
+document.addEventListener('DOMContentLoaded', async () => {
+    if(window.lbData && typeof window.lbData.initialize === 'function'){
+        try {
+            await window.lbData.initialize();
+        } catch(err){
+            console.error('Failed to initialize shared records store', err);
+            alert(
+                window.lbData && window.lbData.explainError
+                    ? window.lbData.explainError(err)
+                    : 'Failed to load shared records.'
+            );
+        }
+    }
+
+    const records = safeGetRecords();
+
+    const summaryModalEl = document.getElementById('summaryModal');
+    if(summaryModalEl && summaryModalEl.parentElement !== document.body){
+        // Keep modal outside transformed/styled containers so fixed centering works.
+        document.body.appendChild(summaryModalEl);
+    }
+
+    const now = new Date();
+    document.getElementById('generatedAt').textContent = 'Generated: ' + now.toLocaleString();
+
+    populateFilterLists(records);
+    computeAndRender(records);
+
+    const backBtn = document.getElementById('backBtn');
+    if(backBtn) backBtn.addEventListener('click', () => {
+        window.lbRoutes.go('records');
+    });
+    const helpBtn = document.getElementById('helpBtn');
+    if(helpBtn) helpBtn.addEventListener('click', () => {
+        window.lbRoutes.go('helpCenter');
+    });
+
+    const applyBtn = document.getElementById('applyFilters');
+    if(applyBtn){
+        applyBtn.addEventListener('click', () => {
+            applyReportFiltersAndRender();
+        });
+    }
+
+    const clearBtn = document.getElementById('clearFilters');
+    if(clearBtn){
+        clearBtn.addEventListener('click', () => {
+            if(document.getElementById('reportSearchInput')) document.getElementById('reportSearchInput').value = '';
+            document.getElementById('filterMonth').value = '';
+            document.getElementById('filterYear').value = '';
+            document.getElementById('filterBarangay').value = '';
+            document.getElementById('filterType').value = '';
+            document.getElementById('filterStatus').value = '';
+            document.getElementById('filterOffice').value = '';
+            document.getElementById('filterReferralSource').value = '';
+            document.getElementById('filterClientCategory').value = '';
+            document.getElementById('filterPriority').value = '';
+            setReportFilterPanelOpen(false);
+            applyReportFiltersAndRender();
+        });
+    }
+
+    const reportSearchInput = document.getElementById('reportSearchInput');
+    if(reportSearchInput){
+        reportSearchInput.addEventListener('input', applyReportFiltersAndRender);
+    }
+
+    const toggleReportFilters = document.getElementById('toggleReportFilters');
+    if(toggleReportFilters){
+        toggleReportFilters.addEventListener('click', () => {
+            const panel = document.getElementById('reportFiltersPanel');
+            const isOpen = !!(panel && !panel.hidden);
+            setReportFilterPanelOpen(!isOpen);
+        });
+    }
+
+    const clearReportSearchFilters = document.getElementById('clearReportSearchFilters');
+    if(clearReportSearchFilters){
+        clearReportSearchFilters.addEventListener('click', () => {
+            if(reportSearchInput) reportSearchInput.value = '';
+            document.getElementById('filterMonth').value = '';
+            document.getElementById('filterYear').value = '';
+            document.getElementById('filterBarangay').value = '';
+            document.getElementById('filterType').value = '';
+            document.getElementById('filterStatus').value = '';
+            document.getElementById('filterOffice').value = '';
+            document.getElementById('filterReferralSource').value = '';
+            document.getElementById('filterClientCategory').value = '';
+            document.getElementById('filterPriority').value = '';
+            setReportFilterPanelOpen(false);
+            applyReportFiltersAndRender();
+        });
+    }
+
+    const syncBeforePrint = () => {
+        cleanupPrintArtifacts();
+        lastRenderedRecords = getCurrentFilteredRecords();
+        renderFilteredPrintSheet(lastRenderedRecords);
+        if(graphState.panelVisible){
+            renderAllLineGraphs(lastRenderedRecords);
+        }
+        syncGraphButtonsAndCards();
+        normalizeGraphsForPrint();
+    };
+
+    window.addEventListener('beforeprint', syncBeforePrint);
+    window.addEventListener('afterprint', cleanupPrintArtifacts);
+    if(typeof window.matchMedia === 'function'){
+        const printMedia = window.matchMedia('print');
+        if(typeof printMedia.addEventListener === 'function'){
+            printMedia.addEventListener('change', evt => {
+                if(evt.matches) syncBeforePrint();
+                else cleanupPrintArtifacts();
+            });
+        }
+    }
+
+    const printBtn = document.getElementById('printBtn');
+    if(printBtn) printBtn.addEventListener('click', () => {
+        cleanupPrintArtifacts();
+        try {
+            syncBeforePrint();
+        } catch(err) {
+            console.error('Print sync failed', err);
+        }
+        window.print();
+    });
+
+    const exportBtn = document.getElementById('exportBtn');
+    if(exportBtn) exportBtn.addEventListener('click', () => {
+        const recs = safeGetRecords();
+        const filtered = getFilteredRecords(recs);
+        const csv = toCSV(filtered);
+        if(!csv){
+            alert('No records to export.');
+            return;
+        }
+        const filename = `lingkodbayan_report_${(new Date()).toISOString().slice(0,10)}.csv`;
+        downloadCSV(filename, csv);
+    });
+
+    const graphBtn = document.getElementById('graphBtn');
+    if(graphBtn){
+        graphBtn.addEventListener('click', () => {
+            setGraphPanelVisibility(!graphState.panelVisible);
+        });
+    }
+
+    const noClientBtn = document.getElementById('noClientBtn');
+    if(noClientBtn){
+        noClientBtn.addEventListener('click', () => {
+            noClientState.hasRun = true;
+            noClientState.visible = !noClientState.visible;
+            if(noClientState.visible){
+                const filtered = getCurrentFilteredRecords();
+                renderNoClientAreas(filtered);
+                noClientBtn.textContent = 'Hide Areas With No Clients';
+                noClientBtn.setAttribute('aria-pressed', 'true');
+            } else {
+                hideNoClientAreas();
+                noClientBtn.textContent = 'Show Areas With No Clients';
+                noClientBtn.setAttribute('aria-pressed', 'false');
+            }
+        });
+    }
+
+        document.querySelectorAll('#lineGraphControls .graph-toggle[data-graph-key]').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const key = btn.getAttribute('data-graph-key');
+            if(!key || !Object.prototype.hasOwnProperty.call(graphState.visibleByKey, key)) return;
+
+            graphState.visibleByKey[key] = !graphState.visibleByKey[key];
+            syncGraphButtonsAndCards({ animateKey: key });
+
+            lastRenderedRecords = getCurrentFilteredRecords();
+            if(graphState.panelVisible && graphState.visibleByKey[key]){
+                renderLineGraphToElements(GRAPH_CONFIGS[key], lastRenderedRecords);
+            }
+        });
+    });
+
+    document.querySelectorAll('.summary .summary-clickable[data-summary-key]').forEach(card => {
+        const open = () => {
+            const key = card.getAttribute('data-summary-key');
+            if(key) openSummaryModal(key);
+        };
+        card.addEventListener('click', open);
+        card.addEventListener('keydown', (ev) => {
+            if(ev.key === 'Enter' || ev.key === ' '){
+                ev.preventDefault();
+                open();
+            }
+        });
+    });
+
+    [
+        { tableId: 'byTypeTable', breakdownKey: 'type', breakdownLabel: 'Type' },
+        { tableId: 'byBarangayTable', breakdownKey: 'barangay', breakdownLabel: 'Barangay' },
+        { tableId: 'byMonthTable', breakdownKey: 'monthYear', breakdownLabel: 'Month / Year' },
+        { tableId: 'byStatusTable', breakdownKey: 'status', breakdownLabel: 'Status' },
+        { tableId: 'byCategoryTable', breakdownKey: 'clientCategory', breakdownLabel: 'Client Category' },
+        { tableId: 'byPriorityTable', breakdownKey: 'priority', breakdownLabel: 'Priority' },
+        { tableId: 'byOfficeTable', breakdownKey: 'office', breakdownLabel: 'Office' }
+    ].forEach(config => {
+        const table = document.getElementById(config.tableId);
+        if(!table) return;
+
+        const openBreakdownRow = row => {
+            if(!row) return;
+            openBreakdownModal(
+                row.getAttribute('data-breakdown-key') || config.breakdownKey,
+                row.getAttribute('data-breakdown-value') || '',
+                row.getAttribute('data-breakdown-label') || config.breakdownLabel
+            );
+        };
+
+        table.addEventListener('click', ev => {
+            const row = ev.target && ev.target.closest ? ev.target.closest('tr[data-breakdown-key]') : null;
+            if(row) openBreakdownRow(row);
+        });
+
+        table.addEventListener('keydown', ev => {
+            if(ev.key !== 'Enter' && ev.key !== ' ') return;
+            const row = ev.target && ev.target.closest ? ev.target.closest('tr[data-breakdown-key]') : null;
+            if(!row) return;
+            ev.preventDefault();
+            openBreakdownRow(row);
+        });
+    });
+
+    const summaryCloseBtn = document.getElementById('summaryModalCloseBtn');
+    if(summaryCloseBtn) summaryCloseBtn.addEventListener('click', closeSummaryModal);
+
+    const summaryBackdrop = document.getElementById('summaryModalBackdrop');
+    if(summaryBackdrop) summaryBackdrop.addEventListener('click', closeSummaryModal);
+
+    document.addEventListener('keydown', (ev) => {
+        if(ev.key === 'Escape'){
+            const modal = document.getElementById('summaryModal');
+            if(modal && !modal.hidden) closeSummaryModal();
+        }
+    });
+
+    syncGraphButtonsAndCards();
+    setGraphPanelVisibility(false);
+
+    window.addEventListener('resize', () => {
+        syncGraphButtonsAndCards();
+        if(graphState.panelVisible){
+            renderAllLineGraphs(lastRenderedRecords);
+        }
+    });
+
+    // live filter on select change
+    ['filterMonth','filterYear','filterBarangay','filterType','filterStatus','filterOffice','filterReferralSource','filterClientCategory','filterPriority'].forEach(id => {
+        const el = document.getElementById(id);
+        if(el) el.addEventListener('change', () => {
+            applyReportFiltersAndRender();
+        });
+    });
+
+    window.addEventListener('lb:records-changed', () => {
+        const currentFilters = {
+            month: document.getElementById('filterMonth').value,
+            year: document.getElementById('filterYear').value,
+            barangay: document.getElementById('filterBarangay').value,
+            type: document.getElementById('filterType').value,
+            status: document.getElementById('filterStatus').value,
+            office: document.getElementById('filterOffice').value,
+            referralSource: document.getElementById('filterReferralSource').value,
+            clientCategory: document.getElementById('filterClientCategory').value,
+            priority: document.getElementById('filterPriority').value
+        };
+
+        const recs = safeGetRecords();
+        populateFilterLists(recs);
+        document.getElementById('filterMonth').value = currentFilters.month;
+        if(Array.from(document.getElementById('filterYear').options).some(o => o.value === currentFilters.year)){
+            document.getElementById('filterYear').value = currentFilters.year;
+        }
+        if(Array.from(document.getElementById('filterBarangay').options).some(o => o.value === currentFilters.barangay)){
+            document.getElementById('filterBarangay').value = currentFilters.barangay;
+        }
+        if(Array.from(document.getElementById('filterType').options).some(o => o.value === currentFilters.type)){
+            document.getElementById('filterType').value = currentFilters.type;
+        }
+        if(Array.from(document.getElementById('filterStatus').options).some(o => o.value === currentFilters.status)){
+            document.getElementById('filterStatus').value = currentFilters.status;
+        }
+        if(Array.from(document.getElementById('filterOffice').options).some(o => o.value === currentFilters.office)){
+            document.getElementById('filterOffice').value = currentFilters.office;
+        }
+        if(Array.from(document.getElementById('filterReferralSource').options).some(o => o.value === currentFilters.referralSource)){
+            document.getElementById('filterReferralSource').value = currentFilters.referralSource;
+        }
+        if(Array.from(document.getElementById('filterClientCategory').options).some(o => o.value === currentFilters.clientCategory)){
+            document.getElementById('filterClientCategory').value = currentFilters.clientCategory;
+        }
+        if(Array.from(document.getElementById('filterPriority').options).some(o => o.value === currentFilters.priority)){
+            document.getElementById('filterPriority').value = currentFilters.priority;
+        }
+        applyReportFiltersAndRender();
+    });
+});
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,5469 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<title>Add Record - LINGKOD BAYAN</title>
+<link rel="stylesheet" href="assets/css/theme.css">
+<link rel="stylesheet" href="assets/css/add-record.css">
+</head>
+
+
+
+<body>
+
+
+
+<header>
+
+    <img src="assets/img/logo.jpg" alt="Logo">
+
+    <h1>Add Record</h1>
+
+    <div class="header-actions">
+        <button type="button" class="header-help-btn" onclick="window.lbRoutes.go('helpCenter')">Help Center</button>
+    </div>
+
+</header>
+
+
+
+<div class="container">
+
+
+
+<form id="recordForm" autocomplete="off">
+
+
+
+    <div class="form-meta" aria-live="polite">
+
+        <div class="step-counter" id="stepCounter">Section 1 of 5</div>
+
+        <div class="step-progress"><span id="stepProgressBar"></span></div>
+
+    </div>
+
+
+
+    <section class="form-step" data-step="1" aria-hidden="false">
+        <h2 class="step-title">Office / Organization</h2>
+
+        <select id="office">
+            <option value="">Office (CNL / PDL)</option>
+            <option value="CNL">CNL</option>
+            <option value="PDL">PDL</option>
+        </select>
+
+        <input type="text" id="leaderBarangayOfficial" placeholder="Click to search VIP/Leaders Referral (kung meron man)" autocomplete="off" autocapitalize="off" spellcheck="false">
+    </section>
+    <section class="form-step" data-step="2" aria-hidden="true">
+        <h2 class="step-title">Client Information</h2>
+
+        <div class="date-picker-wrapper" id="dateRequestedWrapper" style="margin-bottom:12px;">
+            <label for="dateRequested" style="display:none">Date Requested</label>
+            <div class="date-input" id="dateRequestedVisual" aria-haspopup="dialog" aria-expanded="false" role="button" tabindex="0">
+                <input type="text" id="dateRequested" placeholder="Date Requested (MM/DD/YYYY)" autocomplete="off" maxlength="10" aria-label="Date Requested" />
+                <button type="button" class="calendar-btn" id="calendarToggleRequested" title="Choose date" aria-label="Open date picker">&#128197;</button>
+            </div>
+        </div>
+
+        <div class="name-grid">
+            <div>
+                <input type="text" id="lastName" placeholder="Last Name" autocomplete="off" autocapitalize="off" spellcheck="false">
+            </div>
+            <div>
+                <input type="text" id="firstName" placeholder="First Name" autocomplete="off" autocapitalize="off" spellcheck="false">
+            </div>
+            <div>
+                <input type="text" id="middleName" placeholder="Middle Name (optional)" autocomplete="off" autocapitalize="off" spellcheck="false">
+            </div>
+        </div>
+        <div class="existing-record" id="existingRecordNotice" aria-live="polite" style="display:none;">
+            <div class="existing-record__copy">
+                <div class="existing-record__title">Client already exists in the table.</div>
+                <p class="existing-record__text" id="existingRecordText">You can add a new request for this client. The client profile stays on the main record, while request details are saved in history.</p>
+            </div>
+            <div class="existing-record__actions">
+                <button type="button" id="existingRecordAddRequest" class="existing-record__btn">Add Request Details</button>
+                <button type="button" id="existingRecordClear" class="existing-record__btn ghost">Clear Name</button>
+            </div>
+        </div>
+        <div class="existing-record existing-record--warning" id="duplicateRequestNotice" aria-live="polite" style="display:none;">
+            <div class="existing-record__copy">
+                <div class="existing-record__title">Possible duplicate request detected.</div>
+                <p class="existing-record__text" id="duplicateRequestText">This client already has the same request date and program saved.</p>
+            </div>
+        </div>
+
+        <div class="date-picker-wrapper" id="birthdayWrapper">
+            <label for="birthday" style="display:none">Birthday</label>
+            <div class="date-input" id="dateInputVisual" aria-haspopup="dialog" aria-expanded="false" role="button" tabindex="0">
+                <input type="text" id="birthday" placeholder="Birthday" autocomplete="off" maxlength="10" aria-label="Birthday" />
+                <button type="button" class="calendar-btn" id="calendarToggle" title="Choose date" aria-label="Open date picker">&#128197;</button>
+            </div>
+        </div>
+
+        <select id="gender">
+            <option value="">Select Gender</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="lgbtq">LGBTQ+</option>
+            <option value="prefer_not">Prefer not to say</option>
+            <option value="other">Other (specify)</option>
+        </select>
+
+        <input type="text" id="genderOther" placeholder="Please specify gender" style="display:none; margin-top:8px;">
+
+        <input type="email" id="email" placeholder="Client Email Address (optional)" autocomplete="off" autocapitalize="off" spellcheck="false">
+
+        <select id="barangay">
+            <option value="">Calamba Barangay</option>
+        </select>
+
+        <select id="address">
+            <option value="">Purok/Sitio</option>
+            <option>Purok 1</option>
+            <option>Purok 2</option>
+            <option>Sitio A</option>
+            <option>Sitio B</option>
+        </select>
+
+        <select id="subdivision">
+            <option value="">Select Subdivision/Village/Compound</option>
+            <option>Greenfield Village</option>
+            <option>Sunrise Subdivision</option>
+            <option>Riverbank Compound</option>
+        </select>
+
+        <input type="text" id="houseNo" placeholder="Lot and Block" autocomplete="off" autocapitalize="off" spellcheck="false">
+        <input type="text" id="contact" placeholder="Cellphone Number" inputmode="numeric" autocomplete="off" autocapitalize="off" spellcheck="false">
+    </section>
+    <section class="form-step" data-step="3" aria-hidden="true">
+        <h2 class="step-title">Basics</h2>
+
+        <select id="first_contact">
+            <option value="">Saan po tayo lumapit?</option>
+            <option>Online</option>
+            <option>City Hall Office</option>
+            <option>TGP Office - Brgy. Milagrosa</option>
+        </select>
+
+        <input type="text" id="first_staff" placeholder="Ano po ang pangalan ng staff?" autocomplete="off" autocapitalize="off" spellcheck="false">
+
+        <select id="client_class">
+            <option value="">Client Classification</option>
+            <option>Regular Client</option>
+            <option>Barangay Office</option>
+            <option>City Hall Employee</option>
+            <option>Organizational Sectors</option>
+            <option value="Other">Others</option>
+        </select>
+
+        <input type="text" id="client_class_other" placeholder="If Other, specify" autocomplete="off" autocapitalize="off" spellcheck="false" style="display:none;">
+    </section>
+    <section class="form-step" data-step="4" aria-hidden="true">
+        <h2 class="step-title">Programs / Request / Medical</h2>
+
+                <input type="hidden" id="type" value="">
+
+        <label class="program-label">Ano pong programa o activity ang nais ninyong i-request? <span class="required-star" aria-hidden="true">*</span></label>
+        <select id="programs" aria-label="Programs / Request / Medical option">
+            <option value="">Select option</option>
+            <option value="Hospital Bill">Hospital Bill</option>
+            <option value="Laboratory/Medical Procedure">Laboratory/Medical Procedure</option>
+            <option value="Eye glass">Eye glass</option>
+            <option value="Medicine">Medicine</option>
+            <option value="Guarantee Letter">Guarantee Letter</option>
+            <option value="Transport Service - Medical Client">Transport Service - Medical Client</option>
+            <option value="OP Assistance">OP Assistance</option>
+            <option value="Special Case - Medical Client">Special Case - Medical Client</option>
+            <option value="Medical Financial Assistance (Cash)">Medical Financial Assistance (Cash)</option>
+            <option value="Solicitation (Cash / Goods / Item)">Solicitation (Cash / Goods / Item)</option>
+            <option value="Agricultural Program">Agricultural Program</option>
+            <option value="Consultation &amp; Visitation">Consultation &amp; Visitation</option>
+            <option value="Environmental Program">Environmental Program</option>
+            <option value="Hapag-Kainan">Hapag-Kainan</option>
+            <option value="Legal Assistance">Legal Assistance</option>
+            <option value="MayTrabaho - Referral Letter">MayTrabaho - Referral Letter</option>
+            <option value="Educational Discussions / Events">Educational Discussions / Events</option>
+            <option value="Barangay Event Appearance">Barangay Event Appearance</option>
+            <option value="Speaking Engagement">Speaking Engagement</option>
+        </select>
+        <div id="guaranteeLetterOptionField" class="program-inline-choice" style="display:none;">
+            <label class="program-label" for="guarantee_letter_option">Guarantee Letter Option</label>
+            <select id="guarantee_letter_option" aria-label="Guarantee Letter Option">
+                <option value="">Select option</option>
+                <option value="TGP Party list - Public">TGP Party list - Public</option>
+                <option value="TGP Party list - Private">TGP Party list - Private</option>
+                <option value="Senate - Public">Senate - Public</option>
+                <option value="Senate - Private">Senate - Private</option>
+            </select>
+        </div>
+        <div id="opAssistanceStatusField" class="program-inline-choice" style="display:none;">
+            <label class="program-label" for="op_assistance_status">OP Assistance Status</label>
+            <select id="op_assistance_status" aria-label="OP Assistance status">
+                <option value="">Select option</option>
+                <option value="Pending">Pending</option>
+                <option value="Reviewed">Reviewed</option>
+                <option value="Shipped">Shipped</option>
+                <option value="Released">Released</option>
+            </select>
+        </div>
+        <p class="step-note">Type of assistance is set automatically from the selected option.</p>
+    </section>
+
+<section class="form-step" data-step="5" aria-hidden="true">
+        <h2 class="step-title" id="programDetailsTitle">Program Details</h2>
+        <p class="step-note" id="programDetailsHelp">Select an assistance option above to show the required details.</p>
+
+        <div id="guaranteeFields" class="program-fields">
+            <div class="program-card">
+                <h3 class="program-subtitle">Guarantee Letter Details</h3>
+
+                <label for="guarantee_hospital" class="program-label">Hospital / Institution</label>
+                <input type="text" id="guarantee_hospital" placeholder="Your answer" autocomplete="off" autocapitalize="off" spellcheck="false">
+
+                <label for="guarantee_purpose" class="program-label">Purpose of Request</label>
+                <input type="text" id="guarantee_purpose" placeholder="Your answer" autocomplete="off" autocapitalize="off" spellcheck="false">
+
+                <label for="guarantee_amount" class="program-label">Amount Requested</label>
+                <input type="number" id="guarantee_amount" placeholder="Your answer" min="0" step="0.01" autocomplete="off">
+            </div>
+        </div>
+        <div id="medicalFields" class="program-fields">
+            <div class="program-card">
+                <h3 class="program-subtitle">Medical Assistance Related Requests and Activity</h3>
+
+                <div id="requestingForField">
+                    <label class="program-label" for="requesting_for_select">Requesting for</label>
+                    <input type="hidden" id="requesting_for" value="">
+                    <select id="requesting_for_select" aria-label="Requesting for">
+                        <option value="">Select option</option>
+                        <option value="TGP Partylist">TGP Partylist</option>
+                        <option value="DSWD Regional">DSWD Regional</option>
+                        <option value="Malacanang / Office of the President">Malacanang / Office of the President</option>
+                        <option value="Solicitatation - Direct: CNL">Solicitatation - Direct: CNL</option>
+                        <option value="PCSO">PCSO</option>
+                        <option value="DSWD Provincial">DSWD Provincial</option>
+                        <option value="Medsurge Eye Clinic">Medsurge Eye Clinic</option>
+                        <option value="Request for Promissory Assistance">Request for Promissory Assistance</option>
+                        <option value="Other">Other</option>
+                    </select>
+                    <input type="text" id="requesting_for_other" placeholder="Specify other" autocomplete="off" autocapitalize="off" spellcheck="false">
+                </div>
+
+                <label class="program-label" for="patient_status_select">Ang pasyente po ba ay</label>
+                <input type="hidden" id="patient_status" value="">
+                <select id="patient_status_select" aria-label="Patient status">
+                    <option value="">Select option</option>
+                    <option value="Admitted sa hospital">Admitted sa hospital</option>
+                    <option value="Out Patient o hindi na admitted">Out Patient o hindi na admitted</option>
+                </select>
+
+                <label class="program-label" for="client_times_select">Ang pasyente o kliyente po ba ay</label>
+                <input type="hidden" id="client_times" value="">
+                <select id="client_times_select" aria-label="Client type">
+                    <option value="">Select option</option>
+                    <option value="Unang beses pa lang na lalapit para humingi ng tulong medical sa inyong opisina (New Client)">Unang beses pa lang na lalapit para humingi ng tulong medical sa inyong opisina (New Client)</option>
+                    <option value="Pangalawa o makailang beses na nakalapit para humingi ng tulong medical sa inyong opisina (Returning Client)">Pangalawa o makailang beses na nakalapit para humingi ng tulong medical sa inyong opisina (Returning Client)</option>
+                </select>
+
+                <div id="transportStatusField" style="display:none;">
+                    <label class="program-label" for="transport_service_status">Transport Service Status</label>
+                    <select id="transport_service_status" aria-label="Transport service status">
+                        <option value="">Select option</option>
+                        <option value="Show">Show</option>
+                        <option value="No Show">No Show</option>
+                    </select>
+                </div>
+
+                <div id="specialCaseStatusField" style="display:none;">
+                    <label class="program-label" for="special_case_status">Special Case Status</label>
+                    <select id="special_case_status" aria-label="Special case status">
+                        <option value="">Select option</option>
+                        <option value="Interviewed">Interviewed</option>
+                        <option value="sent a letter">sent a letter</option>
+                        <option value="visited">visited</option>
+                        <option value="discharged">discharged</option>
+                    </select>
+                </div>
+
+                <label for="hospital" class="program-label">Hospital / Institution</label>
+                <input type="text" id="hospital" placeholder="Hospital / Institution" autocomplete="off" autocapitalize="off" spellcheck="false">
+
+                <div class="date-picker-wrapper" id="dateAssistanceWrapper">
+                    <label for="date_of_assistance" class="program-label">Date of Assistance</label>
+                    <div class="date-input" id="dateAssistanceVisual" aria-haspopup="dialog" aria-expanded="false" role="button" tabindex="0">
+                        <input type="text" id="date_of_assistance" placeholder="Date of Assistance (MM/DD/YYYY)" autocomplete="off" maxlength="10" aria-label="Date of Assistance" />
+                        <button type="button" class="calendar-btn" id="calendarToggleAssistance" title="Choose date" aria-label="Open date picker">&#128197;</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="activityFields" class="program-fields">
+            <div class="program-card">
+                <h3 class="program-subtitle">Other Activities and Programs</h3>
+
+                <div id="mayTrabahoStatusField" style="display:none;">
+                    <label for="maytrabaho_status" class="program-label">MayTrabaho Status</label>
+                    <select id="maytrabaho_status" aria-label="MayTrabaho status">
+                        <option value="">Select option</option>
+                        <option value="Pending">Pending</option>
+                        <option value="Released">Released</option>
+                        <option value="For Interview">For Interview</option>
+                        <option value="Hired">Hired</option>
+                        <option value="Not Hired">Not Hired</option>
+                    </select>
+                </div>
+
+                <label for="org_long_name" class="program-label">Pangalan ng inyong Organization, Institution, Office, Sangguniang Barangay, Company</label>
+                <input type="text" id="org_long_name" placeholder="Your answer" autocomplete="off" autocapitalize="off" spellcheck="false">
+
+                <label for="num_attendees" class="program-label">Number of Attendees/Beneficiaries</label>
+                <input type="number" id="num_attendees" placeholder="Your answer" min="0" step="1" autocomplete="off">
+
+                <label for="other_details" class="program-label">Iba pang detalye tulad ng: Requests, Venue, Attire, At iba pa</label>
+                <input type="text" id="other_details" placeholder="Your answer" autocomplete="off" autocapitalize="off" spellcheck="false">
+
+                <label for="event_date" class="program-label">Date of the Event/Activity</label>
+                <input type="date" id="event_date" aria-label="Date of the Event/Activity">
+
+                <label for="event_name" class="program-label">Ano ang Event/ Activity <span class="required-star" aria-hidden="true">*</span></label>
+                <input type="text" id="event_name" placeholder="Your answer" autocomplete="off" autocapitalize="off" spellcheck="false">
+
+                <label for="event_place" class="program-label">Place of Event/Activity</label>
+                <input type="text" id="event_place" placeholder="Your answer" autocomplete="off" autocapitalize="off" spellcheck="false">
+
+                <label for="event_time" class="program-label">Time</label>
+                <input type="time" id="event_time" aria-label="Time of Event/Activity">
+
+                <label for="upload_letter" class="program-label">Paki-upload po ng inyong letter of request, solicitation and invitation.</label>
+                <input type="file" id="upload_letter" accept=".pdf,.jpg,.jpeg,.png,.webp">
+                <p class="step-note">Supported files: PDF, JPG, JPEG, PNG, and WEBP. Images can be up to 10 MB, while PDFs can be up to 15 MB.</p>
+            </div>
+        </div>
+
+        <input type="text" id="remarks" placeholder="Remarks" autocomplete="off" autocapitalize="off" spellcheck="false">
+        <p class="step-note">Review all sections before saving the record.</p>
+    </section>
+
+
+
+    <div class="form-nav-row">
+
+        <button type="button" id="prevStepBtn" class="step-btn">Previous Section</button>
+
+        <button type="button" id="nextStepBtn" class="step-btn">Next Section</button>
+
+        <button type="submit" id="addSubmitBtn">Save Record</button>
+
+        <button type="button" id="Clear">Clear</button>
+
+        <button type="button" id="backToTableBtn" onclick="window.lbRoutes.go('records')">Back to Table View</button>
+
+    </div>
+
+
+
+</form>
+
+
+
+</div>
+
+<div id="toast" class="toast">
+
+    <span class="icon" id="toastIcon">OK</span>
+
+    <span id="toastMessage">Record added successfully!</span>
+
+</div>
+
+
+
+<!-- Confirm modal (custom) -->
+
+<div id="confirmModal" class="confirm-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="confirmModalTitle">
+
+  <div class="confirm-modal-overlay" data-close-modal></div>
+
+  <div class="confirm-modal-dialog" role="document">
+
+    <h2 id="confirmModalTitle">Are you sure?</h2>
+    <p>Are you sure you want to clear all inputs? This cannot be undone.</p>
+
+    <div class="confirm-modal-actions">
+
+      <button id="confirmModalCancel" type="button" class="btn cancel">Cancel</button>
+
+      <button id="confirmModalConfirm" type="button" class="btn confirm">Yes</button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+
+<!-- Load barangays list and puroks list before the main script so selects get populated before conversion -->
+
+<script src="assets/js/supabase-config.js"></script>
+<script src="assets/js/supabase-client.js"></script>
+<script src="assets/js/data-store.js"></script>
+<script src="assets/js/record-attachments.js"></script>
+<script src="assets/js/routes.js"></script>
+<script src="assets/js/auth.js"></script>
+<script src="assets/js/ceu-referrals.js"></script>
+<script src="assets/js/barangays.js"></script>
+<script src="assets/js/puroks.js"></script>
+
+
+
+<script>
+
+/* ===================== MERGED SCRIPT =====================
+
+   Contains:
+
+   - Date picker factory (reusable for birthday & dateRequested)
+
+   - Address/purok population helper
+   - Searchable select conversion & updating
+
+   - Inline errors/toast
+
+   - Form submission + validation (normalizes dates to ISO)
+
+   - Autosave / Draft (save/load)
+
+   - Confirm modal handling
+*/
+
+
+
+/* ---------------------- Constants ---------------------- */
+
+if(!(window.lbAuth && window.lbAuth.requireAuth())){
+
+    throw new Error('Unauthorized');
+
+}
+
+
+
+const form = document.getElementById('recordForm');
+
+const fieldIds = ["dateRequested","lastName","firstName","middleName","barangay","address","subdivision","houseNo","contact","email","gender","birthday","first_contact","first_staff","client_class","client_class_other","office","programs","guarantee_letter_option","type","guarantee_hospital","guarantee_purpose","guarantee_amount","requesting_for","patient_status","client_times","transport_service_status","special_case_status","op_assistance_status","maytrabaho_status","hospital","requesting_for_other","date_of_assistance","leaderBarangayOfficial","org_long_name","num_attendees","other_details","event_date","event_name","event_place","event_time","upload_letter","remarks"];
+
+let currentFormStep = 0;
+let isRequestOnlyMode = false;
+let requestOnlyRecordId = null;
+let existingRecordMatch = null;
+const duplicateRequestNotice = document.getElementById('duplicateRequestNotice');
+const duplicateRequestText = document.getElementById('duplicateRequestText');
+
+if(window.lbCeuReferrals && typeof window.lbCeuReferrals.attachInput === 'function'){
+    window.lbCeuReferrals.attachInput(document.getElementById('leaderBarangayOfficial'));
+}
+
+const SUBMIT_LABEL = 'Save Record';
+const CLIENT_CLASS_OPTIONS = Object.freeze([
+    'Regular Client',
+    'Barangay Office',
+    'City Hall Employee',
+    'Organizational Sectors'
+]);
+
+function resolveClientClassValue(selectValue, otherValue){
+    const selected = String(selectValue || '').trim();
+    const other = String(otherValue || '').trim();
+    if(selected === 'Other'){
+        return other || 'Other';
+    }
+    return selected;
+}
+
+function applyClientClassValue(value){
+    const clientClassSelect = document.getElementById('client_class');
+    const clientClassOther = document.getElementById('client_class_other');
+    if(!clientClassSelect || !clientClassOther) return;
+
+    const normalized = String(value || '').trim();
+    if(!normalized){
+        clientClassSelect.value = '';
+        clientClassOther.value = '';
+        clientClassOther.style.display = 'none';
+        clientClassOther.classList.remove('filled');
+        clientClassSelect.dispatchEvent(new Event('change'));
+        return;
+    }
+
+    const matchedOption = CLIENT_CLASS_OPTIONS.find(function(option){
+        return option.toLowerCase() === normalized.toLowerCase();
+    });
+
+    if(matchedOption){
+        clientClassSelect.value = matchedOption;
+        clientClassOther.value = '';
+        clientClassOther.style.display = 'none';
+        clientClassOther.classList.remove('filled');
+        clientClassSelect.dispatchEvent(new Event('change'));
+        return;
+    }
+
+    clientClassSelect.value = 'Other';
+    clientClassOther.style.display = 'block';
+    clientClassOther.disabled = false;
+    clientClassOther.value = normalized;
+    clientClassOther.classList.toggle('filled', normalized !== '');
+    clientClassSelect.dispatchEvent(new Event('change'));
+}
+
+function buildHistoryEntryFromForm(values){
+    const payload = values && typeof values === 'object' ? values : {};
+    return {
+        id: String(payload.id || payload.history_entry_id || '').trim(),
+        name: String(payload.name || '').trim(),
+        glcode: String(payload.glcode || '').trim(),
+        date: String(payload.date || '').trim(),
+        dateCompleted: String(payload.dateCompleted || '').trim(),
+        dateReleased: String(payload.dateReleased || '').trim(),
+        type: String(payload.type || '').trim(),
+        program: String(payload.program || '').trim(),
+        status: String(payload.status || '').trim(),
+        leader: String(payload.leader || '').trim(),
+        first_contact: String(payload.first_contact || '').trim(),
+        first_staff: String(payload.first_staff || '').trim(),
+        client_class: String(payload.client_class || '').trim(),
+        office: String(payload.office || '').trim(),
+        guarantee_letter_option: String(payload.guarantee_letter_option || '').trim(),
+        guarantee_hospital: String(payload.guarantee_hospital || '').trim(),
+        guarantee_purpose: String(payload.guarantee_purpose || '').trim(),
+        guarantee_amount: payload.guarantee_amount !== ''
+            ? payload.guarantee_amount
+            : '',
+        requesting_for: String(payload.requesting_for || '').trim(),
+        patient_status: String(payload.patient_status || '').trim(),
+        client_times: String(payload.client_times || '').trim(),
+        transport_service_status: String(payload.transport_service_status || '').trim(),
+        special_case_status: String(payload.special_case_status || '').trim(),
+        hospital: String(payload.hospital || '').trim(),
+        date_of_assistance: String(payload.date_of_assistance || '').trim(),
+        maytrabaho_status: String(payload.maytrabaho_status || '').trim(),
+        org_long_name: String(payload.org_long_name || '').trim(),
+        num_attendees: payload.num_attendees !== ''
+            ? payload.num_attendees
+            : '',
+        other_details: String(payload.other_details || '').trim(),
+        event_date: String(payload.event_date || '').trim(),
+        event_name: String(payload.event_name || '').trim(),
+        event_place: String(payload.event_place || '').trim(),
+        event_time: String(payload.event_time || '').trim(),
+        upload_letter_meta: payload.upload_letter_meta || null,
+        remarks: String(payload.remarks || '').trim()
+    };
+}
+
+function requiresOrganizationName(clientClassValue){
+    const normalized = String(clientClassValue || '').trim().toLowerCase();
+    return normalized !== '' && normalized !== 'regular client';
+}
+
+const normalizeAssistanceText = (value) => {
+    return String(value || '')
+        .toLowerCase()
+        .replace(/&/g, ' and ')
+        .replace(/[^a-z0-9]+/g, ' ')
+        .replace(/\s+/g, ' ')
+        .trim();
+};
+
+const normalizeAssistanceType = (typeValue) => {
+    const raw = String(typeValue || '').trim();
+    if(!raw) return '';
+
+    const labelMap = {
+        'medical': 'Medical',
+        'hospital': 'Hospital',
+        'pcso': 'PCSO',
+        'transport': 'Transport',
+        'guarantee letter': 'Guarantee Letter',
+        'special case': 'Special Case',
+        'promissory': 'Promissory',
+        'request': 'Request',
+        'solicitation': 'Solicitation',
+        'legal': 'Legal',
+        'referral': 'Referral',
+        'maytrabaho': 'MayTrabaho',
+        'activity': 'Activity',
+        'event': 'Event',
+        'agricultural': 'Agricultural',
+        'environmental': 'Environmental',
+        'educational': 'Educational',
+        'hapag': 'Hapag',
+    'consultation': 'Consultation',
+    'visitation': 'Visitation',
+    'speaking': 'Speaking',
+    'op assistance': 'OP Assistance'
+    };
+
+    const normalized = normalizeAssistanceText(raw);
+    return labelMap[normalized] || raw;
+};
+
+function getAssistanceCategory(typeValue){
+    const raw = String(typeValue || '').trim();
+    if(!raw) return '';
+
+    if(/^medical$/i.test(raw)) return 'Medical';
+    if(/^request$/i.test(raw)) return 'Request';
+    if(/^program$/i.test(raw)) return 'Program';
+
+    const fromProgram = deriveTypeFromProgram(raw);
+    if(fromProgram) return fromProgram;
+
+    const normalized = normalizeAssistanceText(raw);
+    const medicalTokens = ['medical','hospital','pcso','transport','guarantee letter','special case','promissory'];
+    const requestTokens = ['request','solicitation','legal','referral','maytrabaho'];
+    const programTokens = ['program','activity','event','agricultural','environmental','educational','hapag','consultation','visitation','speaking'];
+
+    if(medicalTokens.some(token => normalized.includes(token))) return 'Medical';
+    if(requestTokens.some(token => normalized.includes(token))) return 'Request';
+    if(programTokens.some(token => normalized.includes(token))) return 'Program';
+
+    return '';
+}
+
+function getProgramMode(typeValue){
+    const category = getAssistanceCategory(typeValue);
+    if(category === 'Medical') return 'medical';
+    if(category === 'Request') return 'request';
+    if(category === 'Program') return 'program';
+    return '';
+}
+const ASSISTANCE_TYPE_BY_PROGRAM = Object.freeze({
+    'Hospital Bill': 'Medical',
+    'Laboratory/Medical Procedure': 'Medical',
+    'Eye glass': 'Medical',
+    'Eye Center': 'Medical',
+    'Medicine': 'Medical',
+    'Guarantee Letter': 'Medical',
+    'Transport Service - Medical Client': 'Medical',
+    'Special Case - Medical Client': 'Medical',
+    'Medical Financial Assistance (Cash)': 'Medical',
+    'Solicitation (Cash / Goods / Item)': 'Request',
+    'Agricultural Program': 'Program',
+    'Consultation & Visitation': 'Program',
+    'Environmental Program': 'Program',
+    'Hapag-Kainan': 'Program',
+    'Legal Assistance': 'Request',
+    'OP Assistance': 'Request',
+    'MayTrabaho - Referral Letter': 'Request',
+    'Educational Discussions / Events': 'Program',
+    'Barangay Event Appearance': 'Program',
+    'Speaking Engagement': 'Program'
+});
+
+const PROGRAMS_USE_ACTIVITY_FIELDS = new Set([
+    'Solicitation (Cash / Goods / Item)',
+    'Legal Assistance',
+    'MayTrabaho - Referral Letter'
+]);
+
+const DEFAULT_REQUESTING_FOR_OPTIONS = [
+    'TGP Partylist',
+    'DSWD Regional',
+    'Malacanang / Office of the President',
+    'Solicitatation - Direct: CNL',
+    'PCSO',
+    'DSWD Provincial',
+    'Medsurge Eye Clinic',
+    'Request for Promissory Assistance',
+    'Other'
+];
+
+const TRANSPORT_REQUESTING_FOR_OPTIONS = [
+    'TGP Partylist',
+    'DSWD Regional'
+];
+
+const SPECIAL_CASE_DEFAULT_STATUS = 'Interviewed';
+
+function getSelectedProgram(){
+    const programsSelect = document.getElementById('programs');
+    return programsSelect ? String(programsSelect.value || '').trim() : '';
+}
+
+function normalizeProgramSelectionValue(programName){
+    const value = String(programName || '').trim();
+    return normalizeAssistanceText(value) === 'eye center'
+        ? 'Transport Service - Medical Client'
+        : value;
+}
+
+function getRequestingForOptionsForProgram(programName){
+    return programName === 'Transport Service - Medical Client'
+        ? TRANSPORT_REQUESTING_FOR_OPTIONS
+        : DEFAULT_REQUESTING_FOR_OPTIONS;
+}
+
+function setRequestingForOptionsForProgram(programName, selectedValue){
+    const select = document.getElementById('requesting_for_select');
+    if(!select) return;
+
+    const currentValue = String(selectedValue != null ? selectedValue : select.value || '').trim();
+    const options = getRequestingForOptionsForProgram(programName);
+    select.innerHTML = '';
+
+    const placeholder = document.createElement('option');
+    placeholder.value = '';
+    placeholder.textContent = 'Select option';
+    select.appendChild(placeholder);
+
+    options.forEach(function(value){
+        const option = document.createElement('option');
+        option.value = value;
+        option.textContent = value;
+        select.appendChild(option);
+    });
+
+    select.value = options.includes(currentValue) ? currentValue : '';
+    updateSearchableOptionsForSelect('requesting_for_select');
+    updateRequestingOtherVisibility();
+    refreshMedicalHiddenValues();
+}
+
+function clearRequestingForFields(){
+    const requestingHidden = document.getElementById('requesting_for');
+    const requestingSelect = document.getElementById('requesting_for_select');
+    const requestingOther = document.getElementById('requesting_for_other');
+    if(requestingHidden) requestingHidden.value = '';
+    if(requestingSelect) requestingSelect.value = '';
+    if(requestingOther) requestingOther.value = '';
+    updateRequestingOtherVisibility();
+    clearFieldError('requesting_for');
+}
+
+function deriveTypeFromProgram(programValue){
+    const value = String(programValue || '').trim();
+    if(!value) return '';
+    return ASSISTANCE_TYPE_BY_PROGRAM[value] || '';
+}
+
+function syncTypeFromPrograms(){
+    const typeEl = document.getElementById('type');
+    const selectedProgram = getSelectedProgram();
+
+    if(typeEl){
+        typeEl.value = selectedProgram || '';
+    }
+
+    syncProgramSpecificFields();
+    return {
+        selectedProgram,
+        type: normalizeAssistanceType(selectedProgram)
+    };
+}
+function syncProgramSpecificFields(){
+    const typeEl = document.getElementById('type');
+    const selectedProgram = getSelectedProgram();
+    const mode = getProgramMode(typeEl ? typeEl.value : '');
+    const isGuaranteeProgram = selectedProgram === 'Guarantee Letter';
+    const guaranteeLetterOptionField = document.getElementById('guaranteeLetterOptionField');
+    const guaranteeLetterOptionSelect = document.getElementById('guarantee_letter_option');
+
+    const titleEl = document.getElementById('programDetailsTitle');
+    const helpEl = document.getElementById('programDetailsHelp');
+    const guaranteeEl = document.getElementById('guaranteeFields');
+    const medicalEl = document.getElementById('medicalFields');
+    const requestingForEl = document.getElementById('requestingForField');
+    const activityEl = document.getElementById('activityFields');
+    const transportStatusEl = document.getElementById('transportStatusField');
+    const specialCaseStatusEl = document.getElementById('specialCaseStatusField');
+    const opAssistanceStatusEl = document.getElementById('opAssistanceStatusField');
+    const mayTrabahoStatusEl = document.getElementById('mayTrabahoStatusField');
+
+    const toggleGroup = (groupEl, show) => {
+        if(!groupEl) return;
+        groupEl.style.display = show ? 'block' : 'none';
+        groupEl.querySelectorAll('input, select, textarea').forEach(ctrl => {
+            ctrl.disabled = !show;
+        });
+    };
+
+    const showGuaranteeGroup = false;
+    const useActivityOverride = PROGRAMS_USE_ACTIVITY_FIELDS.has(selectedProgram);
+    const showMedicalGroup = (mode === 'medical' || mode === 'request') && !useActivityOverride;
+    const showProgramGroup = mode === 'program' || useActivityOverride;
+    const showRequestingFor = showMedicalGroup && selectedProgram !== 'Special Case - Medical Client';
+    const showTransportStatus = showMedicalGroup && selectedProgram === 'Transport Service - Medical Client';
+    const showSpecialCaseStatus = showMedicalGroup && selectedProgram === 'Special Case - Medical Client';
+    const showOpAssistanceStatus = showMedicalGroup && selectedProgram === 'OP Assistance';
+    const showMayTrabahoStatus = showProgramGroup && selectedProgram === 'MayTrabaho - Referral Letter';
+
+    setRequestingForOptionsForProgram(selectedProgram);
+    toggleGroup(guaranteeEl, showGuaranteeGroup);
+    toggleGroup(medicalEl, showMedicalGroup);
+    toggleGroup(requestingForEl, showRequestingFor);
+    toggleGroup(activityEl, showProgramGroup);
+    toggleGroup(transportStatusEl, showTransportStatus);
+    toggleGroup(specialCaseStatusEl, showSpecialCaseStatus);
+    toggleGroup(opAssistanceStatusEl, showOpAssistanceStatus);
+    toggleGroup(mayTrabahoStatusEl, showMayTrabahoStatus);
+
+    if(!showRequestingFor){
+        clearRequestingForFields();
+    }
+
+    if(guaranteeLetterOptionField){
+        guaranteeLetterOptionField.style.display = isGuaranteeProgram ? 'block' : 'none';
+        guaranteeLetterOptionField.querySelectorAll('input, select, textarea').forEach(ctrl => {
+            ctrl.disabled = !isGuaranteeProgram;
+        });
+        if(!isGuaranteeProgram && guaranteeLetterOptionSelect){
+            guaranteeLetterOptionSelect.value = '';
+            const wrapper = guaranteeLetterOptionField.querySelector('.search-wrapper');
+            const searchInput = wrapper ? wrapper.querySelector('.search-input') : null;
+            if(searchInput){
+                searchInput.value = '';
+                searchInput.classList.remove('filled');
+                wrapper.classList.remove('selected');
+            }
+            clearFieldError('guarantee_letter_option');
+        }
+    }
+
+    const specialCaseStatusSelect = document.getElementById('special_case_status');
+    if(showSpecialCaseStatus && specialCaseStatusSelect && (!specialCaseStatusSelect.value || specialCaseStatusSelect.value === 'Pending')){
+        specialCaseStatusSelect.value = SPECIAL_CASE_DEFAULT_STATUS;
+    }
+
+    const mayTrabahoStatusSelect = document.getElementById('maytrabaho_status');
+    if(showMayTrabahoStatus && mayTrabahoStatusSelect && !mayTrabahoStatusSelect.value){
+        mayTrabahoStatusSelect.value = 'Pending';
+    }
+
+    const opAssistanceStatusSelect = document.getElementById('op_assistance_status');
+    if(showOpAssistanceStatus && opAssistanceStatusSelect && !opAssistanceStatusSelect.value){
+        opAssistanceStatusSelect.value = 'Pending';
+    }
+
+    if(titleEl){
+        titleEl.textContent = showGuaranteeGroup
+            ? 'Guarantee Letter Details'
+            : useActivityOverride
+                ? 'Other Activities and Programs'
+                : mode === 'medical'
+                    ? 'Medical Assistance Related Requests and Activity'
+                    : mode === 'request'
+                        ? 'Request Details'
+                        : mode === 'program'
+                            ? 'Other Activities and Programs'
+                            : 'Program Details';
+    }
+
+    if(helpEl){
+        helpEl.textContent = showGuaranteeGroup
+            ? 'Fill in guarantee letter information below.'
+            : useActivityOverride
+                ? 'Fill in the activity or event details below.'
+                : mode === 'medical'
+                    ? 'Fill in the medical assistance details below.'
+                    : mode === 'request'
+                        ? 'Fill in request details below.'
+                        : mode === 'program'
+                            ? 'Fill in the activity or event details below.'
+                            : 'Select an assistance option above to show the required details.';
+    }
+
+    if(!showMedicalGroup){
+        ['requesting_for','patient_status','client_times','transport_service_status','special_case_status','hospital','requesting_for_other','date_of_assistance'].forEach(id => clearFieldError(id));
+    }
+
+    if(!showTransportStatus){
+        clearFieldError('transport_service_status');
+    }
+
+    if(!showSpecialCaseStatus){
+        clearFieldError('special_case_status');
+    }
+
+    if(!showOpAssistanceStatus){
+        clearFieldError('op_assistance_status');
+    }
+
+    if(!showProgramGroup){
+        ['maytrabaho_status','org_long_name','num_attendees','other_details','event_date','event_name','event_place','event_time'].forEach(id => clearFieldError(id));
+    }
+
+    if(!showMayTrabahoStatus){
+        clearFieldError('maytrabaho_status');
+    }
+
+    if(!showGuaranteeGroup){
+        ['guarantee_hospital','guarantee_purpose','guarantee_amount'].forEach(id => clearFieldError(id));
+    }
+}
+
+
+
+function getFormSteps(){
+
+    const steps = Array.from(document.querySelectorAll('#recordForm .form-step'));
+
+    return steps;
+
+}
+
+function getClientInformationStepIndex(){
+
+    const steps = getFormSteps();
+
+    const lastNameField = document.getElementById('lastName');
+
+    const clientInfoStep = lastNameField && typeof lastNameField.closest === 'function'
+        ? lastNameField.closest('.form-step')
+        : null;
+
+    const index = clientInfoStep ? steps.indexOf(clientInfoStep) : -1;
+
+    return index >= 0 ? index : 0;
+
+}
+
+
+
+function showFormStep(index){
+
+    const steps = getFormSteps();
+
+    if(!steps.length) return;
+
+
+
+    currentFormStep = Math.max(0, Math.min(index, steps.length - 1));
+
+
+
+    steps.forEach((step, i) => {
+
+        const active = i === currentFormStep;
+
+        step.setAttribute('aria-hidden', active ? 'false' : 'true');
+
+        step.style.display = active ? 'block' : 'none';
+
+    });
+
+
+
+    const stepCounter = document.getElementById('stepCounter');
+
+    if(stepCounter){
+
+        stepCounter.textContent = `Section ${currentFormStep + 1} of ${steps.length}`;
+
+    }
+
+
+
+    const progressBar = document.getElementById('stepProgressBar');
+
+    if(progressBar){
+
+        progressBar.style.width = `${((currentFormStep + 1) / steps.length) * 100}%`;
+
+    }
+
+
+
+    const prevBtn = document.getElementById('prevStepBtn');
+
+    if(prevBtn){
+
+        prevBtn.disabled = currentFormStep === 0;
+
+    }
+
+
+
+    const isLastStep = currentFormStep === steps.length - 1;
+
+    const isBlocked = shouldBlockNewRecord();
+
+
+
+    const nextBtn = document.getElementById('nextStepBtn');
+
+    if(nextBtn){
+
+        nextBtn.style.display = isLastStep ? 'none' : 'inline-flex';
+
+        nextBtn.disabled = isBlocked;
+
+    }
+
+
+
+    const submitBtn = document.getElementById('addSubmitBtn') || form.querySelector('button[type="submit"]');
+
+    if(submitBtn){
+
+        submitBtn.textContent = SUBMIT_LABEL;
+
+        submitBtn.style.display = isLastStep ? 'inline-flex' : 'none';
+
+    }
+
+}
+
+
+
+function openStepForElement(el){
+
+    if(!el || typeof el.closest !== 'function') return;
+
+    const step = el.closest('.form-step');
+
+    if(!step) return;
+
+    const steps = getFormSteps();
+
+    const idx = steps.indexOf(step);
+
+    if(idx >= 0) showFormStep(idx);
+
+}
+
+
+
+function safeGetRecords(){
+    if(window.lbData && typeof window.lbData.getRecords === 'function'){
+        return window.lbData.getRecords();
+    }
+
+    if(window.lbSupabase && window.lbSupabase.isEnabled && window.lbSupabase.isEnabled()){
+        console.warn('Cloud mode is enabled but the shared records store is unavailable.');
+        return [];
+    }
+
+    try{
+
+        const raw = localStorage.getItem('records');
+
+        if(!raw) return [];
+
+        const parsed = JSON.parse(raw);
+
+        return Array.isArray(parsed) ? parsed : [];
+
+    } catch(e){
+
+        console.error('Failed to parse records from storage', e);
+
+        return [];
+
+    }
+
+}
+
+async function ensureSharedRecordsReady(){
+
+    if(!(window.lbData && typeof window.lbData.initialize === 'function')){
+        return;
+    }
+
+    try {
+        await window.lbData.initialize();
+    } catch(e){
+        console.error('Failed to initialize shared records store', e);
+        showToast(
+            window.lbData && window.lbData.explainError
+                ? window.lbData.explainError(e)
+                : 'Failed to load shared records.',
+            'error'
+        );
+    }
+
+}
+
+async function createRecordInStore(record){
+
+    if(window.lbData && typeof window.lbData.createRecord === 'function'){
+        return window.lbData.createRecord(record);
+    }
+
+    if(window.lbSupabase && window.lbSupabase.isEnabled && window.lbSupabase.isEnabled()){
+        throw new Error('Shared cloud record storage is unavailable.');
+    }
+
+    const records = safeGetRecords();
+    const nextId = records.length > 0
+        ? Math.max(...records.map(r => Number(r.id) || 0)) + 1
+        : 1;
+    const nextRecord = Object.assign({}, record, { id: nextId });
+    localStorage.setItem('records', JSON.stringify(records.concat([nextRecord])));
+    return nextRecord;
+
+}
+
+async function updateRecordInStore(record){
+
+    if(window.lbData && typeof window.lbData.updateRecord === 'function'){
+        return window.lbData.updateRecord(record);
+    }
+
+    if(window.lbSupabase && window.lbSupabase.isEnabled && window.lbSupabase.isEnabled()){
+        throw new Error('Shared cloud record storage is unavailable.');
+    }
+
+    const records = safeGetRecords();
+    const nextRecords = records.map(item => {
+        return Number(item.id) === Number(record.id) ? record : item;
+    });
+    localStorage.setItem('records', JSON.stringify(nextRecords));
+    return record;
+
+}
+
+async function storeUploadLetterMetaFromFile(file){
+
+    if(!file) return null;
+
+    const validation = window.lbAttachments && typeof window.lbAttachments.validateFile === 'function'
+        ? window.lbAttachments.validateFile(file)
+        : { valid: true };
+
+    if(!validation.valid){
+        throw new Error(validation.error || 'Invalid file selected.');
+    }
+
+    if(!(window.lbAttachments && typeof window.lbAttachments.uploadFile === 'function')){
+        throw new Error('Supabase attachment storage is unavailable.');
+    }
+
+    return window.lbAttachments.uploadFile(file);
+
+}
+
+async function deleteStoredUploadLetter(meta){
+
+    if(!meta || !(window.lbAttachments && typeof window.lbAttachments.deleteAttachment === 'function')){
+        return;
+    }
+
+    try {
+        await window.lbAttachments.deleteAttachment(meta);
+    } catch(error){
+        console.warn('Failed to delete stored upload letter attachment.', error);
+    }
+
+}
+
+
+
+function findRecordById(recordId){
+
+    const idNum = Number(recordId);
+
+    if(!Number.isFinite(idNum)) return null;
+
+    const records = safeGetRecords();
+
+    return records.find(r => Number(r.id) === idNum) || null;
+
+}
+
+function normalizeNamePart(value){
+
+    return String(value || '')
+
+        .toLowerCase()
+
+        .replace(/[^a-z0-9]+/g, ' ')
+
+        .replace(/\s+/g, ' ')
+
+        .trim();
+
+}
+
+function buildDisplayName(record){
+
+    if(!record) return '';
+
+    if(record.name) return record.name;
+
+    const last = record.lastName || '';
+
+    const first = record.firstName || '';
+
+    const middle = record.middleName || '';
+
+    return `${last}${first ? ', ' + first : ''}${middle ? ' ' + middle : ''}`.trim();
+
+}
+
+function isMatchingExistingRecord(input, record){
+
+    if(!record) return false;
+
+    const inLast = normalizeNamePart(input.last);
+
+    const inFirst = normalizeNamePart(input.first);
+
+    if(!inLast || !inFirst) return false;
+
+    if(inLast.length < 2 || inFirst.length < 2) return false;
+
+    const recLast = normalizeNamePart(record.lastName || '');
+
+    const recFirst = normalizeNamePart(record.firstName || '');
+
+    if(!recLast || !recFirst) return false;
+
+    if(inLast !== recLast || inFirst !== recFirst) return false;
+
+    const inMiddle = normalizeNamePart(input.middle);
+
+    const recMiddle = normalizeNamePart(record.middleName || '');
+
+    if(inMiddle){
+
+        return inMiddle === recMiddle;
+
+    }
+
+    return true;
+
+}
+
+function findExistingRecordMatch(){
+
+    const lastNameEl = document.getElementById('lastName');
+
+    const firstNameEl = document.getElementById('firstName');
+
+    const middleNameEl = document.getElementById('middleName');
+
+    const input = {
+
+        last: lastNameEl ? lastNameEl.value : '',
+
+        first: firstNameEl ? firstNameEl.value : '',
+
+        middle: middleNameEl ? middleNameEl.value : ''
+
+    };
+
+    const records = safeGetRecords();
+
+    return records.find(r => isMatchingExistingRecord(input, r)) || null;
+
+}
+
+function normalizeComparableDate(value){
+
+    const raw = String(value || '').trim();
+    if(!raw) return '';
+
+    const isoRegex = /^\d{4}-\d{2}-\d{2}$/;
+    const mdyRegex = /^(0?[1-9]|1[0-2])\/(0?[1-9]|[12]\d|3[01])\/(\d{4})$/;
+
+    if(isoRegex.test(raw)){
+        return raw;
+    }
+
+    if(mdyRegex.test(raw)){
+        const parts = raw.split('/');
+        const mm = parts[0].padStart(2, '0');
+        const dd = parts[1].padStart(2, '0');
+        const yyyy = parts[2];
+        return `${yyyy}-${mm}-${dd}`;
+    }
+
+    const parsed = new Date(raw);
+    if(Number.isNaN(parsed.getTime())){
+        return raw;
+    }
+
+    const yyyy = parsed.getFullYear();
+    const mm = String(parsed.getMonth() + 1).padStart(2, '0');
+    const dd = String(parsed.getDate()).padStart(2, '0');
+    return `${yyyy}-${mm}-${dd}`;
+
+}
+
+function getRecordPrimaryProgram(record){
+
+    if(!record) return '';
+
+    if(Array.isArray(record.programs)){
+        return String(record.programs[0] || '').trim();
+    }
+
+    return String(record.programs || record.type || '').trim();
+
+}
+
+function getHistoryProgramValue(entry, record){
+
+    if(entry && typeof entry === 'object'){
+        const explicitProgram = String(entry.program || '').trim();
+        if(explicitProgram) return explicitProgram;
+
+        const explicitType = String(entry.type || '').trim();
+        if(explicitType) return explicitType;
+    }
+
+    return getRecordPrimaryProgram(record);
+
+}
+
+function getRecordHistoryEntries(record){
+
+    if(!record || typeof record !== 'object') return [];
+
+    if(Array.isArray(record.history) && record.history.length){
+        return record.history.filter(function(entry){
+            return entry && typeof entry === 'object';
+        });
+    }
+
+    const fallbackProgram = getRecordPrimaryProgram(record);
+    const hasFallbackContent = !!(
+        String(record.dateRequested || record.requestedDate || record.month || '').trim() ||
+        fallbackProgram ||
+        String(record.type || '').trim()
+    );
+
+    if(!hasFallbackContent){
+        return [];
+    }
+
+    return [buildHistoryEntryFromForm({
+        date: record.dateRequested || record.requestedDate || record.month || '',
+        program: fallbackProgram,
+        type: record.type || fallbackProgram,
+        upload_letter_meta: record.upload_letter_meta || null
+    })];
+
+}
+
+function findDuplicateHistoryEntryForRecord(record, requestedDate, selectedProgram){
+
+    const requestedDateKey = normalizeComparableDate(requestedDate);
+    const programKey = normalizeAssistanceText(selectedProgram);
+
+    if(!record || !requestedDateKey || !programKey){
+        return null;
+    }
+
+    const historyEntries = getRecordHistoryEntries(record);
+    return historyEntries.find(function(entry){
+        const entryDateKey = normalizeComparableDate(entry && entry.date || '');
+        const entryProgramKey = normalizeAssistanceText(getHistoryProgramValue(entry, record));
+        return entryDateKey === requestedDateKey && entryProgramKey === programKey;
+    }) || null;
+
+}
+
+function findDuplicateRequestMatch(requestedDate, selectedProgram){
+
+    const lastNameEl = document.getElementById('lastName');
+    const firstNameEl = document.getElementById('firstName');
+    const middleNameEl = document.getElementById('middleName');
+    const input = {
+        last: lastNameEl ? lastNameEl.value : '',
+        first: firstNameEl ? firstNameEl.value : '',
+        middle: middleNameEl ? middleNameEl.value : ''
+    };
+
+    const records = safeGetRecords().filter(function(record){
+        return isMatchingExistingRecord(input, record);
+    });
+
+    for(let index = 0; index < records.length; index += 1){
+        const record = records[index];
+        const entry = findDuplicateHistoryEntryForRecord(record, requestedDate, selectedProgram);
+        if(entry){
+            return {
+                entry: entry,
+                record: record
+            };
+        }
+    }
+
+    return null;
+
+}
+
+function updateDuplicateRequestNotice(){
+
+    if(!duplicateRequestNotice || !duplicateRequestText){
+        return;
+    }
+
+    const requestedDate = document.getElementById('dateRequested')
+        ? document.getElementById('dateRequested').value.trim()
+        : '';
+    const selectedProgram = document.getElementById('programs')
+        ? document.getElementById('programs').value.trim()
+        : '';
+    const duplicateMatch = findDuplicateRequestMatch(requestedDate, selectedProgram);
+
+    if(!duplicateMatch){
+        duplicateRequestNotice.style.display = 'none';
+        duplicateRequestText.textContent = 'This client already has the same request date and program saved.';
+        const dateError = document.getElementById('error-dateRequested');
+        if(dateError && /already has .*saved/i.test(dateError.textContent || '')){
+            clearFieldError('dateRequested');
+        }
+        const programError = document.getElementById('error-programs');
+        if(programError && /duplicate request detected/i.test(programError.textContent || '')){
+            clearFieldError('programs');
+        }
+        return;
+    }
+
+    const displayName = buildDisplayName(duplicateMatch.record);
+    const duplicateProgram = getHistoryProgramValue(duplicateMatch.entry, duplicateMatch.record) || selectedProgram;
+    const duplicateDate = normalizeComparableDate(duplicateMatch.entry && duplicateMatch.entry.date || requestedDate);
+
+    duplicateRequestText.textContent = displayName
+        ? `${displayName} already has ${duplicateProgram || 'this program'} saved for ${duplicateDate || 'this request date'}.`
+        : `This client already has ${duplicateProgram || 'this program'} saved for ${duplicateDate || 'this request date'}.`;
+    duplicateRequestNotice.style.display = 'flex';
+
+}
+
+function setSearchWrapperDisabled(selectId, disabled){
+
+    const select = document.getElementById(selectId);
+
+    if(select) select.disabled = disabled;
+
+    const wrapper = document.querySelector('.search-wrapper[data-field="' + selectId + '"]');
+
+    if(wrapper){
+
+        const input = wrapper.querySelector('.search-input');
+
+        if(input) input.disabled = disabled;
+
+        wrapper.classList.toggle('disabled', disabled);
+
+    }
+
+}
+
+function toggleRequestOnlyFields(enable){
+
+    const lockInputIds = ['lastName','firstName','middleName','birthday','email','houseNo','contact','genderOther'];
+
+    lockInputIds.forEach(id => {
+
+        const el = document.getElementById(id);
+
+        if(el) el.disabled = enable;
+
+    });
+
+
+    const lockSelectIds = ['gender','barangay','address','subdivision'];
+
+    lockSelectIds.forEach(id => setSearchWrapperDisabled(id, enable));
+
+
+    const birthdayToggle = document.getElementById('calendarToggle');
+
+    if(birthdayToggle) birthdayToggle.disabled = enable;
+
+
+}
+
+function clearRequestOnlyMode(){
+
+    if(!isRequestOnlyMode) return;
+
+    isRequestOnlyMode = false;
+
+    requestOnlyRecordId = null;
+
+    existingRecordMatch = null;
+
+    form.classList.remove('request-only');
+
+    toggleRequestOnlyFields(false);
+    updateDuplicateRequestNotice();
+
+}
+
+function setRequestOnlyMode(record){
+
+    if(!record) return;
+
+    isRequestOnlyMode = true;
+
+    requestOnlyRecordId = record.id;
+
+    existingRecordMatch = record;
+
+    form.classList.add('request-only');
+
+
+    const lastNameEl = document.getElementById('lastName');
+
+    const firstNameEl = document.getElementById('firstName');
+
+    const middleNameEl = document.getElementById('middleName');
+
+    if(lastNameEl){
+
+        lastNameEl.value = record.lastName || '';
+
+        if(lastNameEl.value.trim() !== '') lastNameEl.classList.add('filled');
+
+    }
+
+    if(firstNameEl){
+
+        firstNameEl.value = record.firstName || '';
+
+        if(firstNameEl.value.trim() !== '') firstNameEl.classList.add('filled');
+
+    }
+
+    if(middleNameEl){
+
+        middleNameEl.value = record.middleName || '';
+
+        if(middleNameEl.value.trim() !== '') middleNameEl.classList.add('filled');
+
+    }
+
+
+    toggleRequestOnlyFields(true);
+
+    const dateRequestedEl = document.getElementById('dateRequested');
+    if(dateRequestedEl && !dateRequestedEl.value){
+        const today = new Date();
+        const month = String(today.getMonth() + 1).padStart(2, '0');
+        const day = String(today.getDate()).padStart(2, '0');
+        const year = today.getFullYear();
+        dateRequestedEl.value = `${month}/${day}/${year}`;
+        dateRequestedEl.classList.add('filled');
+    }
+
+    const requestedVisual = document.getElementById('dateRequestedVisual');
+    if(requestedVisual && dateRequestedEl && dateRequestedEl.value){
+        requestedVisual.classList.add('filled');
+    }
+
+    const firstContactEl = document.getElementById('first_contact');
+    if(firstContactEl){
+        firstContactEl.value = record.first_contact || '';
+        firstContactEl.dispatchEvent(new Event('change'));
+    }
+
+    const firstStaffEl = document.getElementById('first_staff');
+    if(firstStaffEl){
+        firstStaffEl.value = record.first_staff || '';
+        firstStaffEl.classList.toggle('filled', firstStaffEl.value.trim() !== '');
+    }
+
+    applyClientClassValue(record.client_class || '');
+
+    const officeEl = document.getElementById('office');
+    if(officeEl){
+        officeEl.value = record.office || '';
+        officeEl.dispatchEvent(new Event('change'));
+    }
+
+    const leaderEl = document.getElementById('leaderBarangayOfficial');
+    if(leaderEl){
+        leaderEl.value = record.leaderBarangayOfficial || '';
+        leaderEl.classList.toggle('filled', leaderEl.value.trim() !== '');
+    }
+
+    ['office','houseNo','address','subdivision','birthday','contact','first_contact','first_staff','client_class','client_class_other','barangay','gender','genderOther'].forEach(id => clearFieldError(id));
+
+
+    const notice = document.getElementById('existingRecordNotice');
+
+    const textEl = document.getElementById('existingRecordText');
+
+    const displayName = buildDisplayName(record);
+
+
+    if(textEl){
+
+        textEl.textContent = displayName
+
+            ? `Adding a new request for ${displayName}. The client profile stays on the main record, while request details will be saved in history.`
+
+            : 'Adding a new request. The client profile stays on the main record, while request details will be saved in history.';
+
+    }
+
+    if(notice){
+
+        notice.style.display = 'flex';
+
+        notice.classList.add('active');
+
+    }
+
+
+    showFormStep(0);
+    updateDuplicateRequestNotice();
+
+}
+
+function shouldBlockNewRecord(){
+
+    if(isRequestOnlyMode) return false;
+
+    if(currentFormStep !== getClientInformationStepIndex()) return false;
+
+    return Boolean(existingRecordMatch);
+
+}
+
+function updateExistingRecordNotice(){
+
+    const notice = document.getElementById('existingRecordNotice');
+
+    if(!notice) return;
+
+
+    const match = findExistingRecordMatch();
+
+    existingRecordMatch = match;
+
+
+    if(match){
+
+        const textEl = document.getElementById('existingRecordText');
+
+        const displayName = buildDisplayName(match);
+
+        if(textEl){
+
+            textEl.textContent = displayName
+
+                ? `This name matches ${displayName}. You can add a new request and save its request details into history, or clear the name to create a new record.`
+
+                : 'This name already exists in the table. You can add a new request and save its request details into history, or clear the name to create a new record.';
+
+        }
+
+        notice.style.display = 'flex';
+
+        notice.classList.toggle('active', isRequestOnlyMode && requestOnlyRecordId === match.id);
+
+    } else {
+
+        notice.style.display = 'none';
+
+        notice.classList.remove('active');
+
+        if(isRequestOnlyMode){
+
+            clearRequestOnlyMode();
+
+            showFormStep(getClientInformationStepIndex());
+
+        }
+
+    }
+
+
+    const nextBtn = document.getElementById('nextStepBtn');
+
+    if(nextBtn){
+
+        nextBtn.disabled = shouldBlockNewRecord();
+
+    }
+
+    updateDuplicateRequestNotice();
+
+}
+
+/* ---------------------- Date picker factory ---------------------- */
+
+function createDatePicker(wrapperId, inputId, toggleId){
+
+    const wrapper = document.getElementById(wrapperId);
+
+    if(!wrapper) return;
+
+
+
+    const input = document.getElementById(inputId);
+
+    const toggle = document.getElementById(toggleId);
+
+
+
+    // remove existing popup if present
+
+    const existingPopup = wrapper.querySelector('.calendar-popup');
+
+    if(existingPopup) existingPopup.remove();
+
+
+
+    const popup = document.createElement('div');
+
+    popup.className = 'calendar-popup';
+
+    popup.style.display = 'none';
+
+    popup.setAttribute('role','dialog');
+
+    popup.setAttribute('aria-modal','false');
+
+    popup.setAttribute('aria-hidden','true');
+
+
+
+    // Header
+
+    const header = document.createElement('div');
+
+    header.className = 'calendar-header';
+
+
+
+    const navLeft = document.createElement('div');
+
+    navLeft.className = 'calendar-nav-left';
+
+    const prevBtn = document.createElement('button');
+
+    prevBtn.type = 'button';
+
+    prevBtn.textContent = 'Prev';
+
+    prevBtn.title = 'Previous month';
+
+    navLeft.appendChild(prevBtn);
+
+
+
+    const navRight = document.createElement('div');
+
+    navRight.className = 'calendar-nav-right';
+
+    const nextBtn = document.createElement('button');
+
+    nextBtn.type = 'button';
+
+    nextBtn.textContent = 'Next';
+
+    nextBtn.title = 'Next month';
+
+    navRight.appendChild(nextBtn);
+
+
+
+    const title = document.createElement('div');
+
+    title.className = 'calendar-title';
+
+
+
+    const monthLabel = document.createElement('div');
+
+    monthLabel.className = 'month-label';
+
+    monthLabel.textContent = '';
+
+
+
+    const yearBtn = document.createElement('button');
+
+    yearBtn.className = 'year-btn';
+
+    yearBtn.type = 'button';
+
+    yearBtn.setAttribute('aria-haspopup','true');
+
+    yearBtn.setAttribute('aria-expanded','false');
+
+    yearBtn.textContent = '';
+
+
+
+    const yearPopup = document.createElement('div');
+
+    yearPopup.className = 'year-popup';
+
+    yearPopup.style.display = 'none';
+
+    yearPopup.setAttribute('role','menu');
+
+
+
+    title.appendChild(monthLabel);
+
+    title.appendChild(yearBtn);
+
+
+
+    header.appendChild(navLeft);
+
+    header.appendChild(title);
+
+    header.appendChild(navRight);
+
+
+
+    const grid = document.createElement('div');
+
+    grid.className = 'calendar-grid';
+
+
+
+    ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'].forEach(d=>{
+
+        const wd = document.createElement('div');
+
+        wd.className = 'calendar-weekday';
+
+        wd.textContent = d;
+
+        grid.appendChild(wd);
+
+    });
+
+
+
+    popup.appendChild(header);
+
+    popup.appendChild(grid);
+
+
+
+    const footer = document.createElement('div');
+
+    footer.className = 'calendar-footer';
+
+    const todayBtn = document.createElement('button');
+
+    todayBtn.type = 'button';
+
+    todayBtn.className = 'small-btn';
+
+    todayBtn.textContent = 'Today';
+
+    const closeBtn = document.createElement('button');
+
+    closeBtn.type = 'button';
+
+    closeBtn.className = 'small-btn';
+
+    closeBtn.textContent = 'Close';
+
+    footer.appendChild(todayBtn);
+
+    footer.appendChild(closeBtn);
+
+
+
+    popup.appendChild(footer);
+
+    popup.appendChild(yearPopup);
+
+    wrapper.appendChild(popup);
+
+
+
+    let current = new Date();
+
+    if(input.value){
+
+        const isoRegex = /^\d{4}-\d{2}-\d{2}$/;
+
+        const mdyRegex = /^\d{2}\/\d{2}\/\d{4}$/;
+
+        if(isoRegex.test(input.value)){
+
+            const p = input.value.split('-');
+
+            current = new Date(Number(p[0]), Number(p[1]) - 1, Number(p[2]));
+
+        } else if(mdyRegex.test(input.value)){
+
+            const p = input.value.split('/');
+
+            current = new Date(Number(p[2]), Number(p[0]) - 1, Number(p[1]));
+
+        } else {
+
+            const parsed = new Date(input.value);
+
+            if(!isNaN(parsed.getTime())) current = parsed;
+
+        }
+
+    }
+
+
+
+    function populateYearItems(){
+
+        const now = new Date();
+
+        const curYear = now.getFullYear();
+
+        const min = curYear - 100;
+
+        const max = curYear + 20;
+
+        yearPopup.innerHTML = '';
+
+        for(let y = max; y >= min; y--){
+
+            const item = document.createElement('button');
+
+            item.type = 'button';
+
+            item.className = 'year-item';
+
+            item.textContent = y;
+
+            item.setAttribute('data-year', String(y));
+
+            item.addEventListener('click', function(e){
+
+                const newYear = parseInt(this.getAttribute('data-year'),10);
+
+                if(!isNaN(newYear)){
+
+                    current = new Date(newYear, current.getMonth(), 1);
+
+                    renderCalendar(current);
+
+                    yearBtn.textContent = String(newYear);
+
+                }
+
+                closeYearPopup();
+
+            });
+
+            yearPopup.appendChild(item);
+
+        }
+
+    }
+
+    populateYearItems();
+
+
+
+    function renderCalendar(date){
+
+        const year = date.getFullYear();
+
+        const month = date.getMonth();
+
+        monthLabel.textContent = `${date.toLocaleString(undefined, { month: 'long' })}`;
+
+        yearBtn.textContent = String(year);
+
+
+
+        while(grid.children.length > 7){
+
+            grid.removeChild(grid.lastChild);
+
+        }
+
+
+
+        const firstDayOfMonth = new Date(year, month, 1);
+
+        const startWeekday = firstDayOfMonth.getDay();
+
+        const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+
+
+        for(let i = 0; i < startWeekday; i++){
+
+            const blank = document.createElement('div');
+
+            blank.className = 'day disabled';
+
+            blank.textContent = '';
+
+            grid.appendChild(blank);
+
+        }
+
+
+
+        let selectedIso = null;
+
+        const isoRegex = /^\d{4}-\d{2}-\d{2}$/;
+
+        const mdyRegex = /^\d{2}\/\d{2}\/\d{4}$/;
+
+        if(isoRegex.test(input.value)){
+
+            selectedIso = input.value;
+
+        } else if(mdyRegex.test(input.value)){
+
+            const p = input.value.split('/');
+
+            selectedIso = `${p[2]}-${p[0].padStart(2,'0')}-${p[1].padStart(2,'0')}`;
+
+        }
+
+
+
+        for(let day=1; day<=daysInMonth; day++){
+
+            const d = document.createElement('div');
+
+            d.className = 'day';
+
+            d.textContent = String(day);
+
+            d.setAttribute('data-day', day);
+
+            const iso = `${year}-${String(month+1).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
+
+            if(selectedIso === iso){
+
+                d.classList.add('selected');
+
+            }
+
+            d.addEventListener('click', function(e){
+
+                const mm = String(month + 1).padStart(2,'0');
+
+                const dd = String(day).padStart(2,'0');
+
+                const yyyy = String(year);
+
+                input.value = `${mm}/${dd}/${yyyy}`;
+
+                input.classList.add('filled');
+
+                const visual = wrapper.querySelector('.date-input');
+
+                if(visual) visual.classList.add('filled');
+
+                scheduleAutosave();
+
+                closeCalendar(); // close all; fine for multiple fields
+
+                clearFieldError(input.id);
+
+                setTimeout(()=> input.focus(), 0);
+
+            });
+
+            grid.appendChild(d);
+
+        }
+
+
+
+        const totalCells = grid.children.length;
+
+        const remainder = totalCells % 7;
+
+        if(remainder !== 0){
+
+            const fill = 7 - remainder;
+
+            for(let i=0;i<fill;i++){
+
+                const blank = document.createElement('div');
+
+                blank.className = 'day disabled';
+
+                blank.textContent = '';
+
+                grid.appendChild(blank);
+
+            }
+
+        }
+
+
+
+        const items = yearPopup.querySelectorAll('.year-item');
+
+        items.forEach(it => {
+
+            if(it.getAttribute('data-year') === String(year)) it.classList.add('selected');
+
+            else it.classList.remove('selected');
+
+        });
+
+    }
+
+
+
+    function openCalendar(){
+
+        popup.style.display = 'block';
+
+        popup.setAttribute('aria-hidden','false');
+
+        const vis = wrapper.querySelector('.date-input');
+
+        if(vis) vis.setAttribute('aria-expanded','true');
+
+        renderCalendar(current);
+
+        setTimeout(()=> {
+
+            document.addEventListener('click', outsideClickListener);
+
+        }, 10);
+
+    }
+
+    function closeCalendarLocal(){
+
+        popup.style.display = 'none';
+
+        popup.setAttribute('aria-hidden','true');
+
+        const vis = wrapper.querySelector('.date-input');
+
+        if(vis) vis.setAttribute('aria-expanded','false');
+
+        closeYearPopup();
+
+        document.removeEventListener('click', outsideClickListener);
+
+    }
+
+    function outsideClickListener(e){
+
+        if(!wrapper.contains(e.target)){
+
+            closeCalendarLocal();
+
+        }
+
+    }
+
+
+
+    prevBtn.addEventListener('click', function(){
+
+        current = new Date(current.getFullYear(), current.getMonth() - 1, 1);
+
+        renderCalendar(current);
+
+    });
+
+    nextBtn.addEventListener('click', function(){
+
+        current = new Date(current.getFullYear(), current.getMonth() + 1, 1);
+
+        renderCalendar(current);
+
+    });
+
+
+
+    function openYearPopup(){
+
+        populateYearItems();
+
+        yearPopup.style.display = 'grid';
+
+        yearBtn.setAttribute('aria-expanded','true');
+
+        const items = yearPopup.querySelectorAll('.year-item');
+
+        items.forEach(it => {
+
+            if(it.getAttribute('data-year') === String(current.getFullYear())) it.classList.add('selected');
+
+            else it.classList.remove('selected');
+
+        });
+
+        yearPopup.addEventListener('click', stopPropagation);
+
+    }
+
+    function closeYearPopup(){
+
+        yearPopup.style.display = 'none';
+
+        yearBtn.setAttribute('aria-expanded','false');
+
+        yearPopup.removeEventListener('click', stopPropagation);
+
+    }
+
+    function stopPropagation(e){ e.stopPropagation(); }
+
+
+
+    todayBtn.addEventListener('click', function(){
+
+        const now = new Date();
+
+        input.value = `${String(now.getMonth()+1).padStart(2,'0')}/${String(now.getDate()).padStart(2,'0')}/${now.getFullYear()}`;
+
+        input.classList.add('filled');
+
+        const visual = wrapper.querySelector('.date-input');
+
+        if(visual) visual.classList.add('filled');
+
+        scheduleAutosave();
+
+        closeCalendar(); // close all
+
+    });
+
+
+
+    closeBtn.addEventListener('click', function(){
+
+        closeCalendar(); // close all
+
+    });
+
+
+
+    if(toggle){
+
+        toggle.addEventListener('click', function(e){
+
+            e.stopPropagation();
+
+            if(popup.style.display === 'none' || popup.style.display === ''){
+
+                const parsed = tryParseInputDate(input.value);
+
+                if(parsed) current = parsed;
+
+                renderCalendar(current);
+
+                openCalendar();
+
+            } else {
+
+                closeCalendar();
+
+            }
+
+        });
+
+    }
+
+
+
+    const visual = wrapper.querySelector('.date-input');
+
+    if(visual){
+
+        visual.addEventListener('click', function(e){
+
+            if(popup.style.display === 'none' || popup.style.display === ''){
+
+                const parsed = tryParseInputDate(input.value);
+
+                if(parsed) current = parsed;
+
+                renderCalendar(current);
+
+                openCalendar();
+
+            }
+
+        });
+
+    }
+
+
+
+    yearBtn.addEventListener('click', function(e){
+
+        e.stopPropagation();
+
+        if(yearPopup.style.display === 'grid'){
+
+            closeYearPopup();
+
+        } else {
+
+            openYearPopup();
+
+        }
+
+    });
+
+
+
+    document.addEventListener('keydown', function(e){
+
+        if(e.key === 'Escape'){
+
+            if(yearPopup.style.display === 'grid') {
+
+                closeYearPopup();
+
+            } else {
+
+                closeCalendar();
+
+            }
+
+        }
+
+    });
+
+
+
+    function tryParseInputDate(val){
+
+        if(!val) return null;
+
+        const isoRegex = /^\d{4}-\d{2}-\d{2}$/;
+
+        const mdyRegex = /^\d{2}\/\d{2}\/\d{4}$/;
+
+        if(isoRegex.test(val)){
+
+            const p = val.split('-');
+
+            return new Date(Number(p[0]), Number(p[1]) - 1, Number(p[2]));
+
+        } else if (mdyRegex.test(val)){
+
+            const p = val.split('/');
+
+            return new Date(Number(p[2]), Number(p[0]) - 1, Number(p[1]));
+
+        } else {
+
+            const parsed = new Date(val);
+
+            if(!isNaN(parsed.getTime())) return parsed;
+
+        }
+
+        return null;
+
+    }
+
+
+
+    input.addEventListener('blur', function(){
+
+        const v = input.value.trim();
+
+        if(v === '') {
+
+            clearFieldError(input.id);
+
+            const vis = wrapper.querySelector('.date-input');
+
+            if(vis && (input.value === null || input.value.trim() === '')) vis.classList.remove('filled');
+
+            return;
+
+        }
+
+        const mdyRegex = /^\d{2}\/\d{2}\/\d{4}$/;
+
+        const isoRegex = /^\d{4}-\d{2}-\d{2}$/;
+
+        if(mdyRegex.test(v) || isoRegex.test(v)){
+
+            clearFieldError(input.id);
+
+        } else {
+
+            showFieldError(input.id,'Use MM/DD/YYYY or pick a date.');
+
+        }
+
+    });
+
+
+
+    popup.addEventListener('click', function(e){
+
+        e.stopPropagation();
+
+    });
+
+}
+
+
+
+/* Close calendar helper used elsewhere: hides all calendar popups on the page */
+
+function closeCalendar(){
+
+    document.querySelectorAll('.calendar-popup').forEach(p => {
+
+        p.style.display = 'none';
+
+        p.setAttribute('aria-hidden','true');
+
+    });
+
+    document.querySelectorAll('.date-input').forEach(d => {
+
+        d.setAttribute('aria-expanded','false');
+
+    });
+
+    document.querySelectorAll('.year-popup').forEach(y => y.style.display = 'none');
+
+}
+
+
+
+/* ---------------------- Medical dropdown helpers ---------------------- */
+function updateRequestingOtherVisibility(){
+    const requestingSelect = document.getElementById('requesting_for_select');
+    const requestingOther = document.getElementById('requesting_for_other');
+    if(!requestingOther) return;
+    const showOther = requestingSelect && requestingSelect.value === 'Other';
+    requestingOther.style.display = showOther ? 'block' : 'none';
+    requestingOther.disabled = !showOther;
+    if(!showOther){
+        requestingOther.value = '';
+    }
+}
+
+function refreshMedicalHiddenValues(){
+    const requestingHidden = document.getElementById('requesting_for');
+    const requestingSelect = document.getElementById('requesting_for_select');
+    const requestingOther = document.getElementById('requesting_for_other');
+    if(requestingHidden){
+        const selected = requestingSelect ? requestingSelect.value : '';
+        if(selected === 'Other'){
+            const otherVal = requestingOther ? requestingOther.value.trim() : '';
+            requestingHidden.value = otherVal ? `Other: ${otherVal}` : 'Other';
+        } else {
+            requestingHidden.value = selected || '';
+        }
+    }
+
+    const patientHidden = document.getElementById('patient_status');
+    const patientSelect = document.getElementById('patient_status_select');
+    if(patientHidden){
+        patientHidden.value = patientSelect ? patientSelect.value : '';
+    }
+
+    const clientHidden = document.getElementById('client_times');
+    const clientSelect = document.getElementById('client_times_select');
+    if(clientHidden){
+        clientHidden.value = clientSelect ? clientSelect.value : '';
+    }
+}
+
+function initMedicalRadioGroups(){
+    const requestingSelect = document.getElementById('requesting_for_select');
+    const requestingOther = document.getElementById('requesting_for_other');
+    const patientSelect = document.getElementById('patient_status_select');
+    const clientSelect = document.getElementById('client_times_select');
+    const transportStatusSelect = document.getElementById('transport_service_status');
+    const specialCaseStatusSelect = document.getElementById('special_case_status');
+    const opAssistanceStatusSelect = document.getElementById('op_assistance_status');
+    const mayTrabahoStatusSelect = document.getElementById('maytrabaho_status');
+    const guaranteeLetterOptionSelect = document.getElementById('guarantee_letter_option');
+
+    if(requestingSelect){
+        requestingSelect.addEventListener('change', function(){
+            updateRequestingOtherVisibility();
+            refreshMedicalHiddenValues();
+            clearFieldError('requesting_for');
+            scheduleAutosave();
+        });
+    }
+
+    if(requestingOther){
+        requestingOther.addEventListener('input', function(){
+            refreshMedicalHiddenValues();
+            clearFieldError('requesting_for');
+            scheduleAutosave();
+        });
+    }
+
+    if(patientSelect){
+        patientSelect.addEventListener('change', function(){
+            refreshMedicalHiddenValues();
+            clearFieldError('patient_status');
+            scheduleAutosave();
+        });
+    }
+
+    if(clientSelect){
+        clientSelect.addEventListener('change', function(){
+            refreshMedicalHiddenValues();
+            clearFieldError('client_times');
+            scheduleAutosave();
+        });
+    }
+
+    if(transportStatusSelect){
+        transportStatusSelect.addEventListener('change', function(){
+            clearFieldError('transport_service_status');
+            scheduleAutosave();
+        });
+    }
+
+    if(specialCaseStatusSelect){
+        specialCaseStatusSelect.addEventListener('change', function(){
+            clearFieldError('special_case_status');
+            scheduleAutosave();
+        });
+    }
+
+    if(opAssistanceStatusSelect){
+        opAssistanceStatusSelect.addEventListener('change', function(){
+            clearFieldError('op_assistance_status');
+            scheduleAutosave();
+        });
+    }
+
+    if(mayTrabahoStatusSelect){
+        mayTrabahoStatusSelect.addEventListener('change', function(){
+            clearFieldError('maytrabaho_status');
+            scheduleAutosave();
+        });
+    }
+
+    if(guaranteeLetterOptionSelect){
+        guaranteeLetterOptionSelect.addEventListener('change', function(){
+            clearFieldError('guarantee_letter_option');
+            scheduleAutosave();
+        });
+    }
+
+    updateRequestingOtherVisibility();
+    refreshMedicalHiddenValues();
+}
+
+function applyMedicalDraftSelections(draft){
+    if(!draft) return;
+
+    const selectedProgram = getSelectedProgram();
+
+    const guaranteeLetterOptionSelect = document.getElementById('guarantee_letter_option');
+    if(guaranteeLetterOptionSelect){
+        guaranteeLetterOptionSelect.value = String(draft.guarantee_letter_option || '').trim();
+    }
+
+    const reqValue = String(draft.requesting_for || '').trim();
+    const requestingSelect = document.getElementById('requesting_for_select');
+    const requestingOther = document.getElementById('requesting_for_other');
+    setRequestingForOptionsForProgram(selectedProgram, reqValue);
+    if(requestingSelect){
+        if(selectedProgram === 'Special Case - Medical Client'){
+            clearRequestingForFields();
+        } else if(reqValue){
+            const options = Array.from(requestingSelect.options).map(o => o.value.toLowerCase());
+            const matchIndex = options.indexOf(reqValue.toLowerCase());
+            if(matchIndex >= 0){
+                requestingSelect.value = requestingSelect.options[matchIndex].value;
+                if(requestingSelect.value !== 'Other' && requestingOther){
+                    requestingOther.value = '';
+                }
+            } else if(getRequestingForOptionsForProgram(selectedProgram).includes('Other')){
+                requestingSelect.value = 'Other';
+                if(requestingOther){
+                    requestingOther.value = reqValue.replace(/^Other\s*[:\-]?\s*/i, '');
+                }
+            } else {
+                requestingSelect.value = '';
+                if(requestingOther) requestingOther.value = '';
+            }
+        } else {
+            requestingSelect.value = '';
+            if(requestingOther) requestingOther.value = '';
+        }
+    }
+
+    const patientValue = String(draft.patient_status || '').trim();
+    const patientSelect = document.getElementById('patient_status_select');
+    if(patientSelect){
+        const options = Array.from(patientSelect.options).map(o => o.value.toLowerCase());
+        const matchIndex = options.indexOf(patientValue.toLowerCase());
+        patientSelect.value = matchIndex >= 0 ? patientSelect.options[matchIndex].value : '';
+    }
+
+    const clientValue = String(draft.client_times || '').trim();
+    const clientSelect = document.getElementById('client_times_select');
+    if(clientSelect){
+        const options = Array.from(clientSelect.options).map(o => o.value.toLowerCase());
+        const matchIndex = options.indexOf(clientValue.toLowerCase());
+        clientSelect.value = matchIndex >= 0 ? clientSelect.options[matchIndex].value : '';
+    }
+
+    const transportStatusValue = String(draft.transport_service_status || '').trim();
+    const transportStatusSelect = document.getElementById('transport_service_status');
+    if(transportStatusSelect){
+        const options = Array.from(transportStatusSelect.options).map(o => o.value.toLowerCase());
+        const matchIndex = options.indexOf(transportStatusValue.toLowerCase());
+        transportStatusSelect.value = matchIndex >= 0 ? transportStatusSelect.options[matchIndex].value : '';
+    }
+
+    const rawSpecialCaseStatusValue = String(draft.special_case_status || '').trim();
+    const specialCaseStatusValue = /^pending$/i.test(rawSpecialCaseStatusValue)
+        ? SPECIAL_CASE_DEFAULT_STATUS
+        : /^discharge$/i.test(rawSpecialCaseStatusValue)
+            ? 'discharged'
+            : rawSpecialCaseStatusValue;
+    const specialCaseStatusSelect = document.getElementById('special_case_status');
+    if(specialCaseStatusSelect){
+        const options = Array.from(specialCaseStatusSelect.options).map(o => o.value.toLowerCase());
+        const matchIndex = options.indexOf(specialCaseStatusValue.toLowerCase());
+        specialCaseStatusSelect.value = matchIndex >= 0 ? specialCaseStatusSelect.options[matchIndex].value : '';
+    }
+
+    const opAssistanceStatusValue = String(draft.op_assistance_status || '').trim();
+    const opAssistanceStatusSelect = document.getElementById('op_assistance_status');
+    if(opAssistanceStatusSelect){
+        const options = Array.from(opAssistanceStatusSelect.options).map(o => o.value.toLowerCase());
+        const matchIndex = options.indexOf(opAssistanceStatusValue.toLowerCase());
+        opAssistanceStatusSelect.value = matchIndex >= 0 ? opAssistanceStatusSelect.options[matchIndex].value : '';
+    }
+
+    const mayTrabahoStatusValue = String(draft.maytrabaho_status || '').trim();
+    const mayTrabahoStatusSelect = document.getElementById('maytrabaho_status');
+    if(mayTrabahoStatusSelect){
+        const options = Array.from(mayTrabahoStatusSelect.options).map(o => o.value.toLowerCase());
+        const matchIndex = options.indexOf(mayTrabahoStatusValue.toLowerCase());
+        mayTrabahoStatusSelect.value = matchIndex >= 0 ? mayTrabahoStatusSelect.options[matchIndex].value : '';
+    }
+
+    updateRequestingOtherVisibility();
+    refreshMedicalHiddenValues();
+}
+
+/* ---------------------- Address population helper ---------------------- */
+
+function populateAddressSelect(selectId, barangayName){
+
+    try {
+
+        const select = document.getElementById(selectId);
+
+        if(!select) return;
+
+        const placeholder = select.options[0] ? select.options[0].text : 'Select Purok/Sitio';
+
+        select.innerHTML = '';
+
+        const ph = document.createElement('option');
+
+        ph.value = '';
+
+        ph.textContent = placeholder;
+
+        select.appendChild(ph);
+
+
+
+        let list = [];
+
+        if(typeof PUROKS === 'object' && PUROKS !== null && barangayName && PUROKS.hasOwnProperty(barangayName)){
+
+            list = PUROKS[barangayName] || [];
+
+        } else {
+
+            list = Array.from({length:8}, (_,i) => 'Purok ' + (i+1));
+
+        }
+
+
+
+        list.forEach(lbl => {
+
+            const opt = document.createElement('option');
+
+            opt.value = lbl;
+
+            opt.textContent = lbl;
+
+            select.appendChild(opt);
+
+        });
+
+
+
+        updateSearchableOptionsForSelect(selectId);
+
+    } catch(e){
+
+        console.warn('populateAddressSelect error', e);
+
+    }
+
+}
+
+
+
+/* ---------------------- Searchable-select conversion & utilities ---------------------- */
+
+function updateSearchableOptionsForSelect(selectId){
+
+    const wrapper = document.querySelector('.search-wrapper[data-field="' + selectId + '"]');
+
+    if(!wrapper) return;
+
+    const select = wrapper.querySelector('select');
+
+    const input = wrapper.querySelector('.search-input');
+
+    let optionsDiv = wrapper.querySelector('.options');
+
+
+
+    if(!optionsDiv){
+
+        optionsDiv = document.createElement('div');
+
+        optionsDiv.className = 'options';
+
+        wrapper.insertBefore(optionsDiv, select);
+
+    } else {
+
+        optionsDiv.innerHTML = '';
+
+    }
+
+
+
+    [...select.options].forEach(option => {
+
+        if(option.value === "") return;
+
+        const div = document.createElement('div');
+
+        div.className = 'option';
+
+        div.textContent = option.text;
+
+
+
+        div.addEventListener('click', () => {
+
+            const idx = Array.from(select.options).findIndex(o => o.text === option.text);
+
+            if(idx >= 0) select.selectedIndex = idx;
+
+            if(input){
+
+                input.value = option.text;
+
+                input.classList.add('filled');
+
+            }
+
+            optionsDiv.style.display = "none";
+
+            wrapper.classList.add('selected');
+
+            clearFieldError(select.id);
+
+            select.dispatchEvent(new Event('change', {bubbles:true}));
+
+            scheduleAutosave();
+
+        });
+
+
+
+        optionsDiv.appendChild(div);
+
+    });
+
+
+
+    const selIndex = select.selectedIndex;
+
+    if(selIndex >= 0 && select.options[selIndex] && select.options[selIndex].value !== ""){
+
+        if(input) {
+
+            input.value = select.options[selIndex].text;
+
+            input.classList.add('filled');
+
+            wrapper.classList.add('selected');
+
+        }
+
+    } else {
+
+        if(input){
+
+            input.value = "";
+
+            input.classList.remove('filled');
+
+            wrapper.classList.remove('selected');
+
+        }
+
+    }
+
+}
+
+
+
+function convertAllSelectsToSearchableWrappers() {
+
+    document.querySelectorAll("select").forEach(select => {
+
+        if(select.parentNode && select.parentNode.classList && select.parentNode.classList.contains('search-wrapper')) return;
+
+
+
+        const wrapper = document.createElement("div");
+
+        wrapper.classList.add("search-wrapper");
+
+        wrapper.setAttribute('data-field', select.id);
+
+
+
+        const input = document.createElement("input");
+
+        input.classList.add("search-input");
+
+        input.setAttribute('data-search-for', select.id);
+
+        input.placeholder = select.options[0]?.text || "";
+
+
+
+        const optionsDiv = document.createElement("div");
+
+        optionsDiv.classList.add("options");
+
+
+
+        let currentIndex = -1;
+
+
+
+        [...select.options].forEach(option => {
+
+            if(option.value === "") return;
+
+
+
+            const div = document.createElement("div");
+
+            div.classList.add("option");
+
+            div.textContent = option.text;
+
+
+
+            div.addEventListener("click", () => {
+
+                input.value = option.text;
+
+                const idx = Array.from(select.options).findIndex(o => o.text === option.text);
+
+                if(idx >= 0) select.selectedIndex = idx;
+
+                optionsDiv.style.display = "none";
+
+                input.classList.add('filled');
+
+                wrapper.classList.add('selected');
+
+                clearFieldError(select.id);
+
+                select.dispatchEvent(new Event('change', {bubbles:true}));
+
+                scheduleAutosave();
+
+            });
+
+
+
+            optionsDiv.appendChild(div);
+
+        });
+
+
+
+        input.addEventListener("focus", () => {
+
+            optionsDiv.style.display = "block";
+
+        });
+
+
+
+        input.addEventListener("input", () => {
+
+            const filter = input.value.toLowerCase();
+            const typedValue = input.value.trim();
+            const selectedOption = select.options[select.selectedIndex];
+            const selectedText = selectedOption && selectedOption.value !== "" ? selectedOption.text.trim() : "";
+
+            if(!typedValue || (selectedText && typedValue !== selectedText)){
+
+                select.value = "";
+
+                select.selectedIndex = 0;
+
+            }
+
+            currentIndex = -1;
+
+            optionsDiv.querySelectorAll(".option").forEach(opt => {
+
+                const visible = opt.textContent.toLowerCase().includes(filter);
+
+                opt.style.display = visible ? "block" : "none";
+
+                opt.classList.remove("active");
+
+            });
+
+            clearFieldError(select.id);
+
+            if(typedValue){
+
+                input.classList.add('filled');
+
+                wrapper.classList.add('selected');
+
+            } else {
+
+                input.classList.remove('filled');
+
+                wrapper.classList.remove('selected');
+
+            }
+
+            scheduleAutosave();
+
+        });
+
+
+
+        input.addEventListener("keydown", (e) => {
+
+            const visibleOptions = [...optionsDiv.querySelectorAll(".option")]
+
+                .filter(opt => opt.style.display !== "none");
+
+
+
+            if(e.key === "ArrowDown"){
+
+                e.preventDefault();
+
+                currentIndex++;
+
+                if(currentIndex >= visibleOptions.length) currentIndex = 0;
+
+            }
+
+
+
+            if(e.key === "ArrowUp"){
+
+                e.preventDefault();
+
+                currentIndex--;
+
+                if(currentIndex < 0) currentIndex = visibleOptions.length - 1;
+
+            }
+
+
+
+            if(e.key === "Enter" && currentIndex >= 0){
+
+                e.preventDefault();
+
+                visibleOptions[currentIndex].click();
+
+            }
+
+
+
+            visibleOptions.forEach(opt => opt.classList.remove("active"));
+
+            if(currentIndex >= 0 && visibleOptions[currentIndex]) {
+
+                visibleOptions[currentIndex].classList.add("active");
+
+            }
+
+        });
+
+
+
+        select.style.display = "none";
+
+        select.parentNode.insertBefore(wrapper, select);
+
+        wrapper.appendChild(input);
+
+        wrapper.appendChild(optionsDiv);
+
+        wrapper.appendChild(select);
+
+
+
+        const err = document.createElement('div');
+
+        err.className = 'field-error';
+
+        err.id = 'error-' + select.id;
+
+        err.textContent = '';
+
+        wrapper.appendChild(err);
+
+
+
+        select.addEventListener('change', () => {
+
+            const selectedOption = select.options[select.selectedIndex];
+
+            const selText = selectedOption && selectedOption.value !== "" ? selectedOption.text : '';
+
+            const searchInput = wrapper.querySelector('.search-input');
+
+            if(selText) {
+
+                searchInput.value = selText;
+
+                searchInput.classList.add('filled');
+
+                wrapper.classList.add('selected');
+
+            } else {
+
+                searchInput.value = '';
+
+                searchInput.classList.remove('filled');
+
+                wrapper.classList.remove('selected');
+
+            }
+
+            clearFieldError(select.id);
+
+        });
+
+
+
+        if(select.value && select.value !== ""){
+
+            input.classList.add('filled');
+
+            wrapper.classList.add('selected');
+
+            const selIndex = select.selectedIndex;
+
+            if(selIndex >= 0 && select.options[selIndex]) {
+
+                input.value = select.options[selIndex].text;
+
+            }
+
+        }
+
+    });
+
+}
+
+
+
+/* ---------------------- Inline error UI & helpers ---------------------- */
+
+['lastName','firstName','middleName','houseNo','contact','email','birthday','genderOther','dateRequested','first_staff','client_class_other','guarantee_hospital','guarantee_purpose','guarantee_amount','hospital','requesting_for_other','date_of_assistance','leaderBarangayOfficial','org_long_name','num_attendees','other_details','event_date','event_name','event_place','event_time','upload_letter','remarks'].forEach(id => {
+
+    const inp = document.getElementById(id);
+
+    if(!inp) return;
+
+    const err = document.createElement('div');
+
+    err.className = 'field-error';
+
+    err.id = 'error-' + inp.id;
+
+    err.textContent = '';
+
+    inp.insertAdjacentElement('afterend', err);
+
+
+
+    inp.addEventListener('input', () => clearFieldError(inp.id));
+
+});
+
+
+
+document.addEventListener("click", function(){
+
+    // update filled class for search-wrapper pairs when underlying select has value
+
+    document.querySelectorAll(".search-wrapper").forEach(wrapper => {
+
+        const sel = wrapper.querySelector('select');
+
+        const si = wrapper.querySelector('.search-input');
+
+        if(sel && si){
+
+            const selIndex = sel.selectedIndex;
+
+            if(selIndex >= 0 && sel.options[selIndex] && sel.options[selIndex].value !== ""){
+
+                si.classList.add('filled');
+
+                wrapper.classList.add('selected');
+
+                si.value = sel.options[selIndex].text;
+
+            }
+
+        }
+
+    });
+
+});
+
+
+
+document.querySelectorAll('.search-input').forEach(si => {
+
+    si.addEventListener('input', () => {
+
+        const fid = si.getAttribute('data-search-for');
+
+        clearFieldError(fid);
+
+    });
+
+});
+
+
+
+function showFieldError(fieldId, message){
+
+    const el = document.getElementById('error-' + fieldId);
+
+    if(el){
+
+        el.textContent = message;
+
+        el.style.display = 'block';
+
+    }
+
+}
+
+
+
+function clearFieldError(fieldId){
+
+    const el = document.getElementById('error-' + fieldId);
+
+    if(el){
+
+        el.textContent = '';
+
+        el.style.display = 'none';
+
+    }
+
+}
+
+
+
+function clearAllErrors(){
+
+    fieldIds.forEach(fid => clearFieldError(fid));
+
+}
+
+
+
+/* ---------------------- Toast ---------------------- */
+
+function showToast(message, type = 'success'){
+
+    const toast = document.getElementById("toast");
+
+    const toastMessage = document.getElementById("toastMessage");
+
+    const toastIcon = document.getElementById("toastIcon");
+
+
+
+    if(!toastMessage){
+
+        alert(message);
+
+        return;
+
+    }
+
+
+
+    toastMessage.textContent = message;
+
+
+
+    if(type === 'error'){
+
+        toast.classList.add('error');
+
+        toastIcon.textContent = 'X';
+
+    } else {
+
+        toast.classList.remove('error');
+
+        toastIcon.textContent = 'OK';
+
+    }
+
+
+
+    toast.classList.add("show");
+
+    setTimeout(()=>{
+
+        toast.classList.remove("show");
+
+        toast.classList.remove('error');
+
+    },3000);
+
+}
+
+
+
+/* ---------------------- Form submission & validation ---------------------- */
+
+let isSubmitting = false;
+
+
+
+document.getElementById("recordForm").addEventListener("submit", function(e){
+
+    e.preventDefault();
+
+    addRecord();
+
+});
+
+
+
+function clearForm(){
+
+    clearRequestOnlyMode();
+
+    try { form.reset(); } catch(e){}
+
+    document.querySelectorAll('.search-wrapper').forEach(wrapper=>{
+
+        const select = wrapper.querySelector('select');
+
+        const searchInput = wrapper.querySelector('.search-input');
+
+        if(select){
+
+            const selIndex = select.selectedIndex;
+
+            if(selIndex >= 0 && select.options[selIndex] && select.options[selIndex].value !== ""){
+
+                searchInput.value = select.options[selIndex].text;
+
+                searchInput.classList.add('filled');
+
+                wrapper.classList.add('selected');
+
+            } else {
+
+                searchInput.value = '';
+
+                searchInput.classList.remove('filled');
+
+                wrapper.classList.remove('selected');
+
+            }
+
+            const opts = wrapper.querySelector('.options');
+
+            if(opts) opts.style.display = 'none';
+
+            clearFieldError(select.id);
+
+        }
+
+    });
+
+
+
+    ['lastName','firstName','middleName','houseNo','contact','email','birthday','genderOther','dateRequested','first_staff','client_class_other','guarantee_hospital','guarantee_purpose','guarantee_amount','hospital','requesting_for_other','date_of_assistance','leaderBarangayOfficial','org_long_name','num_attendees','other_details','event_date','event_name','event_place','event_time','upload_letter','remarks'].forEach(id => {
+
+        const el = document.getElementById(id);
+
+        if(el){
+
+            el.value = '';
+
+            el.classList.remove('filled');
+
+            clearFieldError(id);
+
+        }
+
+    });
+
+
+    const other = document.getElementById('genderOther');
+    if(other) { other.style.display = 'none'; }
+    const clientClassOther = document.getElementById('client_class_other');
+    if(clientClassOther) { clientClassOther.style.display = 'none'; }
+
+    const programsSelectForClear = document.getElementById('programs');
+    if(programsSelectForClear) programsSelectForClear.value = '';
+    clearFieldError('programs');
+    syncTypeFromPrograms();
+
+    const dateVisual = document.getElementById('dateInputVisual');
+
+    if(dateVisual) dateVisual.classList.remove('filled');
+
+    const requestedVisual = document.getElementById('dateRequestedVisual');
+
+    if(requestedVisual) requestedVisual.classList.remove('filled');
+    const dateAssistanceVisual = document.getElementById('dateAssistanceVisual');
+
+    if(dateAssistanceVisual) dateAssistanceVisual.classList.remove('filled');
+
+    const requestingOther = document.getElementById('requesting_for_other');
+    if(requestingOther) requestingOther.value = '';
+
+    const requestingHidden = document.getElementById('requesting_for');
+    if(requestingHidden) requestingHidden.value = '';
+
+    const patientHidden = document.getElementById('patient_status');
+    if(patientHidden) patientHidden.value = '';
+
+    const clientHidden = document.getElementById('client_times');
+    if(clientHidden) clientHidden.value = '';
+
+    const requestingSelect = document.getElementById('requesting_for_select');
+    if(requestingSelect) requestingSelect.value = '';
+
+    const patientSelect = document.getElementById('patient_status_select');
+    if(patientSelect) patientSelect.value = '';
+
+    const clientSelect = document.getElementById('client_times_select');
+    if(clientSelect) clientSelect.value = '';
+
+    const transportStatusSelect = document.getElementById('transport_service_status');
+    if(transportStatusSelect) transportStatusSelect.value = '';
+
+    const specialCaseStatusSelect = document.getElementById('special_case_status');
+    if(specialCaseStatusSelect) specialCaseStatusSelect.value = '';
+
+    const opAssistanceStatusSelect = document.getElementById('op_assistance_status');
+    if(opAssistanceStatusSelect) opAssistanceStatusSelect.value = '';
+
+    const mayTrabahoStatusSelect = document.getElementById('maytrabaho_status');
+    if(mayTrabahoStatusSelect) mayTrabahoStatusSelect.value = '';
+
+    updateRequestingOtherVisibility();
+    refreshMedicalHiddenValues();
+
+
+
+    closeCalendar();
+
+
+
+    clearAllErrors();
+
+    showFormStep(0);
+
+    updateExistingRecordNotice();
+    updateDuplicateRequestNotice();
+
+}
+
+
+
+async function addRecord(){
+
+    if(isSubmitting) return;
+
+    isSubmitting = true;
+
+    let storedUploadMetaForRollback = null;
+
+
+
+    const submitBtn = document.getElementById('addSubmitBtn') || form.querySelector('button[type="submit"]');
+
+    if(submitBtn){
+
+        submitBtn.disabled = true;
+
+        submitBtn.textContent = 'Saving...';
+
+    }
+
+
+
+    try {
+
+    clearAllErrors();
+
+    await ensureSharedRecordsReady();
+
+    let records = safeGetRecords();
+
+
+
+    let dateRequestedRaw = document.getElementById('dateRequested').value.trim();
+
+
+
+    const lastName = document.getElementById('lastName').value.trim();
+
+    const firstName = document.getElementById('firstName').value.trim();
+
+    const middleName = document.getElementById('middleName').value.trim();
+
+    const isRequestOnly = isRequestOnlyMode && requestOnlyRecordId !== null;
+
+        const typeSync = syncTypeFromPrograms();
+    const selectedProgram = typeSync.selectedProgram;
+    const type = typeSync.type;
+    const programMode = getProgramMode(type);
+    const isGuaranteeType = selectedProgram === 'Guarantee Letter';
+    const isTransportServiceProgram = selectedProgram === 'Transport Service - Medical Client';
+    const isSpecialCaseProgram = selectedProgram === 'Special Case - Medical Client';
+    const isOpAssistanceProgram = selectedProgram === 'OP Assistance';
+    const isMayTrabahoProgram = selectedProgram === 'MayTrabaho - Referral Letter';
+    const isMedicalType = (programMode === 'medical' || programMode === 'request');
+    const useGuaranteeFields = false;
+    const isActivityType = programMode === 'program';
+    const guarantee_letter_option = isGuaranteeType && document.getElementById('guarantee_letter_option')
+        ? document.getElementById('guarantee_letter_option').value.trim()
+        : '';
+    const transportServiceStatus = isTransportServiceProgram && document.getElementById('transport_service_status')
+        ? document.getElementById('transport_service_status').value.trim()
+        : '';
+    const specialCaseStatus = isSpecialCaseProgram && document.getElementById('special_case_status')
+        ? document.getElementById('special_case_status').value.trim()
+        : '';
+    const opAssistanceStatus = isOpAssistanceProgram && document.getElementById('op_assistance_status')
+        ? document.getElementById('op_assistance_status').value.trim()
+        : '';
+    const mayTrabahoStatus = isMayTrabahoProgram && document.getElementById('maytrabaho_status')
+        ? document.getElementById('maytrabaho_status').value.trim()
+        : '';
+    const status = isTransportServiceProgram
+        ? transportServiceStatus
+        : isSpecialCaseProgram
+            ? (specialCaseStatus || SPECIAL_CASE_DEFAULT_STATUS)
+            : isOpAssistanceProgram
+                ? (opAssistanceStatus || 'Pending')
+            : isMayTrabahoProgram
+                ? (mayTrabahoStatus || 'Pending')
+                : 'Pending';
+    const houseNo = document.getElementById('houseNo').value.trim();
+    const address = document.getElementById('address').value;
+    const subdivision = document.getElementById('subdivision').value;
+    const barangay = document.getElementById('barangay').value;
+    const contact = document.getElementById('contact').value.trim();
+    const email = document.getElementById('email').value.trim();
+    let gender = document.getElementById('gender').value;
+    const genderOther = document.getElementById('genderOther').value.trim();
+    if(gender === 'other' && genderOther) gender = genderOther;
+    let birthdayRaw = document.getElementById('birthday').value.trim();
+    const office = document.getElementById('office') ? document.getElementById('office').value : '';
+    const first_contact = document.getElementById('first_contact').value;
+    const first_staff = document.getElementById('first_staff').value.trim();
+    const client_class = document.getElementById('client_class').value;
+    const client_class_other = document.getElementById('client_class_other').value.trim();
+    const client_class_value = resolveClientClassValue(client_class, client_class_other);
+    const organization_name = '';
+    const position = '';
+    const guarantee_hospital = useGuaranteeFields && document.getElementById('guarantee_hospital') ? document.getElementById('guarantee_hospital').value.trim() : '';
+    const guarantee_purpose = useGuaranteeFields && document.getElementById('guarantee_purpose') ? document.getElementById('guarantee_purpose').value.trim() : '';
+    const guarantee_amount_raw = useGuaranteeFields && document.getElementById('guarantee_amount') ? document.getElementById('guarantee_amount').value.trim() : '';
+    const requesting_for = isMedicalType && !isSpecialCaseProgram && document.getElementById('requesting_for') ? document.getElementById('requesting_for').value : '';
+    const patient_status = isMedicalType && document.getElementById('patient_status') ? document.getElementById('patient_status').value : '';
+    const client_times = isMedicalType && document.getElementById('client_times') ? document.getElementById('client_times').value : '';
+    const hospital = isMedicalType && document.getElementById('hospital') ? document.getElementById('hospital').value.trim() : '';
+    const date_of_assistance = isMedicalType && document.getElementById('date_of_assistance') ? (document.getElementById('date_of_assistance').value || '') : '';
+    const leaderBarangayOfficial = document.getElementById('leaderBarangayOfficial').value.trim();
+    const org_long_name = isActivityType && document.getElementById('org_long_name') ? document.getElementById('org_long_name').value.trim() : '';
+    const num_attendees_raw = isActivityType && document.getElementById('num_attendees') ? document.getElementById('num_attendees').value.trim() : '';
+    const other_details = isActivityType && document.getElementById('other_details') ? document.getElementById('other_details').value.trim() : '';
+    const event_date = isActivityType && document.getElementById('event_date') ? (document.getElementById('event_date').value || '') : '';
+    const event_name = isActivityType && document.getElementById('event_name') ? document.getElementById('event_name').value.trim() : '';
+    const event_place = isActivityType && document.getElementById('event_place') ? document.getElementById('event_place').value.trim() : '';
+    const event_time = isActivityType && document.getElementById('event_time') ? (document.getElementById('event_time').value || '') : '';
+    const upload_letter_input = isActivityType ? document.getElementById('upload_letter') : null;
+    const remarks = document.getElementById('remarks').value.trim();
+
+
+
+    let firstInvalid = null;
+
+
+
+    if(!dateRequestedRaw){
+
+        showFieldError('dateRequested', 'Date requested is required.');
+
+        firstInvalid = firstInvalid || document.getElementById('dateRequested');
+
+    }
+
+    if(!lastName){
+
+        showFieldError('lastName', 'Last name is required.');
+
+        firstInvalid = firstInvalid || document.getElementById('lastName');
+
+    } else if (lastName.length < 2){
+
+        showFieldError('lastName', 'Last name must be at least 2 characters.');
+
+        firstInvalid = firstInvalid || document.getElementById('lastName');
+
+    }
+
+
+
+    if(!firstName){
+
+        showFieldError('firstName', 'First name is required.');
+
+        firstInvalid = firstInvalid || document.getElementById('firstName');
+
+    }
+
+    if(!isRequestOnly){
+
+        if(!office){
+            showFieldError('office', 'Office (CNL or PDL) is required.');
+            firstInvalid = firstInvalid || document.querySelector('[data-field="office"] .search-input') || document.getElementById('office');
+        }
+
+        if(!houseNo){
+            showFieldError('houseNo', 'Lot and Block is required.');
+            firstInvalid = firstInvalid || document.getElementById('houseNo');
+        }
+
+        if(!birthdayRaw){
+            showFieldError('birthday', 'Birthday is required.');
+            firstInvalid = firstInvalid || document.getElementById('birthday');
+        }
+
+        if(!contact){
+            showFieldError('contact', 'Cellphone number is required.');
+            firstInvalid = firstInvalid || document.getElementById('contact');
+        }
+
+    }
+
+    if(!selectedProgram){
+        showFieldError('programs', 'Please select one assistance option.');
+        firstInvalid = firstInvalid || document.querySelector('[data-field="programs"] .search-input') || document.getElementById('programs');
+    }
+
+    if(!type){
+        showFieldError('programs', 'Unable to determine assistance type from the selected option.');
+        firstInvalid = firstInvalid || document.querySelector('[data-field="programs"] .search-input') || document.getElementById('programs');
+    }
+
+    if(isTransportServiceProgram && !transportServiceStatus){
+        showFieldError('transport_service_status', 'Please select Show or No Show for this transport request.');
+        firstInvalid = firstInvalid || document.querySelector('[data-field="transport_service_status"] .search-input') || document.getElementById('transport_service_status');
+    }
+
+    if(!isRequestOnly){
+
+        if(!first_contact){
+            showFieldError('first_contact', 'First contact is required.');
+            firstInvalid = firstInvalid || document.querySelector('[data-field="first_contact"] .search-input');
+        }
+        if(!first_staff){
+            showFieldError('first_staff', 'First staff name is required.');
+            firstInvalid = firstInvalid || document.getElementById('first_staff');
+        }
+        if(!client_class){
+            showFieldError('client_class', 'Client classification is required.');
+            firstInvalid = firstInvalid || document.querySelector('[data-field="client_class"] .search-input');
+        }
+        if(client_class === 'Other' && !client_class_other){
+            showFieldError('client_class_other', 'Please specify the client classification.');
+            firstInvalid = firstInvalid || document.getElementById('client_class_other');
+        }
+        if(!barangay){
+            showFieldError('barangay', 'Barangay is required.');
+            firstInvalid = firstInvalid || document.querySelector('[data-field="barangay"] .search-input');
+        }
+        if(!gender){
+            showFieldError('gender', 'Gender is required.');
+            firstInvalid = firstInvalid || document.querySelector('[data-field="gender"] .search-input');
+        }
+
+        if(document.getElementById('gender').value === 'other' && !genderOther){
+
+            showFieldError('genderOther', 'Please specify gender.');
+
+            firstInvalid = firstInvalid || document.getElementById('genderOther');
+
+        }
+
+    }
+
+    if(isActivityType && !event_name){
+        showFieldError('event_name', 'Event / Activity is required for this program type.');
+        firstInvalid = firstInvalid || document.getElementById('event_name');
+    }
+
+    if(isActivityType && (!upload_letter_input || !upload_letter_input.files || upload_letter_input.files.length === 0)){
+        showFieldError('upload_letter', 'Upload request/solicitation/invitation letter is required.');
+        firstInvalid = firstInvalid || document.getElementById('upload_letter');
+    }
+
+
+
+    // Date Requested normalization
+
+    let isoDateRequested = '';
+
+    let displayDateRequested = '';
+
+    if(dateRequestedRaw){
+
+        const isoRegex = /^\d{4}-\d{2}-\d{2}$/;
+
+        const mdyRegex = /^\d{2}\/\d{2}\/\d{4}$/;
+
+        if(isoRegex.test(dateRequestedRaw)){
+
+            isoDateRequested = dateRequestedRaw;
+
+            const p = dateRequestedRaw.split('-');
+
+            displayDateRequested = `${p[1]}/${p[2]}/${p[0]}`;
+
+        } else if (mdyRegex.test(dateRequestedRaw)){
+
+            const parts = dateRequestedRaw.split('/');
+
+            const mm = parts[0].padStart(2,'0');
+
+            const dd = parts[1].padStart(2,'0');
+
+            const yyyy = parts[2];
+
+            const d = new Date(`${yyyy}-${mm}-${dd}`);
+
+            if(isNaN(d.getTime())){
+
+                showFieldError('dateRequested', 'Date requested is not a valid date.');
+
+                firstInvalid = firstInvalid || document.getElementById('dateRequested');
+
+            } else {
+
+                isoDateRequested = `${yyyy}-${mm}-${dd}`;
+
+                displayDateRequested = `${mm}/${dd}/${yyyy}`;
+
+            }
+
+        } else {
+
+            const parsed = new Date(dateRequestedRaw);
+
+            if(!isNaN(parsed.getTime())){
+
+                const yyyy = parsed.getFullYear();
+
+                const mm = String(parsed.getMonth() + 1).padStart(2,'0');
+
+                const dd = String(parsed.getDate()).padStart(2,'0');
+
+                isoDateRequested = `${yyyy}-${mm}-${dd}`;
+
+                displayDateRequested = `${mm}/${dd}/${yyyy}`;
+
+            } else {
+
+                showFieldError('dateRequested', 'Date format required (MM/DD/YYYY) or use date picker.');
+
+                firstInvalid = firstInvalid || document.getElementById('dateRequested');
+
+            }
+
+        }
+
+    }
+
+
+
+    // Birthday normalization
+
+    let isoBirthday = '';
+
+    if(birthdayRaw){
+
+        const isoRegex = /^\d{4}-\d{2}-\d{2}$/;
+
+        const mdyRegex = /^\d{2}\/\d{2}\/\d{4}$/;
+
+        if(isoRegex.test(birthdayRaw)){
+
+            isoBirthday = birthdayRaw;
+
+        } else if (mdyRegex.test(birthdayRaw)){
+
+            const parts = birthdayRaw.split('/');
+
+            const mm = parts[0].padStart(2,'0');
+
+            const dd = parts[1].padStart(2,'0');
+
+            const yyyy = parts[2];
+
+            const d = new Date(`${yyyy}-${mm}-${dd}`);
+
+            if(isNaN(d.getTime())){
+
+                showFieldError('birthday', 'Birthday is not a valid date.');
+
+                firstInvalid = firstInvalid || document.getElementById('birthday');
+
+            } else {
+
+                isoBirthday = `${yyyy}-${mm}-${dd}`;
+
+            }
+
+        } else {
+
+            const parsed = new Date(birthdayRaw);
+
+            if(!isNaN(parsed.getTime())){
+
+                const yyyy = parsed.getFullYear();
+
+                const mm = String(parsed.getMonth() + 1).padStart(2,'0');
+
+                const dd = String(parsed.getDate()).padStart(2,'0');
+
+                isoBirthday = `${yyyy}-${mm}-${dd}`;
+
+            } else {
+
+                showFieldError('birthday', 'Birthday format required (MM/DD/YYYY) or use date picker.');
+
+                firstInvalid = firstInvalid || document.getElementById('birthday');
+
+            }
+
+        }
+
+    }
+
+
+
+    const cleanedContact = contact.replace(/\D/g,'');
+
+    if(cleanedContact){
+
+        if(!/^\d{10,11}$/.test(cleanedContact)){
+
+            showFieldError('contact', 'Contact must be 10-11 digits (numbers only).');
+
+            firstInvalid = firstInvalid || document.getElementById('contact');
+
+        }
+
+    }
+
+
+
+    if(email){
+
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if(!emailPattern.test(email)){
+
+            showFieldError('email', 'Please enter a valid email address.');
+
+            firstInvalid = firstInvalid || document.getElementById('email');
+
+        }
+
+    } else {
+
+        clearFieldError('email');
+
+    }
+
+
+    let num_attendees = '';
+    let guarantee_amount = '';
+
+    if(useGuaranteeFields && guarantee_amount_raw !== ''){
+        const parsedGuaranteeAmount = Number(guarantee_amount_raw);
+        if(!Number.isFinite(parsedGuaranteeAmount) || parsedGuaranteeAmount < 0){
+            showFieldError('guarantee_amount', 'Amount requested must be 0 or greater.');
+            firstInvalid = firstInvalid || document.getElementById('guarantee_amount');
+        } else {
+            guarantee_amount = parsedGuaranteeAmount;
+        }
+    }
+
+    if(isActivityType && num_attendees_raw !== ''){
+
+        const parsedAttendees = Number(num_attendees_raw);
+
+        if(!Number.isInteger(parsedAttendees) || parsedAttendees < 0){
+
+            showFieldError('num_attendees', 'Number of attendees/beneficiaries must be a whole number of 0 or greater.');
+
+            firstInvalid = firstInvalid || document.getElementById('num_attendees');
+
+        } else {
+
+            num_attendees = parsedAttendees;
+
+        }
+
+    }
+
+    let upload_letter_meta = null;
+
+    const anyErrors = fieldIds.some(fid => {
+
+        const el = document.getElementById('error-' + fid);
+
+        return el && el.style.display === 'block';
+
+    });
+
+
+
+    if(anyErrors){
+
+        showToast("Please fix the errors highlighted below.", 'error');
+
+        if(firstInvalid){
+
+            openStepForElement(firstInvalid);
+
+            try { firstInvalid.focus(); } catch(e){}
+
+        }
+
+        if(submitBtn){ submitBtn.disabled = false; submitBtn.textContent = SUBMIT_LABEL; }
+
+        isSubmitting = false;
+
+        return;
+
+    }
+
+    const duplicateRequestMatch = findDuplicateRequestMatch(isoDateRequested || dateRequestedRaw, selectedProgram);
+    if(duplicateRequestMatch){
+
+        const duplicateProgram = getHistoryProgramValue(duplicateRequestMatch.entry, duplicateRequestMatch.record) || selectedProgram;
+        const duplicateDate = normalizeComparableDate(duplicateRequestMatch.entry && duplicateRequestMatch.entry.date || isoDateRequested || dateRequestedRaw);
+        const duplicateName = buildDisplayName(duplicateRequestMatch.record);
+        const duplicateMessage = duplicateName
+            ? `${duplicateName} already has ${duplicateProgram || 'this program'} saved for ${duplicateDate || 'this request date'}.`
+            : `This client already has ${duplicateProgram || 'this program'} saved for ${duplicateDate || 'this request date'}.`;
+
+        showFieldError('dateRequested', duplicateMessage);
+        showFieldError('programs', 'Duplicate request detected. Review the existing history entry before saving again.');
+        updateDuplicateRequestNotice();
+
+        const duplicateFocus = document.getElementById('dateRequested') || document.getElementById('programs');
+        if(duplicateFocus){
+            openStepForElement(duplicateFocus);
+            try { duplicateFocus.focus(); } catch(e){}
+        }
+
+        showToast('Duplicate request detected. Save was stopped.', 'error');
+        if(submitBtn){ submitBtn.disabled = false; submitBtn.textContent = SUBMIT_LABEL; }
+        isSubmitting = false;
+        return;
+
+    }
+
+    if(isRequestOnly){
+
+        const recordIndex = records.findIndex(r => Number(r.id) === Number(requestOnlyRecordId));
+
+        if(recordIndex < 0){
+
+            showToast('Matching client record not found. Please reselect the name.', 'error');
+
+            if(submitBtn){ submitBtn.disabled = false; submitBtn.textContent = SUBMIT_LABEL; }
+
+            isSubmitting = false;
+
+            return;
+
+        }
+
+        const record = records[recordIndex];
+        const historyEntryId = window.lbAttachments && typeof window.lbAttachments.generateHistoryEntryId === 'function'
+            ? window.lbAttachments.generateHistoryEntryId()
+            : `hist_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
+
+        if(upload_letter_input && upload_letter_input.files && upload_letter_input.files.length > 0){
+            upload_letter_meta = await window.lbAttachments.uploadFile(upload_letter_input.files[0], {
+                historyEntryId: historyEntryId,
+                recordId: record.id
+            });
+            storedUploadMetaForRollback = upload_letter_meta;
+        }
+
+        const inputCombinedName = `${lastName}${firstName ? ', ' + firstName : ''}${middleName ? ' ' + middleName : ''}`.trim();
+
+        const displayName = buildDisplayName(record) || inputCombinedName;
+        const historyEntry = buildHistoryEntryFromForm({
+            id: historyEntryId,
+            name: displayName,
+            glcode: record.glcode || '',
+            date: isoDateRequested || '',
+            dateCompleted: '',
+            dateReleased: '',
+            type,
+            program: selectedProgram,
+            status,
+            leader: leaderBarangayOfficial,
+            first_contact,
+            first_staff,
+            client_class: client_class_value,
+            office,
+            guarantee_letter_option,
+            guarantee_hospital,
+            guarantee_purpose,
+            guarantee_amount,
+            requesting_for,
+            patient_status,
+            client_times,
+            transport_service_status: transportServiceStatus,
+            special_case_status: specialCaseStatus,
+            hospital,
+            date_of_assistance,
+            maytrabaho_status: mayTrabahoStatus,
+            org_long_name,
+            num_attendees,
+            other_details,
+            event_date,
+            event_name,
+            event_place,
+            event_time,
+            upload_letter_meta,
+            remarks
+        });
+
+        if(!Array.isArray(record.history)) record.history = [];
+
+        record.history.push(historyEntry);
+
+        record.type = type;
+
+        if(selectedProgram){
+
+            const currentPrograms = Array.isArray(record.programs)
+
+                ? record.programs.slice()
+
+                : (record.programs ? [record.programs] : []);
+
+            const filteredPrograms = currentPrograms.filter(p => String(p || '').trim() !== selectedProgram);
+
+            record.programs = [selectedProgram].concat(filteredPrograms);
+
+        }
+
+        record.status = status;
+
+        record.guarantee_letter_option = guarantee_letter_option;
+        record.first_contact = first_contact || '';
+        record.first_staff = first_staff || '';
+        record.client_class = client_class_value;
+        record.office = office || '';
+        record.guarantee_hospital = guarantee_hospital || '';
+        record.guarantee_purpose = guarantee_purpose || '';
+        record.guarantee_amount = guarantee_amount;
+        record.requesting_for = requesting_for || '';
+        record.patient_status = patient_status || '';
+        record.client_times = client_times || '';
+        record.transport_service_status = transportServiceStatus || '';
+        record.special_case_status = specialCaseStatus || '';
+        record.hospital = hospital || '';
+        record.date_of_assistance = date_of_assistance || '';
+        record.leaderBarangayOfficial = leaderBarangayOfficial || '';
+        record.org_long_name = org_long_name || '';
+        record.num_attendees = num_attendees;
+        record.other_details = other_details || '';
+        record.event_date = event_date || '';
+        record.event_name = event_name || '';
+        record.event_place = event_place || '';
+        record.event_time = event_time || '';
+        record.upload_letter_meta = upload_letter_meta;
+        record.remarks = remarks || '';
+        record.maytrabaho_status = mayTrabahoStatus || '';
+
+        record.dateCompleted = '';
+
+        record.dateReleased = '';
+
+        record.dateRequested = isoDateRequested || record.dateRequested || '';
+
+        record.requestedDate = displayDateRequested || record.requestedDate || record.month || '';
+
+        record.month = displayDateRequested || record.month || '';
+
+        if(displayName) record.name = displayName;
+
+        record.lastName = record.lastName || lastName;
+
+        record.firstName = record.firstName || firstName;
+
+        record.middleName = record.middleName || middleName;
+
+        records[recordIndex] = record;
+
+        await updateRecordInStore(record);
+        if(upload_letter_meta && window.lbAttachments && typeof window.lbAttachments.finalizeAttachment === 'function'){
+            try {
+                await window.lbAttachments.finalizeAttachment(upload_letter_meta, {
+                    historyEntryId: historyEntryId,
+                    recordId: record.id
+                });
+            } catch(finalizeError){
+                console.warn('History attachment finalize will be retried by cleanup sync.', finalizeError);
+            }
+        }
+        storedUploadMetaForRollback = null;
+
+        showToast("Request added successfully!", 'success');
+
+        clearForm();
+
+        return;
+
+    }
+
+    const combinedName = `${lastName}${firstName ? ', ' + firstName : ''}${middleName ? ' ' + middleName : ''}`.trim();
+    const initialHistoryEntryId = window.lbAttachments && typeof window.lbAttachments.generateHistoryEntryId === 'function'
+        ? window.lbAttachments.generateHistoryEntryId()
+        : `hist_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
+
+    if(upload_letter_input && upload_letter_input.files && upload_letter_input.files.length > 0){
+        upload_letter_meta = await storeUploadLetterMetaFromFile(upload_letter_input.files[0]);
+        storedUploadMetaForRollback = upload_letter_meta;
+    }
+
+    const initialHistoryEntry = buildHistoryEntryFromForm({
+        id: initialHistoryEntryId,
+        name: combinedName,
+        glcode: '',
+        date: isoDateRequested || '',
+        dateCompleted: '',
+        dateReleased: '',
+        type,
+        program: selectedProgram,
+        status,
+        leader: leaderBarangayOfficial,
+        first_contact,
+        first_staff,
+        client_class: client_class_value,
+        office,
+        guarantee_letter_option,
+        guarantee_hospital,
+        guarantee_purpose,
+        guarantee_amount,
+        requesting_for,
+        patient_status,
+        client_times,
+        transport_service_status: transportServiceStatus,
+        special_case_status: specialCaseStatus,
+        hospital,
+        date_of_assistance,
+        maytrabaho_status: mayTrabahoStatus,
+        org_long_name,
+        num_attendees,
+        other_details,
+        event_date,
+        event_name,
+        event_place,
+        event_time,
+        upload_letter_meta,
+        remarks
+    });
+
+    const newRecord = {
+
+        month: displayDateRequested || "",
+
+        dateRequested: isoDateRequested || "",
+
+        glcode: "",
+
+        lastName,
+
+        firstName,
+
+        middleName,
+
+        name: combinedName,
+        type,
+        programs: selectedProgram ? [selectedProgram] : [],
+        guarantee_letter_option,
+        office,
+        first_contact,
+        first_staff,
+        client_class: client_class_value,
+        organization_name,
+        position,
+        guarantee_hospital,
+        guarantee_purpose,
+        guarantee_amount,
+        houseNo,
+        address,
+        subdivisionVillageCompound: subdivision,
+        barangay,
+        contact: cleanedContact,
+        email,
+        gender,
+        birthday: isoBirthday || "",
+        status,
+        requesting_for,
+        patient_status,
+        client_times,
+        transport_service_status: transportServiceStatus,
+        special_case_status: specialCaseStatus,
+        hospital,
+        date_of_assistance,
+        maytrabaho_status: mayTrabahoStatus,
+        leaderBarangayOfficial,
+        org_long_name,
+
+        num_attendees,
+
+        other_details,
+
+        event_date,
+
+        event_name,
+
+        event_place,
+
+        event_time,
+
+        upload_letter_meta,
+
+        remarks,
+
+        history: [initialHistoryEntry],
+
+        latestTransport: "",
+
+        oldestTransport: ""
+
+    };
+
+    const savedRecord = await createRecordInStore(newRecord);
+    if(upload_letter_meta && window.lbAttachments && typeof window.lbAttachments.finalizeAttachment === 'function'){
+        try {
+            await window.lbAttachments.finalizeAttachment(upload_letter_meta, {
+                historyEntryId: initialHistoryEntryId,
+                recordId: savedRecord && savedRecord.id != null ? savedRecord.id : newRecord.id
+            });
+        } catch(finalizeError){
+            console.warn('Initial record attachment finalize will be retried by cleanup sync.', finalizeError);
+        }
+    }
+    storedUploadMetaForRollback = null;
+
+
+
+    try { localStorage.removeItem('draftRecord'); } catch(e){}
+
+
+
+    showToast("Record added successfully!", 'success');
+
+    clearForm();
+
+    } catch(saveError){
+
+        console.error('Failed to save record', saveError);
+        if(storedUploadMetaForRollback){
+            try {
+                if(window.lbAttachments && typeof window.lbAttachments.markAttachmentOrphan === 'function'){
+                    await window.lbAttachments.markAttachmentOrphan(storedUploadMetaForRollback);
+                } else {
+                    await deleteStoredUploadLetter(storedUploadMetaForRollback);
+                }
+            } catch(rollbackError){
+                console.warn('Failed to mark upload attachment for cleanup.', rollbackError);
+            }
+        }
+
+        const errorMessage = window.lbData && typeof window.lbData.explainError === 'function'
+            ? window.lbData.explainError(saveError)
+            : (saveError && saveError.message ? saveError.message : 'Failed to save record. Please try again.');
+        showToast(errorMessage, 'error');
+
+    } finally {
+
+        if(submitBtn){ submitBtn.disabled = false; submitBtn.textContent = SUBMIT_LABEL; }
+
+        isSubmitting = false;
+
+    }
+}
+
+
+
+/* ---------------------- Contact validation ---------------------- */
+
+function validateContactInput(inputEl){
+
+    const v = inputEl.value.replace(/\D/g,'');
+
+    if(v && !/^\d{0,11}$/.test(v)){
+
+        showFieldError('contact','Contact must be 10-11 digits (numbers only).');
+
+    } else {
+
+        clearFieldError('contact');
+
+    }
+
+}
+
+
+
+/* ---------------------- Autosave / Draft ---------------------- */
+
+window.__autosaveDirty = false;
+
+let __autosaveTimer = null;
+
+
+
+function buildDraftObject(){
+    const draft = {
+        dateRequested: document.getElementById('dateRequested').value || '',
+        lastName: document.getElementById('lastName').value || '',
+        firstName: document.getElementById('firstName').value || '',
+        middleName: document.getElementById('middleName').value || '',
+        first_contact: document.getElementById('first_contact').value || '',
+        first_staff: document.getElementById('first_staff').value || '',
+        client_class: document.getElementById('client_class').value || '',
+        client_class_other: document.getElementById('client_class_other').value || '',
+        type: document.getElementById('type').value || '',
+        programs: document.getElementById('programs') ? document.getElementById('programs').value || '' : '',
+        guarantee_letter_option: document.getElementById('guarantee_letter_option') ? document.getElementById('guarantee_letter_option').value || '' : '',
+        guarantee_hospital: document.getElementById('guarantee_hospital') ? document.getElementById('guarantee_hospital').value || '' : '',
+        guarantee_purpose: document.getElementById('guarantee_purpose') ? document.getElementById('guarantee_purpose').value || '' : '',
+        guarantee_amount: document.getElementById('guarantee_amount') ? document.getElementById('guarantee_amount').value || '' : '',
+        requesting_for: document.getElementById('requesting_for') ? document.getElementById('requesting_for').value || '' : '',
+        patient_status: document.getElementById('patient_status') ? document.getElementById('patient_status').value || '' : '',
+        client_times: document.getElementById('client_times') ? document.getElementById('client_times').value || '' : '',
+        transport_service_status: document.getElementById('transport_service_status') ? document.getElementById('transport_service_status').value || '' : '',
+        special_case_status: document.getElementById('special_case_status') ? document.getElementById('special_case_status').value || '' : '',
+        op_assistance_status: document.getElementById('op_assistance_status') ? document.getElementById('op_assistance_status').value || '' : '',
+        maytrabaho_status: document.getElementById('maytrabaho_status') ? document.getElementById('maytrabaho_status').value || '' : '',
+        hospital: document.getElementById('hospital') ? document.getElementById('hospital').value || '' : '',
+        date_of_assistance: document.getElementById('date_of_assistance') ? document.getElementById('date_of_assistance').value || '' : '',
+        office: document.getElementById('office') ? document.getElementById('office').value || '' : '',
+        organization_name: '',
+        position: '',
+        houseNo: document.getElementById('houseNo').value || '',
+        address: document.getElementById('address').value || '',
+        subdivision: document.getElementById('subdivision').value || '',
+        barangay: document.getElementById('barangay').value || '',
+        contact: document.getElementById('contact').value || '',
+        email: document.getElementById('email').value || '',
+        gender: (document.getElementById('gender').value || '') === 'other' ? (document.getElementById('genderOther').value || '') : (document.getElementById('gender').value || ''),
+        birthday: document.getElementById('birthday').value || '',
+        leaderBarangayOfficial: document.getElementById('leaderBarangayOfficial').value || '',
+        org_long_name: document.getElementById('org_long_name').value || '',
+        num_attendees: document.getElementById('num_attendees').value || '',
+        other_details: document.getElementById('other_details').value || '',
+        event_date: document.getElementById('event_date').value || '',
+        event_name: document.getElementById('event_name').value || '',
+        event_place: document.getElementById('event_place').value || '',
+        event_time: document.getElementById('event_time').value || '',
+        remarks: document.getElementById('remarks').value || '',
+        savedAt: new Date().toISOString()
+    };
+    return draft;
+}
+
+
+
+function saveDraftNow(){
+
+    const draft = buildDraftObject();
+
+    localStorage.setItem('draftRecord', JSON.stringify(draft));
+
+    window.__autosaveDirty = false;
+
+    console.debug('Draft saved', draft);
+
+}
+
+
+
+function scheduleAutosave(){
+
+    window.__autosaveDirty = true;
+
+    if(__autosaveTimer) clearTimeout(__autosaveTimer);
+
+    __autosaveTimer = setTimeout(() => {
+
+        saveDraftNow();
+
+    }, 800);
+
+}
+
+
+
+function loadDraftIntoForm(){
+
+    try {
+
+        const raw = localStorage.getItem('draftRecord');
+
+        if(!raw) return;
+
+        const draft = JSON.parse(raw);
+
+        if(!draft) return;
+
+        if(draft.dateRequested) document.getElementById('dateRequested').value = draft.dateRequested;
+
+        if(draft.lastName) document.getElementById('lastName').value = draft.lastName;
+
+        if(draft.firstName) document.getElementById('firstName').value = draft.firstName;
+
+        if(draft.middleName) document.getElementById('middleName').value = draft.middleName;
+
+                if(draft.type) document.getElementById('type').value = draft.type;
+
+        const programsSelect = document.getElementById('programs');
+        if(programsSelect){
+            let draftProgram = '';
+            if(Array.isArray(draft.programs) && draft.programs.length){
+                draftProgram = String(draft.programs[0] || '');
+            } else if(typeof draft.programs === 'string'){
+                draftProgram = draft.programs;
+            }
+            programsSelect.value = normalizeProgramSelectionValue(draftProgram);
+        }
+        if(draft.guarantee_letter_option && document.getElementById('guarantee_letter_option')){
+            document.getElementById('guarantee_letter_option').value = draft.guarantee_letter_option;
+        }
+        if(draft.requesting_for && document.getElementById('requesting_for')) document.getElementById('requesting_for').value = draft.requesting_for;
+        if(draft.patient_status && document.getElementById('patient_status')) document.getElementById('patient_status').value = draft.patient_status;
+        if(draft.client_times && document.getElementById('client_times')) document.getElementById('client_times').value = draft.client_times;
+        if(draft.guarantee_hospital && document.getElementById('guarantee_hospital')) document.getElementById('guarantee_hospital').value = draft.guarantee_hospital;
+        if(draft.guarantee_purpose && document.getElementById('guarantee_purpose')) document.getElementById('guarantee_purpose').value = draft.guarantee_purpose;
+        if(draft.guarantee_amount !== undefined && draft.guarantee_amount !== null && String(draft.guarantee_amount) !== '' && document.getElementById('guarantee_amount')) document.getElementById('guarantee_amount').value = draft.guarantee_amount;
+        if(draft.hospital && document.getElementById('hospital')) document.getElementById('hospital').value = draft.hospital;
+        if(draft.first_contact) document.getElementById('first_contact').value = draft.first_contact;
+        if(draft.first_staff) document.getElementById('first_staff').value = draft.first_staff;
+        if(draft.client_class) document.getElementById('client_class').value = draft.client_class;
+        if(draft.client_class_other) document.getElementById('client_class_other').value = draft.client_class_other;
+        if(draft.office && document.getElementById('office')) document.getElementById('office').value = draft.office;
+        if(draft.houseNo) document.getElementById('houseNo').value = draft.houseNo;
+        if(draft.address) document.getElementById('address').value = draft.address;
+        if(draft.subdivision) document.getElementById('subdivision').value = draft.subdivision;
+        if(draft.barangay) document.getElementById('barangay').value = draft.barangay;
+        if(draft.contact) document.getElementById('contact').value = draft.contact;
+        if(draft.email) document.getElementById('email').value = draft.email;
+
+        if(draft.gender) {
+
+            const g = draft.gender;
+
+            const sel = document.getElementById('gender');
+
+            const optIndexByValue = Array.from(sel.options).findIndex(o => o.value === g);
+
+            const optIndexByText = Array.from(sel.options).findIndex(o => o.text === g);
+
+            if(optIndexByValue >= 0){
+
+                sel.selectedIndex = optIndexByValue;
+
+                document.getElementById('genderOther').style.display = 'none';
+
+            } else if(optIndexByText >= 0){
+
+                sel.selectedIndex = optIndexByText;
+
+                document.getElementById('genderOther').style.display = 'none';
+
+            } else {
+
+                sel.value = 'other';
+
+                document.getElementById('genderOther').style.display = 'block';
+
+                document.getElementById('genderOther').value = g;
+
+                document.getElementById('genderOther').classList.add('filled');
+
+            }
+
+        }
+
+        if(draft.birthday) {
+
+            const isoRegex = /^\d{4}-\d{2}-\d{2}$/;
+
+            if(isoRegex.test(draft.birthday)){
+
+                const p = draft.birthday.split('-');
+
+                document.getElementById('birthday').value = `${p[1]}/${p[2]}/${p[0]}`;
+
+                document.getElementById('birthday').classList.add('filled');
+
+                const dateVisual = document.getElementById('dateInputVisual');
+
+                if(dateVisual) dateVisual.classList.add('filled');
+
+            } else {
+
+                document.getElementById('birthday').value = draft.birthday;
+
+                if(draft.birthday.trim() !== ''){
+
+                    document.getElementById('birthday').classList.add('filled');
+
+                    const dateVisual = document.getElementById('dateInputVisual');
+
+                    if(dateVisual) dateVisual.classList.add('filled');
+
+                }
+
+            }
+
+        }
+
+        if(draft.dateRequested) {
+
+            const isoRegex = /^\d{4}-\d{2}-\d{2}$/;
+
+            const mdyRegex = /^\d{2}\/\d{2}\/\d{4}$/;
+
+            if(isoRegex.test(draft.dateRequested)){
+
+                const p = draft.dateRequested.split('-');
+
+                document.getElementById('dateRequested').value = `${p[1]}/${p[2]}/${p[0]}`;
+
+                document.getElementById('dateRequested').classList.add('filled');
+
+                const dateVisual = document.getElementById('dateRequestedVisual');
+
+                if(dateVisual) dateVisual.classList.add('filled');
+
+            } else if(mdyRegex.test(draft.dateRequested)){
+
+                document.getElementById('dateRequested').value = draft.dateRequested;
+
+                document.getElementById('dateRequested').classList.add('filled');
+
+                const dateVisual = document.getElementById('dateRequestedVisual');
+
+                if(dateVisual) dateVisual.classList.add('filled');
+
+            } else {
+
+                document.getElementById('dateRequested').value = draft.dateRequested;
+
+                if(draft.dateRequested.trim() !== ''){
+
+                    document.getElementById('dateRequested').classList.add('filled');
+
+                    const dateVisual = document.getElementById('dateRequestedVisual');
+
+                    if(dateVisual) dateVisual.classList.add('filled');
+
+                }
+
+            }
+
+        }
+        if(draft.date_of_assistance) {
+
+            const isoRegex = /^\d{4}-\d{2}-\d{2}$/;
+
+            const mdyRegex = /^\d{2}\/\d{2}\/\d{4}$/;
+
+            if(isoRegex.test(draft.date_of_assistance)){
+
+                const p = draft.date_of_assistance.split('-');
+
+                document.getElementById('date_of_assistance').value = `${p[1]}/${p[2]}/${p[0]}`;
+
+                document.getElementById('date_of_assistance').classList.add('filled');
+
+                const dateVisual = document.getElementById('dateAssistanceVisual');
+
+                if(dateVisual) dateVisual.classList.add('filled');
+
+            } else if(mdyRegex.test(draft.date_of_assistance)){
+
+                document.getElementById('date_of_assistance').value = draft.date_of_assistance;
+
+                document.getElementById('date_of_assistance').classList.add('filled');
+
+                const dateVisual = document.getElementById('dateAssistanceVisual');
+
+                if(dateVisual) dateVisual.classList.add('filled');
+
+            } else {
+
+                document.getElementById('date_of_assistance').value = draft.date_of_assistance;
+
+                if(draft.date_of_assistance.trim() !== ''){
+
+                    document.getElementById('date_of_assistance').classList.add('filled');
+
+                    const dateVisual = document.getElementById('dateAssistanceVisual');
+
+                    if(dateVisual) dateVisual.classList.add('filled');
+
+                }
+
+            }
+
+        }
+
+        applyMedicalDraftSelections(draft);
+        if(draft.leaderBarangayOfficial) document.getElementById('leaderBarangayOfficial').value = draft.leaderBarangayOfficial;
+
+        if(draft.org_long_name) document.getElementById('org_long_name').value = draft.org_long_name;
+
+        if(draft.num_attendees !== undefined && draft.num_attendees !== null && String(draft.num_attendees) !== '') document.getElementById('num_attendees').value = draft.num_attendees;
+
+        if(draft.other_details) document.getElementById('other_details').value = draft.other_details;
+
+        if(draft.event_date) document.getElementById('event_date').value = draft.event_date;
+
+        if(draft.event_name) document.getElementById('event_name').value = draft.event_name;
+
+        if(draft.event_place) document.getElementById('event_place').value = draft.event_place;
+
+        if(draft.event_time) document.getElementById('event_time').value = draft.event_time;
+
+        if(draft.remarks) document.getElementById('remarks').value = draft.remarks;
+
+
+
+        document.querySelectorAll('select').forEach(s => s.dispatchEvent(new Event('change')));
+        syncTypeFromPrograms();
+
+    } catch(e){
+
+        console.warn('Failed to load draft', e);
+
+    }
+
+}
+
+
+
+/* ---------------------- Misc small helpers ---------------------- */
+
+document.addEventListener("click", e => {
+
+    document.querySelectorAll(".search-wrapper").forEach(wrapper => {
+
+        if(!wrapper.contains(e.target)){
+
+            const opts = wrapper.querySelector(".options");
+
+            if(opts) opts.style.display = "none";
+
+        }
+
+    });
+
+});
+
+
+
+/* ---------------------- Initialize & wiring ---------------------- */
+
+document.addEventListener("DOMContentLoaded", function(){
+
+    // Fields that should get 'filled' class behavior
+
+        const textInputs = ["dateRequested","lastName","firstName","middleName","houseNo","contact","email","birthday","genderOther","first_staff","client_class_other","guarantee_hospital","guarantee_purpose","guarantee_amount","hospital","requesting_for_other","date_of_assistance","leaderBarangayOfficial","org_long_name","num_attendees","other_details","event_date","event_name","event_place","event_time","remarks"];
+
+
+
+    textInputs.forEach(id=>{
+
+        const input = document.getElementById(id);
+
+        if(!input) return;
+
+        input.addEventListener("input", function(){
+
+            if(this.value.trim() !== ""){
+
+                this.classList.add("filled");
+
+                if(id === 'birthday'){
+
+                    const visual = document.getElementById('dateInputVisual');
+
+                    if(visual) visual.classList.add('filled');
+
+                }
+
+                if(id === 'dateRequested'){
+
+                    const visual = document.getElementById('dateRequestedVisual');
+
+                    if(visual) visual.classList.add('filled');
+
+                }
+
+                if(id === 'date_of_assistance'){
+
+                    const visual = document.getElementById('dateAssistanceVisual');
+
+                    if(visual) visual.classList.add('filled');
+
+                }
+
+            }else{
+
+                this.classList.remove("filled");
+
+                if(id === 'birthday'){
+
+                    const visual = document.getElementById('dateInputVisual');
+
+                    if(visual) visual.classList.remove('filled');
+
+                }
+
+                if(id === 'dateRequested'){
+
+                    const visual = document.getElementById('dateRequestedVisual');
+
+                    if(visual) visual.classList.remove('filled');
+
+                }
+
+                if(id === 'date_of_assistance'){
+
+                    const visual = document.getElementById('dateAssistanceVisual');
+
+                    if(visual) visual.classList.remove('filled');
+
+                }
+
+            }
+
+            // contact sanitization
+
+            if(id === 'contact'){
+
+                const cleaned = this.value.replace(/\D+/g,'');
+
+                if(cleaned !== this.value) {
+
+                    const pos = this.selectionStart - 1;
+
+                    this.value = cleaned;
+
+                    try { this.setSelectionRange(pos, pos); } catch(e){}
+
+                }
+
+                validateContactInput(this);
+
+            }
+
+
+
+            // date fields formatting (manual typing)
+
+            if(id === 'birthday' || id === 'dateRequested' || id === 'date_of_assistance'){
+
+                const raw = this.value;
+
+                const cleaned = raw.replace(/[^\d\/]/g,'').slice(0,10);
+
+                if(cleaned !== raw) {
+
+                    this.value = cleaned;
+
+                }
+
+                const digits = this.value.replace(/\D/g,'').slice(0,8);
+
+                let display = this.value;
+
+                if(digits.length > 0){
+
+                    const parts = [];
+
+                    parts.push(digits.slice(0,2));
+
+                    if(digits.length > 2) parts.push(digits.slice(2,4));
+
+                    if(digits.length > 4) parts.push(digits.slice(4,8));
+
+                    display = parts.join(digits.length > 2 ? '/' : '');
+
+                }
+
+                if(display !== this.value) this.value = display;
+
+                clearFieldError(id);
+
+            }
+
+
+
+            clearFieldError(id);
+
+            scheduleAutosave();
+
+        });
+
+    });
+
+
+
+    // Populate barangay if function exists
+
+    try { if(typeof populateBarangaySelect === 'function') populateBarangaySelect('barangay'); } catch(e){}
+
+
+
+    // After barangays populate initial address options
+
+    try {
+
+        const barangaySel = document.getElementById('barangay');
+
+        const chosen = barangaySel ? barangaySel.value : '';
+
+        if(typeof populateAddressSelect === 'function') populateAddressSelect('address', chosen);
+
+    } catch(e){}
+
+
+
+    // Gender other show/hide
+
+    const gender = document.getElementById('gender');
+
+    if(gender){
+
+        gender.addEventListener('change', function(){
+
+            const other = document.getElementById('genderOther');
+
+            if(this.value === 'other'){
+
+                other.style.display = 'block';
+
+                other.focus();
+
+            } else {
+
+                other.style.display = 'none';
+
+                other.value = '';
+
+                other.classList.remove('filled');
+
+            }
+
+            scheduleAutosave();
+
+            clearFieldError('gender');
+
+            clearFieldError('genderOther');
+
+        });
+
+    }
+
+
+
+    const clientClass = document.getElementById('client_class');
+    const clientClassOther = document.getElementById('client_class_other');
+    if(clientClass && clientClassOther){
+        const syncClientClassOther = () => {
+            if(clientClass.value === 'Other'){
+                clientClassOther.style.display = 'block';
+            } else {
+                clientClassOther.style.display = 'none';
+                clientClassOther.value = '';
+                clientClassOther.classList.remove('filled');
+            }
+        };
+        clientClass.addEventListener('change', function(){
+            syncClientClassOther();
+            scheduleAutosave();
+            clearFieldError('client_class');
+            clearFieldError('client_class_other');
+        });
+        syncClientClassOther();
+    }
+
+    // initialize date pickers
+
+    createDatePicker('birthdayWrapper','birthday','calendarToggle');
+
+    createDatePicker('dateRequestedWrapper','dateRequested','calendarToggleRequested');
+
+    createDatePicker('dateAssistanceWrapper','date_of_assistance','calendarToggleAssistance');
+
+    initMedicalRadioGroups();
+
+
+
+    // Remove any persisted single-field keys (best-effort)
+
+        const ids = ['lastName','firstName','middleName','houseNo','contact','email','birthday','dateRequested','first_staff','client_class_other','leaderBarangayOfficial','guarantee_hospital','guarantee_purpose','guarantee_amount','org_long_name','num_attendees','other_details','event_date','event_name','event_place','event_time','upload_letter','remarks'];
+
+    ids.forEach(id => {
+
+        try { sessionStorage.removeItem(id); } catch(e){}
+
+    });
+
+
+
+    // Load draft
+
+    loadDraftIntoForm();
+
+    ensureSharedRecordsReady().then(() => {
+        existingRecordMatch = null;
+        updateExistingRecordNotice();
+        updateDuplicateRequestNotice();
+    });
+
+    window.addEventListener('lb:records-changed', function(){
+        existingRecordMatch = null;
+        updateExistingRecordNotice();
+        updateDuplicateRequestNotice();
+    });
+
+
+
+    // Convert selects to search wrappers AFTER population & draft load
+
+    convertAllSelectsToSearchableWrappers();
+
+
+
+    const nameFields = ['lastName','firstName','middleName'];
+
+    nameFields.forEach(id => {
+
+        const el = document.getElementById(id);
+
+        if(!el) return;
+
+        el.addEventListener('input', function(){
+            updateExistingRecordNotice();
+            updateDuplicateRequestNotice();
+        });
+
+    });
+
+    const dateRequestedField = document.getElementById('dateRequested');
+    if(dateRequestedField){
+        dateRequestedField.addEventListener('input', updateDuplicateRequestNotice);
+        dateRequestedField.addEventListener('change', updateDuplicateRequestNotice);
+    }
+
+    const programsField = document.getElementById('programs');
+    if(programsField){
+        programsField.addEventListener('change', updateDuplicateRequestNotice);
+    }
+
+    const uploadLetterField = document.getElementById('upload_letter');
+    if(uploadLetterField){
+        uploadLetterField.addEventListener('change', function(){
+            if(!uploadLetterField.files || !uploadLetterField.files[0]){
+                clearFieldError('upload_letter');
+                return;
+            }
+
+            const validation = window.lbAttachments && typeof window.lbAttachments.validateFile === 'function'
+                ? window.lbAttachments.validateFile(uploadLetterField.files[0])
+                : { valid: true };
+
+            if(!validation.valid){
+                showFieldError('upload_letter', validation.error || 'Invalid file selected.');
+                uploadLetterField.value = '';
+                return;
+            }
+
+            clearFieldError('upload_letter');
+        });
+    }
+
+
+    const existingAddBtn = document.getElementById('existingRecordAddRequest');
+
+    if(existingAddBtn){
+
+        existingAddBtn.addEventListener('click', function(){
+
+            const match = existingRecordMatch || findExistingRecordMatch();
+
+            if(!match){
+
+                showToast('No matching client found. Please check the name.', 'error');
+
+                return;
+
+            }
+
+            setRequestOnlyMode(match);
+
+        });
+
+    }
+
+
+    const existingClearBtn = document.getElementById('existingRecordClear');
+
+    if(existingClearBtn){
+
+        existingClearBtn.addEventListener('click', function(){
+
+            clearRequestOnlyMode();
+
+            ['lastName','firstName','middleName'].forEach(id => {
+
+                const el = document.getElementById(id);
+
+                if(!el) return;
+
+                el.value = '';
+
+                el.classList.remove('filled');
+
+            });
+
+            updateExistingRecordNotice();
+
+            showFormStep(getClientInformationStepIndex());
+
+        });
+
+    }
+
+    updateExistingRecordNotice();
+
+
+
+    const prevStepBtn = document.getElementById('prevStepBtn');
+
+    const nextStepBtn = document.getElementById('nextStepBtn');
+
+    if(prevStepBtn){
+
+        prevStepBtn.addEventListener('click', function(){ showFormStep(currentFormStep - 1); });
+
+    }
+
+    if(nextStepBtn){
+
+        nextStepBtn.addEventListener('click', function(){
+
+            if(shouldBlockNewRecord()){
+
+                showToast('This client already exists. Click \"Add Request Details\" to continue.', 'error');
+
+                return;
+
+            }
+
+            showFormStep(currentFormStep + 1);
+
+        });
+
+    }
+
+
+
+    form.addEventListener('keydown', function(e){
+
+        if(e.key !== 'Enter') return;
+
+        if(e.ctrlKey || e.altKey || e.metaKey) return;
+
+
+
+        const target = e.target;
+
+        const tag = target && target.tagName ? String(target.tagName).toLowerCase() : '';
+
+        if(tag === 'button' || tag === 'textarea' || tag === 'select') return;
+
+        if(target && target.isContentEditable) return;
+
+        if(target && target.classList && target.classList.contains('search-input')) return;
+
+        if(target && typeof target.closest === 'function' && target.closest('.search-wrapper')) return;
+
+
+
+        const confirmModalEl = document.getElementById('confirmModal');
+
+        if(confirmModalEl && confirmModalEl.classList.contains('open')) return;
+
+
+
+        e.preventDefault();
+
+
+
+        if(e.shiftKey){
+
+            if(currentFormStep > 0) showFormStep(currentFormStep - 1);
+
+            return;
+
+        }
+
+
+
+        const steps = getFormSteps();
+
+        const isLastStep = currentFormStep === (steps.length - 1);
+
+        if(isLastStep){
+
+            const submitBtn = document.getElementById('addSubmitBtn');
+
+            if(submitBtn && !submitBtn.disabled){
+
+                submitBtn.click();
+
+            }
+
+        } else {
+
+            if(shouldBlockNewRecord()){
+
+                showToast('This client already exists. Click \"Add Request Details\" to continue.', 'error');
+
+                return;
+
+            }
+
+            showFormStep(currentFormStep + 1);
+
+        }
+
+    });
+
+
+
+    showFormStep(0);
+
+
+
+    // ensure address searchable options reflect the populated address list
+
+    try { updateSearchableOptionsForSelect('address'); } catch(e){}
+
+
+
+        // Keep autosave + validation for assistance dropdown.
+    const programsSelect = document.getElementById('programs');
+    if(programsSelect){
+        programsSelect.addEventListener('change', function(){
+            syncTypeFromPrograms();
+            clearFieldError('programs');
+            scheduleAutosave();
+        });
+    }
+    syncTypeFromPrograms();
+
+    // autosave heartbeat
+
+    setInterval(function(){
+
+        if(window.__autosaveDirty) { saveDraftNow(); }
+
+    }, 5000);
+
+
+
+    // Reset / confirm modal wiring
+
+    const clearBtn = document.getElementById('Clear');
+
+    const confirmModal = document.getElementById('confirmModal');
+
+    const confirmBtn = document.getElementById('confirmModalConfirm');
+
+    const cancelBtn = document.getElementById('confirmModalCancel');
+
+    const modalOverlay = confirmModal ? confirmModal.querySelector('.confirm-modal-overlay') : null;
+
+    let lastFocusedBeforeModal = null;
+
+
+
+    function openConfirmModal(){
+
+        if(!confirmModal) return;
+
+        lastFocusedBeforeModal = document.activeElement;
+
+        confirmModal.classList.add('open');
+
+        confirmModal.setAttribute('aria-hidden','false');
+
+        document.body.classList.add('modal-open');
+
+        try { confirmBtn.focus(); } catch(e){}
+
+        document.addEventListener('keydown', handleModalKeydown);
+
+    }
+
+
+
+    function closeConfirmModal(){
+
+        if(!confirmModal) return;
+
+        confirmModal.classList.remove('open');
+
+        confirmModal.setAttribute('aria-hidden','true');
+
+        document.body.classList.remove('modal-open');
+
+        try { if(lastFocusedBeforeModal) lastFocusedBeforeModal.focus(); } catch(e){}
+
+        document.removeEventListener('keydown', handleModalKeydown);
+
+    }
+
+
+
+    function handleModalKeydown(e){
+
+        if(e.key === 'Escape'){
+
+            e.preventDefault();
+
+            closeConfirmModal();
+
+        }
+
+        if(e.key === 'Tab' && confirmModal.classList.contains('open')){
+
+            const focusable = confirmModal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+
+            if(focusable.length === 0) return;
+
+            const first = focusable[0];
+
+            const last = focusable[focusable.length - 1];
+
+            if(e.shiftKey && document.activeElement === first){
+
+                e.preventDefault();
+
+                last.focus();
+
+            } else if(!e.shiftKey && document.activeElement === last){
+
+                e.preventDefault();
+
+                first.focus();
+
+            }
+
+        }
+
+    }
+
+
+
+    if(clearBtn){
+
+        clearBtn.addEventListener('click', function(){
+
+            openConfirmModal();
+
+        });
+
+    }
+
+
+
+    if(cancelBtn){
+
+        cancelBtn.addEventListener('click', function(){
+
+            closeConfirmModal();
+
+        });
+
+    }
+
+
+
+    if(modalOverlay){
+
+        modalOverlay.addEventListener('click', function(){
+
+            closeConfirmModal();
+
+        });
+
+    }
+
+
+
+    if(confirmBtn){
+
+        confirmBtn.addEventListener('click', function(){
+
+            try {
+
+                clearForm();
+
+                localStorage.removeItem('draftRecord');
+
+                window.__autosaveDirty = false;
+
+                showToast('Form data cleared.', 'success');
+
+            } catch(e){
+
+                console.warn('Reset failed', e);
+
+                showToast('Failed to clear form.', 'error');
+
+            } finally {
+
+                closeConfirmModal();
+
+            }
+
+        });
+
+    }
+
+
+
+    // When barangay changes, populate address/purok select
+
+    const barangaySelect = document.getElementById('barangay');
+
+    if(barangaySelect){
+
+        barangaySelect.addEventListener('change', function(){
+
+            const chosen = this.value;
+
+            try {
+
+                if(typeof populateAddressSelect === 'function') populateAddressSelect('address', chosen);
+
+            } catch(e){
+
+                console.warn('populateAddressSelect failed', e);
+
+            }
+
+            scheduleAutosave();
+
+        });
+
+    }
+
+});
+
+</script>
+
+
+
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
